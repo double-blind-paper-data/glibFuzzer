@@ -1,0 +1,135 @@
+Testcase id: 112104
+Job: libarchive_afl_msan
+Crash Type: Use-of-uninitialized-value
+isSecurity: True
+Crash state: get_line
+bid_get_line
+uudecode_bidder_bid
+Poc: 112104.testcase
+engine: afl
+fully_qualified_name: afl_libarchive_fuzzer
+target: libarchive_fuzzer
+name: afl
+[Environment] MSAN_OPTIONS=allocator_release_to_os_interval_ms=500:exit_code=86:halt_on_error=1:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:print_stats=1:print_summary=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+==192122==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x4c9e8f in get_line /src/libarchive/libarchive/archive_read_support_filter_uu.c:183:11
+    #1 0x4c9256 in bid_get_line /src/libarchive/libarchive/archive_read_support_filter_uu.c:223:9
+    #2 0x4c7b19 in uudecode_bidder_bid /src/libarchive/libarchive/archive_read_support_filter_uu.c:282:9
+    #3 0x4ac5ae in choose_filters /src/libarchive/libarchive/archive_read.c:574:11
+    #4 0x4a98e2 in archive_read_open1 /src/libarchive/libarchive/archive_read.c:514:7
+    #5 0x4a8c9f in archive_read_open /src/libarchive/libarchive/archive_read.c:150:9
+    #6 0x4a4d16 in LLVMFuzzerTestOneInput /src/libarchive_fuzzer.cc:45:3
+    #7 0x4a849f in main /src/aflplusplus/utils/aflpp_driver/aflpp_driver.c:303:7
+    #8 0x7fc0269a20b2 in __libc_start_main
+    #9 0x42090d in _start
+
+  Uninitialized value was stored to memory at
+    #0 0x44aab9 in __msan_memcpy /src/llvm-project/compiler-rt/lib/msan/msan_interceptors.cpp:1585:3
+    #1 0x4b1376 in __archive_read_filter_ahead /src/libarchive/libarchive/archive_read.c:1481:4
+    #2 0x4b68fe in bzip2_reader_bid /src/libarchive/libarchive/archive_read_support_filter_bzip2.c:134:11
+    #3 0x4ac5ae in choose_filters /src/libarchive/libarchive/archive_read.c:574:11
+    #4 0x4a98e2 in archive_read_open1 /src/libarchive/libarchive/archive_read.c:514:7
+    #5 0x4a8c9f in archive_read_open /src/libarchive/libarchive/archive_read.c:150:9
+    #6 0x4a4d16 in LLVMFuzzerTestOneInput /src/libarchive_fuzzer.cc:45:3
+    #7 0x4a849f in main /src/aflplusplus/utils/aflpp_driver/aflpp_driver.c:303:7
+
+  Uninitialized value was created by a heap allocation
+    #0 0x4516ed in malloc /src/llvm-project/compiler-rt/lib/msan/msan_interceptors.cpp:912:3
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_afl_msan/custom/libarchive_fuzzer+0x4c9e8f)
+Unique heap origins: 9
+Stack depot allocated bytes: 1900544
+Unique origin histories: 3
+History depot allocated bytes: 196608
+Exiting
+==192125==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x4c9e8f in get_line /src/libarchive/libarchive/archive_read_support_filter_uu.c:183:11
+    #1 0x4c9256 in bid_get_line /src/libarchive/libarchive/archive_read_support_filter_uu.c:223:9
+    #2 0x4c7b19 in uudecode_bidder_bid /src/libarchive/libarchive/archive_read_support_filter_uu.c:282:9
+    #3 0x4ac5ae in choose_filters /src/libarchive/libarchive/archive_read.c:574:11
+    #4 0x4a98e2 in archive_read_open1 /src/libarchive/libarchive/archive_read.c:514:7
+    #5 0x4a8c9f in archive_read_open /src/libarchive/libarchive/archive_read.c:150:9
+    #6 0x4a4d16 in LLVMFuzzerTestOneInput /src/libarchive_fuzzer.cc:45:3
+    #7 0x4a849f in main /src/aflplusplus/utils/aflpp_driver/aflpp_driver.c:303:7
+    #8 0x7fc0269a20b2 in __libc_start_main
+    #9 0x42090d in _start
+
+  Uninitialized value was stored to memory at
+    #0 0x44aab9 in __msan_memcpy /src/llvm-project/compiler-rt/lib/msan/msan_interceptors.cpp:1585:3
+    #1 0x4b1376 in __archive_read_filter_ahead /src/libarchive/libarchive/archive_read.c:1481:4
+    #2 0x4b68fe in bzip2_reader_bid /src/libarchive/libarchive/archive_read_support_filter_bzip2.c:134:11
+    #3 0x4ac5ae in choose_filters /src/libarchive/libarchive/archive_read.c:574:11
+    #4 0x4a98e2 in archive_read_open1 /src/libarchive/libarchive/archive_read.c:514:7
+    #5 0x4a8c9f in archive_read_open /src/libarchive/libarchive/archive_read.c:150:9
+    #6 0x4a4d16 in LLVMFuzzerTestOneInput /src/libarchive_fuzzer.cc:45:3
+    #7 0x4a849f in main /src/aflplusplus/utils/aflpp_driver/aflpp_driver.c:303:7
+
+  Uninitialized value was created by a heap allocation
+    #0 0x4516ed in malloc /src/llvm-project/compiler-rt/lib/msan/msan_interceptors.cpp:912:3
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_afl_msan/custom/libarchive_fuzzer+0x4c9e8f)
+Unique heap origins: 10
+Stack depot allocated bytes: 1900544
+Unique origin histories: 4
+History depot allocated bytes: 196608
+Exiting
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+==192122==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x4c9e8f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_afl_msan/custom/libarchive_fuzzer+0x4c9e8f)
+    #1 0x4c9256  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_afl_msan/custom/libarchive_fuzzer+0x4c9256)
+    #2 0x4c7b19  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_afl_msan/custom/libarchive_fuzzer+0x4c7b19)
+    #3 0x4ac5ae  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_afl_msan/custom/libarchive_fuzzer+0x4ac5ae)
+    #4 0x4a98e2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_afl_msan/custom/libarchive_fuzzer+0x4a98e2)
+    #5 0x4a8c9f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_afl_msan/custom/libarchive_fuzzer+0x4a8c9f)
+    #6 0x4a4d16  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_afl_msan/custom/libarchive_fuzzer+0x4a4d16)
+    #7 0x4a849f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_afl_msan/custom/libarchive_fuzzer+0x4a849f)
+    #8 0x7fc0269a20b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #9 0x42090d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_afl_msan/custom/libarchive_fuzzer+0x42090d)
+
+  Uninitialized value was stored to memory at
+    #0 0x44aab9  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_afl_msan/custom/libarchive_fuzzer+0x44aab9)
+    #1 0x4b1376  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_afl_msan/custom/libarchive_fuzzer+0x4b1376)
+    #2 0x4b68fe  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_afl_msan/custom/libarchive_fuzzer+0x4b68fe)
+    #3 0x4ac5ae  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_afl_msan/custom/libarchive_fuzzer+0x4ac5ae)
+    #4 0x4a98e2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_afl_msan/custom/libarchive_fuzzer+0x4a98e2)
+    #5 0x4a8c9f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_afl_msan/custom/libarchive_fuzzer+0x4a8c9f)
+    #6 0x4a4d16  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_afl_msan/custom/libarchive_fuzzer+0x4a4d16)
+    #7 0x4a849f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_afl_msan/custom/libarchive_fuzzer+0x4a849f)
+
+  Uninitialized value was created by a heap allocation
+    #0 0x4516ed  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_afl_msan/custom/libarchive_fuzzer+0x4516ed)
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_afl_msan/custom/libarchive_fuzzer+0x4c9e8f) 
+Unique heap origins: 9
+Stack depot allocated bytes: 1900544
+Unique origin histories: 3
+History depot allocated bytes: 196608
+Exiting
+==192125==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x4c9e8f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_afl_msan/custom/libarchive_fuzzer+0x4c9e8f)
+    #1 0x4c9256  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_afl_msan/custom/libarchive_fuzzer+0x4c9256)
+    #2 0x4c7b19  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_afl_msan/custom/libarchive_fuzzer+0x4c7b19)
+    #3 0x4ac5ae  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_afl_msan/custom/libarchive_fuzzer+0x4ac5ae)
+    #4 0x4a98e2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_afl_msan/custom/libarchive_fuzzer+0x4a98e2)
+    #5 0x4a8c9f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_afl_msan/custom/libarchive_fuzzer+0x4a8c9f)
+    #6 0x4a4d16  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_afl_msan/custom/libarchive_fuzzer+0x4a4d16)
+    #7 0x4a849f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_afl_msan/custom/libarchive_fuzzer+0x4a849f)
+    #8 0x7fc0269a20b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #9 0x42090d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_afl_msan/custom/libarchive_fuzzer+0x42090d)
+
+  Uninitialized value was stored to memory at
+    #0 0x44aab9  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_afl_msan/custom/libarchive_fuzzer+0x44aab9)
+    #1 0x4b1376  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_afl_msan/custom/libarchive_fuzzer+0x4b1376)
+    #2 0x4b68fe  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_afl_msan/custom/libarchive_fuzzer+0x4b68fe)
+    #3 0x4ac5ae  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_afl_msan/custom/libarchive_fuzzer+0x4ac5ae)
+    #4 0x4a98e2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_afl_msan/custom/libarchive_fuzzer+0x4a98e2)
+    #5 0x4a8c9f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_afl_msan/custom/libarchive_fuzzer+0x4a8c9f)
+    #6 0x4a4d16  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_afl_msan/custom/libarchive_fuzzer+0x4a4d16)
+    #7 0x4a849f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_afl_msan/custom/libarchive_fuzzer+0x4a849f)
+
+  Uninitialized value was created by a heap allocation
+    #0 0x4516ed  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_afl_msan/custom/libarchive_fuzzer+0x4516ed)

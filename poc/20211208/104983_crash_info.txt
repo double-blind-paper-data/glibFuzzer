@@ -1,0 +1,83 @@
+Testcase id: 104983
+Job: dav1d_libfuzzer_msan
+Crash Type: Timeout
+isSecurity: False
+Crash state: dav1d_fuzzer_mt
+Poc: 104983.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_dav1d_fuzzer_mt
+target: dav1d_fuzzer_mt
+name: libFuzzer
+[Environment] MSAN_OPTIONS=allocator_release_to_os_interval_ms=500:exitcode=77:halt_on_error=1:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:print_stats=1:print_summary=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 2164435300
+INFO: Loaded 1 modules   (12441 inline 8-bit counters): 12441 [0x8cd875, 0x8d090e),
+INFO: Loaded 1 PC tables (12441 PCs): 12441 [0x8d0910,0x9012a0),
+INFO:        0 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases-disk/temp-20/new
+INFO:     2438 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/data-bundles/dav1d_fuzzer_mt
+INFO: -max_len is not provided; libFuzzer will not generate inputs larger than 1048576 bytes
+INFO: seed corpus: files: 2438 min: 4b max: 1931860b total: 88193432b rss: 78Mb
+#256	pulse  cov: 8008 ft: 32298 corp: 207/83Kb exec/s: 42 rss: 204Mb
+#512	pulse  cov: 8739 ft: 43158 corp: 433/345Kb exec/s: 17 rss: 270Mb
+#1024	pulse  cov: 9665 ft: 51854 corp: 793/1784Kb exec/s: 18 rss: 403Mb
+Slowest unit: 14 s:
+artifact_prefix=&#x27;/clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/&#x27;; Test unit written to /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/slow-unit-357344024e5c0d6da6f8bd39858130b9fdde5b8d
+Slowest unit: 16 s:
+artifact_prefix=&#x27;/clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/&#x27;; Test unit written to /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/slow-unit-09c3e417cee62f35825254f32799a608a0fa7ada
+ALARM: working on the last Unit for 28 seconds
+       and the timeout value is 25 (use -timeout=N to change)
+MS: 0 ; base unit: 0000000000000000000000000000000000000000
+artifact_prefix=&#x27;/clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/&#x27;; Test unit written to /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/timeout-47236a8af856f785ecac48a0ee7fa796face1005
+==76130== ERROR: libFuzzer: timeout after 28 seconds
+    #0 0x4e2049 in __sanitizer_print_stack_trace /src/llvm-project/compiler-rt/lib/msan/msan.cpp:733:3
+    #1 0x4875e8 in fuzzer::PrintStackTrace() cxa_noexception.cpp:0
+    #2 0x46c479 in fuzzer::Fuzzer::AlarmCallback() cxa_noexception.cpp:0
+    #3 0x530b84 in SignalAction(int, void*, void*) /src/llvm-project/compiler-rt/lib/msan/msan_interceptors.cpp:1018:3
+    #4 0x7f15598c33bf in libpthread.so.0
+    #5 0x7f15598be375 in pthread_cond_wait@@GLIBC_2.3.2
+    #6 0x574b18 in dav1d_submit_frame /src/dav1d/src/decode.c:3485:13
+    #7 0x5e44d0 in dav1d_parse_obus /src/dav1d/src/obu.c:1608:24
+    #8 0x54249b in gen_picture /src/dav1d/src/lib.c:398:15
+    #9 0x542b17 in dav1d_get_picture /src/dav1d/src/lib.c:443:15
+    #10 0x541062 in LLVMFuzzerTestOneInput /src/dav1d/tests/libfuzzer/dav1d_fuzzer.c:186:24
+    #11 0x46daa3 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #12 0x46d28a in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*, bool, bool*) cxa_noexception.cpp:0
+    #13 0x46f0e4 in fuzzer::Fuzzer::ReadAndExecuteSeedCorpora(std::__Fuzzer::vector&lt;fuzzer::SizedFile, std::__Fuzzer::allocator&lt;fuzzer::SizedFile&gt; &gt;&amp;) cxa_noexception.cpp:0
+    #14 0x46f319 in fuzzer::Fuzzer::Loop(std::__Fuzzer::vector&lt;fuzzer::SizedFile, std::__Fuzzer::allocator&lt;fuzzer::SizedFile&gt; &gt;&amp;) cxa_noexception.cpp:0
+    #15 0x45ed5d in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #16 0x487da2 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #17 0x7f15596bd0b2 in __libc_start_main
+    #18 0x43663d in _start
+
+SUMMARY: libFuzzer: timeout
+stat::number_of_executed_units: 2040
+stat::average_exec_per_sec:     2
+stat::new_units_added:          0
+stat::slowest_unit_time_sec:    16
+stat::peak_rss_mb:              406
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+artifact_prefix=&#x27;/clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/&#x27;; Test unit written to /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/timeout-47236a8af856f785ecac48a0ee7fa796face1005
+==76130== ERROR: libFuzzer: timeout after 28 seconds
+    #0 0x4e2049  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dav1d_libfuzzer_msan/custom/dav1d_fuzzer_mt+0x4e2049)
+    #1 0x4875e8  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dav1d_libfuzzer_msan/custom/dav1d_fuzzer_mt+0x4875e8)
+    #2 0x46c479  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dav1d_libfuzzer_msan/custom/dav1d_fuzzer_mt+0x46c479)
+    #3 0x530b84  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dav1d_libfuzzer_msan/custom/dav1d_fuzzer_mt+0x530b84)
+    #4 0x7f15598c33bf  (/lib/x86_64-linux-gnu/libpthread.so.0+0x153bf)
+    #5 0x7f15598be375  (/lib/x86_64-linux-gnu/libpthread.so.0+0x10375)
+    #6 0x574b18  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dav1d_libfuzzer_msan/custom/dav1d_fuzzer_mt+0x574b18)
+    #7 0x5e44d0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dav1d_libfuzzer_msan/custom/dav1d_fuzzer_mt+0x5e44d0)
+    #8 0x54249b  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dav1d_libfuzzer_msan/custom/dav1d_fuzzer_mt+0x54249b)
+    #9 0x542b17  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dav1d_libfuzzer_msan/custom/dav1d_fuzzer_mt+0x542b17)
+    #10 0x541062  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dav1d_libfuzzer_msan/custom/dav1d_fuzzer_mt+0x541062)
+    #11 0x46daa3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dav1d_libfuzzer_msan/custom/dav1d_fuzzer_mt+0x46daa3)
+    #12 0x46d28a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dav1d_libfuzzer_msan/custom/dav1d_fuzzer_mt+0x46d28a)
+    #13 0x46f0e4  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dav1d_libfuzzer_msan/custom/dav1d_fuzzer_mt+0x46f0e4)
+    #14 0x46f319  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dav1d_libfuzzer_msan/custom/dav1d_fuzzer_mt+0x46f319)
+    #15 0x45ed5d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dav1d_libfuzzer_msan/custom/dav1d_fuzzer_mt+0x45ed5d)
+    #16 0x487da2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dav1d_libfuzzer_msan/custom/dav1d_fuzzer_mt+0x487da2)
+    #17 0x7f15596bd0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #18 0x43663d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dav1d_libfuzzer_msan/custom/dav1d_fuzzer_mt+0x43663d)

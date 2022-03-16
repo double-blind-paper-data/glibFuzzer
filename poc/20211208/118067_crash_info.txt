@@ -1,0 +1,219 @@
+Testcase id: 118067
+Job: go-ethereum_libfuzzer_asan
+Crash Type: Fatal error
+isSecurity: False
+Crash state: acquireSudog: found s.elem != nil in cache
+big.nat.make
+big.(*Int).Sub
+pthread_create
+Poc: 118067.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_fuzz_cross_g2_add
+target: fuzz_cross_g2_add
+name: libFuzzer
+[Environment] ASAN_OPTIONS=alloc_dealloc_mismatch=0:allocator_may_return_null=1:allocator_release_to_os_interval_ms=500:allow_user_segv_handler=0:check_malloc_usable_size=0:detect_leaks=1:detect_odr_violation=0:detect_stack_use_after_return=1:exitcode=77:fast_unwind_on_fatal=0:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:max_uar_stack_size_log=16:print_scariness=1:print_summary=1:print_suppressions=0:quarantine_size_mb=64:redzone=256:strict_memcmp=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 755940271
+INFO: 12959 Extra Counters
+INFO:        0 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases-disk/temp-20/new
+INFO:      532 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/data-bundles/fuzz_cross_g2_add
+INFO: -max_len is not provided; libFuzzer will not generate inputs larger than 159668 bytes
+INFO: seed corpus: files: 532 min: 1b max: 159668b total: 803229b rss: 61Mb
+#534	INITED ft: 1784 corp: 179/71Kb exec/s: 0 rss: 61Mb
+#661	NEW    ft: 1786 corp: 180/73Kb lim: 18111 exec/s: 0 rss: 61Mb L: 2407/18111 MS: 1 ChangeByte-
+#1098	NEW    ft: 1826 corp: 181/73Kb lim: 18111 exec/s: 0 rss: 64Mb L: 96/18111 MS: 1 ChangeBinInt-
+#1460	NEW    ft: 1838 corp: 182/74Kb lim: 18111 exec/s: 0 rss: 64Mb L: 211/18111 MS: 2 InsertRepeatedBytes-ShuffleBytes-
+#1531	NEW    ft: 1845 corp: 183/74Kb lim: 18111 exec/s: 0 rss: 65Mb L: 97/18111 MS: 1 InsertByte-
+#1537	NEW    ft: 1856 corp: 184/76Kb lim: 18111 exec/s: 0 rss: 65Mb L: 1955/18111 MS: 1 EraseBytes-
+#2430	NEW    ft: 1858 corp: 185/76Kb lim: 18111 exec/s: 2430 rss: 66Mb L: 211/18111 MS: 1 ChangeBinInt-
+#3298	NEW    ft: 1872 corp: 186/76Kb lim: 18111 exec/s: 3298 rss: 67Mb L: 96/18111 MS: 2 ChangeByte-ShuffleBytes-
+#3762	NEW    ft: 1875 corp: 187/76Kb lim: 18111 exec/s: 3762 rss: 67Mb L: 289/18111 MS: 4 ChangeBit-InsertByte-CrossOver-ChangeByte-
+#4096	pulse  ft: 1875 corp: 187/76Kb lim: 18111 exec/s: 2048 rss: 67Mb
+#4187	NEW    ft: 1891 corp: 188/88Kb lim: 18111 exec/s: 2093 rss: 68Mb L: 11675/18111 MS: 5 EraseBytes-ChangeByte-CrossOver-CopyPart-ShuffleBytes-
+#4597	NEW    ft: 1894 corp: 189/88Kb lim: 18111 exec/s: 2298 rss: 68Mb L: 241/18111 MS: 5 InsertRepeatedBytes-ShuffleBytes-ChangeBit-ChangeBinInt-InsertRepeatedBytes-
+#4598	NEW    ft: 1901 corp: 190/88Kb lim: 18111 exec/s: 2299 rss: 68Mb L: 96/18111 MS: 1 CopyPart-
+#4989	REDUCE ft: 1901 corp: 190/86Kb lim: 18111 exec/s: 2494 rss: 69Mb L: 16557/16557 MS: 1 EraseBytes-
+#5603	NEW    ft: 1904 corp: 191/87Kb lim: 18111 exec/s: 2801 rss: 69Mb L: 566/16557 MS: 4 EraseBytes-EraseBytes-ShuffleBytes-ShuffleBytes-
+#7002	NEW    ft: 1905 corp: 192/88Kb lim: 18111 exec/s: 2334 rss: 70Mb L: 992/16557 MS: 4 InsertByte-ChangeBinInt-InsertByte-EraseBytes-
+#8192	pulse  ft: 1905 corp: 192/88Kb lim: 18111 exec/s: 2048 rss: 71Mb
+#12273	NEW    ft: 1910 corp: 193/88Kb lim: 18153 exec/s: 2045 rss: 75Mb L: 96/16557 MS: 1 ChangeByte-
+#13981	NEW    ft: 1922 corp: 194/88Kb lim: 18167 exec/s: 1997 rss: 77Mb L: 354/16557 MS: 3 CopyPart-InsertByte-CrossOver-
+#14382	NEW    ft: 1924 corp: 195/88Kb lim: 18167 exec/s: 2054 rss: 77Mb L: 96/16557 MS: 1 ChangeByte-
+#16384	pulse  ft: 1924 corp: 195/88Kb lim: 18181 exec/s: 2048 rss: 79Mb
+#18537	NEW    ft: 1926 corp: 196/89Kb lim: 18195 exec/s: 2059 rss: 81Mb L: 595/16557 MS: 4 InsertRepeatedBytes-ShuffleBytes-ChangeBit-ChangeBit-
+#32768	pulse  ft: 1926 corp: 196/89Kb lim: 18335 exec/s: 2048 rss: 95Mb
+#41196	NEW    ft: 1928 corp: 197/100Kb lim: 18419 exec/s: 2059 rss: 103Mb L: 11675/16557 MS: 3 ChangeBit-ChangeBit-ShuffleBytes-
+#49329	NEW    ft: 1930 corp: 198/101Kb lim: 18489 exec/s: 2055 rss: 111Mb L: 769/16557 MS: 3 ShuffleBytes-ChangeBinInt-ShuffleBytes-
+#59048	NEW    ft: 1932 corp: 199/101Kb lim: 18573 exec/s: 2036 rss: 121Mb L: 107/16557 MS: 4 CrossOver-ShuffleBytes-ChangeASCIIInt-EraseBytes-
+#65536	pulse  ft: 1932 corp: 199/101Kb lim: 18629 exec/s: 1985 rss: 128Mb
+#72930	REDUCE ft: 1932 corp: 199/100Kb lim: 18699 exec/s: 2025 rss: 136Mb L: 14859/14859 MS: 2 ShuffleBytes-EraseBytes-
+#85577	REDUCE ft: 1932 corp: 199/98Kb lim: 18825 exec/s: 1990 rss: 149Mb L: 13555/13555 MS: 2 ShuffleBytes-EraseBytes-
+#89888	NEW    ft: 1933 corp: 200/99Kb lim: 18867 exec/s: 1997 rss: 153Mb L: 153/13555 MS: 5 ShuffleBytes-InsertRepeatedBytes-ChangeBit-InsertRepeatedBytes-CrossOver-
+#102267	REDUCE ft: 1933 corp: 200/98Kb lim: 18979 exec/s: 2005 rss: 164Mb L: 474/13555 MS: 4 EraseBytes-CopyPart-ChangeBit-InsertRepeatedBytes-
+#122190	NEW    ft: 1936 corp: 201/112Kb lim: 19175 exec/s: 2003 rss: 172Mb L: 13648/13648 MS: 3 InsertRepeatedBytes-CopyPart-ChangeASCIIInt-
+#125416	NEW    ft: 1940 corp: 202/112Kb lim: 19203 exec/s: 1990 rss: 172Mb L: 96/13648 MS: 1 ChangeBit-
+#130735	NEW    ft: 1944 corp: 203/112Kb lim: 19245 exec/s: 1980 rss: 172Mb L: 577/13648 MS: 4 ShuffleBytes-CopyPart-ChangeBit-InsertByte-
+#131072	pulse  ft: 1944 corp: 203/112Kb lim: 19245 exec/s: 1985 rss: 172Mb
+#167403	NEW    ft: 1945 corp: 204/114Kb lim: 19609 exec/s: 1992 rss: 172Mb L: 1467/13648 MS: 3 ChangeBit-CopyPart-CrossOver-
+#215690	NEW    ft: 1947 corp: 205/116Kb lim: 20085 exec/s: 1978 rss: 172Mb L: 2322/13648 MS: 2 CopyPart-InsertRepeatedBytes-
+#262144	pulse  ft: 1947 corp: 205/116Kb lim: 20547 exec/s: 1971 rss: 172Mb
+#279821	NEW    ft: 1950 corp: 206/117Kb lim: 20715 exec/s: 1970 rss: 172Mb L: 992/13648 MS: 1 ChangeByte-
+#323122	NEW    ft: 1951 corp: 207/117Kb lim: 21135 exec/s: 1970 rss: 172Mb L: 96/13648 MS: 1 ShuffleBytes-
+#385032	NEW    ft: 1955 corp: 208/117Kb lim: 21751 exec/s: 1964 rss: 172Mb L: 97/13648 MS: 4 CopyPart-ChangeBinInt-InsertByte-CMP- DE: &quot;\360\002\000\000\000\000\000\000&quot;-
+#415730	REDUCE ft: 1955 corp: 208/114Kb lim: 22045 exec/s: 1960 rss: 172Mb L: 8451/13648 MS: 3 ChangeByte-ChangeASCIIInt-EraseBytes-
+#425848	NEW    ft: 1961 corp: 209/114Kb lim: 22143 exec/s: 1953 rss: 172Mb L: 220/13648 MS: 3 ChangeByte-CrossOver-InsertRepeatedBytes-
+#437100	NEW    ft: 1967 corp: 210/114Kb lim: 22255 exec/s: 1960 rss: 172Mb L: 110/13648 MS: 2 CopyPart-CrossOver-
+#495469	NEW    ft: 1969 corp: 211/115Kb lim: 22829 exec/s: 1950 rss: 172Mb L: 114/13648 MS: 4 ChangeBit-ChangeBinInt-ChangeByte-CopyPart-
+#501424	REDUCE ft: 1969 corp: 211/113Kb lim: 22885 exec/s: 1951 rss: 172Mb L: 7133/13648 MS: 5 InsertByte-ChangeByte-ChangeBit-EraseBytes-ShuffleBytes-
+#507364	NEW    ft: 1970 corp: 212/113Kb lim: 22941 exec/s: 1951 rss: 172Mb L: 131/13648 MS: 5 CrossOver-CrossOver-EraseBytes-ChangeASCIIInt-InsertByte-
+#524288	pulse  ft: 1970 corp: 212/113Kb lim: 23109 exec/s: 1949 rss: 172Mb
+#634217	NEW    ft: 1971 corp: 213/113Kb lim: 24201 exec/s: 1945 rss: 172Mb L: 97/13648 MS: 3 InsertByte-CrossOver-ChangeASCIIInt-
+#822517	REDUCE ft: 1971 corp: 213/113Kb lim: 26077 exec/s: 1935 rss: 172Mb L: 76/13648 MS: 5 ChangeBit-InsertByte-ChangeByte-ShuffleBytes-EraseBytes-
+#898946	REDUCE ft: 1971 corp: 213/113Kb lim: 26833 exec/s: 1933 rss: 172Mb L: 5922/13648 MS: 4 InsertRepeatedBytes-CopyPart-CopyPart-EraseBytes-
+#993297	NEW    ft: 1973 corp: 214/114Kb lim: 27771 exec/s: 1932 rss: 172Mb L: 485/13648 MS: 1 CopyPart-
+#1012282	NEW    ft: 1978 corp: 215/114Kb lim: 27953 exec/s: 1931 rss: 172Mb L: 192/13648 MS: 5 ChangeBinInt-ShuffleBytes-ChangeBit-CrossOver-ChangeASCIIInt-
+fatal error: acquireSudog: found s.elem != nil in cache
+
+goroutine 69 [running]:
+runtime.throw({0x741ad6, 0x0})
+	runtime/panic.go:1198 +0x71 fp=0x10c000121630 sp=0x10c000121600 pc=0x590a11
+runtime.acquireSudog()
+	runtime/proc.go:413 +0x115 fp=0x10c0001216a0 sp=0x10c000121630 pc=0x593715
+runtime.semacquire1(0x1485080, 0x0, 0x0, 0x0)
+	runtime/sema.go:115 +0x72 fp=0x10c000121708 sp=0x10c0001216a0 pc=0x5a1cd2
+runtime.semacquire(...)
+	runtime/sema.go:95
+runtime.gcMarkDone()
+	runtime/mgc.go:776 +0x2a fp=0x10c000121760 sp=0x10c000121708 pc=0x57730a
+runtime.gcBgMarkWorker()
+	runtime/mgc.go:1330 +0x2f1 fp=0x10c0001217e0 sp=0x10c000121760 pc=0x578711
+runtime.goexit()
+	runtime/asm_amd64.s:1581 +0x1 fp=0x10c0001217e8 sp=0x10c0001217e0 pc=0x5bd221
+created by runtime.gcBgMarkStartWorkers
+	runtime/mgc.go:1124 +0x25
+
+goroutine 17 [runnable, locked to thread]:
+math/big.nat.make(...)
+	math/big/nat.go:62
+math/big.nat.sub({0x10c000482000, 0x6, 0x1}, {0x10c0005c6000, 0x6, 0x1}, {0x10c000482000, 0x1, 0x1})
+	math/big/nat.go:141 +0x2be
+math/big.(*Int).Sub(0x10c0005c8000, 0x10c0003f57d8, 0x10c0005c8000)
+	math/big/int.go:147 +0x14b
+crypto/rand.Int({0x9100a0, 0x10c000576030}, 0x10c0003f57d8)
+	crypto/rand/util.go:111 +0x169
+github.com/ethereum/go-ethereum/tests/fuzzers/bls12381.randomScalar({0x9100a0, 0x10c000576030}, 0xb66a56cd8e21f205)
+	github.com/ethereum/go-ethereum/tests/fuzzers/bls12381/bls12381_fuzz.go:240 +0x6a
+github.com/ethereum/go-ethereum/tests/fuzzers/bls12381.getG2Points({0x9100a0, 0x10c000576030})
+	github.com/ethereum/go-ethereum/tests/fuzzers/bls12381/bls12381_fuzz.go:214 +0x249
+github.com/ethereum/go-ethereum/tests/fuzzers/bls12381.FuzzCrossG2Add({0x6120005d2080, 0x60, 0x60})
+	github.com/ethereum/go-ethereum/tests/fuzzers/bls12381/bls12381_fuzz.go:106 +0xc5
+main.LLVMFuzzerTestOneInput(...)
+	github.com/ethereum/go-ethereum/tests/fuzzers/bls12381/main.4108496765.go:21
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==1066==ERROR: AddressSanitizer: ABRT on unknown address 0x03e80000042a (pc 0x0000005beae1 bp 0x7fcd42878dc0 sp 0x7fcd42878da8 T15)
+SCARINESS: 10 (signal)
+    #0 0x5beae1 in runtime.raise.abi0 runtime/sys_linux_amd64.s:165
+    #1 0x5a4937 in runtime.crash runtime/signal_unix.go:861
+    #2 0x590cd0 in runtime.fatalthrow.func1 runtime/panic.go:1257
+    #3 0x5bafe5 in runtime.systemstack.abi0 runtime/asm_amd64.s:383
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: ABRT (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzz_cross_g2_add+0x5beae1)
+Thread T15 created by T10 here:
+    #0 0x50f3fc in pthread_create /src/llvm-project/compiler-rt/lib/asan/asan_interceptors.cpp:207:3
+    #1 0x55f110 in _cgo_try_pthread_create /_/runtime/cgo/gcc_libinit.c:100:9
+    #2 0x596de6 in runtime.newm runtime/proc.go:2230
+    #3 0x5974ce in runtime.startm runtime/proc.go:2485
+    #4 0x5979f9 in runtime.wakep runtime/proc.go:2584
+    #5 0x5991c4 in runtime.resetspinning runtime/proc.go:3216
+    #6 0x59977d in runtime.schedule runtime/proc.go:3374
+    #7 0x599cac in runtime.park_m runtime/proc.go:3516
+    #8 0x5baf64 in runtime.mcall runtime/asm_amd64.s:307
+
+Thread T10 created by T3 here:
+    #0 0x50f3fc in pthread_create /src/llvm-project/compiler-rt/lib/asan/asan_interceptors.cpp:207:3
+    #1 0x55f110 in _cgo_try_pthread_create /_/runtime/cgo/gcc_libinit.c:100:9
+    #2 0x596de6 in runtime.newm runtime/proc.go:2230
+    #3 0x5974ce in runtime.startm runtime/proc.go:2485
+    #4 0x5979f9 in runtime.wakep runtime/proc.go:2584
+    #5 0x5991c4 in runtime.resetspinning runtime/proc.go:3216
+    #6 0x59977d in runtime.schedule runtime/proc.go:3374
+    #7 0x599cac in runtime.park_m runtime/proc.go:3516
+    #8 0x5baf64 in runtime.mcall runtime/asm_amd64.s:307
+
+Thread T3 created by T1 here:
+    #0 0x50f3fc in pthread_create /src/llvm-project/compiler-rt/lib/asan/asan_interceptors.cpp:207:3
+    #1 0x55f110 in _cgo_try_pthread_create /_/runtime/cgo/gcc_libinit.c:100:9
+    #2 0x596de6 in runtime.newm runtime/proc.go:2230
+    #3 0x5974ce in runtime.startm runtime/proc.go:2485
+    #4 0x5979f9 in runtime.wakep runtime/proc.go:2584
+    #5 0x59b797 in runtime.newproc.func1 runtime/proc.go:4261
+    #6 0x5bafe5 in runtime.systemstack.abi0 runtime/asm_amd64.s:383
+
+Thread T1 created by T0 here:
+    #0 0x50f3fc in pthread_create /src/llvm-project/compiler-rt/lib/asan/asan_interceptors.cpp:207:3
+    #1 0x55f05f in _cgo_try_pthread_create /_/runtime/cgo/gcc_libinit.c:100:9
+    #2 0x55f05f in x_cgo_sys_thread_create /_/runtime/cgo/gcc_libinit.c:27:12
+    #3 0x71d97c in __libc_csu_init
+
+==1066==ABORTING
+MS: 4 ChangeBit-CopyPart-ChangeBinInt-ChangeBinInt-; base unit: 2f7a4995a5f2df18acedcedb7ae25d96fd3880d2
+0x30,0x4c,0x4c,0x4c,0x4c,0x40,0x4c,0x4c,0x4c,0x4c,0x4c,0x4c,0x4c,0xfe,0xff,0xff,0xff,0x4c,0x4c,0x8,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x29,0x4c,0x4c,0x4c,0x4c,0x4c,0xfe,0xff,0xff,0xff,0x4c,0x4c,0x8,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x4c,0x30,0x4c,0x4d,0x4c,0x4c,0x40,0x4c,0x4c,0x4c,0x4c,0x4c,0x4c,0x4c,0xfe,0xff,0xff,0xff,0x4c,0xb9,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0x4c,0x4c,0x4c,0x4c,0x7e,0x4c,0x4c,0x4c,0x40,0x4c,0x4c,0xa,0xa,
+0LLLL@LLLLLLL\376\377\377\377LL\010\000\000\000\000\000\000\000)LLLLL\376\377\377\377LL\010\000\000\000\000\000\000\000L0LMLL@LLLLLLL\376\377\377\377L\271\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377LLLL~LLL@LL\012\012
+artifact_prefix=&#x27;/clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/&#x27;; Test unit written to /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/crash-361ebfa76006b2fea46bbda527bcbcdce79c3bb6
+Base64: MExMTExATExMTExMTP7///9MTAgAAAAAAAAAKUxMTExM/v///0xMCAAAAAAAAABMMExNTExATExMTExMTP7///9Muf////////////////////9MTExMfkxMTEBMTAoK
+stat::number_of_executed_units: 1025176
+stat::average_exec_per_sec:     1930
+stat::new_units_added:          44
+stat::slowest_unit_time_sec:    0
+stat::peak_rss_mb:              172
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+==1066==ERROR: AddressSanitizer: ABRT on unknown address 0x03e80000042a (pc 0x0000005beae1 bp 0x7fcd42878dc0 sp 0x7fcd42878da8 T15)
+SCARINESS: 10 (signal)
+    #0 0x5beae1  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzz_cross_g2_add+0x5beae1)
+    #1 0x5a4937  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzz_cross_g2_add+0x5a4937)
+    #2 0x590cd0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzz_cross_g2_add+0x590cd0)
+    #3 0x5bafe5  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzz_cross_g2_add+0x5bafe5)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: ABRT (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzz_cross_g2_add+0x5beae1) 
+Thread T15 created by T10 here:
+    #0 0x50f3fc  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzz_cross_g2_add+0x50f3fc)
+    #1 0x55f110  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzz_cross_g2_add+0x55f110)
+    #2 0x596de6  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzz_cross_g2_add+0x596de6)
+    #3 0x5974ce  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzz_cross_g2_add+0x5974ce)
+    #4 0x5979f9  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzz_cross_g2_add+0x5979f9)
+    #5 0x5991c4  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzz_cross_g2_add+0x5991c4)
+    #6 0x59977d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzz_cross_g2_add+0x59977d)
+    #7 0x599cac  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzz_cross_g2_add+0x599cac)
+    #8 0x5baf64  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzz_cross_g2_add+0x5baf64)
+
+Thread T10 created by T3 here:
+    #0 0x50f3fc  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzz_cross_g2_add+0x50f3fc)
+    #1 0x55f110  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzz_cross_g2_add+0x55f110)
+    #2 0x596de6  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzz_cross_g2_add+0x596de6)
+    #3 0x5974ce  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzz_cross_g2_add+0x5974ce)
+    #4 0x5979f9  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzz_cross_g2_add+0x5979f9)
+    #5 0x5991c4  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzz_cross_g2_add+0x5991c4)
+    #6 0x59977d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzz_cross_g2_add+0x59977d)
+    #7 0x599cac  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzz_cross_g2_add+0x599cac)
+    #8 0x5baf64  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzz_cross_g2_add+0x5baf64)
+
+Thread T3 created by T1 here:
+    #0 0x50f3fc  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzz_cross_g2_add+0x50f3fc)
+    #1 0x55f110  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzz_cross_g2_add+0x55f110)
+    #2 0x596de6  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzz_cross_g2_add+0x596de6)
+    #3 0x5974ce  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzz_cross_g2_add+0x5974ce)
+    #4 0x5979f9  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzz_cross_g2_add+0x5979f9)
+    #5 0x59b797  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzz_cross_g2_add+0x59b797)
+    #6 0x5bafe5  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzz_cross_g2_add+0x5bafe5)
+
+Thread T1 created by T0 here:
+    #0 0x50f3fc  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzz_cross_g2_add+0x50f3fc)
+    #1 0x55f05f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzz_cross_g2_add+0x55f05f)
+    #2 0x71d97c  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzz_cross_g2_add+0x71d97c)

@@ -1,0 +1,88 @@
+Testcase id: 118066
+Job: boost_libfuzzer_ubsan
+Crash Type: Timeout
+isSecurity: False
+Crash state: boost_regex_fuzzer
+Poc: 118066.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_boost_regex_fuzzer
+target: boost_regex_fuzzer
+name: libFuzzer
+[Environment] UBSAN_OPTIONS=allocator_release_to_os_interval_ms=500:exitcode=77:halt_on_error=1:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:print_stacktrace=1:print_summary=1:print_suppressions=0:silence_unsigned_overflow=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 2473937180
+INFO: Loaded 1 modules   (17003 inline 8-bit counters): 17003 [0x6af2c8, 0x6b3533),
+INFO: Loaded 1 PC tables (17003 PCs): 17003 [0x5e6818,0x628ec8),
+INFO:        0 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases-disk/temp-21/new
+INFO:     1970 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases-disk/temp-21/mutations
+INFO:      500 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/data-bundles/boost_regex_fuzzer
+INFO: -max_len is not provided; libFuzzer will not generate inputs larger than 163466 bytes
+INFO: seed corpus: files: 2470 min: 1b max: 163466b total: 1178136b rss: 57Mb
+#2048	pulse  cov: 2397 ft: 10087 corp: 969/41Kb exec/s: 409 rss: 57Mb
+ALARM: working on the last Unit for 37 seconds
+       and the timeout value is 25 (use -timeout=N to change)
+MS: 0 ; base unit: 0000000000000000000000000000000000000000
+artifact_prefix=&#x27;/clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/&#x27;; Test unit written to /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/timeout-c923d35b0b6f8d4a5fbacf4db3cb72ce21602ea7
+==17907== ERROR: libFuzzer: timeout after 37 seconds
+    #0 0x4b2c84 in __sanitizer_print_stack_trace /src/llvm-project/compiler-rt/lib/ubsan/ubsan_diag_standalone.cpp:31:3
+    #1 0x4598f8 in fuzzer::PrintStackTrace() cxa_noexception.cpp:0
+    #2 0x43e789 in fuzzer::Fuzzer::AlarmCallback() cxa_noexception.cpp:0
+    #3 0x7fe7bdd8a3bf in libpthread.so.0
+    #4 0x45741f in __sanitizer_cov_trace_const_cmp8 /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerTracePC.cpp:495:1
+    #5 0x4ec8e3 in boost::re_detail_500::repeater_count&lt;std::__1::__wrap_iter&lt;char const*&gt; &gt;::unwind_until(int, boost::re_detail_500::repeater_count&lt;std::__1::__wrap_iter&lt;char const*&gt; &gt;*, int) /src/boost/boost/regex/v5/perl_matcher.hpp:241:31
+    #6 0x4ec808 in boost::re_detail_500::repeater_count&lt;std::__1::__wrap_iter&lt;char const*&gt; &gt;::repeater_count(int, boost::re_detail_500::repeater_count&lt;std::__1::__wrap_iter&lt;char const*&gt; &gt;**, std::__1::__wrap_iter&lt;char const*&gt;, int) /src/boost/boost/regex/v5/perl_matcher.hpp:271:14
+    #7 0x4ec44b in saved_repeater /src/boost/boost/regex/v5/perl_matcher_non_recursive.hpp:84:50
+    #8 0x4ec44b in boost::re_detail_500::perl_matcher&lt;std::__1::__wrap_iter&lt;char const*&gt;, std::__1::allocator&lt;boost::sub_match&lt;std::__1::__wrap_iter&lt;char const*&gt; &gt; &gt;, boost::regex_traits&lt;char, boost::cpp_regex_traits&lt;char&gt; &gt; &gt;::push_repeater_count(int, boost::re_detail_500::repeater_count&lt;std::__1::__wrap_iter&lt;char const*&gt; &gt;**) /src/boost/boost/regex/v5/perl_matcher_non_recursive.hpp:341:20
+    #9 0x4eb99d in boost::re_detail_500::perl_matcher&lt;std::__1::__wrap_iter&lt;char const*&gt;, std::__1::allocator&lt;boost::sub_match&lt;std::__1::__wrap_iter&lt;char const*&gt; &gt; &gt;, boost::regex_traits&lt;char, boost::cpp_regex_traits&lt;char&gt; &gt; &gt;::match_recursion() /src/boost/boost/regex/v5/perl_matcher_non_recursive.hpp:1037:7
+    #10 0x4e612e in boost::re_detail_500::perl_matcher&lt;std::__1::__wrap_iter&lt;char const*&gt;, std::__1::allocator&lt;boost::sub_match&lt;std::__1::__wrap_iter&lt;char const*&gt; &gt; &gt;, boost::regex_traits&lt;char, boost::cpp_regex_traits&lt;char&gt; &gt; &gt;::match_all_states() /src/boost/boost/regex/v5/perl_matcher_non_recursive.hpp:201:14
+    #11 0x4e402a in boost::re_detail_500::perl_matcher&lt;std::__1::__wrap_iter&lt;char const*&gt;, std::__1::allocator&lt;boost::sub_match&lt;std::__1::__wrap_iter&lt;char const*&gt; &gt; &gt;, boost::regex_traits&lt;char, boost::cpp_regex_traits&lt;char&gt; &gt; &gt;::match_prefix() /src/boost/boost/regex/v5/perl_matcher_common.hpp:306:4
+    #12 0x4e3822 in boost::re_detail_500::perl_matcher&lt;std::__1::__wrap_iter&lt;char const*&gt;, std::__1::allocator&lt;boost::sub_match&lt;std::__1::__wrap_iter&lt;char const*&gt; &gt; &gt;, boost::regex_traits&lt;char, boost::cpp_regex_traits&lt;char&gt; &gt; &gt;::match_imp() /src/boost/boost/regex/v5/perl_matcher_common.hpp:196:12
+    #13 0x4e2026 in match /src/boost/boost/regex/v5/perl_matcher_common.hpp:172:11
+    #14 0x4e2026 in bool boost::regex_match&lt;std::__1::__wrap_iter&lt;char const*&gt;, std::__1::allocator&lt;boost::sub_match&lt;std::__1::__wrap_iter&lt;char const*&gt; &gt; &gt;, char, boost::regex_traits&lt;char, boost::cpp_regex_traits&lt;char&gt; &gt; &gt;(std::__1::__wrap_iter&lt;char const*&gt;, std::__1::__wrap_iter&lt;char const*&gt;, boost::match_results&lt;std::__1::__wrap_iter&lt;char const*&gt;, std::__1::allocator&lt;boost::sub_match&lt;std::__1::__wrap_iter&lt;char const*&gt; &gt; &gt; &gt;&amp;, boost::basic_regex&lt;char, boost::regex_traits&lt;char, boost::cpp_regex_traits&lt;char&gt; &gt; &gt; const&amp;, boost::regex_constants::_match_flags) /src/boost/boost/regex/v5/regex_match.hpp:39:19
+    #15 0x4b4577 in bool boost::regex_match&lt;std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt;, std::__1::allocator&lt;boost::sub_match&lt;std::__1::__wrap_iter&lt;char const*&gt; &gt; &gt;, char, boost::regex_traits&lt;char, boost::cpp_regex_traits&lt;char&gt; &gt; &gt;(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; const&amp;, boost::match_results&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;::const_iterator, std::__1::allocator&lt;boost::sub_match&lt;std::__1::__wrap_iter&lt;char const*&gt; &gt; &gt; &gt;&amp;, boost::basic_regex&lt;char, boost::regex_traits&lt;char, boost::cpp_regex_traits&lt;char&gt; &gt; &gt; const&amp;, boost::regex_constants::_match_flags) /src/boost/boost/regex/v5/regex_match.hpp:67:11
+    #16 0x4b41f9 in LLVMFuzzerTestOneInput /src/boost_regex_fuzzer.cc:50:18
+    #17 0x43fdb3 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #18 0x43f59a in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*, bool, bool*) cxa_noexception.cpp:0
+    #19 0x4413f4 in fuzzer::Fuzzer::ReadAndExecuteSeedCorpora(std::__Fuzzer::vector&lt;fuzzer::SizedFile, std::__Fuzzer::allocator&lt;fuzzer::SizedFile&gt; &gt;&amp;) cxa_noexception.cpp:0
+    #20 0x441629 in fuzzer::Fuzzer::Loop(std::__Fuzzer::vector&lt;fuzzer::SizedFile, std::__Fuzzer::allocator&lt;fuzzer::SizedFile&gt; &gt;&amp;) cxa_noexception.cpp:0
+    #21 0x43106d in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #22 0x45a0b2 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #23 0x7fe7bdb7e0b2 in __libc_start_main
+    #24 0x40894d in _start
+
+SUMMARY: libFuzzer: timeout
+stat::number_of_executed_units: 2421
+stat::average_exec_per_sec:     46
+stat::new_units_added:          0
+stat::slowest_unit_time_sec:    0
+stat::peak_rss_mb:              57
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+artifact_prefix=&#x27;/clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/&#x27;; Test unit written to /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/timeout-c923d35b0b6f8d4a5fbacf4db3cb72ce21602ea7
+==17907== ERROR: libFuzzer: timeout after 37 seconds
+    #0 0x4b2c84  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/boost_libfuzzer_ubsan/custom/boost_regex_fuzzer+0x4b2c84)
+    #1 0x4598f8  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/boost_libfuzzer_ubsan/custom/boost_regex_fuzzer+0x4598f8)
+    #2 0x43e789  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/boost_libfuzzer_ubsan/custom/boost_regex_fuzzer+0x43e789)
+    #3 0x7fe7bdd8a3bf  (/lib/x86_64-linux-gnu/libpthread.so.0+0x153bf)
+    #4 0x45741f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/boost_libfuzzer_ubsan/custom/boost_regex_fuzzer+0x45741f)
+    #5 0x4ec8e3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/boost_libfuzzer_ubsan/custom/boost_regex_fuzzer+0x4ec8e3)
+    #6 0x4ec808  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/boost_libfuzzer_ubsan/custom/boost_regex_fuzzer+0x4ec808)
+    #7 0x4ec44b  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/boost_libfuzzer_ubsan/custom/boost_regex_fuzzer+0x4ec44b)
+    #8 0x4eb99d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/boost_libfuzzer_ubsan/custom/boost_regex_fuzzer+0x4eb99d)
+    #9 0x4e612e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/boost_libfuzzer_ubsan/custom/boost_regex_fuzzer+0x4e612e)
+    #10 0x4e402a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/boost_libfuzzer_ubsan/custom/boost_regex_fuzzer+0x4e402a)
+    #11 0x4e3822  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/boost_libfuzzer_ubsan/custom/boost_regex_fuzzer+0x4e3822)
+    #12 0x4e2026  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/boost_libfuzzer_ubsan/custom/boost_regex_fuzzer+0x4e2026)
+    #13 0x4b4577  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/boost_libfuzzer_ubsan/custom/boost_regex_fuzzer+0x4b4577)
+    #14 0x4b41f9  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/boost_libfuzzer_ubsan/custom/boost_regex_fuzzer+0x4b41f9)
+    #15 0x43fdb3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/boost_libfuzzer_ubsan/custom/boost_regex_fuzzer+0x43fdb3)
+    #16 0x43f59a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/boost_libfuzzer_ubsan/custom/boost_regex_fuzzer+0x43f59a)
+    #17 0x4413f4  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/boost_libfuzzer_ubsan/custom/boost_regex_fuzzer+0x4413f4)
+    #18 0x441629  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/boost_libfuzzer_ubsan/custom/boost_regex_fuzzer+0x441629)
+    #19 0x43106d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/boost_libfuzzer_ubsan/custom/boost_regex_fuzzer+0x43106d)
+    #20 0x45a0b2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/boost_libfuzzer_ubsan/custom/boost_regex_fuzzer+0x45a0b2)
+    #21 0x7fe7bdb7e0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #22 0x40894d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/boost_libfuzzer_ubsan/custom/boost_regex_fuzzer+0x40894d)

@@ -1,0 +1,41 @@
+Testcase id: 40238
+Job: libecc_honggfuzz_msan
+Crash Type: Use-of-uninitialized-value
+isSecurity: True
+Crash state: logLog
+performanceCheck
+cryptofuzz::ExecutorBase<cryptofuzz::component::ECDSA_Signature, cryptofuzz::ope
+Poc: 40238.testcase
+engine: honggfuzz
+fully_qualified_name: honggfuzz_cryptofuzz-libecc
+target: cryptofuzz-libecc
+name: honggfuzz
+[Environment] MSAN_OPTIONS=allocator_release_to_os_interval_ms=500:halt_on_error=1:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:print_stats=1:print_summary=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+Uninitialized bytes in __interceptor_localtime_r at offset 0 inside [0x7fffffffcc58, 8)
+==14406==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x1627ad2 in logLog
+    #1 0x162fd4a in performanceCheck
+    #2 0x1626119 in main
+    #3 0x7ffff7c5b0b2 in __libc_start_main
+    #4 0x497f0d in _start
+
+  Uninitialized value was created by an allocation of &#x27;ref.tmp278&#x27; in the stack frame of function &#x27;_ZNK10cryptofuzz12ExecutorBaseINS_9component15ECDSA_SignatureENS_9operation10ECDSA_SignEE3RunERN7fuzzing10datasource10DatasourceEPKhm&#x27;
+    #0 0x6483e0 in cryptofuzz::ExecutorBase&lt;cryptofuzz::component::ECDSA_Signature, cryptofuzz::operation::ECDSA_Sign&gt;::Run(fuzzing::datasource::Datasource&amp;, unsigned char const*, unsigned long) const /src/cryptofuzz/executor.cpp:2064
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libecc_honggfuzz_msan/custom/cryptofuzz-libecc+0x1627ad2)
+Exiting
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+Uninitialized bytes in __interceptor_localtime_r at offset 0 inside [0x7fffffffcc58, 8)
+==14406==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x1627ad2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libecc_honggfuzz_msan/custom/cryptofuzz-libecc+0x1627ad2)
+    #1 0x162fd4a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libecc_honggfuzz_msan/custom/cryptofuzz-libecc+0x162fd4a)
+    #2 0x1626119  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libecc_honggfuzz_msan/custom/cryptofuzz-libecc+0x1626119)
+    #3 0x7ffff7c5b0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #4 0x497f0d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libecc_honggfuzz_msan/custom/cryptofuzz-libecc+0x497f0d)
+
+  Uninitialized value was created by an allocation of &#x27;ref.tmp278&#x27; in the stack frame of function &#x27;_ZNK10cryptofuzz12ExecutorBaseINS_9component15ECDSA_SignatureENS_9operation10ECDSA_SignEE3RunERN7fuzzing10datasource10DatasourceEPKhm&#x27;
+    #0 0x6483e0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libecc_honggfuzz_msan/custom/cryptofuzz-libecc+0x6483e0)

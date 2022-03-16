@@ -1,0 +1,71 @@
+Testcase id: 114426
+Job: libpng-proto_libfuzzer_asan
+Crash Type: Direct-leak
+isSecurity: False
+Crash state: OSS_FUZZ_png_malloc
+OSS_FUZZ_png_set_tRNS
+OSS_FUZZ_png_handle_tRNS
+Poc: 114426.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_png_transforms_fuzzer
+target: png_transforms_fuzzer
+name: libFuzzer
+[Environment] ASAN_OPTIONS=detect_leaks=1:exitcode=77
++----------------------------------------Release Build Stacktrace----------------------------------------+
+Command: /clusterfuzz/run_bot/clusterfuzz/bot/builds/libpng-proto_libfuzzer_asan/custom/png_transforms_fuzzer -rss_limit_mb=2560 -timeout=60 -runs=100 /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/f7ef0540cbbca2ae62252f9c98a4ad8ab49eb8b28c2bdb30a319f31f300f12f3
+Time ran: 0.04296374320983887
+
+INFO: found LLVMFuzzerCustomMutator (0x55fea0). Disabling -len_control by default.
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 3054837485
+INFO: Loaded 1 modules   (6377 inline 8-bit counters): 6377 [0x6f36b8, 0x6f4fa1),
+INFO: Loaded 1 PC tables (6377 PCs): 6377 [0x66b998,0x684828),
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpng-proto_libfuzzer_asan/custom/png_transforms_fuzzer: Running 1 inputs 100 time(s) each.
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/f7ef0540cbbca2ae62252f9c98a4ad8ab49eb8b28c2bdb30a319f31f300f12f3
+
+=================================================================
+==7442==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 256 byte(s) in 1 object(s) allocated from:
+<b>    #0 0x526c0d in malloc /src/llvm-project/compiler-rt/lib/asan/asan_malloc_linux.cpp:129:3</b>
+<b>    #1 0x58ad53 in OSS_FUZZ_png_malloc_base /src/libpng/pngmem.c:95:17</b>
+<b>    #2 0x58ad53 in OSS_FUZZ_png_malloc /src/libpng/pngmem.c:179:10</b>
+<b>    #3 0x5cd491 in OSS_FUZZ_png_set_tRNS /src/libpng/pngset.c:1019:35</b>
+<b>    #4 0x5bc242 in OSS_FUZZ_png_handle_tRNS /src/libpng/pngrutil.c:1913:4</b>
+<b>    #5 0x58be19 in OSS_FUZZ_png_read_info /src/libpng/pngread.c:245:10</b>
+<b>    #6 0x58eaf6 in OSS_FUZZ_png_read_png /src/libpng/pngread.c:1058:4</b>
+<b>    #7 0x567945 in LLVMFuzzerTestOneInput /src/libpng_transforms_fuzzer.cc:107:5</b>
+<b>    #8 0x457a43 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long)</b>
+<b>    #9 0x443352 in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:324:6</b>
+<b>    #10 0x448e1a in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long))</b>
+<b>    #11 0x471d42 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10</b>
+<b>    #12 0x7fa4acbc80b2 in __libc_start_main</b>
+
+================================================================================
+The following leaks are not necessarily related to the first leak.
+
+
+SUMMARY: AddressSanitizer: 256 byte(s) leaked in 1 allocation(s).
+
+INFO: a leak has been found in the initial corpus.
+
+INFO: to ignore leaks on libFuzzer side use -detect_leaks=0.
+
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+
+Direct leak of 256 byte(s) in 1 object(s) allocated from:
+    #0 0x526c0d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpng-proto_libfuzzer_asan/custom/png_transforms_fuzzer+0x526c0d)
+    #1 0x58ad53  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpng-proto_libfuzzer_asan/custom/png_transforms_fuzzer+0x58ad53)
+    #2 0x5cd491  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpng-proto_libfuzzer_asan/custom/png_transforms_fuzzer+0x5cd491)
+    #3 0x5bc242  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpng-proto_libfuzzer_asan/custom/png_transforms_fuzzer+0x5bc242)
+    #4 0x58be19  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpng-proto_libfuzzer_asan/custom/png_transforms_fuzzer+0x58be19)
+    #5 0x58eaf6  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpng-proto_libfuzzer_asan/custom/png_transforms_fuzzer+0x58eaf6)
+    #6 0x567945  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpng-proto_libfuzzer_asan/custom/png_transforms_fuzzer+0x567945)
+    #7 0x457a43  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpng-proto_libfuzzer_asan/custom/png_transforms_fuzzer+0x457a43)
+    #8 0x443352  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpng-proto_libfuzzer_asan/custom/png_transforms_fuzzer+0x443352)
+    #9 0x448e1a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpng-proto_libfuzzer_asan/custom/png_transforms_fuzzer+0x448e1a)
+    #10 0x471d42  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpng-proto_libfuzzer_asan/custom/png_transforms_fuzzer+0x471d42)
+    #11 0x7fa4acbc80b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)

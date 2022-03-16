@@ -1,0 +1,146 @@
+Testcase id: 42900
+Job: libheif_libfuzzer_asan
+Crash Type: Heap-buffer-overflow READ 1
+isSecurity: True
+Crash state: void apply_sao_internal<unsigned short>
+thread_task_sao::work
+worker_thread
+Poc: 42900.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_file-fuzzer
+target: file-fuzzer
+name: libFuzzer
+[Environment] ASAN_OPTIONS=exitcode=77
++----------------------------------------Release Build Stacktrace----------------------------------------+
+Command: /clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_asan/custom/file-fuzzer -rss_limit_mb=2560 -timeout=60 -runs=100 /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/807a2609974bce30bb497cb61256c853658dcf0d97679fa3b44948ce6e5e9339
+Time ran: 0.04964113235473633
+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 3290016720
+INFO: Loaded 1 modules   (136015 inline 8-bit counters): 136015 [0x27ef500, 0x281084f),
+INFO: Loaded 1 PC tables (136015 PCs): 136015 [0x2810850,0x2a23d40),
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_asan/custom/file-fuzzer: Running 1 inputs 100 time(s) each.
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/807a2609974bce30bb497cb61256c853658dcf0d97679fa3b44948ce6e5e9339
+=================================================================
+==32842==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x613000006278 at pc 0x000001ccbfaf bp 0x7f8b79af7990 sp 0x7f8b79af7988
+READ of size 1 at 0x613000006278 thread T2
+    #0 0x1ccbfae in void apply_sao_internal&lt;unsigned short&gt;(de265_image*, int, int, slice_segment_header const*, int, int, int, unsigned short const*, int, unsigned short*, int) /src/libde265/libde265/sao.cc:252:28
+    #1 0x1cc7884 in apply_sao&lt;unsigned char&gt; /src/libde265/libde265/sao.cc:270:5
+    #2 0x1cc7884 in thread_task_sao::work() /src/libde265/libde265/sao.cc:441:9
+    #3 0x1d002fd in worker_thread(void*) /src/libde265/libde265/threads.cc:233:11
+    #4 0x7f8b7d438608 in start_thread
+    #5 0x7f8b7d35f292 in __clone
+
+Address 0x613000006278 is a wild pointer inside of access range of size 0x000000000001.
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_asan/custom/file-fuzzer+0x1ccbfae)
+Shadow bytes around the buggy address:
+  0x0c267fff8bf0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c267fff8c00: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c267fff8c10: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c267fff8c20: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c267fff8c30: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+=&gt;0x0c267fff8c40: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa[fa]
+  0x0c267fff8c50: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c267fff8c60: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c267fff8c70: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c267fff8c80: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c267fff8c90: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+Thread T2 created by T0 here:
+    #0 0x510c8c in pthread_create /src/llvm-project/compiler-rt/lib/asan/asan_interceptors.cpp:207:3
+    #1 0x1cffea1 in de265_thread_create /src/libde265/libde265/threads.cc:41:96
+    #2 0x1cffea1 in start_thread_pool(thread_pool*, int) /src/libde265/libde265/threads.cc:271:15
+    #3 0x1c78a23 in decoder_context::start_thread_pool(int) /src/libde265/libde265/decctx.cc:346:3
+    #4 0x1c74206 in de265_start_worker_threads /src/libde265/libde265/de265.cc:264:28
+    #5 0x6ba656 in libde265_new_decoder(void**) /src/libheif/libheif/heif_decoder_libde265.cc:173:3
+    #6 0x63beb9 in heif::HeifContext::decode_image_planar(unsigned int, std::__1::shared_ptr&lt;heif::HeifPixelImage&gt;&amp;, heif_colorspace, heif_decoding_options const*, bool) const /src/libheif/libheif/heif_context.cc:1086:29
+    #7 0x63a495 in heif::HeifContext::decode_image_user(unsigned int, std::__1::shared_ptr&lt;heif::HeifPixelImage&gt;&amp;, heif_colorspace, heif_chroma, heif_decoding_options const*) const /src/libheif/libheif/heif_context.cc:1014:15
+    #8 0x60c15f in heif_decode_image /src/libheif/libheif/heif.cc:917:35
+    #9 0x6c76bd in TestDecodeImage(heif_context*, heif_image_handle const*, unsigned long) /src/libheif/libheif/file_fuzzer.cc:61:9
+    #10 0x6c6f97 in LLVMFuzzerTestOneInput /src/libheif/libheif/file_fuzzer.cc:102:5
+    #11 0x4583c3 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #12 0x443cd2 in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:324:6
+    #13 0x44979a in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #14 0x4726c2 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #15 0x7f8b7d2640b2 in __libc_start_main
+
+==32842==ABORTING
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+==32842==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x613000006278 at pc 0x000001ccbfaf bp 0x7f8b79af7990 sp 0x7f8b79af7988
+READ of size 1 at 0x613000006278 thread T2
+    #0 0x1ccbfae  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_asan/custom/file-fuzzer+0x1ccbfae)
+    #1 0x1cc7884  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_asan/custom/file-fuzzer+0x1cc7884)
+    #2 0x1d002fd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_asan/custom/file-fuzzer+0x1d002fd)
+    #3 0x7f8b7d438608  (/lib/x86_64-linux-gnu/libpthread.so.0+0x9608)
+    #4 0x7f8b7d35f292  (/lib/x86_64-linux-gnu/libc.so.6+0x122292)
+
+Address 0x613000006278 is a wild pointer inside of access range of size 0x000000000001.
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_asan/custom/file-fuzzer+0x1ccbfae) 
+Shadow bytes around the buggy address:
+  0x0c267fff8bf0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c267fff8c00: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c267fff8c10: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c267fff8c20: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c267fff8c30: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+=&gt;0x0c267fff8c40: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa[fa]
+  0x0c267fff8c50: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c267fff8c60: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c267fff8c70: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c267fff8c80: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c267fff8c90: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+Thread T2 created by T0 here:
+    #0 0x510c8c  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_asan/custom/file-fuzzer+0x510c8c)
+    #1 0x1cffea1  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_asan/custom/file-fuzzer+0x1cffea1)
+    #2 0x1c78a23  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_asan/custom/file-fuzzer+0x1c78a23)
+    #3 0x1c74206  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_asan/custom/file-fuzzer+0x1c74206)
+    #4 0x6ba656  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_asan/custom/file-fuzzer+0x6ba656)
+    #5 0x63beb9  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_asan/custom/file-fuzzer+0x63beb9)
+    #6 0x63a495  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_asan/custom/file-fuzzer+0x63a495)
+    #7 0x60c15f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_asan/custom/file-fuzzer+0x60c15f)
+    #8 0x6c76bd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_asan/custom/file-fuzzer+0x6c76bd)
+    #9 0x6c6f97  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_asan/custom/file-fuzzer+0x6c6f97)
+    #10 0x4583c3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_asan/custom/file-fuzzer+0x4583c3)
+    #11 0x443cd2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_asan/custom/file-fuzzer+0x443cd2)
+    #12 0x44979a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_asan/custom/file-fuzzer+0x44979a)
+    #13 0x4726c2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_asan/custom/file-fuzzer+0x4726c2)
+    #14 0x7f8b7d2640b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)

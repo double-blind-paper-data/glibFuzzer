@@ -1,0 +1,245 @@
+Testcase id: 14636
+Job: libpg_query_afl_msan
+Crash Type: Use-of-uninitialized-value
+isSecurity: True
+Crash state: scanner_yyerror
+base_yyerror
+base_yyparse
+Poc: 14636.testcase
+engine: afl
+fully_qualified_name: afl_fuzz_parser
+target: fuzz_parser
+name: afl
+[Environment] MSAN_OPTIONS=allocator_release_to_os_interval_ms=500:exit_code=86:halt_on_error=1:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:print_stats=1:print_summary=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+==12594==WARNING: MemorySanitizer: use-of-uninitialized-value
+<b>    #0 0x59e4ee in scanner_yyerror /src/libpg_query/scan.l:1220:6</b>
+<b>    #1 0x4a4912 in base_yyerror /src/libpg_query/gram.y:15961:2</b>
+<b>    #2 0x52ae9e in base_yyparse /src/libpg_query/gram.c:46301:7</b>
+<b>    #3 0x4a0df3 in raw_parser /src/libpg_query/src/postgres/src_backend_parser_parser.c:71:13</b>
+<b>    #4 0x4a014c in pg_query_raw_parse /src/libpg_query/src/pg_query_parse.c:45:17</b>
+<b>    #5 0x4a051c in pg_query_parse /src/libpg_query/src/pg_query_parse.c:95:24</b>
+<b>    #6 0x49faf0 in LLVMFuzzerTestOneInput /src/libpg_query/test/fuzz/fuzz_parser.c:16:30</b>
+<b>    #7 0x49f85f in main /src/aflplusplus/utils/aflpp_driver/aflpp_driver.c:303:7</b>
+<b>    #8 0x7ff0131960b2 in __libc_start_main</b>
+<b>    #9 0x41d3dd in _start</b>
+
+  Uninitialized value was created by an allocation of &#x27;base_yylloc&#x27; in the stack frame of function &#x27;base_yyparse&#x27;
+    #0 0x4a4920 in base_yyparse /src/libpg_query/gram.c:27710
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x59e4ee)
+Unique heap origins: 7
+Stack depot allocated bytes: 1900544
+Unique origin histories: 5
+History depot allocated bytes: 196608
+Exiting
+==12595==WARNING: MemorySanitizer: use-of-uninitialized-value
+<b>    #0 0x59e4ee in scanner_yyerror /src/libpg_query/scan.l:1220:6</b>
+<b>    #1 0x4a4912 in base_yyerror /src/libpg_query/gram.y:15961:2</b>
+<b>    #2 0x52ae9e in base_yyparse /src/libpg_query/gram.c:46301:7</b>
+<b>    #3 0x4a0df3 in raw_parser /src/libpg_query/src/postgres/src_backend_parser_parser.c:71:13</b>
+<b>    #4 0x4a014c in pg_query_raw_parse /src/libpg_query/src/pg_query_parse.c:45:17</b>
+<b>    #5 0x4a051c in pg_query_parse /src/libpg_query/src/pg_query_parse.c:95:24</b>
+<b>    #6 0x49faf0 in LLVMFuzzerTestOneInput /src/libpg_query/test/fuzz/fuzz_parser.c:16:30</b>
+<b>    #7 0x49f85f in main /src/aflplusplus/utils/aflpp_driver/aflpp_driver.c:303:7</b>
+<b>    #8 0x7ff0131960b2 in __libc_start_main</b>
+<b>    #9 0x41d3dd in _start</b>
+
+  Uninitialized value was created by an allocation of &#x27;base_yylloc&#x27; in the stack frame of function &#x27;base_yyparse&#x27;
+    #0 0x4a4920 in base_yyparse /src/libpg_query/gram.c:27710
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x59e4ee)
+Unique heap origins: 4
+Stack depot allocated bytes: 1900544
+Unique origin histories: 2
+History depot allocated bytes: 196608
+Exiting
+==12596==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x59e4ee in scanner_yyerror /src/libpg_query/scan.l:1220:6
+    #1 0x4a4912 in base_yyerror /src/libpg_query/gram.y:15961:2
+    #2 0x52ae9e in base_yyparse /src/libpg_query/gram.c:46301:7
+    #3 0x4a0df3 in raw_parser /src/libpg_query/src/postgres/src_backend_parser_parser.c:71:13
+    #4 0x4a014c in pg_query_raw_parse /src/libpg_query/src/pg_query_parse.c:45:17
+    #5 0x4a051c in pg_query_parse /src/libpg_query/src/pg_query_parse.c:95:24
+    #6 0x49faf0 in LLVMFuzzerTestOneInput /src/libpg_query/test/fuzz/fuzz_parser.c:16:30
+    #7 0x49f85f in main /src/aflplusplus/utils/aflpp_driver/aflpp_driver.c:303:7
+    #8 0x7ff0131960b2 in __libc_start_main
+    #9 0x41d3dd in _start
+
+  Uninitialized value was created by an allocation of &#x27;base_yylloc&#x27; in the stack frame of function &#x27;base_yyparse&#x27;
+    #0 0x4a4920 in base_yyparse /src/libpg_query/gram.c:27710
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x59e4ee)
+Unique heap origins: 5
+Stack depot allocated bytes: 1900544
+Unique origin histories: 3
+History depot allocated bytes: 196608
+Exiting
+==12598==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x59e4ee in scanner_yyerror /src/libpg_query/scan.l:1220:6
+    #1 0x4a4912 in base_yyerror /src/libpg_query/gram.y:15961:2
+    #2 0x52ae9e in base_yyparse /src/libpg_query/gram.c:46301:7
+    #3 0x4a0df3 in raw_parser /src/libpg_query/src/postgres/src_backend_parser_parser.c:71:13
+    #4 0x4a014c in pg_query_raw_parse /src/libpg_query/src/pg_query_parse.c:45:17
+    #5 0x4a051c in pg_query_parse /src/libpg_query/src/pg_query_parse.c:95:24
+    #6 0x49faf0 in LLVMFuzzerTestOneInput /src/libpg_query/test/fuzz/fuzz_parser.c:16:30
+    #7 0x49f85f in main /src/aflplusplus/utils/aflpp_driver/aflpp_driver.c:303:7
+    #8 0x7ff0131960b2 in __libc_start_main
+    #9 0x41d3dd in _start
+
+  Uninitialized value was created by an allocation of &#x27;base_yylloc&#x27; in the stack frame of function &#x27;base_yyparse&#x27;
+    #0 0x4a4920 in base_yyparse /src/libpg_query/gram.c:27710
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x59e4ee)
+Unique heap origins: 2
+Stack depot allocated bytes: 1638400
+Unique origin histories: 0
+History depot allocated bytes: 0
+Exiting
+==12599==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x59e4ee in scanner_yyerror /src/libpg_query/scan.l:1220:6
+    #1 0x4a4912 in base_yyerror /src/libpg_query/gram.y:15961:2
+    #2 0x52ae9e in base_yyparse /src/libpg_query/gram.c:46301:7
+    #3 0x4a0df3 in raw_parser /src/libpg_query/src/postgres/src_backend_parser_parser.c:71:13
+    #4 0x4a014c in pg_query_raw_parse /src/libpg_query/src/pg_query_parse.c:45:17
+    #5 0x4a051c in pg_query_parse /src/libpg_query/src/pg_query_parse.c:95:24
+    #6 0x49faf0 in LLVMFuzzerTestOneInput /src/libpg_query/test/fuzz/fuzz_parser.c:16:30
+    #7 0x49f85f in main /src/aflplusplus/utils/aflpp_driver/aflpp_driver.c:303:7
+    #8 0x7ff0131960b2 in __libc_start_main
+    #9 0x41d3dd in _start
+
+==12600==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x59e4ee in scanner_yyerror /src/libpg_query/scan.l:1220:6
+    #1 0x4a4912 in base_yyerror /src/libpg_query/gram.y:15961:2
+    #2 0x52ae9e in base_yyparse /src/libpg_query/gram.c:46301:7
+    #3 0x4a0df3 in raw_parser /src/libpg_query/src/postgres/src_backend_parser_parser.c:71:13
+    #4 0x4a014c in pg_query_raw_parse /src/libpg_query/src/pg_query_parse.c:45:17
+    #5 0x4a051c in pg_query_parse /src/libpg_query/src/pg_query_parse.c:95:24
+    #6 0x49faf0 in LLVMFuzzerTestOneInput /src/libpg_query/test/fuzz/fuzz_parser.c:16:30
+    #7 0x49f85f in main /src/aflplusplus/utils/aflpp_driver/aflpp_driver.c:303:7
+    #8 0x7ff0131960b2 in __libc_start_main
+    #9 0x41d3dd in _start
+
+  Uninitialized value was created by an allocation of &#x27;base_yylloc&#x27; in the stack frame of function &#x27;base_yyparse&#x27;
+    #0 0x4a4920 in base_yyparse /src/libpg_query/gram.c:27710
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x59e4ee)
+Unique heap origins: 2
+Stack depot allocated bytes: 1638400
+Unique origin histories: 0
+History depot allocated bytes: 0
+Exiting
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+==12594==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x59e4ee  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x59e4ee)
+    #1 0x4a4912  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x4a4912)
+    #2 0x52ae9e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x52ae9e)
+    #3 0x4a0df3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x4a0df3)
+    #4 0x4a014c  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x4a014c)
+    #5 0x4a051c  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x4a051c)
+    #6 0x49faf0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x49faf0)
+    #7 0x49f85f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x49f85f)
+    #8 0x7ff0131960b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #9 0x41d3dd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x41d3dd)
+
+  Uninitialized value was created by an allocation of &#x27;base_yylloc&#x27; in the stack frame of function &#x27;base_yyparse&#x27;
+    #0 0x4a4920  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x4a4920)
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x59e4ee) 
+Unique heap origins: 7
+Stack depot allocated bytes: 1900544
+Unique origin histories: 5
+History depot allocated bytes: 196608
+Exiting
+==12595==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x59e4ee  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x59e4ee)
+    #1 0x4a4912  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x4a4912)
+    #2 0x52ae9e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x52ae9e)
+    #3 0x4a0df3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x4a0df3)
+    #4 0x4a014c  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x4a014c)
+    #5 0x4a051c  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x4a051c)
+    #6 0x49faf0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x49faf0)
+    #7 0x49f85f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x49f85f)
+    #8 0x7ff0131960b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #9 0x41d3dd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x41d3dd)
+
+  Uninitialized value was created by an allocation of &#x27;base_yylloc&#x27; in the stack frame of function &#x27;base_yyparse&#x27;
+    #0 0x4a4920  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x4a4920)
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x59e4ee) 
+Unique heap origins: 4
+Stack depot allocated bytes: 1900544
+Unique origin histories: 2
+History depot allocated bytes: 196608
+Exiting
+==12596==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x59e4ee  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x59e4ee)
+    #1 0x4a4912  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x4a4912)
+    #2 0x52ae9e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x52ae9e)
+    #3 0x4a0df3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x4a0df3)
+    #4 0x4a014c  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x4a014c)
+    #5 0x4a051c  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x4a051c)
+    #6 0x49faf0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x49faf0)
+    #7 0x49f85f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x49f85f)
+    #8 0x7ff0131960b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #9 0x41d3dd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x41d3dd)
+
+  Uninitialized value was created by an allocation of &#x27;base_yylloc&#x27; in the stack frame of function &#x27;base_yyparse&#x27;
+    #0 0x4a4920  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x4a4920)
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x59e4ee) 
+Unique heap origins: 5
+Stack depot allocated bytes: 1900544
+Unique origin histories: 3
+History depot allocated bytes: 196608
+Exiting
+==12598==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x59e4ee  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x59e4ee)
+    #1 0x4a4912  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x4a4912)
+    #2 0x52ae9e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x52ae9e)
+    #3 0x4a0df3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x4a0df3)
+    #4 0x4a014c  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x4a014c)
+    #5 0x4a051c  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x4a051c)
+    #6 0x49faf0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x49faf0)
+    #7 0x49f85f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x49f85f)
+    #8 0x7ff0131960b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #9 0x41d3dd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x41d3dd)
+
+  Uninitialized value was created by an allocation of &#x27;base_yylloc&#x27; in the stack frame of function &#x27;base_yyparse&#x27;
+    #0 0x4a4920  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x4a4920)
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x59e4ee) 
+Unique heap origins: 2
+Stack depot allocated bytes: 1638400
+Unique origin histories: 0
+History depot allocated bytes: 0
+Exiting
+==12599==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x59e4ee  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x59e4ee)
+    #1 0x4a4912  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x4a4912)
+    #2 0x52ae9e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x52ae9e)
+    #3 0x4a0df3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x4a0df3)
+    #4 0x4a014c  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x4a014c)
+    #5 0x4a051c  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x4a051c)
+    #6 0x49faf0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x49faf0)
+    #7 0x49f85f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x49f85f)
+    #8 0x7ff0131960b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #9 0x41d3dd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x41d3dd)
+
+==12600==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x59e4ee  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x59e4ee)
+    #1 0x4a4912  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x4a4912)
+    #2 0x52ae9e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x52ae9e)
+    #3 0x4a0df3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x4a0df3)
+    #4 0x4a014c  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x4a014c)
+    #5 0x4a051c  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x4a051c)
+    #6 0x49faf0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x49faf0)
+    #7 0x49f85f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x49f85f)
+    #8 0x7ff0131960b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #9 0x41d3dd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x41d3dd)
+
+  Uninitialized value was created by an allocation of &#x27;base_yylloc&#x27; in the stack frame of function &#x27;base_yyparse&#x27;
+    #0 0x4a4920  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_afl_msan/custom/fuzz_parser+0x4a4920)

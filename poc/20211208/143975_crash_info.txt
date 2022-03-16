@@ -1,0 +1,41 @@
+Testcase id: 143975
+Job: libsass_honggfuzz_msan
+Crash Type: Use-of-uninitialized-value
+isSecurity: True
+Crash state: logLog
+performanceCheck
+Sass::handle_error
+Poc: 143975.testcase
+engine: honggfuzz
+fully_qualified_name: honggfuzz_data_context_fuzzer
+target: data_context_fuzzer
+name: honggfuzz
+[Environment] MSAN_OPTIONS=allocator_release_to_os_interval_ms=500:halt_on_error=1:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:print_stats=1:print_summary=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+Uninitialized bytes in __interceptor_localtime_r at offset 0 inside [0x7fffffffcc48, 8)
+==34448==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x505ce2 in logLog
+    #1 0x50df5a in performanceCheck
+    #2 0x504329 in main
+    #3 0x7ffff7c5b0b2 in __libc_start_main
+    #4 0x47f7ed in _start
+
+  Uninitialized value was created by an allocation of &#x27;agg.tmp173&#x27; in the stack frame of function &#x27;_ZN4SassL12handle_errorEP12Sass_Context&#x27;
+    #0 0x519780 in Sass::handle_error(Sass_Context*) /src/libsass/src/sass_context.cpp:39
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libsass_honggfuzz_msan/custom/data_context_fuzzer+0x505ce2)
+Exiting
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+Uninitialized bytes in __interceptor_localtime_r at offset 0 inside [0x7fffffffcc48, 8)
+==34448==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x505ce2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libsass_honggfuzz_msan/custom/data_context_fuzzer+0x505ce2)
+    #1 0x50df5a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libsass_honggfuzz_msan/custom/data_context_fuzzer+0x50df5a)
+    #2 0x504329  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libsass_honggfuzz_msan/custom/data_context_fuzzer+0x504329)
+    #3 0x7ffff7c5b0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #4 0x47f7ed  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libsass_honggfuzz_msan/custom/data_context_fuzzer+0x47f7ed)
+
+  Uninitialized value was created by an allocation of &#x27;agg.tmp173&#x27; in the stack frame of function &#x27;_ZN4SassL12handle_errorEP12Sass_Context&#x27;
+    #0 0x519780  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libsass_honggfuzz_msan/custom/data_context_fuzzer+0x519780)

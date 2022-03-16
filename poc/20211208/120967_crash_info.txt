@@ -1,0 +1,51 @@
+Testcase id: 120967
+Job: cctz_libfuzzer_ubsan
+Crash Type: Integer-overflow
+isSecurity: False
+Crash state: bool cctz::detail::join_seconds<long long, 1000000l>
+time_zone.h
+Poc: 120967.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_fuzz_cctz
+target: fuzz_cctz
+name: libFuzzer
+[Environment] UBSAN_OPTIONS=exitcode=77:print_stacktrace=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+Command: /clusterfuzz/run_bot/clusterfuzz/bot/builds/cctz_libfuzzer_ubsan/custom/fuzz_cctz -rss_limit_mb=2560 -timeout=60 -runs=100 /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/4762dc20335d8f654d927de96ec0d506a609db615bf5c55b843a4764cabda99f
+Time ran: 0.01976180076599121
+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 3569988274
+INFO: Loaded 1 modules   (4933 inline 8-bit counters): 4933 [0x5e7f68, 0x5e92ad),
+INFO: Loaded 1 PC tables (4933 PCs): 4933 [0x573660,0x586ab0),
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/cctz_libfuzzer_ubsan/custom/fuzz_cctz: Running 1 inputs 100 time(s) each.
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/4762dc20335d8f654d927de96ec0d506a609db615bf5c55b843a4764cabda99f
+/usr/local/bin/../include/c++/v1/chrono:775:59: runtime error: signed integer overflow: 9223372036854775807 * 1000000 cannot be represented in type &#x27;long long&#x27;
+    #0 0x4b5e67 in operator() /usr/local/include/c++/v1/chrono:775:59
+    #1 0x4b5e67 in duration_cast&lt;std::__1::chrono::duration&lt;long long, std::__1::ratio&lt;1L, 1000000L&gt; &gt;, long, std::__1::ratio&lt;1L, 1L&gt; &gt; /usr/local/include/c++/v1/chrono:802:12
+    #2 0x4b5e67 in time_point_cast&lt;std::__1::chrono::duration&lt;long long, std::__1::ratio&lt;1L, 1000000L&gt; &gt;, std::__1::chrono::system_clock, std::__1::chrono::duration&lt;long, std::__1::ratio&lt;1L, 1L&gt; &gt; &gt; /usr/local/include/c++/v1/chrono:1268:44
+    #3 0x4b5e67 in bool cctz::detail::join_seconds&lt;long long, 1000000l&gt;(std::__1::chrono::time_point&lt;std::__1::chrono::system_clock, std::__1::chrono::duration&lt;long, std::__1::ratio&lt;1l, 1l&gt; &gt; &gt; const&amp;, std::__1::chrono::duration&lt;long, std::__1::ratio&lt;1l, 1000000000000000l&gt; &gt; const&amp;, std::__1::chrono::time_point&lt;std::__1::chrono::system_clock, std::__1::chrono::duration&lt;long long, std::__1::ratio&lt;1l, 1000000l&gt; &gt; &gt;*) /src/cctz/include/cctz/time_zone.h:407:10
+    #4 0x4b416f in parse&lt;std::__1::chrono::duration&lt;long long, std::__1::ratio&lt;1L, 1000000L&gt; &gt; &gt; /src/cctz/include/cctz/time_zone.h:372:10
+    #5 0x4b416f in LLVMFuzzerTestOneInput /src/cctz/build/fuzz_cctz.cc:33:3
+    #6 0x43fcf3 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #7 0x42b602 in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:324:6
+    #8 0x4310ca in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #9 0x459ff2 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #10 0x7fb26633e0b2 in __libc_start_main
+    #11 0x40888d in _start
+
+SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior /usr/local/bin/../include/c++/v1/chrono:775:59 in
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/4762dc20335d8f654d927de96ec0d506a609db615bf5c55b843a4764cabda99f
+/usr/local/bin/../include/c++/v1/chrono:775:59: runtime error: signed integer overflow: 9223372036854775807 * 1000000 cannot be represented in type &#x27;long long&#x27;
+    #0 0x4b5e67  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cctz_libfuzzer_ubsan/custom/fuzz_cctz+0x4b5e67)
+    #1 0x4b416f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cctz_libfuzzer_ubsan/custom/fuzz_cctz+0x4b416f)
+    #2 0x43fcf3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cctz_libfuzzer_ubsan/custom/fuzz_cctz+0x43fcf3)
+    #3 0x42b602  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cctz_libfuzzer_ubsan/custom/fuzz_cctz+0x42b602)
+    #4 0x4310ca  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cctz_libfuzzer_ubsan/custom/fuzz_cctz+0x4310ca)
+    #5 0x459ff2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cctz_libfuzzer_ubsan/custom/fuzz_cctz+0x459ff2)
+    #6 0x7fb26633e0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #7 0x40888d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cctz_libfuzzer_ubsan/custom/fuzz_cctz+0x40888d)

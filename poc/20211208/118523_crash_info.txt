@@ -1,0 +1,160 @@
+Testcase id: 118523
+Job: libxls_libfuzzer_msan
+Crash Type: Use-of-uninitialized-value
+isSecurity: True
+Crash state: ole2_sopen
+ole2_read_header_and_body
+ole2_open_buffer
+Poc: 118523.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_fuzz_xls
+target: fuzz_xls
+name: libFuzzer
+[Environment] MSAN_OPTIONS=allocator_release_to_os_interval_ms=500:exitcode=77:halt_on_error=1:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:print_stats=1:print_summary=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 1162690500
+INFO: Loaded 1 modules   (1091 inline 8-bit counters): 1091 [0x5b95f0, 0x5b9a33),
+INFO: Loaded 1 PC tables (1091 PCs): 1091 [0x573120,0x577550),
+INFO: -fork=48: fuzzing in separate process(s)
+INFO: -fork=48: 1820 seed inputs, starting to fuzz in /clusterfuzz/run_bot/clusterfuzz/bot_tmpdir/libFuzzerTemp.FuzzWithFork57283.dir
+#156: cov: 7957 ft: 7957 corp: 1820 exec/s 78 oom/timeout/crash: 0/0/0 time: 30s job: 1 dft_time: 0
+  NEW_FUNC: 0x53dfa0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libxls_libfuzzer_msan/custom/fuzz_xls+0x53dfa0)
+  NEW_FUNC: 0x54be00  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libxls_libfuzzer_msan/custom/fuzz_xls+0x54be00)
+  NEW_FUNC: 0x550b30  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libxls_libfuzzer_msan/custom/fuzz_xls+0x550b30)
+#420: cov: 7967 ft: 7959 corp: 1822 exec/s 132 oom/timeout/crash: 0/0/0 time: 30s job: 23 dft_time: 0
+INFO: log from the inner process:
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 1190493209
+INFO: Loaded 1 modules   (1091 inline 8-bit counters): 1091 [0x5b95f0, 0x5b9a33),
+INFO: Loaded 1 PC tables (1091 PCs): 1091 [0x573120,0x577550),
+INFO:        0 files found in /clusterfuzz/run_bot/clusterfuzz/bot_tmpdir/libFuzzerTemp.FuzzWithFork57283.dir/C23
+INFO: -max_len is not provided; libFuzzer will not generate inputs larger than 35591 bytes
+INFO: seed corpus: files: 42 min: 19408b max: 35591b total: 1209542b rss: 75Mb
+#43	INITED cov: 441 ft: 2954 corp: 39/1092Kb exec/s: 0 rss: 101Mb
+#45	NEW    cov: 443 ft: 2960 corp: 40/1116Kb lim: 35591 exec/s: 0 rss: 101Mb L: 24447/35591 MS: 2 ChangeBit-InsertRepeatedBytes-
+#49	NEW    cov: 443 ft: 2961 corp: 41/1149Kb lim: 35591 exec/s: 0 rss: 101Mb L: 33583/35591 MS: 4 CMP-ChangeBit-ChangeASCIIInt-InsertRepeatedBytes- DE: &quot;\003\000&quot;-
+#51	NEW    cov: 443 ft: 2967 corp: 42/1172Kb lim: 35591 exec/s: 0 rss: 101Mb L: 24165/35591 MS: 2 ChangeBinInt-ChangeBinInt-
+#59	NEW    cov: 443 ft: 2984 corp: 43/1204Kb lim: 35591 exec/s: 0 rss: 101Mb L: 32770/35591 MS: 3 ChangeASCIIInt-ChangeASCIIInt-PersAutoDict- DE: &quot;\003\000&quot;-
+#61	NEW    cov: 443 ft: 2985 corp: 44/1237Kb lim: 35591 exec/s: 0 rss: 101Mb L: 33570/35591 MS: 2 ChangeBit-CMP- DE: &quot;:\377&quot;-
+#62	NEW    cov: 443 ft: 2986 corp: 45/1270Kb lim: 35591 exec/s: 0 rss: 101Mb L: 33584/35591 MS: 1 InsertByte-
+#67	NEW    cov: 445 ft: 2991 corp: 46/1273Kb lim: 35591 exec/s: 0 rss: 101Mb L: 2880/35591 MS: 5 ShuffleBytes-InsertByte-ChangeASCIIInt-EraseBytes-CrossOver-
+#76	NEW    cov: 445 ft: 2994 corp: 47/1302Kb lim: 35591 exec/s: 0 rss: 101Mb L: 29398/35591 MS: 4 ChangeBinInt-CopyPart-ShuffleBytes-InsertByte-
+#79	NEW    cov: 446 ft: 2998 corp: 48/1335Kb lim: 35591 exec/s: 0 rss: 101Mb L: 33905/35591 MS: 3 ChangeBinInt-ChangeBinInt-CrossOver-
+#86	NEW    cov: 446 ft: 3000 corp: 49/1367Kb lim: 35591 exec/s: 0 rss: 101Mb L: 32768/35591 MS: 2 ChangeBinInt-CopyPart-
+#88	NEW    cov: 446 ft: 3001 corp: 50/1368Kb lim: 35591 exec/s: 0 rss: 101Mb L: 1735/35591 MS: 2 CMP-EraseBytes- DE: &quot;\001\000\000\000\000\000\001H&quot;-
+#89	NEW    cov: 446 ft: 3003 corp: 51/1401Kb lim: 35591 exec/s: 0 rss: 101Mb L: 33645/35591 MS: 1 InsertRepeatedBytes-
+#93	NEW    cov: 446 ft: 3004 corp: 52/1432Kb lim: 35591 exec/s: 0 rss: 104Mb L: 31655/35591 MS: 4 InsertByte-ChangeByte-ChangeByte-InsertRepeatedBytes-
+#94	NEW    cov: 446 ft: 3018 corp: 53/1457Kb lim: 35591 exec/s: 0 rss: 104Mb L: 25540/35591 MS: 1 EraseBytes-
+#97	REDUCE cov: 446 ft: 3018 corp: 53/1457Kb lim: 35591 exec/s: 0 rss: 104Mb L: 1363/35591 MS: 3 ChangeBit-CopyPart-EraseBytes-
+#105	NEW    cov: 446 ft: 3020 corp: 54/1489Kb lim: 35591 exec/s: 0 rss: 104Mb L: 33567/35591 MS: 3 ChangeBinInt-ChangeByte-InsertByte-
+#106	NEW    cov: 446 ft: 3024 corp: 55/1519Kb lim: 35591 exec/s: 0 rss: 104Mb L: 30205/35591 MS: 1 CrossOver-
+#107	NEW    cov: 446 ft: 3028 corp: 56/1533Kb lim: 35591 exec/s: 0 rss: 104Mb L: 14547/35591 MS: 1 EraseBytes-
+#113	NEW    cov: 446 ft: 3032 corp: 57/1567Kb lim: 35591 exec/s: 0 rss: 104Mb L: 34811/35591 MS: 1 CrossOver-
+#120	NEW    cov: 446 ft: 3039 corp: 58/1597Kb lim: 35591 exec/s: 0 rss: 104Mb L: 30238/35591 MS: 2 InsertRepeatedBytes-InsertByte-
+#132	NEW    cov: 446 ft: 3040 corp: 59/1624Kb lim: 35591 exec/s: 0 rss: 104Mb L: 27950/35591 MS: 2 EraseBytes-CopyPart-
+#138	REDUCE cov: 446 ft: 3041 corp: 60/1625Kb lim: 35591 exec/s: 0 rss: 104Mb L: 1154/35591 MS: 1 EraseBytes-
+#144	NEW    cov: 446 ft: 3044 corp: 61/1659Kb lim: 35591 exec/s: 0 rss: 104Mb L: 34996/35591 MS: 1 InsertByte-
+#147	REDUCE cov: 446 ft: 3044 corp: 61/1659Kb lim: 35591 exec/s: 0 rss: 104Mb L: 2401/35591 MS: 3 ChangeASCIIInt-ChangeASCIIInt-EraseBytes-
+#150	NEW    cov: 446 ft: 3045 corp: 62/1692Kb lim: 35591 exec/s: 150 rss: 104Mb L: 33603/35591 MS: 3 ChangeASCIIInt-ShuffleBytes-PersAutoDict- DE: &quot;\001\000\000\000\000\000\001H&quot;-
+#161	NEW    cov: 446 ft: 3046 corp: 63/1724Kb lim: 35591 exec/s: 161 rss: 104Mb L: 32769/35591 MS: 1 InsertByte-
+#162	NEW    cov: 446 ft: 3054 corp: 64/1743Kb lim: 35591 exec/s: 162 rss: 104Mb L: 19784/35591 MS: 1 PersAutoDict- DE: &quot;\003\000&quot;-
+#164	NEW    cov: 446 ft: 3056 corp: 65/1772Kb lim: 35591 exec/s: 164 rss: 104Mb L: 29322/35591 MS: 2 ChangeBit-InsertRepeatedBytes-
+#165	NEW    cov: 446 ft: 3057 corp: 66/1792Kb lim: 35591 exec/s: 165 rss: 104Mb L: 20426/35591 MS: 1 CrossOver-
+#171	NEW    cov: 448 ft: 3083 corp: 67/1823Kb lim: 35591 exec/s: 171 rss: 104Mb L: 32483/35591 MS: 1 CopyPart-
+#182	NEW    cov: 448 ft: 3085 corp: 68/1833Kb lim: 35591 exec/s: 182 rss: 104Mb L: 10242/35591 MS: 1 CrossOver-
+#184	NEW    cov: 448 ft: 3086 corp: 69/1853Kb lim: 35591 exec/s: 184 rss: 104Mb L: 19785/35591 MS: 2 ChangeByte-InsertByte-
+#193	NEW    cov: 452 ft: 3097 corp: 70/1853Kb lim: 35591 exec/s: 193 rss: 104Mb L: 449/35591 MS: 4 PersAutoDict-ChangeByte-CopyPart-CrossOver- DE: &quot;\001\000\000\000\000\000\001H&quot;-
+#198	NEW    cov: 452 ft: 3100 corp: 71/1875Kb lim: 35591 exec/s: 198 rss: 104Mb L: 22200/35591 MS: 5 EraseBytes-ChangeByte-CMP-InsertByte-EraseBytes- DE: &quot;\005SummaryIn\305\246ormation&quot;-
+#203	NEW    cov: 452 ft: 3101 corp: 72/1898Kb lim: 35591 exec/s: 203 rss: 104Mb L: 23931/35591 MS: 5 ChangeBinInt-CrossOver-EraseBytes-CopyPart-CrossOver-
+#212	NEW    cov: 452 ft: 3103 corp: 73/1931Kb lim: 35591 exec/s: 212 rss: 104Mb L: 33567/35591 MS: 4 InsertByte-ChangeBit-ChangeByte-CrossOver-
+#220	NEW    cov: 452 ft: 3104 corp: 74/1955Kb lim: 35591 exec/s: 220 rss: 104Mb L: 24377/35591 MS: 3 ChangeBinInt-CopyPart-CMP- DE: &quot;\003\000\000\000\000\000\000\000&quot;-
+#221	NEW    cov: 452 ft: 3105 corp: 75/1974Kb lim: 35591 exec/s: 221 rss: 104Mb L: 19818/35591 MS: 1 InsertRepeatedBytes-
+#223	NEW    cov: 452 ft: 3107 corp: 76/2002Kb lim: 35591 exec/s: 223 rss: 104Mb L: 28645/35591 MS: 2 ChangeBit-CopyPart-
+#224	NEW    cov: 452 ft: 3108 corp: 77/2032Kb lim: 35591 exec/s: 224 rss: 104Mb L: 30626/35591 MS: 1 InsertByte-
+#236	REDUCE cov: 452 ft: 3109 corp: 78/2033Kb lim: 35591 exec/s: 236 rss: 104Mb L: 837/35591 MS: 2 ChangeBit-EraseBytes-
+#244	NEW    cov: 453 ft: 3115 corp: 79/2057Kb lim: 35591 exec/s: 244 rss: 104Mb L: 24415/35591 MS: 3 ChangeBit-ChangeASCIIInt-InsertRepeatedBytes-
+#250	NEW    cov: 453 ft: 3116 corp: 80/2089Kb lim: 35591 exec/s: 250 rss: 104Mb L: 33465/35591 MS: 1 CopyPart-
+#252	NEW    cov: 453 ft: 3117 corp: 81/2120Kb lim: 35591 exec/s: 126 rss: 107Mb L: 31655/35591 MS: 2 ChangeByte-PersAutoDict- DE: &quot;:\377&quot;-
+#256	pulse  cov: 453 ft: 3117 corp: 81/2120Kb lim: 35591 exec/s: 128 rss: 107Mb
+==57489==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x54aa31 in ole2_validate_sector_chain /src/libxls/src/ole.c:80:5
+    #1 0x54aa31 in ole2_sopen /src/libxls/src/ole.c:268:14
+    #2 0x54c786 in ole2_read_body /src/libxls/src/ole.c:479:18
+    #3 0x54c786 in ole2_read_header_and_body /src/libxls/src/ole.c:594:9
+    #4 0x550c3c in ole2_open_buffer /src/libxls/src/ole.c:609:12
+    #5 0x53e031 in xls_open_buffer /src/libxls/src/xls.c:1505:15
+    #6 0x528a54 in LLVMFuzzerTestOneInput /src/libxls/fuzz/fuzz_xls.c:5:30
+    #7 0x456913 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #8 0x4560fa in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*, bool, bool*) cxa_noexception.cpp:0
+    #9 0x45799b in fuzzer::Fuzzer::MutateAndTestOne() cxa_noexception.cpp:0
+    #10 0x458485 in fuzzer::Fuzzer::Loop(std::__Fuzzer::vector&lt;fuzzer::SizedFile, std::__Fuzzer::allocator&lt;fuzzer::SizedFile&gt; &gt;&amp;) cxa_noexception.cpp:0
+    #11 0x447bcd in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #12 0x470c12 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #13 0x7fa5ee4b60b2 in __libc_start_main
+    #14 0x41f4ad in _start
+
+  Uninitialized value was created by a heap allocation
+    #0 0x4d563d in __interceptor_malloc /src/llvm-project/compiler-rt/lib/msan/msan_interceptors.cpp:912:3
+    #1 0x54e393 in ole_malloc /src/libxls/src/ole.c:66:12
+    #2 0x54e393 in read_MSAT /src/libxls/src/ole.c:822:24
+    #3 0x54e393 in ole2_read_header /src/libxls/src/ole.c:460:23
+    #4 0x54e393 in ole2_read_header_and_body /src/libxls/src/ole.c:589:9
+    #5 0x550c3c in ole2_open_buffer /src/libxls/src/ole.c:609:12
+    #6 0x53e031 in xls_open_buffer /src/libxls/src/xls.c:1505:15
+    #7 0x528a54 in LLVMFuzzerTestOneInput /src/libxls/fuzz/fuzz_xls.c:5:30
+    #8 0x456913 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #9 0x4560fa in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*, bool, bool*) cxa_noexception.cpp:0
+    #10 0x45799b in fuzzer::Fuzzer::MutateAndTestOne() cxa_noexception.cpp:0
+    #11 0x458485 in fuzzer::Fuzzer::Loop(std::__Fuzzer::vector&lt;fuzzer::SizedFile, std::__Fuzzer::allocator&lt;fuzzer::SizedFile&gt; &gt;&amp;) cxa_noexception.cpp:0
+    #12 0x447bcd in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #13 0x470c12 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #14 0x7fa5ee4b60b2 in __libc_start_main
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libxls_libfuzzer_msan/custom/fuzz_xls+0x54aa31)
+Unique heap origins: 638
+Stack depot allocated bytes: 1900544
+Unique origin histories: 1280
+History depot allocated bytes: 196608
+Exiting
+MS: 2 ChangeBinInt-PersAutoDict- DE: &quot;:\377&quot;-; base unit: c7e4baa0176c76d9e96d2eea63306e480722f390
+artifact_prefix=&#x27;/clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/&#x27;; Test unit written to /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/crash-0591c602374b19ad061d55c2b131ef4ebf95a044
+stat::number_of_executed_units: 264
+stat::average_exec_per_sec:     132
+stat::new_units_added:          44
+stat::slowest_unit_time_sec:    0
+stat::peak_rss_mb:              108
+INFO: exiting: 77 time: 32s
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+#256	pulse  cov: 453 ft: 3117 corp: 81/2120Kb lim: 35591 exec/s: 128 rss: 107Mb
+==57489==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x54aa31  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libxls_libfuzzer_msan/custom/fuzz_xls+0x54aa31)
+    #1 0x54c786  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libxls_libfuzzer_msan/custom/fuzz_xls+0x54c786)
+    #2 0x550c3c  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libxls_libfuzzer_msan/custom/fuzz_xls+0x550c3c)
+    #3 0x53e031  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libxls_libfuzzer_msan/custom/fuzz_xls+0x53e031)
+    #4 0x528a54  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libxls_libfuzzer_msan/custom/fuzz_xls+0x528a54)
+    #5 0x456913  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libxls_libfuzzer_msan/custom/fuzz_xls+0x456913)
+    #6 0x4560fa  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libxls_libfuzzer_msan/custom/fuzz_xls+0x4560fa)
+    #7 0x45799b  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libxls_libfuzzer_msan/custom/fuzz_xls+0x45799b)
+    #8 0x458485  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libxls_libfuzzer_msan/custom/fuzz_xls+0x458485)
+    #9 0x447bcd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libxls_libfuzzer_msan/custom/fuzz_xls+0x447bcd)
+    #10 0x470c12  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libxls_libfuzzer_msan/custom/fuzz_xls+0x470c12)
+    #11 0x7fa5ee4b60b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #12 0x41f4ad  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libxls_libfuzzer_msan/custom/fuzz_xls+0x41f4ad)
+
+  Uninitialized value was created by a heap allocation
+    #0 0x4d563d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libxls_libfuzzer_msan/custom/fuzz_xls+0x4d563d)
+    #1 0x54e393  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libxls_libfuzzer_msan/custom/fuzz_xls+0x54e393)
+    #2 0x550c3c  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libxls_libfuzzer_msan/custom/fuzz_xls+0x550c3c)
+    #3 0x53e031  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libxls_libfuzzer_msan/custom/fuzz_xls+0x53e031)
+    #4 0x528a54  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libxls_libfuzzer_msan/custom/fuzz_xls+0x528a54)
+    #5 0x456913  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libxls_libfuzzer_msan/custom/fuzz_xls+0x456913)
+    #6 0x4560fa  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libxls_libfuzzer_msan/custom/fuzz_xls+0x4560fa)
+    #7 0x45799b  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libxls_libfuzzer_msan/custom/fuzz_xls+0x45799b)
+    #8 0x458485  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libxls_libfuzzer_msan/custom/fuzz_xls+0x458485)
+    #9 0x447bcd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libxls_libfuzzer_msan/custom/fuzz_xls+0x447bcd)
+    #10 0x470c12  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libxls_libfuzzer_msan/custom/fuzz_xls+0x470c12)
+    #11 0x7fa5ee4b60b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)

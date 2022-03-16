@@ -1,0 +1,59 @@
+Testcase id: 114429
+Job: c-blosc2_libfuzzer_ubsan
+Crash Type: Null-dereference
+isSecurity: False
+Crash state: blosc2_stdio_seek
+blosc_d
+do_job
+Poc: 114429.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_decompress_frame_fuzzer
+target: decompress_frame_fuzzer
+name: libFuzzer
+[Environment] UBSAN_OPTIONS=exitcode=77:print_stacktrace=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+Command: /clusterfuzz/run_bot/clusterfuzz/bot/builds/c-blosc2_libfuzzer_ubsan/custom/decompress_frame_fuzzer -rss_limit_mb=2560 -timeout=60 -runs=100 /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/73c84224248a3eafb625c47e9e416be479941b4e45d12d688ea368eebe5727f4
+Time ran: 0.009914398193359375
+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 3148962503
+INFO: Loaded 1 modules   (73010 inline 8-bit counters): 73010 [0x96bda8, 0x97dada),
+INFO: Loaded 1 PC tables (73010 PCs): 73010 [0x7d4f98,0x8f22b8),
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/c-blosc2_libfuzzer_ubsan/custom/decompress_frame_fuzzer: Running 1 inputs 100 time(s) each.
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/73c84224248a3eafb625c47e9e416be479941b4e45d12d688ea368eebe5727f4
+/src/c-blosc2/blosc/blosc2-stdio.c:47:21: runtime error: member access within null pointer of type &#x27;blosc2_stdio_file&#x27;
+    #0 0x4e2537 in blosc2_stdio_seek /src/c-blosc2/blosc/blosc2-stdio.c:47:21
+    #1 0x4bd544 in blosc_d /src/c-blosc2/blosc/blosc2.c:1440:7
+    #2 0x4b6ee1 in serial_blosc /src/c-blosc2/blosc/blosc2.c:1736:16
+    #3 0x4b6ee1 in do_job /src/c-blosc2/blosc/blosc2.c:1901:15
+    #4 0x4ba236 in blosc_run_decompression_with_context /src/c-blosc2/blosc/blosc2.c:2541:13
+    #5 0x4ba3e7 in blosc2_decompress_ctx /src/c-blosc2/blosc/blosc2.c:2561:12
+    #6 0x4dcdeb in frame_decompress_chunk /src/c-blosc2/blosc/frame.c:3377:24
+    #7 0x4b34a3 in LLVMFuzzerTestOneInput /src/c-blosc2/tests/fuzz/fuzz_decompress_frame.c:37:15
+    #8 0x43f023 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #9 0x42a932 in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:324:6
+    #10 0x4303fa in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #11 0x459322 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #12 0x7f0986dee0b2 in __libc_start_main
+    #13 0x407bbd in _start
+
+SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior /src/c-blosc2/blosc/blosc2-stdio.c:47:21 in
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/73c84224248a3eafb625c47e9e416be479941b4e45d12d688ea368eebe5727f4
+/src/c-blosc2/blosc/blosc2-stdio.c:47:21: runtime error: member access within null pointer of type &#x27;blosc2_stdio_file&#x27;
+    #0 0x4e2537  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/c-blosc2_libfuzzer_ubsan/custom/decompress_frame_fuzzer+0x4e2537)
+    #1 0x4bd544  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/c-blosc2_libfuzzer_ubsan/custom/decompress_frame_fuzzer+0x4bd544)
+    #2 0x4b6ee1  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/c-blosc2_libfuzzer_ubsan/custom/decompress_frame_fuzzer+0x4b6ee1)
+    #3 0x4ba236  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/c-blosc2_libfuzzer_ubsan/custom/decompress_frame_fuzzer+0x4ba236)
+    #4 0x4ba3e7  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/c-blosc2_libfuzzer_ubsan/custom/decompress_frame_fuzzer+0x4ba3e7)
+    #5 0x4dcdeb  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/c-blosc2_libfuzzer_ubsan/custom/decompress_frame_fuzzer+0x4dcdeb)
+    #6 0x4b34a3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/c-blosc2_libfuzzer_ubsan/custom/decompress_frame_fuzzer+0x4b34a3)
+    #7 0x43f023  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/c-blosc2_libfuzzer_ubsan/custom/decompress_frame_fuzzer+0x43f023)
+    #8 0x42a932  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/c-blosc2_libfuzzer_ubsan/custom/decompress_frame_fuzzer+0x42a932)
+    #9 0x4303fa  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/c-blosc2_libfuzzer_ubsan/custom/decompress_frame_fuzzer+0x4303fa)
+    #10 0x459322  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/c-blosc2_libfuzzer_ubsan/custom/decompress_frame_fuzzer+0x459322)
+    #11 0x7f0986dee0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #12 0x407bbd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/c-blosc2_libfuzzer_ubsan/custom/decompress_frame_fuzzer+0x407bbd)

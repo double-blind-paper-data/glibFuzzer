@@ -1,0 +1,51 @@
+Testcase id: 118087
+Job: dnsmasq_libfuzzer_ubsan
+Crash Type: Undefined-shift
+isSecurity: False
+Crash state: sha256_transform
+hash_questions
+fuzz_util.c
+Poc: 118087.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_fuzz_util
+target: fuzz_util
+name: libFuzzer
+[Environment] UBSAN_OPTIONS=exitcode=77:print_stacktrace=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+Command: /clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_libfuzzer_ubsan/custom/fuzz_util -rss_limit_mb=2560 -timeout=60 -runs=100 /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/2aa5253e7141a900237a53a79ecb2cb67b48fc5e5795e17eea3f2858028c8b50
+Time ran: 0.016063690185546875
+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 2542842020
+INFO: Loaded 1 modules   (15113 inline 8-bit counters): 15113 [0x5dd6e0, 0x5e11e9),
+INFO: Loaded 1 PC tables (15113 PCs): 15113 [0x5567c0,0x591850),
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_libfuzzer_ubsan/custom/fuzz_util: Running 1 inputs 100 time(s) each.
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/2aa5253e7141a900237a53a79ecb2cb67b48fc5e5795e17eea3f2858028c8b50
+hash-questions.c:168:21: runtime error: left shift of 128 by 24 places cannot be represented in type &#x27;int&#x27;
+    #0 0x4cac10 in sha256_transform /src/dnsmasq/src/hash-questions.c:168:21
+    #1 0x4ca175 in sha256_final /src/dnsmasq/src/hash-questions.c:267:3
+    #2 0x4ca175 in hash_questions /src/dnsmasq/src/hash-questions.c:127:3
+    #3 0x4b58a3 in LLVMFuzzerTestOneInput /src/fuzz_util.c:53:9
+    #4 0x440413 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #5 0x42bd22 in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:324:6
+    #6 0x4317ea in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #7 0x45a712 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #8 0x7fe5d64b00b2 in __libc_start_main
+    #9 0x408fad in _start
+
+SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior hash-questions.c:168:21 in
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/2aa5253e7141a900237a53a79ecb2cb67b48fc5e5795e17eea3f2858028c8b50
+hash-questions.c:168:21: runtime error: left shift of 128 by 24 places cannot be represented in type &#x27;int&#x27;
+    #0 0x4cac10  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_libfuzzer_ubsan/custom/fuzz_util+0x4cac10)
+    #1 0x4ca175  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_libfuzzer_ubsan/custom/fuzz_util+0x4ca175)
+    #2 0x4b58a3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_libfuzzer_ubsan/custom/fuzz_util+0x4b58a3)
+    #3 0x440413  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_libfuzzer_ubsan/custom/fuzz_util+0x440413)
+    #4 0x42bd22  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_libfuzzer_ubsan/custom/fuzz_util+0x42bd22)
+    #5 0x4317ea  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_libfuzzer_ubsan/custom/fuzz_util+0x4317ea)
+    #6 0x45a712  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_libfuzzer_ubsan/custom/fuzz_util+0x45a712)
+    #7 0x7fe5d64b00b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #8 0x408fad  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_libfuzzer_ubsan/custom/fuzz_util+0x408fad)

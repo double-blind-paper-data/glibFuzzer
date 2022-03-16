@@ -1,0 +1,87 @@
+Testcase id: 134208
+Job: dnsmasq_honggfuzz_asan
+Crash Type: Heap-buffer-overflow WRITE 1
+isSecurity: True
+Crash state: extract_name
+extract_addresses
+FuzzExtractTheAddress
+Poc: 134208.testcase
+engine: honggfuzz
+fully_qualified_name: honggfuzz_fuzz_rfc1035
+target: fuzz_rfc1035
+name: honggfuzz
+[Environment] ASAN_OPTIONS=alloc_dealloc_mismatch=0:allocator_may_return_null=1:allocator_release_to_os_interval_ms=500:allow_user_segv_handler=0:check_malloc_usable_size=0:detect_leaks=1:detect_odr_violation=0:detect_stack_use_after_return=1:fast_unwind_on_fatal=0:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:max_uar_stack_size_log=16:print_scariness=1:print_summary=1:print_suppressions=0:quarantine_size_mb=64:redzone=32:strict_memcmp=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+=================================================================
+==14606==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x60700003122c at pc 0x00000056d48a bp 0x7fffffffca50 sp 0x7fffffffca48
+WRITE of size 1 at 0x60700003122c thread T0
+SCARINESS: 31 (1-byte-write-heap-buffer-overflow)
+    #0 0x56d489 in extract_name /src/dnsmasq/src/rfc1035.c:106:11
+    #1 0x56fd97 in extract_addresses /src/dnsmasq/src/rfc1035.c:591:39
+    #2 0x4e4800 in FuzzExtractTheAddress /src/fuzz_rfc1035.c:38:5
+    #3 0x4e58cd in LLVMFuzzerTestOneInput /src/fuzz_rfc1035.c:237:7
+    #4 0x4d5c9e in main
+    #5 0x7ffff7c5b0b2 in __libc_start_main
+    #6 0x41d79d in _start
+
+0x60700003122c is located 0 bytes to the right of 76-byte region [0x6070000311e0,0x60700003122c)
+allocated by thread T0 here:
+    #0 0x49ea1d in __interceptor_malloc /src/llvm-project/compiler-rt/lib/asan/asan_malloc_linux.cpp:129:3
+    #1 0x4e45af in get_null_terminated /src/fuzz_header.h:47:17
+    #2 0x4e45af in FuzzExtractTheAddress /src/fuzz_rfc1035.c:23:14
+    #3 0x4e58cd in LLVMFuzzerTestOneInput /src/fuzz_rfc1035.c:237:7
+    #4 0x4d5c9e in main
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_honggfuzz_asan/custom/fuzz_rfc1035+0x56d489)
+Shadow bytes around the buggy address:
+  0x0c0e7fffe1f0: 00 04 fa fa fa fa 00 00 00 00 00 00 00 00 00 04
+  0x0c0e7fffe200: fa fa fa fa 00 00 00 00 00 00 00 00 00 04 fa fa
+  0x0c0e7fffe210: fa fa 00 00 00 00 00 00 00 00 00 04 fa fa fa fa
+  0x0c0e7fffe220: 00 00 00 00 00 00 00 00 00 04 fa fa fa fa 00 00
+  0x0c0e7fffe230: 00 00 00 00 00 00 00 04 fa fa fa fa 00 00 00 00
+=&gt;0x0c0e7fffe240: 00 00 00 00 00[04]fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fffe250: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fffe260: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fffe270: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fffe280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fffe290: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==14606==ABORTING
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+WRITE of size 1 at 0x60700003122c thread T0
+SCARINESS: 31 (1-byte-write-heap-buffer-overflow)
+    #0 0x56d489  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_honggfuzz_asan/custom/fuzz_rfc1035+0x56d489)
+    #1 0x56fd97  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_honggfuzz_asan/custom/fuzz_rfc1035+0x56fd97)
+    #2 0x4e4800  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_honggfuzz_asan/custom/fuzz_rfc1035+0x4e4800)
+    #3 0x4e58cd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_honggfuzz_asan/custom/fuzz_rfc1035+0x4e58cd)
+    #4 0x4d5c9e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_honggfuzz_asan/custom/fuzz_rfc1035+0x4d5c9e)
+    #5 0x7ffff7c5b0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #6 0x41d79d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_honggfuzz_asan/custom/fuzz_rfc1035+0x41d79d)
+
+0x60700003122c is located 0 bytes to the right of 76-byte region [0x6070000311e0,0x60700003122c)
+allocated by thread T0 here:
+    #0 0x49ea1d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_honggfuzz_asan/custom/fuzz_rfc1035+0x49ea1d)
+    #1 0x4e45af  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_honggfuzz_asan/custom/fuzz_rfc1035+0x4e45af)
+    #2 0x4e58cd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_honggfuzz_asan/custom/fuzz_rfc1035+0x4e58cd)
+    #3 0x4d5c9e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_honggfuzz_asan/custom/fuzz_rfc1035+0x4d5c9e)

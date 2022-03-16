@@ -1,0 +1,56 @@
+Testcase id: 137866
+Job: lcms_libfuzzer_ubsan
+Crash Type: Integer-overflow
+isSecurity: False
+Crash state: Eval4Inputs
+EvaluateCLUTfloatIn16
+_LUTeval16
+Poc: 137866.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_cms_transform_fuzzer
+target: cms_transform_fuzzer
+name: libFuzzer
+[Environment] UBSAN_OPTIONS=exitcode=77:print_stacktrace=1:silence_unsigned_overflow=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+Command: /clusterfuzz/run_bot/clusterfuzz/bot/builds/lcms_libfuzzer_ubsan/custom/cms_transform_fuzzer -rss_limit_mb=2560 -timeout=60 -runs=100 /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/a9a3a847bdc0fb199f605d8d22af030480590f0a8738facc8a963ec6c7de0bde
+Time ran: 0.01959967613220215
+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 1819353641
+INFO: Loaded 1 modules   (10404 inline 8-bit counters): 10404 [0x5d5078, 0x5d791c),
+INFO: Loaded 1 PC tables (10404 PCs): 10404 [0x5548c0,0x57d300),
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/lcms_libfuzzer_ubsan/custom/cms_transform_fuzzer: Running 1 inputs 100 time(s) each.
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/a9a3a847bdc0fb199f605d8d22af030480590f0a8738facc8a963ec6c7de0bde
+lcms2_internal.h:151:85: runtime error: signed integer overflow: -2147478394 + -32767 cannot be represented in type &#x27;int&#x27;
+    #0 0x50571a in Eval4Inputs /src/lcms/src/cmsintrp.c:0
+    #1 0x50e629 in EvaluateCLUTfloatIn16 /src/lcms/src/cmslut.c:454:5
+    #2 0x5114ae in _LUTeval16 /src/lcms/src/cmslut.c:1333:14
+    #3 0x4cf674 in CachedXFORM /src/lcms/src/cmsxform.c:542:17
+    #4 0x4cbda2 in cmsDoTransform /src/lcms/src/cmsxform.c:206:5
+    #5 0x4b354f in LLVMFuzzerTestOneInput /src/cms_transform_fuzzer.c:0:5
+    #6 0x43efd3 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #7 0x42a8e2 in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:324:6
+    #8 0x4303aa in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #9 0x4592d2 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #10 0x7f8074ee30b2 in __libc_start_main
+    #11 0x407b6d in _start
+
+SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior lcms2_internal.h:151:85 in
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/a9a3a847bdc0fb199f605d8d22af030480590f0a8738facc8a963ec6c7de0bde
+lcms2_internal.h:151:85: runtime error: signed integer overflow: -2147478394 + -32767 cannot be represented in type &#x27;int&#x27;
+    #0 0x50571a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/lcms_libfuzzer_ubsan/custom/cms_transform_fuzzer+0x50571a)
+    #1 0x50e629  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/lcms_libfuzzer_ubsan/custom/cms_transform_fuzzer+0x50e629)
+    #2 0x5114ae  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/lcms_libfuzzer_ubsan/custom/cms_transform_fuzzer+0x5114ae)
+    #3 0x4cf674  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/lcms_libfuzzer_ubsan/custom/cms_transform_fuzzer+0x4cf674)
+    #4 0x4cbda2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/lcms_libfuzzer_ubsan/custom/cms_transform_fuzzer+0x4cbda2)
+    #5 0x4b354f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/lcms_libfuzzer_ubsan/custom/cms_transform_fuzzer+0x4b354f)
+    #6 0x43efd3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/lcms_libfuzzer_ubsan/custom/cms_transform_fuzzer+0x43efd3)
+    #7 0x42a8e2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/lcms_libfuzzer_ubsan/custom/cms_transform_fuzzer+0x42a8e2)
+    #8 0x4303aa  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/lcms_libfuzzer_ubsan/custom/cms_transform_fuzzer+0x4303aa)
+    #9 0x4592d2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/lcms_libfuzzer_ubsan/custom/cms_transform_fuzzer+0x4592d2)
+    #10 0x7f8074ee30b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #11 0x407b6d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/lcms_libfuzzer_ubsan/custom/cms_transform_fuzzer+0x407b6d)

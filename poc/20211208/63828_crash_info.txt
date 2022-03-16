@@ -1,0 +1,25 @@
+Testcase id: 63828
+Job: xpdf_libfuzzer_msan
+Crash Type: Out-of-memory
+isSecurity: False
+Crash state: fuzz_pdfload
+Poc: 63828.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_fuzz_pdfload
+target: fuzz_pdfload
+name: libFuzzer
+[Environment] MSAN_OPTIONS=exitcode=77
++----------------------------------------Release Build Stacktrace----------------------------------------+
+Command: /clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_msan/custom/fuzz_pdfload -detect_leaks=0 -rss_limit_mb=2560 -timeout=60 -runs=100 /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/59aff0c4028dcad8f6d178356962e82d9dca340b361561f1b9e92a992db8437e
+Time ran: 2.3631486892700195
+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 3556796370
+INFO: Loaded 1 modules   (26067 inline 8-bit counters): 26067 [0xb34620, 0xb3abf3),
+INFO: Loaded 1 PC tables (26067 PCs): 26067 [0xa264d0,0xa8c200),
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_msan/custom/fuzz_pdfload: Running 1 inputs 100 time(s) each.
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/59aff0c4028dcad8f6d178356962e82d9dca340b361561f1b9e92a992db8437e
+==182467== ERROR: libFuzzer: out-of-memory (used: 3133Mb; limit: 2560Mb)
+   To change the out-of-memory limit use -rss_limit_mb=&lt;N&gt;
+
+SUMMARY: libFuzzer: out-of-memory

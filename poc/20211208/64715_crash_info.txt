@@ -1,0 +1,87 @@
+Testcase id: 64715
+Job: exprtk_libfuzzer_msan
+Crash Type: Timeout
+isSecurity: False
+Crash state: exprtk_fuzzer
+Poc: 64715.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_exprtk_fuzzer
+target: exprtk_fuzzer
+name: libFuzzer
+[Environment] MSAN_OPTIONS=exitcode=77
++----------------------------------------Release Build Stacktrace----------------------------------------+
+Command: /clusterfuzz/run_bot/clusterfuzz/bot/builds/exprtk_libfuzzer_msan/custom/exprtk_fuzzer -rss_limit_mb=2560 -timeout=60 -runs=100 /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/560b63c8148dd62c6a4ded73698f7c6e9a4b1a613a14ee552a07fb66d5228dbd
+Time ran: 62.041781187057495
+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 1615221425
+INFO: Loaded 1 modules   (168407 inline 8-bit counters): 168407 [0x258bcd0, 0x25b4ea7),
+INFO: Loaded 1 PC tables (168407 PCs): 168407 [0x1e9f1d8,0x2130f48),
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/exprtk_libfuzzer_msan/custom/exprtk_fuzzer: Running 1 inputs 100 time(s) each.
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/560b63c8148dd62c6a4ded73698f7c6e9a4b1a613a14ee552a07fb66d5228dbd
+ALARM: working on the last Unit for 61 seconds
+       and the timeout value is 60 (use -timeout=N to change)
+==3739== ERROR: libFuzzer: timeout after 61 seconds
+    #0 0x4d1ab9 in __sanitizer_print_stack_trace /src/llvm-project/compiler-rt/lib/msan/msan.cpp:733:3
+    #1 0x477058 in fuzzer::PrintStackTrace() cxa_noexception.cpp:0
+    #2 0x45bee9 in fuzzer::Fuzzer::AlarmCallback() cxa_noexception.cpp:0
+    #3 0x5205f4 in SignalAction(int, void*, void*) /src/llvm-project/compiler-rt/lib/msan/msan_interceptors.cpp:1018:3
+    #4 0x7f941fccf3bf in libpthread.so.0
+    #5 0x4d001f in exprtk_fuzzer
+    #6 0x52cbac in __msan::CopyOrigin(void const*, void const*, unsigned long, __sanitizer::StackTrace*) /src/llvm-project/compiler-rt/lib/msan/msan_poisoning.cpp:87:19
+    #7 0x4d567a in __msan_memcpy /src/llvm-project/compiler-rt/lib/msan/msan_interceptors.cpp:1587:3
+    #8 0xff1078 in __move_assign /usr/local/include/c++/v1/string:2467:16
+    #9 0xff1078 in operator= /usr/local/include/c++/v1/string:2478:5
+    #10 0xff1078 in operator= /src/exprtk/exprtk.hpp:2083:14
+    #11 0xff1078 in __move_backward_constexpr&lt;exprtk::lexer::token *, exprtk::lexer::token *&gt; /usr/local/include/c++/v1/__algorithm/move_backward.h:30:21
+    #12 0xff1078 in __move_backward&lt;exprtk::lexer::token *, exprtk::lexer::token *&gt; /usr/local/include/c++/v1/__algorithm/move_backward.h:39:12
+    #13 0xff1078 in move_backward&lt;exprtk::lexer::token *, exprtk::lexer::token *&gt; /usr/local/include/c++/v1/__algorithm/move_backward.h:71:13
+    #14 0xff1078 in __move_range /usr/local/include/c++/v1/vector:1771:5
+    #15 0xff1078 in std::__1::vector&lt;exprtk::lexer::token, std::__1::allocator&lt;exprtk::lexer::token&gt; &gt;::insert(std::__1::__wrap_iter&lt;exprtk::lexer::token const*&gt;, exprtk::lexer::token const&amp;) /usr/local/include/c++/v1/vector:1792:13
+    #16 0xfefbc5 in exprtk::lexer::generator::insert_front(exprtk::lexer::token::token_type) /src/exprtk/exprtk.hpp:2379:41
+    #17 0x14221ac in exprtk::parser&lt;float&gt;::post_bracket_process(exprtk::lexer::token::token_type const&amp;, exprtk::details::expression_node&lt;float&gt;*&amp;) /src/exprtk/exprtk.hpp:26546:24
+    #18 0x140ddfd in exprtk::parser&lt;float&gt;::parse_branch(exprtk::parser&lt;float&gt;::precedence_level) /src/exprtk/exprtk.hpp:27103:23
+    #19 0x13f6fcd in exprtk::parser&lt;float&gt;::parse_expression(exprtk::parser&lt;float&gt;::precedence_level) /src/exprtk/exprtk.hpp:21744:43
+    #20 0x13f866e in exprtk::parser&lt;float&gt;::parse_expression(exprtk::parser&lt;float&gt;::precedence_level) /src/exprtk/exprtk.hpp:21931:38
+    #21 0x13f1ef9 in exprtk::parser&lt;float&gt;::parse_corpus() /src/exprtk/exprtk.hpp:21636:39
+    #22 0x110e4a5 in exprtk::parser&lt;float&gt;::compile(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; const&amp;, exprtk::expression&lt;float&gt;&amp;) /src/exprtk/exprtk.hpp:21254:34
+    #23 0x532205 in void run&lt;float&gt;(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; const&amp;) /src/exprtk_fuzzer.cpp:53:15
+    #24 0x52fcaa in LLVMFuzzerTestOneInput /src/exprtk_fuzzer.cpp:76:4
+    #25 0x45d513 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #26 0x448e22 in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:324:6
+    #27 0x44e8ea in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #28 0x477812 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #29 0x7f941fac30b2 in __libc_start_main
+    #30 0x4260ad in _start
+
+SUMMARY: libFuzzer: timeout
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+       and the timeout value is 60 (use -timeout=N to change)
+==3739== ERROR: libFuzzer: timeout after 61 seconds
+    #0 0x4d1ab9  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exprtk_libfuzzer_msan/custom/exprtk_fuzzer+0x4d1ab9)
+    #1 0x477058  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exprtk_libfuzzer_msan/custom/exprtk_fuzzer+0x477058)
+    #2 0x45bee9  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exprtk_libfuzzer_msan/custom/exprtk_fuzzer+0x45bee9)
+    #3 0x5205f4  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exprtk_libfuzzer_msan/custom/exprtk_fuzzer+0x5205f4)
+    #4 0x7f941fccf3bf  (/lib/x86_64-linux-gnu/libpthread.so.0+0x153bf)
+    #5 0x4d001f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exprtk_libfuzzer_msan/custom/exprtk_fuzzer+0x4d001f)
+    #6 0x52cbac  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exprtk_libfuzzer_msan/custom/exprtk_fuzzer+0x52cbac)
+    #7 0x4d567a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exprtk_libfuzzer_msan/custom/exprtk_fuzzer+0x4d567a)
+    #8 0xff1078  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exprtk_libfuzzer_msan/custom/exprtk_fuzzer+0xff1078)
+    #9 0xfefbc5  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exprtk_libfuzzer_msan/custom/exprtk_fuzzer+0xfefbc5)
+    #10 0x14221ac  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exprtk_libfuzzer_msan/custom/exprtk_fuzzer+0x14221ac)
+    #11 0x140ddfd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exprtk_libfuzzer_msan/custom/exprtk_fuzzer+0x140ddfd)
+    #12 0x13f6fcd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exprtk_libfuzzer_msan/custom/exprtk_fuzzer+0x13f6fcd)
+    #13 0x13f866e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exprtk_libfuzzer_msan/custom/exprtk_fuzzer+0x13f866e)
+    #14 0x13f1ef9  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exprtk_libfuzzer_msan/custom/exprtk_fuzzer+0x13f1ef9)
+    #15 0x110e4a5  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exprtk_libfuzzer_msan/custom/exprtk_fuzzer+0x110e4a5)
+    #16 0x532205  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exprtk_libfuzzer_msan/custom/exprtk_fuzzer+0x532205)
+    #17 0x52fcaa  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exprtk_libfuzzer_msan/custom/exprtk_fuzzer+0x52fcaa)
+    #18 0x45d513  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exprtk_libfuzzer_msan/custom/exprtk_fuzzer+0x45d513)
+    #19 0x448e22  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exprtk_libfuzzer_msan/custom/exprtk_fuzzer+0x448e22)
+    #20 0x44e8ea  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exprtk_libfuzzer_msan/custom/exprtk_fuzzer+0x44e8ea)
+    #21 0x477812  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exprtk_libfuzzer_msan/custom/exprtk_fuzzer+0x477812)
+    #22 0x7f941fac30b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #23 0x4260ad  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exprtk_libfuzzer_msan/custom/exprtk_fuzzer+0x4260ad)

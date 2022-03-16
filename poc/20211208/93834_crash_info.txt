@@ -1,0 +1,25 @@
+Testcase id: 93834
+Job: libwebp_libfuzzer_msan
+Crash Type: Out-of-memory
+isSecurity: False
+Crash state: animdecoder_fuzzer
+Poc: 93834.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_animdecoder_fuzzer
+target: animdecoder_fuzzer
+name: libFuzzer
+[Environment] MSAN_OPTIONS=exitcode=77
++----------------------------------------Release Build Stacktrace----------------------------------------+
+Command: /clusterfuzz/run_bot/clusterfuzz/bot/builds/libwebp_libfuzzer_msan/custom/animdecoder_fuzzer -rss_limit_mb=2560 -timeout=60 -runs=100 /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/eef94b73957a00b4fdc570f532c1aa2c1bb3291c91892131976ed64b1faabf32
+Time ran: 2.1388306617736816
+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 308929112
+INFO: Loaded 1 modules   (5479 inline 8-bit counters): 5479 [0x6c23e8, 0x6c394f),
+INFO: Loaded 1 PC tables (5479 PCs): 5479 [0x664ca8,0x67a318),
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/libwebp_libfuzzer_msan/custom/animdecoder_fuzzer: Running 1 inputs 100 time(s) each.
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/eef94b73957a00b4fdc570f532c1aa2c1bb3291c91892131976ed64b1faabf32
+==67572== ERROR: libFuzzer: out-of-memory (used: 2994Mb; limit: 2560Mb)
+   To change the out-of-memory limit use -rss_limit_mb=&lt;N&gt;
+
+SUMMARY: libFuzzer: out-of-memory

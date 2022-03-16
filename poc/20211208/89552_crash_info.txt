@@ -1,0 +1,57 @@
+Testcase id: 89552
+Job: go-ethereum_libfuzzer_asan
+Crash Type: Timeout
+isSecurity: False
+Crash state: fuzzKeystore
+Poc: 89552.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_fuzzKeystore
+target: fuzzKeystore
+name: libFuzzer
+[Environment] ASAN_OPTIONS=alloc_dealloc_mismatch=0:allocator_may_return_null=1:allocator_release_to_os_interval_ms=500:allow_user_segv_handler=0:check_malloc_usable_size=0:detect_leaks=1:detect_odr_violation=0:detect_stack_use_after_return=1:exitcode=77:fast_unwind_on_fatal=0:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:max_uar_stack_size_log=16:print_scariness=1:print_summary=1:print_suppressions=0:quarantine_size_mb=64:redzone=16:strict_memcmp=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 2681313391
+INFO: 16748 Extra Counters
+INFO:        0 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases-disk/temp-20/new
+INFO:        0 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases-disk/temp-20/mutations
+INFO:     1582 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/data-bundles/fuzzKeystore
+INFO: seed corpus: files: 1582 min: 1b max: 127b total: 21773b rss: 71Mb
+#8	pulse  ft: 2554 corp: 3/3b exec/s: 2 rss: 71Mb
+#16	pulse  ft: 3023 corp: 9/9b exec/s: 2 rss: 71Mb
+#32	pulse  ft: 3419 corp: 22/22b exec/s: 2 rss: 71Mb
+#64	pulse  ft: 3884 corp: 49/49b exec/s: 2 rss: 71Mb
+#128	pulse  ft: 4560 corp: 101/101b exec/s: 2 rss: 71Mb
+#256	pulse  ft: 5814 corp: 190/190b exec/s: 2 rss: 80Mb
+#512	pulse  ft: 6366 corp: 321/426b exec/s: 1 rss: 93Mb
+ALARM: working on the last Unit for 25 seconds
+       and the timeout value is 25 (use -timeout=N to change)
+MS: 0 ; base unit: 0000000000000000000000000000000000000000
+0x62,0x62,
+bb
+artifact_prefix=&#x27;/clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/&#x27;; Test unit written to /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/timeout-9a900f538965a426994e1e90600920aff0b4e8d2
+Base64: YmI=
+==96999== ERROR: libFuzzer: timeout after 25 seconds
+    #0 0x52fc41 in __sanitizer_print_stack_trace /src/llvm-project/compiler-rt/lib/asan/asan_stack.cpp:87:3
+    #1 0x470678 in fuzzer::PrintStackTrace() cxa_noexception.cpp:0
+    #2 0x455509 in fuzzer::Fuzzer::AlarmCallback() cxa_noexception.cpp:0
+    #3 0x7f485c0e93bf in libpthread.so.0
+    #4 0x5c2182 in runtime.futex.abi0 runtime/sys_linux_amd64.s:519
+
+SUMMARY: libFuzzer: timeout
+stat::number_of_executed_units: 570
+stat::average_exec_per_sec:     1
+stat::new_units_added:          0
+stat::slowest_unit_time_sec:    0
+stat::peak_rss_mb:              94
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+Base64: YmI=
+==96999== ERROR: libFuzzer: timeout after 25 seconds
+    #0 0x52fc41  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzzKeystore+0x52fc41)
+    #1 0x470678  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzzKeystore+0x470678)
+    #2 0x455509  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzzKeystore+0x455509)
+    #3 0x7f485c0e93bf  (/lib/x86_64-linux-gnu/libpthread.so.0+0x153bf)
+    #4 0x5c2182  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzzKeystore+0x5c2182)

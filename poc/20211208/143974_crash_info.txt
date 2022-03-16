@@ -1,0 +1,272 @@
+Testcase id: 143974
+Job: gcloud-go_libfuzzer_msan
+Crash Type: Stack overflow
+isSecurity: False
+Crash state: spansql.binOpParser.parse-fm
+spansql.binOpParser.parse-fm
+spansql.binOpParser.parse-fm
+Poc: 143974.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_fuzz_parse_query
+target: fuzz_parse_query
+name: libFuzzer
+[Environment] MSAN_OPTIONS=dedup_token_length=3:exitcode=77:symbolize=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+Command: /clusterfuzz/run_bot/clusterfuzz/bot/builds/gcloud-go_libfuzzer_msan/custom/fuzz_parse_query -rss_limit_mb=2560 -timeout=60 -runs=100 /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/ada15083da6e02d67a9ff0112941e669c69ed2f236b3436a0425871d1a1be300
+Time ran: 1.197831392288208
+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 2850733087
+INFO: 5125 Extra Counters
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/gcloud-go_libfuzzer_msan/custom/fuzz_parse_query: Running 1 inputs 100 time(s) each.
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/ada15083da6e02d67a9ff0112941e669c69ed2f236b3436a0425871d1a1be300
+runtime: goroutine stack exceeds 1000000000-byte limit
+runtime: sp=0xc02021a358 stack=[0xc02021a000, 0xc04021a000]
+fatal error: stack overflow
+
+runtime stack:
+runtime.throw({0x610a4a, 0x708f40})
+	runtime/panic.go:1198 +0x71
+runtime.newstack()
+	runtime/stack.go:1088 +0x5ac
+runtime.morestack()
+	runtime/asm_amd64.s:461 +0x80
+
+goroutine 17 [running, locked to thread]:
+cloud.google.com/go/spanner/spansql.binOpParser.parse-fm(0xc000122320)
+	cloud.google.com/go/spanner/spansql/parser.go:2487 +0x66 fp=0xc02021a368 sp=0xc02021a360 pc=0x5ef4a6
+cloud.google.com/go/spanner/spansql.binOpParser.parse({0xc0000fc140, 0xc0000fc140, {0x60ec2b, 0x2}, 0x0, 0xc0000181e0}, 0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2488 +0x6c fp=0xc02021a3f0 sp=0xc02021a368 pc=0x5e8b4c
+cloud.google.com/go/spanner/spansql.binOpParser.parse-fm(0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2487 +0x52 fp=0xc02021a438 sp=0xc02021a3f0 pc=0x5ef492
+cloud.google.com/go/spanner/spansql.binOpParser.parse({0xc0000fc180, 0xc0000fc180, {0x60ec35, 0x2}, 0x0, 0xc0000181f0}, 0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2488 +0x6c fp=0xc02021a4c0 sp=0xc02021a438 pc=0x5e8b4c
+cloud.google.com/go/spanner/spansql.binOpParser.parse-fm(0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2487 +0x52 fp=0xc02021a508 sp=0xc02021a4c0 pc=0x5ef492
+cloud.google.com/go/spanner/spansql.binOpParser.parse({0xc0000fc1c0, 0xc0000fc1c0, {0x62ed90, 0x1}, 0x0, 0xc000018200}, 0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2488 +0x6c fp=0xc02021a590 sp=0xc02021a508 pc=0x5e8b4c
+cloud.google.com/go/spanner/spansql.binOpParser.parse-fm(0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2487 +0x52 fp=0xc02021a5d8 sp=0xc02021a590 pc=0x5ef492
+cloud.google.com/go/spanner/spansql.binOpParser.parse({0xc0000fc200, 0xc0000fc200, {0x60ebfa, 0x1}, 0x0, 0xc000018210}, 0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2488 +0x6c fp=0xc02021a660 sp=0xc02021a5d8 pc=0x5e8b4c
+cloud.google.com/go/spanner/spansql.binOpParser.parse-fm(0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2487 +0x52 fp=0xc02021a6a8 sp=0xc02021a660 pc=0x5ef492
+cloud.google.com/go/spanner/spansql.binOpParser.parse({0xc0000fc240, 0xc0000fc240, {0x60ec00, 0x1}, 0x0, 0xc000018220}, 0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2488 +0x6c fp=0xc02021a730 sp=0xc02021a6a8 pc=0x5e8b4c
+cloud.google.com/go/spanner/spansql.(*parser).parseArithOp(...)
+	cloud.google.com/go/spanner/spansql/parser.go:2712
+cloud.google.com/go/spanner/spansql.(*parser).parseComparisonOp(0xc000122320)
+	cloud.google.com/go/spanner/spansql/parser.go:2657 +0x85 fp=0xc02021a838 sp=0xc02021a730 pc=0x5e9865
+cloud.google.com/go/spanner/spansql.(*parser).parseInOp(0xc000122320)
+	cloud.google.com/go/spanner/spansql/parser.go:2619 +0x52 fp=0xc02021a918 sp=0xc02021a838 pc=0x5e9532
+cloud.google.com/go/spanner/spansql.(*parser).parseIsOp(0xc000122320)
+	cloud.google.com/go/spanner/spansql/parser.go:2584 +0x52 fp=0xc02021a9e8 sp=0xc02021a918 pc=0x5e9052
+cloud.google.com/go/spanner/spansql.(*parser).parseLogicalNot(0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2572 +0x11a fp=0xc02021aa58 sp=0xc02021a9e8 pc=0x5e8fda
+cloud.google.com/go/spanner/spansql.binOpParser.parse({0x687c20, 0x687c20, {0x60ecd3, 0x3}, 0x687c30, 0x687c38}, 0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2488 +0x6c fp=0xc02021aae0 sp=0xc02021aa58 pc=0x5e8b4c
+cloud.google.com/go/spanner/spansql.binOpParser.parse-fm(0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2487 +0x52 fp=0xc02021ab28 sp=0xc02021aae0 pc=0x5ef492
+cloud.google.com/go/spanner/spansql.binOpParser.parse({0xc0000fc280, 0xc0000fc2c0, {0x60ec67, 0x2}, 0x687c30, 0x687c40}, 0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2488 +0x6c fp=0xc02021abb0 sp=0xc02021ab28 pc=0x5e8b4c
+cloud.google.com/go/spanner/spansql.(*parser).parseExpr(...)
+	cloud.google.com/go/spanner/spansql/parser.go:2475
+cloud.google.com/go/spanner/spansql.(*parser).parseLit(0xc000122320)
+	cloud.google.com/go/spanner/spansql/parser.go:2789 +0x2e5 fp=0xc02021ace8 sp=0xc02021abb0 pc=0x5ea7a5
+cloud.google.com/go/spanner/spansql.(*parser).parseUnaryArithOp(0xc000122320)
+	cloud.google.com/go/spanner/spansql/parser.go:2763 +0x3cf fp=0xc02021ad98 sp=0xc02021ace8 pc=0x5ea2af
+cloud.google.com/go/spanner/spansql.binOpParser.parse({0x687c28, 0x687c28, {0x60ebe4, 0x1}, 0x0, 0xc000018190}, 0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2488 +0x6c fp=0xc02021ae20 sp=0xc02021ad98 pc=0x5e8b4c
+cloud.google.com/go/spanner/spansql.binOpParser.parse-fm(0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2487 +0x52 fp=0xc02021ae68 sp=0xc02021ae20 pc=0x5ef492
+cloud.google.com/go/spanner/spansql.binOpParser.parse({0xc0000fc040, 0xc0000fc040, {0x60ebe9, 0x1}, 0x0, 0xc0000181a0}, 0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2488 +0x6c fp=0xc02021aef0 sp=0xc02021ae68 pc=0x5e8b4c
+cloud.google.com/go/spanner/spansql.binOpParser.parse-fm(0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2487 +0x52 fp=0xc02021af38 sp=0xc02021aef0 pc=0x5ef492
+cloud.google.com/go/spanner/spansql.binOpParser.parse({0xc0000fc080, 0xc0000fc080, {0x60ec9f, 0x2}, 0x0, 0xc0000181b0}, 0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2488 +0x6c fp=0xc02021afc0 sp=0xc02021af38 pc=0x5e8b4c
+cloud.google.com/go/spanner/spansql.binOpParser.parse-fm(0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2487 +0x52 fp=0xc02021b008 sp=0xc02021afc0 pc=0x5ef492
+cloud.google.com/go/spanner/spansql.binOpParser.parse({0xc0000fc0c0, 0xc0000fc0c0, {0x60ebe5, 0x1}, 0x0, 0xc0000181c0}, 0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2488 +0x6c fp=0xc02021b090 sp=0xc02021b008 pc=0x5e8b4c
+cloud.google.com/go/spanner/spansql.binOpParser.parse-fm(0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2487 +0x52 fp=0xc02021b0d8 sp=0xc02021b090 pc=0x5ef492
+cloud.google.com/go/spanner/spansql.binOpParser.parse({0xc0000fc100, 0xc0000fc100, {0x60ebe7, 0x1}, 0x0, 0xc0000181d0}, 0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2488 +0x6c fp=0xc02021b160 sp=0xc02021b0d8 pc=0x5e8b4c
+cloud.google.com/go/spanner/spansql.binOpParser.parse-fm(0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2487 +0x52 fp=0xc02021b1a8 sp=0xc02021b160 pc=0x5ef492
+cloud.google.com/go/spanner/spansql.binOpParser.parse({0xc0000fc140, 0xc0000fc140, {0x60ec2b, 0x2}, 0x0, 0xc0000181e0}, 0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2488 +0x6c fp=0xc02021b230 sp=0xc02021b1a8 pc=0x5e8b4c
+cloud.google.com/go/spanner/spansql.binOpParser.parse-fm(0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2487 +0x52 fp=0xc02021b278 sp=0xc02021b230 pc=0x5ef492
+cloud.google.com/go/spanner/spansql.binOpParser.parse({0xc0000fc180, 0xc0000fc180, {0x60ec35, 0x2}, 0x0, 0xc0000181f0}, 0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2488 +0x6c fp=0xc02021b300 sp=0xc02021b278 pc=0x5e8b4c
+cloud.google.com/go/spanner/spansql.binOpParser.parse-fm(0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2487 +0x52 fp=0xc02021b348 sp=0xc02021b300 pc=0x5ef492
+cloud.google.com/go/spanner/spansql.binOpParser.parse({0xc0000fc1c0, 0xc0000fc1c0, {0x62ed90, 0x1}, 0x0, 0xc000018200}, 0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2488 +0x6c fp=0xc02021b3d0 sp=0xc02021b348 pc=0x5e8b4c
+cloud.google.com/go/spanner/spansql.binOpParser.parse-fm(0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2487 +0x52 fp=0xc02021b418 sp=0xc02021b3d0 pc=0x5ef492
+cloud.google.com/go/spanner/spansql.binOpParser.parse({0xc0000fc200, 0xc0000fc200, {0x60ebfa, 0x1}, 0x0, 0xc000018210}, 0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2488 +0x6c fp=0xc02021b4a0 sp=0xc02021b418 pc=0x5e8b4c
+cloud.google.com/go/spanner/spansql.binOpParser.parse-fm(0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2487 +0x52 fp=0xc02021b4e8 sp=0xc02021b4a0 pc=0x5ef492
+cloud.google.com/go/spanner/spansql.binOpParser.parse({0xc0000fc240, 0xc0000fc240, {0x60ec00, 0x1}, 0x0, 0xc000018220}, 0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2488 +0x6c fp=0xc02021b570 sp=0xc02021b4e8 pc=0x5e8b4c
+cloud.google.com/go/spanner/spansql.(*parser).parseArithOp(...)
+	cloud.google.com/go/spanner/spansql/parser.go:2712
+cloud.google.com/go/spanner/spansql.(*parser).parseComparisonOp(0xc000122320)
+	cloud.google.com/go/spanner/spansql/parser.go:2657 +0x85 fp=0xc02021b678 sp=0xc02021b570 pc=0x5e9865
+cloud.google.com/go/spanner/spansql.(*parser).parseInOp(0xc000122320)
+	cloud.google.com/go/spanner/spansql/parser.go:2619 +0x52 fp=0xc02021b758 sp=0xc02021b678 pc=0x5e9532
+cloud.google.com/go/spanner/spansql.(*parser).parseIsOp(0xc000122320)
+	cloud.google.com/go/spanner/spansql/parser.go:2584 +0x52 fp=0xc02021b828 sp=0xc02021b758 pc=0x5e9052
+cloud.google.com/go/spanner/spansql.(*parser).parseLogicalNot(0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2572 +0x11a fp=0xc02021b898 sp=0xc02021b828 pc=0x5e8fda
+cloud.google.com/go/spanner/spansql.binOpParser.parse({0x687c20, 0x687c20, {0x60ecd3, 0x3}, 0x687c30, 0x687c38}, 0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2488 +0x6c fp=0xc02021b920 sp=0xc02021b898 pc=0x5e8b4c
+cloud.google.com/go/spanner/spansql.binOpParser.parse-fm(0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2487 +0x52 fp=0xc02021b968 sp=0xc02021b920 pc=0x5ef492
+cloud.google.com/go/spanner/spansql.binOpParser.parse({0xc0000fc280, 0xc0000fc2c0, {0x60ec67, 0x2}, 0x687c30, 0x687c40}, 0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2488 +0x6c fp=0xc02021b9f0 sp=0xc02021b968 pc=0x5e8b4c
+cloud.google.com/go/spanner/spansql.(*parser).parseExpr(...)
+	cloud.google.com/go/spanner/spansql/parser.go:2475
+cloud.google.com/go/spanner/spansql.(*parser).parseLit(0xc000122320)
+	cloud.google.com/go/spanner/spansql/parser.go:2789 +0x2e5 fp=0xc02021bb28 sp=0xc02021b9f0 pc=0x5ea7a5
+cloud.google.com/go/spanner/spansql.(*parser).parseUnaryArithOp(0xc000122320)
+	cloud.google.com/go/spanner/spansql/parser.go:2763 +0x3cf fp=0xc02021bbd8 sp=0xc02021bb28 pc=0x5ea2af
+cloud.google.com/go/spanner/spansql.binOpParser.parse({0x687c28, 0x687c28, {0x60ebe4, 0x1}, 0x0, 0xc000018190}, 0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2488 +0x6c fp=0xc02021bc60 sp=0xc02021bbd8 pc=0x5e8b4c
+cloud.google.com/go/spanner/spansql.binOpParser.parse-fm(0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2487 +0x52 fp=0xc02021bca8 sp=0xc02021bc60 pc=0x5ef492
+cloud.google.com/go/spanner/spansql.binOpParser.parse({0xc0000fc040, 0xc0000fc040, {0x60ebe9, 0x1}, 0x0, 0xc0000181a0}, 0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2488 +0x6c fp=0xc02021bd30 sp=0xc02021bca8 pc=0x5e8b4c
+cloud.google.com/go/spanner/spansql.binOpParser.parse-fm(0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2487 +0x52 fp=0xc02021bd78 sp=0xc02021bd30 pc=0x5ef492
+cloud.google.com/go/spanner/spansql.binOpParser.parse({0xc0000fc080, 0xc0000fc080, {0x60ec9f, 0x2}, 0x0, 0xc0000181b0}, 0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2488 +0x6c fp=0xc02021be00 sp=0xc02021bd78 pc=0x5e8b4c
+cloud.google.com/go/spanner/spansql.binOpParser.parse-fm(0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2487 +0x52 fp=0xc02021be48 sp=0xc02021be00 pc=0x5ef492
+cloud.google.com/go/spanner/spansql.binOpParser.parse({0xc0000fc0c0, 0xc0000fc0c0, {0x60ebe5, 0x1}, 0x0, 0xc0000181c0}, 0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2488 +0x6c fp=0xc02021bed0 sp=0xc02021be48 pc=0x5e8b4c
+cloud.google.com/go/spanner/spansql.binOpParser.parse-fm(0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2487 +0x52 fp=0xc02021bf18 sp=0xc02021bed0 pc=0x5ef492
+cloud.google.com/go/spanner/spansql.binOpParser.parse({0xc0000fc100, 0xc0000fc100, {0x60ebe7, 0x1}, 0x0, 0xc0000181d0}, 0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2488 +0x6c fp=0xc02021bfa0 sp=0xc02021bf18 pc=0x5e8b4c
+cloud.google.com/go/spanner/spansql.binOpParser.parse-fm(0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2487 +0x52 fp=0xc02021bfe8 sp=0xc02021bfa0 pc=0x5ef492
+cloud.google.com/go/spanner/spansql.binOpParser.parse({0xc0000fc140, 0xc0000fc140, {0x60ec2b, 0x2}, 0x0, 0xc0000181e0}, 0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2488 +0x6c fp=0xc02021c070 sp=0xc02021bfe8 pc=0x5e8b4c
+cloud.google.com/go/spanner/spansql.binOpParser.parse-fm(0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2487 +0x52 fp=0xc02021c0b8 sp=0xc02021c070 pc=0x5ef492
+cloud.google.com/go/spanner/spansql.binOpParser.parse({0xc0000fc180, 0xc0000fc180, {0x60ec35, 0x2}, 0x0, 0xc0000181f0}, 0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2488 +0x6c fp=0xc02021c140 sp=0xc02021c0b8 pc=0x5e8b4c
+cloud.google.com/go/spanner/spansql.binOpParser.parse-fm(0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2487 +0x52 fp=0xc02021c188 sp=0xc02021c140 pc=0x5ef492
+cloud.google.com/go/spanner/spansql.binOpParser.parse({0xc0000fc1c0, 0xc0000fc1c0, {0x62ed90, 0x1}, 0x0, 0xc000018200}, 0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2488 +0x6c fp=0xc02021c210 sp=0xc02021c188 pc=0x5e8b4c
+cloud.google.com/go/spanner/spansql.binOpParser.parse-fm(0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2487 +0x52 fp=0xc02021c258 sp=0xc02021c210 pc=0x5ef492
+cloud.google.com/go/spanner/spansql.binOpParser.parse({0xc0000fc200, 0xc0000fc200, {0x60ebfa, 0x1}, 0x0, 0xc000018210}, 0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2488 +0x6c fp=0xc02021c2e0 sp=0xc02021c258 pc=0x5e8b4c
+cloud.google.com/go/spanner/spansql.binOpParser.parse-fm(0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2487 +0x52 fp=0xc02021c328 sp=0xc02021c2e0 pc=0x5ef492
+cloud.google.com/go/spanner/spansql.binOpParser.parse({0xc0000fc240, 0xc0000fc240, {0x60ec00, 0x1}, 0x0, 0xc000018220}, 0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2488 +0x6c fp=0xc02021c3b0 sp=0xc02021c328 pc=0x5e8b4c
+cloud.google.com/go/spanner/spansql.(*parser).parseArithOp(...)
+	cloud.google.com/go/spanner/spansql/parser.go:2712
+cloud.google.com/go/spanner/spansql.(*parser).parseComparisonOp(0xc000122320)
+	cloud.google.com/go/spanner/spansql/parser.go:2657 +0x85 fp=0xc02021c4b8 sp=0xc02021c3b0 pc=0x5e9865
+cloud.google.com/go/spanner/spansql.(*parser).parseInOp(0xc000122320)
+	cloud.google.com/go/spanner/spansql/parser.go:2619 +0x52 fp=0xc02021c598 sp=0xc02021c4b8 pc=0x5e9532
+cloud.google.com/go/spanner/spansql.(*parser).parseIsOp(0xc000122320)
+	cloud.google.com/go/spanner/spansql/parser.go:2584 +0x52 fp=0xc02021c668 sp=0xc02021c598 pc=0x5e9052
+cloud.google.com/go/spanner/spansql.(*parser).parseLogicalNot(0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2572 +0x11a fp=0xc02021c6d8 sp=0xc02021c668 pc=0x5e8fda
+cloud.google.com/go/spanner/spansql.binOpParser.parse({0x687c20, 0x687c20, {0x60ecd3, 0x3}, 0x687c30, 0x687c38}, 0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2488 +0x6c fp=0xc02021c760 sp=0xc02021c6d8 pc=0x5e8b4c
+cloud.google.com/go/spanner/spansql.binOpParser.parse-fm(0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2487 +0x52 fp=0xc02021c7a8 sp=0xc02021c760 pc=0x5ef492
+cloud.google.com/go/spanner/spansql.binOpParser.parse({0xc0000fc280, 0xc0000fc2c0, {0x60ec67, 0x2}, 0x687c30, 0x687c40}, 0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2488 +0x6c fp=0xc02021c830 sp=0xc02021c7a8 pc=0x5e8b4c
+cloud.google.com/go/spanner/spansql.(*parser).parseExpr(...)
+	cloud.google.com/go/spanner/spansql/parser.go:2475
+cloud.google.com/go/spanner/spansql.(*parser).parseLit(0xc000122320)
+	cloud.google.com/go/spanner/spansql/parser.go:2789 +0x2e5 fp=0xc02021c968 sp=0xc02021c830 pc=0x5ea7a5
+cloud.google.com/go/spanner/spansql.(*parser).parseUnaryArithOp(0xc000122320)
+	cloud.google.com/go/spanner/spansql/parser.go:2763 +0x3cf fp=0xc02021ca18 sp=0xc02021c968 pc=0x5ea2af
+cloud.google.com/go/spanner/spansql.binOpParser.parse({0x687c28, 0x687c28, {0x60ebe4, 0x1}, 0x0, 0xc000018190}, 0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2488 +0x6c fp=0xc02021caa0 sp=0xc02021ca18 pc=0x5e8b4c
+cloud.google.com/go/spanner/spansql.binOpParser.parse-fm(0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2487 +0x52 fp=0xc02021cae8 sp=0xc02021caa0 pc=0x5ef492
+cloud.google.com/go/spanner/spansql.binOpParser.parse({0xc0000fc040, 0xc0000fc040, {0x60ebe9, 0x1}, 0x0, 0xc0000181a0}, 0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2488 +0x6c fp=0xc02021cb70 sp=0xc02021cae8 pc=0x5e8b4c
+cloud.google.com/go/spanner/spansql.binOpParser.parse-fm(0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2487 +0x52 fp=0xc02021cbb8 sp=0xc02021cb70 pc=0x5ef492
+cloud.google.com/go/spanner/spansql.binOpParser.parse({0xc0000fc080, 0xc0000fc080, {0x60ec9f, 0x2}, 0x0, 0xc0000181b0}, 0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2488 +0x6c fp=0xc02021cc40 sp=0xc02021cbb8 pc=0x5e8b4c
+cloud.google.com/go/spanner/spansql.binOpParser.parse-fm(0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2487 +0x52 fp=0xc02021cc88 sp=0xc02021cc40 pc=0x5ef492
+cloud.google.com/go/spanner/spansql.binOpParser.parse({0xc0000fc0c0, 0xc0000fc0c0, {0x60ebe5, 0x1}, 0x0, 0xc0000181c0}, 0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2488 +0x6c fp=0xc02021cd10 sp=0xc02021cc88 pc=0x5e8b4c
+cloud.google.com/go/spanner/spansql.binOpParser.parse-fm(0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2487 +0x52 fp=0xc02021cd58 sp=0xc02021cd10 pc=0x5ef492
+cloud.google.com/go/spanner/spansql.binOpParser.parse({0xc0000fc100, 0xc0000fc100, {0x60ebe7, 0x1}, 0x0, 0xc0000181d0}, 0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2488 +0x6c fp=0xc02021cde0 sp=0xc02021cd58 pc=0x5e8b4c
+cloud.google.com/go/spanner/spansql.binOpParser.parse-fm(0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2487 +0x52 fp=0xc02021ce28 sp=0xc02021cde0 pc=0x5ef492
+cloud.google.com/go/spanner/spansql.binOpParser.parse({0xc0000fc140, 0xc0000fc140, {0x60ec2b, 0x2}, 0x0, 0xc0000181e0}, 0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2488 +0x6c fp=0xc02021ceb0 sp=0xc02021ce28 pc=0x5e8b4c
+cloud.google.com/go/spanner/spansql.binOpParser.parse-fm(0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2487 +0x52 fp=0xc02021cef8 sp=0xc02021ceb0 pc=0x5ef492
+cloud.google.com/go/spanner/spansql.binOpParser.parse({0xc0000fc180, 0xc0000fc180, {0x60ec35, 0x2}, 0x0, 0xc0000181f0}, 0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2488 +0x6c fp=0xc02021cf80 sp=0xc02021cef8 pc=0x5e8b4c
+cloud.google.com/go/spanner/spansql.binOpParser.parse-fm(0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2487 +0x52 fp=0xc02021cfc8 sp=0xc02021cf80 pc=0x5ef492
+cloud.google.com/go/spanner/spansql.binOpParser.parse({0xc0000fc1c0, 0xc0000fc1c0, {0x62ed90, 0x1}, 0x0, 0xc000018200}, 0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2488 +0x6c fp=0xc02021d050 sp=0xc02021cfc8 pc=0x5e8b4c
+cloud.google.com/go/spanner/spansql.binOpParser.parse-fm(0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2487 +0x52 fp=0xc02021d098 sp=0xc02021d050 pc=0x5ef492
+cloud.google.com/go/spanner/spansql.binOpParser.parse({0xc0000fc200, 0xc0000fc200, {0x60ebfa, 0x1}, 0x0, 0xc000018210}, 0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2488 +0x6c fp=0xc02021d120 sp=0xc02021d098 pc=0x5e8b4c
+cloud.google.com/go/spanner/spansql.binOpParser.parse-fm(0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2487 +0x52 fp=0xc02021d168 sp=0xc02021d120 pc=0x5ef492
+cloud.google.com/go/spanner/spansql.binOpParser.parse({0xc0000fc240, 0xc0000fc240, {0x60ec00, 0x1}, 0x0, 0xc000018220}, 0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2488 +0x6c fp=0xc02021d1f0 sp=0xc02021d168 pc=0x5e8b4c
+cloud.google.com/go/spanner/spansql.(*parser).parseArithOp(...)
+	cloud.google.com/go/spanner/spansql/parser.go:2712
+cloud.google.com/go/spanner/spansql.(*parser).parseComparisonOp(0xc000122320)
+	cloud.google.com/go/spanner/spansql/parser.go:2657 +0x85 fp=0xc02021d2f8 sp=0xc02021d1f0 pc=0x5e9865
+cloud.google.com/go/spanner/spansql.(*parser).parseInOp(0xc000122320)
+	cloud.google.com/go/spanner/spansql/parser.go:2619 +0x52 fp=0xc02021d3d8 sp=0xc02021d2f8 pc=0x5e9532
+cloud.google.com/go/spanner/spansql.(*parser).parseIsOp(0xc000122320)
+	cloud.google.com/go/spanner/spansql/parser.go:2584 +0x52 fp=0xc02021d4a8 sp=0xc02021d3d8 pc=0x5e9052
+cloud.google.com/go/spanner/spansql.(*parser).parseLogicalNot(0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2572 +0x11a fp=0xc02021d518 sp=0xc02021d4a8 pc=0x5e8fda
+cloud.google.com/go/spanner/spansql.binOpParser.parse({0x687c20, 0x687c20, {0x60ecd3, 0x3}, 0x687c30, 0x687c38}, 0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2488 +0x6c fp=0xc02021d5a0 sp=0xc02021d518 pc=0x5e8b4c
+cloud.google.com/go/spanner/spansql.binOpParser.parse-fm(0x0)
+	cloud.google.com/go/spanner/spansql/parser.go:2487 +0x52 fp=0xc02021d5e8 sp=0xc02021d5a0 pc=0x5ef492
+==5670== ERROR: libFuzzer: deadly signal
+    #0 0x4caec9 in __sanitizer_print_stack_trace /src/llvm-project/compiler-rt/lib/msan/msan.cpp:733:3
+    #1 0x470468 in fuzzer::PrintStackTrace() cxa_noexception.cpp:0
+    #2 0x455383 in fuzzer::Fuzzer::CrashCallback() cxa_noexception.cpp:0
+    #3 0x519a04 in SignalAction(int, void*, void*) /src/llvm-project/compiler-rt/lib/msan/msan_interceptors.cpp:1018:3
+    #4 0x7f188dd293bf in libpthread.so.0
+    #5 0x586b20 in runtime.raise.abi0 runtime/sys_linux_amd64.s:164
+
+NOTE: libFuzzer has rudimentary signal handlers.
+      Combine libFuzzer with AddressSanitizer or similar for better crash reports.
+SUMMARY: libFuzzer: deadly signal
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+	cloud.google.com/go/spanner/spansql/parser.go:2487 +0x52 fp=0xc02021d5e8 sp=0xc02021d5a0 pc=0x5ef492
+==5670== ERROR: libFuzzer: deadly signal
+    #0 0x4caec9  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/gcloud-go_libfuzzer_msan/custom/fuzz_parse_query+0x4caec9)
+    #1 0x470468  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/gcloud-go_libfuzzer_msan/custom/fuzz_parse_query+0x470468)
+    #2 0x455383  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/gcloud-go_libfuzzer_msan/custom/fuzz_parse_query+0x455383)
+    #3 0x519a04  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/gcloud-go_libfuzzer_msan/custom/fuzz_parse_query+0x519a04)
+    #4 0x7f188dd293bf  (/lib/x86_64-linux-gnu/libpthread.so.0+0x153bf)
+    #5 0x586b20  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/gcloud-go_libfuzzer_msan/custom/fuzz_parse_query+0x586b20)

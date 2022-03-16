@@ -1,0 +1,83 @@
+Testcase id: 59388
+Job: libpng_libfuzzer_msan
+Crash Type: Use-of-uninitialized-value
+isSecurity: True
+Crash state: OSS_FUZZ_png_do_read_transformations
+OSS_FUZZ_png_read_row
+libpng_read_fuzzer.cc
+Poc: 59388.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_libpng_read_fuzzer
+target: libpng_read_fuzzer
+name: libFuzzer
+[Environment] MSAN_OPTIONS=exitcode=77
++----------------------------------------Release Build Stacktrace----------------------------------------+
+Command: /clusterfuzz/run_bot/clusterfuzz/bot/builds/libpng_libfuzzer_msan/custom/libpng_read_fuzzer -rss_limit_mb=2560 -timeout=60 -runs=100 /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/crash-55a0c2124fba9dd2003ce376c027a788319559b4
+Time ran: 0.03790545463562012
+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 1702285611
+INFO: Loaded 1 modules   (5511 inline 8-bit counters): 5511 [0x6d4db0, 0x6d6337),
+INFO: Loaded 1 PC tables (5511 PCs): 5511 [0x66f5a8,0x684e18),
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpng_libfuzzer_msan/custom/libpng_read_fuzzer: Running 1 inputs 100 time(s) each.
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/crash-55a0c2124fba9dd2003ce376c027a788319559b4
+==71284==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x59b83d in png_do_expand_palette /src/libpng/pngrtran.c:4233:23
+    #1 0x59b83d in OSS_FUZZ_png_do_read_transformations /src/libpng/pngrtran.c:4786:10
+    #2 0x55d501 in OSS_FUZZ_png_read_row /src/libpng/pngread.c:572:7
+    #3 0x4a541a in LLVMFuzzerTestOneInput /src/libpng/contrib/oss-fuzz/libpng_read_fuzzer.cc:200:7
+    #4 0x4dd563 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #5 0x4c8e72 in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:324:6
+    #6 0x4ce93a in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #7 0x4f7862 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #8 0x7fc2e13a40b2 in __libc_start_main
+    #9 0x41f5ad in _start
+
+  Uninitialized value was created by a heap allocation
+    #0 0x45038d in __interceptor_malloc /src/llvm-project/compiler-rt/lib/msan/msan_interceptors.cpp:912:3
+    #1 0x4a3a14 in limited_malloc(png_struct_def*, unsigned long) /src/libpng/contrib/oss-fuzz/libpng_read_fuzzer.cc:90:10
+    #2 0x5598f5 in OSS_FUZZ_png_malloc_base /src/libpng/pngmem.c:91:17
+    #3 0x5598f5 in OSS_FUZZ_png_malloc /src/libpng/pngmem.c:179:10
+    #4 0x5c235e in OSS_FUZZ_png_read_start_row /src/libpng/pngrutil.c:4607:44
+    #5 0x55c834 in OSS_FUZZ_png_read_update_info /src/libpng/pngread.c:275:10
+    #6 0x4a5211 in LLVMFuzzerTestOneInput /src/libpng/contrib/oss-fuzz/libpng_read_fuzzer.cc:192:3
+    #7 0x4dd563 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #8 0x4c8e72 in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:324:6
+    #9 0x4ce93a in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #10 0x4f7862 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #11 0x7fc2e13a40b2 in __libc_start_main
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpng_libfuzzer_msan/custom/libpng_read_fuzzer+0x59b83d)
+Unique heap origins: 41
+Stack depot allocated bytes: 1900544
+Unique origin histories: 9
+History depot allocated bytes: 196608
+Exiting
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/crash-55a0c2124fba9dd2003ce376c027a788319559b4
+==71284==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x59b83d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpng_libfuzzer_msan/custom/libpng_read_fuzzer+0x59b83d)
+    #1 0x55d501  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpng_libfuzzer_msan/custom/libpng_read_fuzzer+0x55d501)
+    #2 0x4a541a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpng_libfuzzer_msan/custom/libpng_read_fuzzer+0x4a541a)
+    #3 0x4dd563  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpng_libfuzzer_msan/custom/libpng_read_fuzzer+0x4dd563)
+    #4 0x4c8e72  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpng_libfuzzer_msan/custom/libpng_read_fuzzer+0x4c8e72)
+    #5 0x4ce93a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpng_libfuzzer_msan/custom/libpng_read_fuzzer+0x4ce93a)
+    #6 0x4f7862  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpng_libfuzzer_msan/custom/libpng_read_fuzzer+0x4f7862)
+    #7 0x7fc2e13a40b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #8 0x41f5ad  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpng_libfuzzer_msan/custom/libpng_read_fuzzer+0x41f5ad)
+
+  Uninitialized value was created by a heap allocation
+    #0 0x45038d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpng_libfuzzer_msan/custom/libpng_read_fuzzer+0x45038d)
+    #1 0x4a3a14  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpng_libfuzzer_msan/custom/libpng_read_fuzzer+0x4a3a14)
+    #2 0x5598f5  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpng_libfuzzer_msan/custom/libpng_read_fuzzer+0x5598f5)
+    #3 0x5c235e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpng_libfuzzer_msan/custom/libpng_read_fuzzer+0x5c235e)
+    #4 0x55c834  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpng_libfuzzer_msan/custom/libpng_read_fuzzer+0x55c834)
+    #5 0x4a5211  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpng_libfuzzer_msan/custom/libpng_read_fuzzer+0x4a5211)
+    #6 0x4dd563  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpng_libfuzzer_msan/custom/libpng_read_fuzzer+0x4dd563)
+    #7 0x4c8e72  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpng_libfuzzer_msan/custom/libpng_read_fuzzer+0x4c8e72)
+    #8 0x4ce93a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpng_libfuzzer_msan/custom/libpng_read_fuzzer+0x4ce93a)
+    #9 0x4f7862  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpng_libfuzzer_msan/custom/libpng_read_fuzzer+0x4f7862)
+    #10 0x7fc2e13a40b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)

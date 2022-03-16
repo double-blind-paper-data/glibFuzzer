@@ -1,0 +1,54 @@
+Testcase id: 114431
+Job: dnsmasq_libfuzzer_ubsan
+Crash Type: Divide-by-zero
+isSecurity: False
+Crash state: address_allocate
+dhcp_reply
+dhcp_packet
+Poc: 114431.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_fuzz_dhcp
+target: fuzz_dhcp
+name: libFuzzer
+[Environment] UBSAN_OPTIONS=exitcode=77:print_stacktrace=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+Command: /clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_libfuzzer_ubsan/custom/fuzz_dhcp -rss_limit_mb=2560 -timeout=60 -runs=100 /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/5909c7015ab90e4f2a31f5327ae7d52edbbf14826da49085c88d05c8054ebf4c
+Time ran: 0.015098333358764648
+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 3699835511
+INFO: Loaded 1 modules   (15119 inline 8-bit counters): 15119 [0x5dd7a0, 0x5e12af),
+INFO: Loaded 1 PC tables (15119 PCs): 15119 [0x5567b0,0x5918a0),
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_libfuzzer_ubsan/custom/fuzz_dhcp: Running 1 inputs 100 time(s) each.
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/5909c7015ab90e4f2a31f5327ae7d52edbbf14826da49085c88d05c8054ebf4c
+dhcp.c:808:21: runtime error: division by zero
+    #0 0x4c0ad6 in address_allocate /src/dnsmasq/src/dhcp.c:808:21
+    #1 0x50d5b3 in dhcp_reply /src/dnsmasq/src/rfc2131.c:626:11
+    #2 0x4bea59 in dhcp_packet /src/dnsmasq/src/dhcp.c:354:21
+    #3 0x4b576a in FuzzDhcp /src/fuzz_dhcp.c:41:3
+    #4 0x4b5901 in LLVMFuzzerTestOneInput /src/fuzz_dhcp.c:78:3
+    #5 0x440413 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #6 0x42bd22 in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:324:6
+    #7 0x4317ea in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #8 0x45a712 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #9 0x7efe6ef840b2 in __libc_start_main
+    #10 0x408fad in _start
+
+SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior dhcp.c:808:21 in
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/5909c7015ab90e4f2a31f5327ae7d52edbbf14826da49085c88d05c8054ebf4c
+dhcp.c:808:21: runtime error: division by zero
+    #0 0x4c0ad6  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_libfuzzer_ubsan/custom/fuzz_dhcp+0x4c0ad6)
+    #1 0x50d5b3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_libfuzzer_ubsan/custom/fuzz_dhcp+0x50d5b3)
+    #2 0x4bea59  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_libfuzzer_ubsan/custom/fuzz_dhcp+0x4bea59)
+    #3 0x4b576a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_libfuzzer_ubsan/custom/fuzz_dhcp+0x4b576a)
+    #4 0x4b5901  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_libfuzzer_ubsan/custom/fuzz_dhcp+0x4b5901)
+    #5 0x440413  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_libfuzzer_ubsan/custom/fuzz_dhcp+0x440413)
+    #6 0x42bd22  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_libfuzzer_ubsan/custom/fuzz_dhcp+0x42bd22)
+    #7 0x4317ea  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_libfuzzer_ubsan/custom/fuzz_dhcp+0x4317ea)
+    #8 0x45a712  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_libfuzzer_ubsan/custom/fuzz_dhcp+0x45a712)
+    #9 0x7efe6ef840b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #10 0x408fad  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_libfuzzer_ubsan/custom/fuzz_dhcp+0x408fad)

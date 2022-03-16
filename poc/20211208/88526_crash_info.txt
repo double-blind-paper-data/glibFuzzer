@@ -1,0 +1,66 @@
+Testcase id: 88526
+Job: vlc_honggfuzz_asan
+Crash Type: Abrt
+isSecurity: False
+Crash state: date_Increment
+PacketizeBlock
+Parse
+Poc: 88526.testcase
+engine: honggfuzz
+fully_qualified_name: honggfuzz_vlc-demux-libfuzzer
+target: vlc-demux-libfuzzer
+name: honggfuzz
+[Environment] ASAN_OPTIONS=alloc_dealloc_mismatch=0:allocator_may_return_null=1:allocator_release_to_os_interval_ms=500:allow_user_segv_handler=0:check_malloc_usable_size=0:detect_leaks=1:detect_odr_violation=0:detect_stack_use_after_return=1:fast_unwind_on_fatal=0:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:max_uar_stack_size_log=16:print_scariness=1:print_summary=1:print_suppressions=0:quarantine_size_mb=64:redzone=32:strict_memcmp=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+=================================================================
+==5720==ERROR: AddressSanitizer: ABRT on unknown address 0x03e800001658 (pc 0x7ffff7a9618b bp 0x7ffff7c0b588 sp 0x7fffffffc2a0 T0)
+SCARINESS: 10 (signal)
+    #0 0x7ffff7a9618b in raise
+    #1 0x7ffff7a75858 in abort
+    #2 0x7ffff7a75728 in libc.so.6
+    #3 0x7ffff7a86f35 in __assert_fail
+    #4 0x897ab6 in date_Increment /src/vlc/src/misc/mtime.c:91:5
+    #5 0x6ac3ae in GetOutBuffer /src/vlc/modules/packetizer/dts.c:125:9
+    #6 0x6ac3ae in PacketizeBlock /src/vlc/modules/packetizer/dts.c:357:34
+    #7 0x555a37 in Parse /src/vlc/modules/demux/mpeg/es.c:655:28
+    #8 0x545a27 in OpenCommon /src/vlc/modules/demux/mpeg/es.c:285:13
+    #9 0x54463a in OpenAudio /src/vlc/modules/demux/mpeg/es.c:300:20
+    #10 0x7f2779 in demux_Probe /src/vlc/src/input/demux.c:111:15
+    #11 0x7c6d19 in vlc_module_load /src/vlc/src/modules/modules.c:243:19
+    #12 0x7f21e3 in demux_NewAdvanced /src/vlc/src/input/demux.c:192:20
+    #13 0x7f1722 in demux_New /src/vlc/src/input/demux.c:76:12
+    #14 0x4e0f90 in demux_process_stream /src/vlc/test/src/input/demux-run.c:297:22
+    #15 0x4e1b86 in libvlc_demux_process_memory /src/vlc/test/src/input/demux-run.c:379:12
+    #16 0x4d6a1d in LLVMFuzzerTestOneInput /src/vlc/test/vlc-demux-libfuzzer.c:54:5
+    #17 0x4d70ee in main
+    #18 0x7ffff7a770b2 in __libc_start_main
+    #19 0x41eb0d in _start
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: ABRT (/lib/x86_64-linux-gnu/libc.so.6+0x4618b)
+==5720==ABORTING
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+==5720==ERROR: AddressSanitizer: ABRT on unknown address 0x03e800001658 (pc 0x7ffff7a9618b bp 0x7ffff7c0b588 sp 0x7fffffffc2a0 T0)
+SCARINESS: 10 (signal)
+    #0 0x7ffff7a9618b  (/lib/x86_64-linux-gnu/libc.so.6+0x4618b)
+    #1 0x7ffff7a75858  (/lib/x86_64-linux-gnu/libc.so.6+0x25858)
+    #2 0x7ffff7a75728  (/lib/x86_64-linux-gnu/libc.so.6+0x25728)
+    #3 0x7ffff7a86f35  (/lib/x86_64-linux-gnu/libc.so.6+0x36f35)
+    #4 0x897ab6  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_honggfuzz_asan/custom/vlc-demux-libfuzzer+0x897ab6)
+    #5 0x6ac3ae  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_honggfuzz_asan/custom/vlc-demux-libfuzzer+0x6ac3ae)
+    #6 0x555a37  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_honggfuzz_asan/custom/vlc-demux-libfuzzer+0x555a37)
+    #7 0x545a27  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_honggfuzz_asan/custom/vlc-demux-libfuzzer+0x545a27)
+    #8 0x54463a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_honggfuzz_asan/custom/vlc-demux-libfuzzer+0x54463a)
+    #9 0x7f2779  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_honggfuzz_asan/custom/vlc-demux-libfuzzer+0x7f2779)
+    #10 0x7c6d19  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_honggfuzz_asan/custom/vlc-demux-libfuzzer+0x7c6d19)
+    #11 0x7f21e3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_honggfuzz_asan/custom/vlc-demux-libfuzzer+0x7f21e3)
+    #12 0x7f1722  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_honggfuzz_asan/custom/vlc-demux-libfuzzer+0x7f1722)
+    #13 0x4e0f90  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_honggfuzz_asan/custom/vlc-demux-libfuzzer+0x4e0f90)
+    #14 0x4e1b86  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_honggfuzz_asan/custom/vlc-demux-libfuzzer+0x4e1b86)
+    #15 0x4d6a1d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_honggfuzz_asan/custom/vlc-demux-libfuzzer+0x4d6a1d)
+    #16 0x4d70ee  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_honggfuzz_asan/custom/vlc-demux-libfuzzer+0x4d70ee)
+    #17 0x7ffff7a770b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #18 0x41eb0d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_honggfuzz_asan/custom/vlc-demux-libfuzzer+0x41eb0d)

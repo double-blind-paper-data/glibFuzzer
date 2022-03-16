@@ -1,0 +1,145 @@
+Testcase id: 2343
+Job: cpython3_libfuzzer_msan
+Crash Type: Use-of-uninitialized-value
+isSecurity: True
+Crash state: _PyLong_FromSTwoDigits
+long_and
+binary_op1
+Poc: 2343.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_fuzz_builtin_float
+target: fuzz_builtin_float
+name: libFuzzer
+[Environment] MSAN_OPTIONS=halt_on_error=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+Command: /clusterfuzz/run_bot/clusterfuzz/bot/builds/cpython3_libfuzzer_msan/custom/fuzz_builtin_float -rss_limit_mb=2560 -timeout=60 -runs=100 /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/tmppmouhc6z
+Time ran: 0.0948941707611084
+
+==18821==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x6a6bb0 in _PyLong_FromSTwoDigits /src/cpython3/Objects/longobject.c:226:9
+    #1 0x6d76cf in long_and /src/cpython3/Objects/longobject.c:4782:16
+    #2 0x137d139 in binary_op1 /src/cpython3/Objects/abstract.c:891:13
+    #3 0x137b363 in binary_op /src/cpython3/Objects/abstract.c:930:24
+    #4 0x137b363 in PyNumber_And /src/cpython3/Objects/abstract.c:1062:1
+    #5 0xb3915a in _PyEval_EvalFrameDefault /src/cpython3/Python/ceval.c:4867:29
+    #6 0xb1af84 in _PyEval_EvalFrame /src/cpython3/Include/internal/pycore_ceval.h:48:16
+    #7 0xb1af84 in _PyEval_Vector /src/cpython3/Python/ceval.c:5815:24
+    #8 0x5b22d2 in _PyFunction_Vectorcall /src/cpython3/Objects/call.c:0
+    #9 0x5b94f8 in _PyObject_VectorcallTstate /src/cpython3/Include/internal/pycore_call.h:89:11
+    #10 0x5b94f8 in object_vacall /src/cpython3/Objects/call.c:784:14
+    #11 0x5b9e6b in _PyObject_CallMethodIdObjArgs /src/cpython3/Objects/call.c:875:24
+    #12 0xcf0910 in import_find_and_load /src/cpython3/Python/import.c:1739:11
+    #13 0xcf0910 in PyImport_ImportModuleLevelObject /src/cpython3/Python/import.c:1840:15
+    #14 0x163bc26 in builtin___import__ /src/cpython3/Python/bltinmodule.c:272:12
+    #15 0x14ce6bb in cfunction_call /src/cpython3/Objects/methodobject.c:543:18
+    #16 0x5adb8c in _PyObject_MakeTpCall /src/cpython3/Objects/call.c:214:18
+    #17 0x5b44c0 in _PyObject_CallFunctionVa /src/cpython3/Objects/call.c:0
+    #18 0x5b3558 in PyObject_CallFunction /src/cpython3/Objects/call.c:557:14
+    #19 0xceb025 in PyImport_Import /src/cpython3/Python/import.c:2045:9
+    #20 0xcebc82 in PyImport_ImportModule /src/cpython3/Python/import.c:1452:14
+    #21 0xcebc82 in PyImport_ImportModuleNoBlock /src/cpython3/Python/import.c:1470:12
+    #22 0xb77240 in _PyCodecRegistry_Init /src/cpython3/Python/codecs.c:1530:11
+    #23 0xb77e24 in _PyCodec_Lookup /src/cpython3/Python/codecs.c:135:46
+    #24 0xab4ea7 in config_get_codec_name /src/cpython3/Objects/unicodeobject.c:15870:23
+    #25 0xa22104 in init_fs_encoding /src/cpython3/Objects/unicodeobject.c:15984:9
+    #26 0xa22104 in _PyUnicode_InitEncodings /src/cpython3/Objects/unicodeobject.c:16000:23
+    #27 0xdab104 in init_interp_main /src/cpython3/Python/pylifecycle.c:1103:14
+    #28 0xd98346 in pyinit_main /src/cpython3/Python/pylifecycle.c:1194:23
+    #29 0xd98346 in Py_InitializeFromConfig /src/cpython3/Python/pylifecycle.c:1225:18
+    #30 0x54460a in LLVMFuzzerInitialize /src/cpython3/Modules/_xxtestfuzz/fuzzer.c:468:14
+    #31 0x4611d7 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #32 0x48c5a2 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #33 0x7f1987b3c0b2 in __libc_start_main
+    #34 0x43ae3d in _start
+
+  Uninitialized value was created by a heap allocation
+    #0 0x4f0fcd in __interceptor_malloc /src/llvm-project/compiler-rt/lib/msan/msan_interceptors.cpp:912:3
+    #1 0x7b659b in _PyMem_RawMalloc /src/cpython3/Objects/obmalloc.c:100:12
+    #2 0x7bb258 in PyObject_Malloc /src/cpython3/Objects/obmalloc.c:698:12
+    #3 0x68ee07 in _PyLong_New /src/cpython3/Objects/longobject.c:129:14
+    #4 0x68ee07 in _PyLong_FromByteArray /src/cpython3/Objects/longobject.c:845:9
+    #5 0x6e5e3f in int_from_bytes_impl /src/cpython3/Objects/longobject.c:5635:16
+    #6 0x6e5e3f in int_from_bytes /src/cpython3/Objects/clinic/longobject.c.h:389:20
+    #7 0x14ca1c0 in cfunction_vectorcall_FASTCALL_KEYWORDS /src/cpython3/Objects/methodobject.c:446:24
+    #8 0x5b0cff in _PyObject_VectorcallTstate /src/cpython3/Include/internal/pycore_call.h:89:11
+    #9 0x5b0cff in PyObject_Vectorcall /src/cpython3/Objects/call.c:298:12
+    #10 0xb3ec88 in _PyEval_EvalFrameDefault /src/cpython3/Python/ceval.c:4479:23
+    #11 0xb1af84 in _PyEval_EvalFrame /src/cpython3/Include/internal/pycore_ceval.h:48:16
+    #12 0xb1af84 in _PyEval_Vector /src/cpython3/Python/ceval.c:5815:24
+    #13 0x5b22d2 in _PyFunction_Vectorcall /src/cpython3/Objects/call.c:0
+    #14 0x5b94f8 in _PyObject_VectorcallTstate /src/cpython3/Include/internal/pycore_call.h:89:11
+    #15 0x5b94f8 in object_vacall /src/cpython3/Objects/call.c:784:14
+    #16 0x5b9e6b in _PyObject_CallMethodIdObjArgs /src/cpython3/Objects/call.c:875:24
+    #17 0xcf0910 in import_find_and_load /src/cpython3/Python/import.c:1739:11
+    #18 0xcf0910 in PyImport_ImportModuleLevelObject /src/cpython3/Python/import.c:1840:15
+    #19 0x163bc26 in builtin___import__ /src/cpython3/Python/bltinmodule.c:272:12
+    #20 0x14ce6bb in cfunction_call /src/cpython3/Objects/methodobject.c:543:18
+    #21 0x5adb8c in _PyObject_MakeTpCall /src/cpython3/Objects/call.c:214:18
+    #22 0x5b44c0 in _PyObject_CallFunctionVa /src/cpython3/Objects/call.c:0
+    #23 0x5b3558 in PyObject_CallFunction /src/cpython3/Objects/call.c:557:14
+    #24 0xceb025 in PyImport_Import /src/cpython3/Python/import.c:2045:9
+    #25 0xcebc82 in PyImport_ImportModule /src/cpython3/Python/import.c:1452:14
+    #26 0xcebc82 in PyImport_ImportModuleNoBlock /src/cpython3/Python/import.c:1470:12
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cpython3_libfuzzer_msan/custom/fuzz_builtin_float+0x6a6bb0)
+Unique heap origins: 6985
+Stack depot allocated bytes: 2883584
+Unique origin histories: 1864
+History depot allocated bytes: 196608
+Exiting
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+
+==18821==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x6a6bb0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cpython3_libfuzzer_msan/custom/fuzz_builtin_float+0x6a6bb0)
+    #1 0x6d76cf  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cpython3_libfuzzer_msan/custom/fuzz_builtin_float+0x6d76cf)
+    #2 0x137d139  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cpython3_libfuzzer_msan/custom/fuzz_builtin_float+0x137d139)
+    #3 0x137b363  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cpython3_libfuzzer_msan/custom/fuzz_builtin_float+0x137b363)
+    #4 0xb3915a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cpython3_libfuzzer_msan/custom/fuzz_builtin_float+0xb3915a)
+    #5 0xb1af84  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cpython3_libfuzzer_msan/custom/fuzz_builtin_float+0xb1af84)
+    #6 0x5b22d2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cpython3_libfuzzer_msan/custom/fuzz_builtin_float+0x5b22d2)
+    #7 0x5b94f8  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cpython3_libfuzzer_msan/custom/fuzz_builtin_float+0x5b94f8)
+    #8 0x5b9e6b  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cpython3_libfuzzer_msan/custom/fuzz_builtin_float+0x5b9e6b)
+    #9 0xcf0910  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cpython3_libfuzzer_msan/custom/fuzz_builtin_float+0xcf0910)
+    #10 0x163bc26  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cpython3_libfuzzer_msan/custom/fuzz_builtin_float+0x163bc26)
+    #11 0x14ce6bb  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cpython3_libfuzzer_msan/custom/fuzz_builtin_float+0x14ce6bb)
+    #12 0x5adb8c  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cpython3_libfuzzer_msan/custom/fuzz_builtin_float+0x5adb8c)
+    #13 0x5b44c0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cpython3_libfuzzer_msan/custom/fuzz_builtin_float+0x5b44c0)
+    #14 0x5b3558  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cpython3_libfuzzer_msan/custom/fuzz_builtin_float+0x5b3558)
+    #15 0xceb025  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cpython3_libfuzzer_msan/custom/fuzz_builtin_float+0xceb025)
+    #16 0xcebc82  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cpython3_libfuzzer_msan/custom/fuzz_builtin_float+0xcebc82)
+    #17 0xb77240  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cpython3_libfuzzer_msan/custom/fuzz_builtin_float+0xb77240)
+    #18 0xb77e24  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cpython3_libfuzzer_msan/custom/fuzz_builtin_float+0xb77e24)
+    #19 0xab4ea7  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cpython3_libfuzzer_msan/custom/fuzz_builtin_float+0xab4ea7)
+    #20 0xa22104  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cpython3_libfuzzer_msan/custom/fuzz_builtin_float+0xa22104)
+    #21 0xdab104  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cpython3_libfuzzer_msan/custom/fuzz_builtin_float+0xdab104)
+    #22 0xd98346  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cpython3_libfuzzer_msan/custom/fuzz_builtin_float+0xd98346)
+    #23 0x54460a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cpython3_libfuzzer_msan/custom/fuzz_builtin_float+0x54460a)
+    #24 0x4611d7  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cpython3_libfuzzer_msan/custom/fuzz_builtin_float+0x4611d7)
+    #25 0x48c5a2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cpython3_libfuzzer_msan/custom/fuzz_builtin_float+0x48c5a2)
+    #26 0x7f1987b3c0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #27 0x43ae3d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cpython3_libfuzzer_msan/custom/fuzz_builtin_float+0x43ae3d)
+
+  Uninitialized value was created by a heap allocation
+    #0 0x4f0fcd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cpython3_libfuzzer_msan/custom/fuzz_builtin_float+0x4f0fcd)
+    #1 0x7b659b  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cpython3_libfuzzer_msan/custom/fuzz_builtin_float+0x7b659b)
+    #2 0x7bb258  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cpython3_libfuzzer_msan/custom/fuzz_builtin_float+0x7bb258)
+    #3 0x68ee07  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cpython3_libfuzzer_msan/custom/fuzz_builtin_float+0x68ee07)
+    #4 0x6e5e3f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cpython3_libfuzzer_msan/custom/fuzz_builtin_float+0x6e5e3f)
+    #5 0x14ca1c0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cpython3_libfuzzer_msan/custom/fuzz_builtin_float+0x14ca1c0)
+    #6 0x5b0cff  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cpython3_libfuzzer_msan/custom/fuzz_builtin_float+0x5b0cff)
+    #7 0xb3ec88  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cpython3_libfuzzer_msan/custom/fuzz_builtin_float+0xb3ec88)
+    #8 0xb1af84  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cpython3_libfuzzer_msan/custom/fuzz_builtin_float+0xb1af84)
+    #9 0x5b22d2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cpython3_libfuzzer_msan/custom/fuzz_builtin_float+0x5b22d2)
+    #10 0x5b94f8  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cpython3_libfuzzer_msan/custom/fuzz_builtin_float+0x5b94f8)
+    #11 0x5b9e6b  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cpython3_libfuzzer_msan/custom/fuzz_builtin_float+0x5b9e6b)
+    #12 0xcf0910  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cpython3_libfuzzer_msan/custom/fuzz_builtin_float+0xcf0910)
+    #13 0x163bc26  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cpython3_libfuzzer_msan/custom/fuzz_builtin_float+0x163bc26)
+    #14 0x14ce6bb  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cpython3_libfuzzer_msan/custom/fuzz_builtin_float+0x14ce6bb)
+    #15 0x5adb8c  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cpython3_libfuzzer_msan/custom/fuzz_builtin_float+0x5adb8c)
+    #16 0x5b44c0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cpython3_libfuzzer_msan/custom/fuzz_builtin_float+0x5b44c0)
+    #17 0x5b3558  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cpython3_libfuzzer_msan/custom/fuzz_builtin_float+0x5b3558)
+    #18 0xceb025  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cpython3_libfuzzer_msan/custom/fuzz_builtin_float+0xceb025)
+    #19 0xcebc82  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cpython3_libfuzzer_msan/custom/fuzz_builtin_float+0xcebc82)

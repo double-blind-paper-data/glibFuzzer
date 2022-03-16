@@ -1,0 +1,171 @@
+Testcase id: 95005
+Job: libvips_libfuzzer_asan
+Crash Type: Heap-buffer-overflow READ {*}
+isSecurity: True
+Crash state: jxl::ModularFrameDecoder::DecodeGroup
+jxl::FrameDecoder::ProcessACGroup
+jxl::ThreadPool::RunCallState<jxl::FrameDecoder::ProcessSections
+Poc: 95005.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_pngsave_buffer_fuzzer
+target: pngsave_buffer_fuzzer
+name: libFuzzer
+[Environment] ASAN_OPTIONS=exitcode=77
++----------------------------------------Release Build Stacktrace----------------------------------------+
+Command: /clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_libfuzzer_asan/custom/pngsave_buffer_fuzzer -rss_limit_mb=2560 -timeout=60 -runs=100 /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/bc4530b26dddee45f320a14b4e30f2218a3ec3f6285f0d5b7b0078d2429910f9
+Time ran: 0.07726836204528809
+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 1776401984
+INFO: Loaded 1 modules   (247064 inline 8-bit counters): 247064 [0x3f174d0, 0x3f539e8),
+INFO: Loaded 1 PC tables (247064 PCs): 247064 [0x3f539e8,0x4318b68),
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_libfuzzer_asan/custom/pngsave_buffer_fuzzer: Running 1 inputs 100 time(s) each.
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/bc4530b26dddee45f320a14b4e30f2218a3ec3f6285f0d5b7b0078d2429910f9
+=================================================================
+==4029==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x62b000006d80 at pc 0x00000052a657 bp 0x7fe209ef7490 sp 0x7fe209ef6c58
+READ of size 512 at 0x62b000006d80 thread T2
+    #0 0x52a656 in __asan_memcpy /src/llvm-project/compiler-rt/lib/asan/asan_interceptors_memintrinsics.cpp:22:3
+    #1 0x2dfcb17 in CopyImageTo&lt;int&gt; /src/libjxl/lib/jxl/image_ops.h:55:5
+    #2 0x2dfcb17 in jxl::ModularFrameDecoder::DecodeGroup(jxl::Rect const&amp;, jxl::BitReader*, int, int, jxl::ModularStreamId const&amp;, bool, jxl::PassesDecoderState*, jxl::ImageBundle*, bool) /src/libjxl/lib/jxl/dec_modular.cc:334:5
+    #3 0x2cb7a29 in jxl::FrameDecoder::ProcessACGroup(unsigned long, jxl::BitReader* restrict*, unsigned long, unsigned long, bool, bool) /src/libjxl/lib/jxl/dec_frame.cc:638:7
+    #4 0x2cc1134 in operator() /src/libjxl/lib/jxl/dec_frame.cc:790:16
+    #5 0x2cc1134 in jxl::ThreadPool::RunCallState&lt;jxl::FrameDecoder::ProcessSections(jxl::FrameDecoder::SectionInfo const*, unsigned long, jxl::FrameDecoder::SectionStatus*)::$_1, jxl::FrameDecoder::ProcessSections(jxl::FrameDecoder::SectionInfo const*, unsigned long, jxl::FrameDecoder::SectionStatus*)::$_2&gt;::CallDataFunc(void*, unsigned int, unsigned long) /src/libjxl/lib/jxl/base/data_parallel.h:88:14
+    #6 0x3215564 in RunRange /src/libjxl/lib/threads/thread_parallel_runner_internal.cc:139:7
+    #7 0x3215564 in jpegxl::ThreadParallelRunner::ThreadFunc(jpegxl::ThreadParallelRunner*, int) /src/libjxl/lib/threads/thread_parallel_runner_internal.cc:169:9
+    #8 0x32177a3 in __invoke&lt;void (*)(jpegxl::ThreadParallelRunner *, int), jpegxl::ThreadParallelRunner *, unsigned int&gt; /usr/local/include/c++/v1/type_traits:3662:23
+    #9 0x32177a3 in __thread_execute&lt;std::__1::unique_ptr&lt;std::__1::__thread_struct, std::__1::default_delete&lt;std::__1::__thread_struct&gt; &gt;, void (*)(jpegxl::ThreadParallelRunner *, int), jpegxl::ThreadParallelRunner *, unsigned int, 2UL, 3UL&gt; /usr/local/include/c++/v1/thread:280:5
+    #10 0x32177a3 in void* std::__1::__thread_proxy&lt;std::__1::tuple&lt;std::__1::unique_ptr&lt;std::__1::__thread_struct, std::__1::default_delete&lt;std::__1::__thread_struct&gt; &gt;, void (*)(jpegxl::ThreadParallelRunner*, int), jpegxl::ThreadParallelRunner*, unsigned int&gt; &gt;(void*) /usr/local/include/c++/v1/thread:291:5
+    #11 0x7fe20d8ae608 in start_thread
+    #12 0x7fe20d7a9292 in __clone
+
+0x62b000006d80 is located 0 bytes to the right of 27520-byte region [0x62b000000200,0x62b000006d80)
+allocated by thread T2 here:
+    #0 0x52b29d in malloc /src/llvm-project/compiler-rt/lib/asan/asan_malloc_linux.cpp:129:3
+    #1 0x2636186 in jxl::CacheAligned::Allocate(unsigned long, unsigned long) /src/libjxl/lib/jxl/base/cache_aligned.cc:87:21
+    #2 0x269c9f7 in Allocate /src/libjxl/lib/jxl/base/cache_aligned.h:43:12
+    #3 0x269c9f7 in AllocateArray /src/libjxl/lib/jxl/base/cache_aligned.h:61:29
+    #4 0x269c9f7 in jxl::PlaneBase::PlaneBase(unsigned long, unsigned long, unsigned long) /src/libjxl/lib/jxl/image.cc:93:14
+    #5 0x2ee2636 in Plane /src/libjxl/lib/jxl/image.h:149:9
+    #6 0x2ee2636 in shrink /src/libjxl/lib/jxl/modular/modular_image.h:60:28
+    #7 0x2ee2636 in jxl::MetaSqueeze(jxl::Image&amp;, std::__1::vector&lt;jxl::SqueezeParams, std::__1::allocator&lt;jxl::SqueezeParams&gt; &gt;*) /src/libjxl/lib/jxl/modular/transform/squeeze.cc:273:24
+    #8 0x272a7ed in jxl::Transform::MetaApply(jxl::Image&amp;) /src/libjxl/lib/jxl/modular/transform/transform.cc:65:14
+    #9 0x27189b7 in jxl::ModularDecode(jxl::BitReader*, jxl::Image&amp;, jxl::GroupHeader&amp;, unsigned long, jxl::ModularOptions*, std::__1::vector&lt;jxl::PropertyDecisionNode, std::__1::allocator&lt;jxl::PropertyDecisionNode&gt; &gt; const*, jxl::ANSCode const*, std::__1::vector&lt;unsigned char, std::__1::allocator&lt;unsigned char&gt; &gt; const*, bool) /src/libjxl/lib/jxl/modular/encoding/encoding.cc:395:5
+    #10 0x271a5fa in jxl::ModularGenericDecompress(jxl::BitReader*, jxl::Image&amp;, jxl::GroupHeader*, unsigned long, jxl::ModularOptions*, bool, std::__1::vector&lt;jxl::PropertyDecisionNode, std::__1::allocator&lt;jxl::PropertyDecisionNode&gt; &gt; const*, jxl::ANSCode const*, std::__1::vector&lt;unsigned char, std::__1::allocator&lt;unsigned char&gt; &gt; const*, bool) /src/libjxl/lib/jxl/modular/encoding/encoding.cc:506:21
+    #11 0x2dfc541 in jxl::ModularFrameDecoder::DecodeGroup(jxl::Rect const&amp;, jxl::BitReader*, int, int, jxl::ModularStreamId const&amp;, bool, jxl::PassesDecoderState*, jxl::ImageBundle*, bool) /src/libjxl/lib/jxl/dec_modular.cc:307:10
+    #12 0x2cb7a29 in jxl::FrameDecoder::ProcessACGroup(unsigned long, jxl::BitReader* restrict*, unsigned long, unsigned long, bool, bool) /src/libjxl/lib/jxl/dec_frame.cc:638:7
+    #13 0x2cc1134 in operator() /src/libjxl/lib/jxl/dec_frame.cc:790:16
+    #14 0x2cc1134 in jxl::ThreadPool::RunCallState&lt;jxl::FrameDecoder::ProcessSections(jxl::FrameDecoder::SectionInfo const*, unsigned long, jxl::FrameDecoder::SectionStatus*)::$_1, jxl::FrameDecoder::ProcessSections(jxl::FrameDecoder::SectionInfo const*, unsigned long, jxl::FrameDecoder::SectionStatus*)::$_2&gt;::CallDataFunc(void*, unsigned int, unsigned long) /src/libjxl/lib/jxl/base/data_parallel.h:88:14
+    #15 0x3215564 in RunRange /src/libjxl/lib/threads/thread_parallel_runner_internal.cc:139:7
+    #16 0x3215564 in jpegxl::ThreadParallelRunner::ThreadFunc(jpegxl::ThreadParallelRunner*, int) /src/libjxl/lib/threads/thread_parallel_runner_internal.cc:169:9
+    #17 0x32177a3 in __invoke&lt;void (*)(jpegxl::ThreadParallelRunner *, int), jpegxl::ThreadParallelRunner *, unsigned int&gt; /usr/local/include/c++/v1/type_traits:3662:23
+    #18 0x32177a3 in __thread_execute&lt;std::__1::unique_ptr&lt;std::__1::__thread_struct, std::__1::default_delete&lt;std::__1::__thread_struct&gt; &gt;, void (*)(jpegxl::ThreadParallelRunner *, int), jpegxl::ThreadParallelRunner *, unsigned int, 2UL, 3UL&gt; /usr/local/include/c++/v1/thread:280:5
+    #19 0x32177a3 in void* std::__1::__thread_proxy&lt;std::__1::tuple&lt;std::__1::unique_ptr&lt;std::__1::__thread_struct, std::__1::default_delete&lt;std::__1::__thread_struct&gt; &gt;, void (*)(jpegxl::ThreadParallelRunner*, int), jpegxl::ThreadParallelRunner*, unsigned int&gt; &gt;(void*) /usr/local/include/c++/v1/thread:291:5
+    #20 0x7fe20d8ae608 in start_thread
+
+Thread T2 created by T0 here:
+    #0 0x51499c in __interceptor_pthread_create /src/llvm-project/compiler-rt/lib/asan/asan_interceptors.cpp:207:3
+    #1 0x3215c9d in __libcpp_thread_create /usr/local/include/c++/v1/__threading_support:514:10
+    #2 0x3215c9d in thread&lt;void (&amp;)(jpegxl::ThreadParallelRunner *, int), jpegxl::ThreadParallelRunner *, unsigned int &amp;, void&gt; /usr/local/include/c++/v1/thread:307:16
+    #3 0x3215c9d in construct&lt;std::__1::thread, void (&amp;)(jpegxl::ThreadParallelRunner *, int), jpegxl::ThreadParallelRunner *, unsigned int &amp;&gt; /usr/local/include/c++/v1/__memory/allocator.h:151:28
+    #4 0x3215c9d in construct&lt;std::__1::thread, void (&amp;)(jpegxl::ThreadParallelRunner *, int), jpegxl::ThreadParallelRunner *, unsigned int &amp;, void&gt; /usr/local/include/c++/v1/__memory/allocator_traits.h:290:13
+    #5 0x3215c9d in __construct_one_at_end&lt;void (&amp;)(jpegxl::ThreadParallelRunner *, int), jpegxl::ThreadParallelRunner *, unsigned int &amp;&gt; /usr/local/include/c++/v1/vector:933:5
+    #6 0x3215c9d in emplace_back&lt;void (&amp;)(jpegxl::ThreadParallelRunner *, int), jpegxl::ThreadParallelRunner *, unsigned int &amp;&gt; /usr/local/include/c++/v1/vector:1693:9
+    #7 0x3215c9d in jpegxl::ThreadParallelRunner::ThreadParallelRunner(int) /src/libjxl/lib/threads/thread_parallel_runner_internal.cc:196:14
+    #8 0x32143b8 in JxlThreadParallelRunnerCreate /src/libjxl/lib/threads/thread_parallel_runner.cc:81:19
+    #9 0x7b8337 in vips_foreign_load_jxl_build /src/libvips/libvips/foreign/jxlload.c:158:16
+    #10 0x7ba88b in vips_foreign_load_jxl_buffer_build /src/libvips/libvips/foreign/jxlload.c:828:6
+    #11 0x58423e in vips_object_build /src/libvips/libvips/iofuncs/object.c:367:6
+    #12 0x869f08 in vips_cache_operation_buildp /src/libvips/libvips/iofuncs/cache.c:910:7
+    #13 0x593e97 in vips_call_required_optional /src/libvips/libvips/iofuncs/operation.c:880:6
+    #14 0x596bd9 in vips_call_by_name /src/libvips/libvips/iofuncs/operation.c:920:11
+    #15 0x596f94 in vips_call_split_option_string /src/libvips/libvips/iofuncs/operation.c:1039:11
+    #16 0x577101 in vips_image_new_from_buffer /src/libvips/libvips/iofuncs/image.c:2158:11
+    #17 0x56464e in LLVMFuzzerTestOneInput /src/libvips/fuzz/pngsave_buffer_fuzzer.cc:20:16
+    #18 0x45c0d3 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #19 0x4479e2 in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:324:6
+    #20 0x44d4aa in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #21 0x4763d2 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #22 0x7fe20d6ae0b2 in __libc_start_main
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_libfuzzer_asan/custom/pngsave_buffer_fuzzer+0x52a656)
+Shadow bytes around the buggy address:
+  0x0c567fff8d60: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c567fff8d70: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c567fff8d80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c567fff8d90: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c567fff8da0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=&gt;0x0c567fff8db0:[fa]fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c567fff8dc0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c567fff8dd0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c567fff8de0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c567fff8df0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c567fff8e00: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==4029==ABORTING
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+==4029==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x62b000006d80 at pc 0x00000052a657 bp 0x7fe209ef7490 sp 0x7fe209ef6c58
+READ of size 512 at 0x62b000006d80 thread T2
+    #0 0x52a656  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_libfuzzer_asan/custom/pngsave_buffer_fuzzer+0x52a656)
+    #1 0x2dfcb17  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_libfuzzer_asan/custom/pngsave_buffer_fuzzer+0x2dfcb17)
+    #2 0x2cb7a29  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_libfuzzer_asan/custom/pngsave_buffer_fuzzer+0x2cb7a29)
+    #3 0x2cc1134  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_libfuzzer_asan/custom/pngsave_buffer_fuzzer+0x2cc1134)
+    #4 0x3215564  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_libfuzzer_asan/custom/pngsave_buffer_fuzzer+0x3215564)
+    #5 0x32177a3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_libfuzzer_asan/custom/pngsave_buffer_fuzzer+0x32177a3)
+    #6 0x7fe20d8ae608  (/lib/x86_64-linux-gnu/libpthread.so.0+0x9608)
+    #7 0x7fe20d7a9292  (/lib/x86_64-linux-gnu/libc.so.6+0x122292)
+
+0x62b000006d80 is located 0 bytes to the right of 27520-byte region [0x62b000000200,0x62b000006d80)
+allocated by thread T2 here:
+    #0 0x52b29d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_libfuzzer_asan/custom/pngsave_buffer_fuzzer+0x52b29d)
+    #1 0x2636186  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_libfuzzer_asan/custom/pngsave_buffer_fuzzer+0x2636186)
+    #2 0x269c9f7  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_libfuzzer_asan/custom/pngsave_buffer_fuzzer+0x269c9f7)
+    #3 0x2ee2636  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_libfuzzer_asan/custom/pngsave_buffer_fuzzer+0x2ee2636)
+    #4 0x272a7ed  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_libfuzzer_asan/custom/pngsave_buffer_fuzzer+0x272a7ed)
+    #5 0x27189b7  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_libfuzzer_asan/custom/pngsave_buffer_fuzzer+0x27189b7)
+    #6 0x271a5fa  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_libfuzzer_asan/custom/pngsave_buffer_fuzzer+0x271a5fa)
+    #7 0x2dfc541  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_libfuzzer_asan/custom/pngsave_buffer_fuzzer+0x2dfc541)
+    #8 0x2cb7a29  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_libfuzzer_asan/custom/pngsave_buffer_fuzzer+0x2cb7a29)
+    #9 0x2cc1134  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_libfuzzer_asan/custom/pngsave_buffer_fuzzer+0x2cc1134)
+    #10 0x3215564  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_libfuzzer_asan/custom/pngsave_buffer_fuzzer+0x3215564)
+    #11 0x32177a3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_libfuzzer_asan/custom/pngsave_buffer_fuzzer+0x32177a3)
+    #12 0x7fe20d8ae608  (/lib/x86_64-linux-gnu/libpthread.so.0+0x9608)
+
+Thread T2 created by T0 here:
+    #0 0x51499c  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_libfuzzer_asan/custom/pngsave_buffer_fuzzer+0x51499c)
+    #1 0x3215c9d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_libfuzzer_asan/custom/pngsave_buffer_fuzzer+0x3215c9d)
+    #2 0x32143b8  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_libfuzzer_asan/custom/pngsave_buffer_fuzzer+0x32143b8)
+    #3 0x7b8337  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_libfuzzer_asan/custom/pngsave_buffer_fuzzer+0x7b8337)
+    #4 0x7ba88b  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_libfuzzer_asan/custom/pngsave_buffer_fuzzer+0x7ba88b)
+    #5 0x58423e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_libfuzzer_asan/custom/pngsave_buffer_fuzzer+0x58423e)
+    #6 0x869f08  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_libfuzzer_asan/custom/pngsave_buffer_fuzzer+0x869f08)
+    #7 0x593e97  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_libfuzzer_asan/custom/pngsave_buffer_fuzzer+0x593e97)
+    #8 0x596bd9  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_libfuzzer_asan/custom/pngsave_buffer_fuzzer+0x596bd9)
+    #9 0x596f94  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_libfuzzer_asan/custom/pngsave_buffer_fuzzer+0x596f94)
+    #10 0x577101  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_libfuzzer_asan/custom/pngsave_buffer_fuzzer+0x577101)
+    #11 0x56464e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_libfuzzer_asan/custom/pngsave_buffer_fuzzer+0x56464e)
+    #12 0x45c0d3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_libfuzzer_asan/custom/pngsave_buffer_fuzzer+0x45c0d3)
+    #13 0x4479e2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_libfuzzer_asan/custom/pngsave_buffer_fuzzer+0x4479e2)
+    #14 0x44d4aa  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_libfuzzer_asan/custom/pngsave_buffer_fuzzer+0x44d4aa)
+    #15 0x4763d2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_libfuzzer_asan/custom/pngsave_buffer_fuzzer+0x4763d2)
+    #16 0x7fe20d6ae0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)

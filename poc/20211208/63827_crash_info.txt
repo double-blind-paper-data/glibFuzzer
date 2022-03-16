@@ -1,0 +1,118 @@
+Testcase id: 63827
+Job: igraph_libfuzzer_msan
+Crash Type: Timeout
+isSecurity: False
+Crash state: read_gml_fuzzer
+Poc: 63827.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_read_gml_fuzzer
+target: read_gml_fuzzer
+name: libFuzzer
+[Environment] MSAN_OPTIONS=allocator_release_to_os_interval_ms=500:exitcode=77:halt_on_error=1:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:print_stats=1:print_summary=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 1849189810
+INFO: Loaded 1 modules   (8045 inline 8-bit counters): 8045 [0x70a940, 0x70c8ad),
+INFO: Loaded 1 PC tables (8045 PCs): 8045 [0x69f7f0,0x6beec0),
+INFO:        0 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases-disk/temp-20/new
+INFO:     4197 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/data-bundles/read_gml_fuzzer
+INFO: -max_len is not provided; libFuzzer will not generate inputs larger than 986934 bytes
+INFO: seed corpus: files: 4197 min: 1b max: 986934b total: 266763507b rss: 70Mb
+Slowest unit: 11 s:
+artifact_prefix=&#x27;/clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/&#x27;; Test unit written to /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/slow-unit-923bd055b5ed554792f0adfe6cdc7f0b0fd3dca3
+Slowest unit: 14 s:
+artifact_prefix=&#x27;/clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/&#x27;; Test unit written to /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/slow-unit-75fa4bd5fdeb40a91c21cf976e7ad198528607ba
+#4096	pulse  cov: 544 ft: 2853 corp: 692/20Mb exec/s: 30 rss: 172Mb
+#4198	INITED cov: 544 ft: 2859 corp: 698/25Mb exec/s: 27 rss: 193Mb
+#5685	REDUCE cov: 544 ft: 2859 corp: 698/25Mb lim: 982039 exec/s: 35 rss: 193Mb L: 229/982020 MS: 2 ChangeBinInt-EraseBytes-
+#5686	REDUCE cov: 544 ft: 2859 corp: 698/25Mb lim: 982039 exec/s: 35 rss: 193Mb L: 2930/982020 MS: 1 EraseBytes-
+#6397	REDUCE cov: 544 ft: 2859 corp: 698/25Mb lim: 982039 exec/s: 39 rss: 193Mb L: 922/982020 MS: 1 EraseBytes-
+#7058	REDUCE cov: 544 ft: 2859 corp: 698/25Mb lim: 982039 exec/s: 43 rss: 193Mb L: 352352/982020 MS: 1 EraseBytes-
+#7765	REDUCE cov: 544 ft: 2859 corp: 698/25Mb lim: 982039 exec/s: 44 rss: 193Mb L: 2161/982020 MS: 2 ChangeBit-EraseBytes-
+#8192	pulse  cov: 544 ft: 2859 corp: 698/25Mb lim: 982039 exec/s: 46 rss: 193Mb
+#9991	REDUCE cov: 544 ft: 2859 corp: 698/25Mb lim: 982058 exec/s: 50 rss: 193Mb L: 766/982020 MS: 1 EraseBytes-
+#10227	REDUCE cov: 544 ft: 2859 corp: 698/25Mb lim: 982058 exec/s: 48 rss: 193Mb L: 68/982020 MS: 1 EraseBytes-
+#11723	REDUCE cov: 544 ft: 2859 corp: 698/25Mb lim: 982058 exec/s: 41 rss: 193Mb L: 96/982020 MS: 1 EraseBytes-
+#11739	REDUCE cov: 544 ft: 2859 corp: 698/25Mb lim: 982058 exec/s: 41 rss: 193Mb L: 306628/982020 MS: 1 EraseBytes-
+#12515	REDUCE cov: 544 ft: 2859 corp: 698/25Mb lim: 982058 exec/s: 43 rss: 193Mb L: 30872/982020 MS: 1 EraseBytes-
+Slowest unit: 18 s:
+artifact_prefix=&#x27;/clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/&#x27;; Test unit written to /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/slow-unit-be419b6698a2fc6bb6c468dfae01b4b424f89c8e
+#14401	REDUCE cov: 544 ft: 2859 corp: 698/25Mb lim: 982058 exec/s: 43 rss: 193Mb L: 327/982020 MS: 1 EraseBytes-
+#14599	REDUCE cov: 544 ft: 2859 corp: 698/25Mb lim: 982058 exec/s: 43 rss: 193Mb L: 192557/982020 MS: 3 InsertRepeatedBytes-ChangeBinInt-EraseBytes-
+#14930	REDUCE cov: 544 ft: 2859 corp: 698/25Mb lim: 982058 exec/s: 44 rss: 193Mb L: 512693/982020 MS: 1 EraseBytes-
+#15696	REDUCE cov: 544 ft: 2859 corp: 698/25Mb lim: 982058 exec/s: 46 rss: 199Mb L: 27/982020 MS: 1 EraseBytes-
+#16384	pulse  cov: 544 ft: 2859 corp: 698/25Mb lim: 982058 exec/s: 48 rss: 199Mb
+#16758	REDUCE cov: 544 ft: 2859 corp: 698/25Mb lim: 982058 exec/s: 47 rss: 199Mb L: 77398/982020 MS: 2 ChangeASCIIInt-EraseBytes-
+#16870	REDUCE cov: 544 ft: 2859 corp: 698/25Mb lim: 982058 exec/s: 47 rss: 199Mb L: 919497/982020 MS: 2 CMP-CrossOver- DE: &quot;\001\000\000\000\000\000\000\000&quot;-
+#20468	REDUCE cov: 544 ft: 2859 corp: 698/25Mb lim: 982077 exec/s: 45 rss: 199Mb L: 19/982020 MS: 3 ChangeByte-ChangeByte-EraseBytes-
+#21284	REDUCE cov: 544 ft: 2859 corp: 698/25Mb lim: 982077 exec/s: 45 rss: 199Mb L: 2280/982020 MS: 1 EraseBytes-
+#21873	REDUCE cov: 544 ft: 2859 corp: 698/25Mb lim: 982077 exec/s: 46 rss: 199Mb L: 43153/982020 MS: 4 ShuffleBytes-CMP-ChangeByte-EraseBytes- DE: &quot;\000\000&quot;-
+#22295	REDUCE cov: 544 ft: 2859 corp: 698/25Mb lim: 982077 exec/s: 47 rss: 199Mb L: 35/982020 MS: 2 ChangeBinInt-EraseBytes-
+#22446	REDUCE cov: 544 ft: 2859 corp: 698/25Mb lim: 982077 exec/s: 47 rss: 199Mb L: 555/982020 MS: 1 EraseBytes-
+#22532	REDUCE cov: 544 ft: 2859 corp: 698/25Mb lim: 982077 exec/s: 45 rss: 199Mb L: 178/982020 MS: 1 EraseBytes-
+#23670	REDUCE cov: 544 ft: 2859 corp: 698/25Mb lim: 982077 exec/s: 47 rss: 199Mb L: 31/982020 MS: 3 EraseBytes-ShuffleBytes-CopyPart-
+#25531	REDUCE cov: 544 ft: 2859 corp: 698/25Mb lim: 982077 exec/s: 49 rss: 199Mb L: 75/982020 MS: 1 EraseBytes-
+#26297	REDUCE cov: 544 ft: 2859 corp: 698/25Mb lim: 982077 exec/s: 47 rss: 199Mb L: 153/982020 MS: 1 EraseBytes-
+#26518	REDUCE cov: 544 ft: 2859 corp: 698/25Mb lim: 982077 exec/s: 47 rss: 199Mb L: 240505/982020 MS: 1 EraseBytes-
+#27921	REDUCE cov: 544 ft: 2859 corp: 698/25Mb lim: 982077 exec/s: 48 rss: 199Mb L: 1039/982020 MS: 3 EraseBytes-ChangeByte-InsertRepeatedBytes-
+#29817	REDUCE cov: 544 ft: 2859 corp: 698/25Mb lim: 982077 exec/s: 49 rss: 199Mb L: 427/982020 MS: 1 EraseBytes-
+#30406	REDUCE cov: 544 ft: 2859 corp: 698/25Mb lim: 982077 exec/s: 47 rss: 199Mb L: 451141/982020 MS: 4 ChangeASCIIInt-ChangeASCIIInt-CopyPart-EraseBytes-
+#31196	REDUCE cov: 544 ft: 2859 corp: 698/25Mb lim: 982077 exec/s: 44 rss: 199Mb L: 33948/982020 MS: 5 ShuffleBytes-ChangeBit-ShuffleBytes-PersAutoDict-EraseBytes- DE: &quot;\001\000\000\000\000\000\000\000&quot;-
+#31842	REDUCE cov: 544 ft: 2859 corp: 698/25Mb lim: 982077 exec/s: 45 rss: 199Mb L: 90/982020 MS: 1 EraseBytes-
+#32133	REDUCE cov: 544 ft: 2859 corp: 698/25Mb lim: 982077 exec/s: 45 rss: 199Mb L: 163818/982020 MS: 1 EraseBytes-
+#32327	REDUCE cov: 544 ft: 2859 corp: 698/25Mb lim: 982077 exec/s: 45 rss: 199Mb L: 245/982020 MS: 4 InsertByte-CrossOver-ChangeBinInt-EraseBytes-
+#32768	pulse  cov: 544 ft: 2859 corp: 698/25Mb lim: 982077 exec/s: 46 rss: 199Mb
+#33094	REDUCE cov: 544 ft: 2859 corp: 698/25Mb lim: 982077 exec/s: 45 rss: 199Mb L: 107/982020 MS: 2 ShuffleBytes-EraseBytes-
+ALARM: working on the last Unit for 27 seconds
+       and the timeout value is 25 (use -timeout=N to change)
+MS: 3 PersAutoDict-ChangeBinInt-CopyPart- DE: &quot;\000\000&quot;-; base unit: 923bd055b5ed554792f0adfe6cdc7f0b0fd3dca3
+artifact_prefix=&#x27;/clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/&#x27;; Test unit written to /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/timeout-118e0cf41711f4ca81eb5fdfdc527cefd6a43a80
+==184841== ERROR: libFuzzer: timeout after 27 seconds
+    #0 0x4cafa9 in __sanitizer_print_stack_trace /src/llvm-project/compiler-rt/lib/msan/msan.cpp:733:3
+    #1 0x470548 in fuzzer::PrintStackTrace() cxa_noexception.cpp:0
+    #2 0x4553d9 in fuzzer::Fuzzer::AlarmCallback() cxa_noexception.cpp:0
+    #3 0x519ae4 in SignalAction(int, void*, void*) /src/llvm-project/compiler-rt/lib/msan/msan_interceptors.cpp:1018:3
+    #4 0x7f7a9b1d63bf in libpthread.so.0
+    #5 0x57439d in yy_get_previous_state /src/igraph/build/src/io/parsers/gml-lexer.c:1429:8
+    #6 0x57439d in igraph_gml_yylex /src/igraph/build/src/io/parsers/gml-lexer.c:1179:23
+    #7 0x569dd2 in igraph_gml_yyparse /src/igraph/build/src/io/parsers/gml-parser.c:1432:16
+    #8 0x55bdd2 in igraph_read_graph_gml /src/igraph/src/io/gml.c:211:9
+    #9 0x528e23 in LLVMFuzzerTestOneInput /src/igraph/fuzzing/read_gml_fuzzer.c:51:9
+    #10 0x456a03 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #11 0x4561ea in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*, bool, bool*) cxa_noexception.cpp:0
+    #12 0x457a8b in fuzzer::Fuzzer::MutateAndTestOne() cxa_noexception.cpp:0
+    #13 0x458575 in fuzzer::Fuzzer::Loop(std::__Fuzzer::vector&lt;fuzzer::SizedFile, std::__Fuzzer::allocator&lt;fuzzer::SizedFile&gt; &gt;&amp;) cxa_noexception.cpp:0
+    #14 0x447cbd in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #15 0x470d02 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #16 0x7f7a9afca0b2 in __libc_start_main
+    #17 0x41f59d in _start
+
+SUMMARY: libFuzzer: timeout
+stat::number_of_executed_units: 33782
+stat::average_exec_per_sec:     43
+stat::new_units_added:          34
+stat::slowest_unit_time_sec:    18
+stat::peak_rss_mb:              199
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+artifact_prefix=&#x27;/clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/&#x27;; Test unit written to /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/timeout-118e0cf41711f4ca81eb5fdfdc527cefd6a43a80
+==184841== ERROR: libFuzzer: timeout after 27 seconds
+    #0 0x4cafa9  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/igraph_libfuzzer_msan/custom/read_gml_fuzzer+0x4cafa9)
+    #1 0x470548  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/igraph_libfuzzer_msan/custom/read_gml_fuzzer+0x470548)
+    #2 0x4553d9  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/igraph_libfuzzer_msan/custom/read_gml_fuzzer+0x4553d9)
+    #3 0x519ae4  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/igraph_libfuzzer_msan/custom/read_gml_fuzzer+0x519ae4)
+    #4 0x7f7a9b1d63bf  (/lib/x86_64-linux-gnu/libpthread.so.0+0x153bf)
+    #5 0x57439d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/igraph_libfuzzer_msan/custom/read_gml_fuzzer+0x57439d)
+    #6 0x569dd2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/igraph_libfuzzer_msan/custom/read_gml_fuzzer+0x569dd2)
+    #7 0x55bdd2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/igraph_libfuzzer_msan/custom/read_gml_fuzzer+0x55bdd2)
+    #8 0x528e23  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/igraph_libfuzzer_msan/custom/read_gml_fuzzer+0x528e23)
+    #9 0x456a03  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/igraph_libfuzzer_msan/custom/read_gml_fuzzer+0x456a03)
+    #10 0x4561ea  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/igraph_libfuzzer_msan/custom/read_gml_fuzzer+0x4561ea)
+    #11 0x457a8b  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/igraph_libfuzzer_msan/custom/read_gml_fuzzer+0x457a8b)
+    #12 0x458575  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/igraph_libfuzzer_msan/custom/read_gml_fuzzer+0x458575)
+    #13 0x447cbd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/igraph_libfuzzer_msan/custom/read_gml_fuzzer+0x447cbd)
+    #14 0x470d02  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/igraph_libfuzzer_msan/custom/read_gml_fuzzer+0x470d02)
+    #15 0x7f7a9afca0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #16 0x41f59d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/igraph_libfuzzer_msan/custom/read_gml_fuzzer+0x41f59d)

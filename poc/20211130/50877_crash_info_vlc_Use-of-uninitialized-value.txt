@@ -1,0 +1,67 @@
+Testcase id: 50877
+Job: vlc_honggfuzz_msan
+Crash Type: Use-of-uninitialized-value
+isSecurity: True
+Crash state: vlc_getopt_long
+config_LoadCmdLine
+libvlc_InternalInit
+Poc: 50877.testcase
+engine: honggfuzz
+fully_qualified_name: honggfuzz_vlc-demux-dec-libfuzzer
+target: vlc-demux-dec-libfuzzer
+name: honggfuzz
+[Environment] MSAN_OPTIONS=allocator_release_to_os_interval_ms=500:halt_on_error=1:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:print_stats=1:print_summary=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+==84805==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0xb1996c in vlc_getopt_long /src/vlc/src/config/getopt.c:258:9
+    #1 0xb124f3 in config_LoadCmdLine /src/vlc/src/config/cmdline.c:186:22
+    #2 0xafb1bb in libvlc_InternalInit /src/vlc/src/libvlc.c:149:9
+    #3 0x4b1122 in libvlc_new /src/vlc/lib/core.c:56:9
+    #4 0x4af411 in libvlc_create /src/vlc/test/src/input/common.c:70:30
+    #5 0x4a0ab9 in LLVMFuzzerInitialize /src/vlc/test/vlc-demux-libfuzzer.c:47:11
+    #6 0x4a1095 in main
+    #7 0x7ffff7a770b2 in __libc_start_main
+    #8 0x41e9fd in _start
+
+  Uninitialized value was stored to memory at
+    #0 0xb12150 in config_LoadCmdLine /src/vlc/src/config/cmdline.c:144:42
+    #1 0xafb1bb in libvlc_InternalInit /src/vlc/src/libvlc.c:149:9
+    #2 0x4b1122 in libvlc_new /src/vlc/lib/core.c:56:9
+    #3 0x4af411 in libvlc_create /src/vlc/test/src/input/common.c:70:30
+    #4 0x4a0ab9 in LLVMFuzzerInitialize /src/vlc/test/vlc-demux-libfuzzer.c:47:11
+    #5 0x4a1095 in main
+
+  Uninitialized value was created by an allocation of &#x27;psz_name76&#x27; in the stack frame of function &#x27;config_LoadCmdLine&#x27;
+    #0 0xb10e90 in config_LoadCmdLine /src/vlc/src/config/cmdline.c:59
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_honggfuzz_msan/custom/vlc-demux-dec-libfuzzer+0xb1996c)
+Unique heap origins: 133
+Stack depot allocated bytes: 1900544
+Unique origin histories: 17
+History depot allocated bytes: 196608
+Exiting
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+==84805==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0xb1996c  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_honggfuzz_msan/custom/vlc-demux-dec-libfuzzer+0xb1996c)
+    #1 0xb124f3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_honggfuzz_msan/custom/vlc-demux-dec-libfuzzer+0xb124f3)
+    #2 0xafb1bb  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_honggfuzz_msan/custom/vlc-demux-dec-libfuzzer+0xafb1bb)
+    #3 0x4b1122  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_honggfuzz_msan/custom/vlc-demux-dec-libfuzzer+0x4b1122)
+    #4 0x4af411  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_honggfuzz_msan/custom/vlc-demux-dec-libfuzzer+0x4af411)
+    #5 0x4a0ab9  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_honggfuzz_msan/custom/vlc-demux-dec-libfuzzer+0x4a0ab9)
+    #6 0x4a1095  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_honggfuzz_msan/custom/vlc-demux-dec-libfuzzer+0x4a1095)
+    #7 0x7ffff7a770b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #8 0x41e9fd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_honggfuzz_msan/custom/vlc-demux-dec-libfuzzer+0x41e9fd)
+
+  Uninitialized value was stored to memory at
+    #0 0xb12150  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_honggfuzz_msan/custom/vlc-demux-dec-libfuzzer+0xb12150)
+    #1 0xafb1bb  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_honggfuzz_msan/custom/vlc-demux-dec-libfuzzer+0xafb1bb)
+    #2 0x4b1122  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_honggfuzz_msan/custom/vlc-demux-dec-libfuzzer+0x4b1122)
+    #3 0x4af411  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_honggfuzz_msan/custom/vlc-demux-dec-libfuzzer+0x4af411)
+    #4 0x4a0ab9  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_honggfuzz_msan/custom/vlc-demux-dec-libfuzzer+0x4a0ab9)
+    #5 0x4a1095  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_honggfuzz_msan/custom/vlc-demux-dec-libfuzzer+0x4a1095)
+
+  Uninitialized value was created by an allocation of &#x27;psz_name76&#x27; in the stack frame of function &#x27;config_LoadCmdLine&#x27;
+    #0 0xb10e90  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_honggfuzz_msan/custom/vlc-demux-dec-libfuzzer+0xb10e90)

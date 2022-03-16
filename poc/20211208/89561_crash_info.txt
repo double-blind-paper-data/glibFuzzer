@@ -1,0 +1,57 @@
+Testcase id: 89561
+Job: libsass_libfuzzer_asan
+Crash Type: Direct-leak
+isSecurity: False
+Crash state: data_context_fuzzer.cc
+Poc: 89561.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_data_context_fuzzer
+target: data_context_fuzzer
+name: libFuzzer
+[Environment] ASAN_OPTIONS=exitcode=77
++----------------------------------------Release Build Stacktrace----------------------------------------+
+Command: /clusterfuzz/run_bot/clusterfuzz/bot/builds/libsass_libfuzzer_asan/custom/data_context_fuzzer -rss_limit_mb=2560 -timeout=60 -runs=100 /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/22184ab8609f96f60afe354a36f0c70ecefda9a9ceba22af82f1f7b36a2e5d0a
+Time ran: 0.022138595581054688
+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 356019304
+INFO: Loaded 1 modules   (88393 inline 8-bit counters): 88393 [0xe26498, 0xe3bde1),
+INFO: Loaded 1 PC tables (88393 PCs): 88393 [0xe3bde8,0xf95278),
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/libsass_libfuzzer_asan/custom/data_context_fuzzer: Running 1 inputs 100 time(s) each.
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/22184ab8609f96f60afe354a36f0c70ecefda9a9ceba22af82f1f7b36a2e5d0a
+
+=================================================================
+==126927==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 2 byte(s) in 1 object(s) allocated from:
+<b>    #0 0x561ead in __interceptor_malloc /src/llvm-project/compiler-rt/lib/asan/asan_malloc_linux.cpp:129:3</b>
+<b>    #1 0x59b170 in LLVMFuzzerTestOneInput /src/data_context_fuzzer.cc:4:29</b>
+<b>    #2 0x492ce3 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0</b>
+<b>    #3 0x47e5f2 in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:324:6</b>
+<b>    #4 0x4840ba in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0</b>
+<b>    #5 0x4acfe2 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10</b>
+<b>    #6 0x7ffa77db00b2 in __libc_start_main</b>
+
+================================================================================
+The following leaks are not necessarily related to the first leak.
+
+
+SUMMARY: AddressSanitizer: 2 byte(s) leaked in 1 allocation(s).
+
+INFO: a leak has been found in the initial corpus.
+
+INFO: to ignore leaks on libFuzzer side use -detect_leaks=0.
+
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+
+Direct leak of 2 byte(s) in 1 object(s) allocated from:
+    #0 0x561ead  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libsass_libfuzzer_asan/custom/data_context_fuzzer+0x561ead)
+    #1 0x59b170  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libsass_libfuzzer_asan/custom/data_context_fuzzer+0x59b170)
+    #2 0x492ce3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libsass_libfuzzer_asan/custom/data_context_fuzzer+0x492ce3)
+    #3 0x47e5f2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libsass_libfuzzer_asan/custom/data_context_fuzzer+0x47e5f2)
+    #4 0x4840ba  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libsass_libfuzzer_asan/custom/data_context_fuzzer+0x4840ba)
+    #5 0x4acfe2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libsass_libfuzzer_asan/custom/data_context_fuzzer+0x4acfe2)
+    #6 0x7ffa77db00b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)

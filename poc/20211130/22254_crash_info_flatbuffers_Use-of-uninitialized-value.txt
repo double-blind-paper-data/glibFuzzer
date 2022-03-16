@@ -1,0 +1,36 @@
+Testcase id: 22254
+Job: flatbuffers_honggfuzz_msan
+Crash Type: Use-of-uninitialized-value
+isSecurity: True
+Crash state: verifier.h
+Poc: 22254.testcase
+engine: honggfuzz
+fully_qualified_name: honggfuzz_verifier_fuzzer
+target: verifier_fuzzer
+name: honggfuzz
+[Environment] MSAN_OPTIONS=allocator_release_to_os_interval_ms=500:halt_on_error=1:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:print_stats=1:print_summary=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+==38485==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x2d6b66 in flatbuffers::Verifier::Verifier(unsigned char const*, unsigned long, unsigned int, unsigned int, bool) /src/flatbuffers/include/flatbuffers/verifier.h:39:5
+    #1 0x2d6b66 in LLVMFuzzerTestOneInput /src/flatbuffers/tests/fuzzer/flatbuffers_verifier_fuzzer.cc:11:25
+    #2 0x2ec42e in main
+    #3 0x7ffff7c5b0b2 in __libc_start_main
+    #4 0x25239d in _start
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/flatbuffers_honggfuzz_msan/custom/verifier_fuzzer+0x2d6b66)
+  ORIGIN: invalid (0). Might be a bug in MemorySanitizer origin tracking.
+    This could still be a bug in your code, too!
+Unique heap origins: 21
+Stack depot allocated bytes: 1900544
+Unique origin histories: 13
+History depot allocated bytes: 196608
+Exiting
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+==38485==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x2d6b66  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/flatbuffers_honggfuzz_msan/custom/verifier_fuzzer+0x2d6b66)
+    #1 0x2ec42e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/flatbuffers_honggfuzz_msan/custom/verifier_fuzzer+0x2ec42e)
+    #2 0x7ffff7c5b0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #3 0x25239d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/flatbuffers_honggfuzz_msan/custom/verifier_fuzzer+0x25239d)

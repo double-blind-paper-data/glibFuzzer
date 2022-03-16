@@ -1,0 +1,68 @@
+Testcase id: 142749
+Job: draco_libfuzzer_ubsan
+Crash Type: Invalid-enum-value
+isSecurity: False
+Crash state: draco::SequentialIntegerAttributeDecoder::CreateIntPredictionScheme
+draco::SequentialIntegerAttributeDecoder::DecodeValues
+draco::SequentialAttributeDecoder::DecodePortableAttribute
+Poc: 142749.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_draco_mesh_decoder_without_dequantization_fuzzer
+target: draco_mesh_decoder_without_dequantization_fuzzer
+name: libFuzzer
+[Environment] UBSAN_OPTIONS=exitcode=77:print_stacktrace=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+Command: /clusterfuzz/run_bot/clusterfuzz/bot/builds/draco_libfuzzer_ubsan/custom/draco_mesh_decoder_without_dequantization_fuzzer -rss_limit_mb=2560 -timeout=60 -runs=100 /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/crash-1c7da946e255afe76938da91d5427e23b28fdf50
+Time ran: 0.0180814266204834
+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 3514687704
+INFO: Loaded 1 modules   (28169 inline 8-bit counters): 28169 [0x7a7650, 0x7ae459),
+INFO: Loaded 1 PC tables (28169 PCs): 28169 [0x688ac0,0x6f6b50),
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/draco_libfuzzer_ubsan/custom/draco_mesh_decoder_without_dequantization_fuzzer: Running 1 inputs 100 time(s) each.
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/crash-1c7da946e255afe76938da91d5427e23b28fdf50
+/src/draco/src/draco/compression/attributes/sequential_integer_attribute_decoder.cc:98:7: runtime error: load of value -122, which is not a valid value for type &#x27;draco::PredictionSchemeMethod&#x27;
+    #0 0x584592 in draco::SequentialIntegerAttributeDecoder::CreateIntPredictionScheme(draco::PredictionSchemeMethod, draco::PredictionSchemeTransformType) /src/draco/src/draco/compression/attributes/sequential_integer_attribute_decoder.cc:98:7
+    #1 0x583bbd in draco::SequentialIntegerAttributeDecoder::DecodeValues(std::__1::vector&lt;draco::IndexType&lt;unsigned int, draco::PointIndex_tag_type_&gt;, std::__1::allocator&lt;draco::IndexType&lt;unsigned int, draco::PointIndex_tag_type_&gt; &gt; &gt; const&amp;, draco::DecoderBuffer*) /src/draco/src/draco/compression/attributes/sequential_integer_attribute_decoder.cc:61:26
+    #2 0x5e63df in draco::SequentialAttributeDecoder::DecodePortableAttribute(std::__1::vector&lt;draco::IndexType&lt;unsigned int, draco::PointIndex_tag_type_&gt;, std::__1::allocator&lt;draco::IndexType&lt;unsigned int, draco::PointIndex_tag_type_&gt; &gt; &gt; const&amp;, draco::DecoderBuffer*) /src/draco/src/draco/compression/attributes/sequential_attribute_decoder.cc:43:8
+    #3 0x581168 in draco::SequentialAttributeDecodersController::DecodePortableAttributes(draco::DecoderBuffer*) /src/draco/src/draco/compression/attributes/sequential_attribute_decoders_controller.cc:74:35
+    #4 0x55eb69 in draco::AttributesDecoder::DecodeAttributes(draco::DecoderBuffer*) /src/draco/src/draco/compression/attributes/attributes_decoder.h:56:10
+    #5 0x5268ac in draco::PointCloudDecoder::DecodeAllAttributes() /src/draco/src/draco/compression/point_cloud/point_cloud_decoder.cc:181:19
+    #6 0x5264d6 in draco::PointCloudDecoder::DecodePointAttributes() /src/draco/src/draco/compression/point_cloud/point_cloud_decoder.cc:169:8
+    #7 0x5253c8 in draco::PointCloudDecoder::Decode(draco::DracoOptions&lt;draco::GeometryAttribute::Type&gt; const&amp;, draco::DecoderBuffer*, draco::PointCloud*) /src/draco/src/draco/compression/point_cloud/point_cloud_decoder.cc:122:8
+    #8 0x4b7f98 in draco::MeshDecoder::Decode(draco::DracoOptions&lt;draco::GeometryAttribute::Type&gt; const&amp;, draco::DecoderBuffer*, draco::Mesh*) /src/draco/src/draco/compression/mesh/mesh_decoder.cc:24:29
+    #9 0x4b5e18 in draco::Decoder::DecodeBufferToGeometry(draco::DecoderBuffer*, draco::Mesh*) /src/draco/src/draco/compression/decode.cc:124:3
+    #10 0x4b61ec in draco::Decoder::DecodeMeshFromBuffer(draco::DecoderBuffer*) /src/draco/src/draco/compression/decode.cc:89:3
+    #11 0x4b410e in LLVMFuzzerTestOneInput /src/draco/src/draco/tools/fuzz/draco_mesh_decoder_without_dequantization_fuzzer.cc:27:11
+    #12 0x43fce3 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #13 0x42b5f2 in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:324:6
+    #14 0x4310ba in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #15 0x459fe2 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #16 0x7f3b898a50b2 in __libc_start_main
+    #17 0x40887d in _start
+
+SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior /src/draco/src/draco/compression/attributes/sequential_integer_attribute_decoder.cc:98:7 in
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/crash-1c7da946e255afe76938da91d5427e23b28fdf50
+/src/draco/src/draco/compression/attributes/sequential_integer_attribute_decoder.cc:98:7: runtime error: load of value -122, which is not a valid value for type &#x27;draco::PredictionSchemeMethod&#x27;
+    #0 0x584592  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/draco_libfuzzer_ubsan/custom/draco_mesh_decoder_without_dequantization_fuzzer+0x584592)
+    #1 0x583bbd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/draco_libfuzzer_ubsan/custom/draco_mesh_decoder_without_dequantization_fuzzer+0x583bbd)
+    #2 0x5e63df  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/draco_libfuzzer_ubsan/custom/draco_mesh_decoder_without_dequantization_fuzzer+0x5e63df)
+    #3 0x581168  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/draco_libfuzzer_ubsan/custom/draco_mesh_decoder_without_dequantization_fuzzer+0x581168)
+    #4 0x55eb69  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/draco_libfuzzer_ubsan/custom/draco_mesh_decoder_without_dequantization_fuzzer+0x55eb69)
+    #5 0x5268ac  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/draco_libfuzzer_ubsan/custom/draco_mesh_decoder_without_dequantization_fuzzer+0x5268ac)
+    #6 0x5264d6  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/draco_libfuzzer_ubsan/custom/draco_mesh_decoder_without_dequantization_fuzzer+0x5264d6)
+    #7 0x5253c8  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/draco_libfuzzer_ubsan/custom/draco_mesh_decoder_without_dequantization_fuzzer+0x5253c8)
+    #8 0x4b7f98  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/draco_libfuzzer_ubsan/custom/draco_mesh_decoder_without_dequantization_fuzzer+0x4b7f98)
+    #9 0x4b5e18  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/draco_libfuzzer_ubsan/custom/draco_mesh_decoder_without_dequantization_fuzzer+0x4b5e18)
+    #10 0x4b61ec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/draco_libfuzzer_ubsan/custom/draco_mesh_decoder_without_dequantization_fuzzer+0x4b61ec)
+    #11 0x4b410e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/draco_libfuzzer_ubsan/custom/draco_mesh_decoder_without_dequantization_fuzzer+0x4b410e)
+    #12 0x43fce3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/draco_libfuzzer_ubsan/custom/draco_mesh_decoder_without_dequantization_fuzzer+0x43fce3)
+    #13 0x42b5f2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/draco_libfuzzer_ubsan/custom/draco_mesh_decoder_without_dequantization_fuzzer+0x42b5f2)
+    #14 0x4310ba  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/draco_libfuzzer_ubsan/custom/draco_mesh_decoder_without_dequantization_fuzzer+0x4310ba)
+    #15 0x459fe2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/draco_libfuzzer_ubsan/custom/draco_mesh_decoder_without_dequantization_fuzzer+0x459fe2)
+    #16 0x7f3b898a50b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #17 0x40887d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/draco_libfuzzer_ubsan/custom/draco_mesh_decoder_without_dequantization_fuzzer+0x40887d)

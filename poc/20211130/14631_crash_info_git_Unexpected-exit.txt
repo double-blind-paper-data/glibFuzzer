@@ -1,0 +1,120 @@
+Testcase id: 14631
+Job: git_libfuzzer_asan
+Crash Type: Unexpected-exit
+isSecurity: False
+Crash state: die_builtin
+die
+unpack_object_header_buffer
+Poc: 14631.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_fuzz-pack-headers
+target: fuzz-pack-headers
+name: libFuzzer
+[Environment] ASAN_OPTIONS=alloc_dealloc_mismatch=0:allocator_may_return_null=1:allocator_release_to_os_interval_ms=500:allow_user_segv_handler=0:check_malloc_usable_size=0:detect_leaks=1:detect_odr_violation=0:detect_stack_use_after_return=1:exitcode=77:fast_unwind_on_fatal=0:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:max_uar_stack_size_log=16:print_scariness=1:print_summary=1:print_suppressions=0:quarantine_size_mb=64:redzone=128:strict_memcmp=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 1102147987
+INFO: Loaded 1 modules   (91181 inline 8-bit counters): 91181 [0x1279420, 0x128f84d),
+INFO: Loaded 1 PC tables (91181 PCs): 91181 [0xf04610,0x10688e0),
+INFO:        0 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases-disk/temp-23/new
+INFO:        1 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/data-bundles/fuzz-pack-headers
+INFO: -max_len is not provided; libFuzzer will not generate inputs larger than 1048576 bytes
+INFO: seed corpus: files: 1 min: 185890932b max: 185890932b total: 185890932b rss: 73Mb
+#2	INITED cov: 3 ft: 4 corp: 1/1024Kb exec/s: 0 rss: 73Mb
+#3	REDUCE cov: 3 ft: 4 corp: 1/563Kb lim: 1048576 exec/s: 0 rss: 73Mb L: 577411/577411 MS: 1 EraseBytes-
+#4	REDUCE cov: 3 ft: 4 corp: 1/403Kb lim: 1048576 exec/s: 0 rss: 73Mb L: 413024/413024 MS: 1 EraseBytes-
+#15	REDUCE cov: 3 ft: 4 corp: 1/360Kb lim: 1048576 exec/s: 0 rss: 73Mb L: 368724/368724 MS: 1 EraseBytes-
+#17	REDUCE cov: 3 ft: 4 corp: 1/300Kb lim: 1048576 exec/s: 0 rss: 73Mb L: 307445/307445 MS: 2 CrossOver-EraseBytes-
+#34	REDUCE cov: 3 ft: 4 corp: 1/37Kb lim: 1048576 exec/s: 0 rss: 73Mb L: 37927/37927 MS: 2 CrossOver-CrossOver-
+#40	REDUCE cov: 3 ft: 4 corp: 1/31Kb lim: 1048576 exec/s: 0 rss: 73Mb L: 32074/32074 MS: 1 EraseBytes-
+#48	REDUCE cov: 3 ft: 4 corp: 1/26Kb lim: 1048576 exec/s: 0 rss: 73Mb L: 26953/26953 MS: 3 ChangeBinInt-CopyPart-EraseBytes-
+#53	REDUCE cov: 3 ft: 4 corp: 1/13544b lim: 1048576 exec/s: 0 rss: 73Mb L: 13544/13544 MS: 5 ChangeBinInt-InsertRepeatedBytes-ShuffleBytes-ChangeBit-EraseBytes-
+#60	REDUCE cov: 3 ft: 4 corp: 1/7879b lim: 1048576 exec/s: 0 rss: 73Mb L: 7879/7879 MS: 2 InsertRepeatedBytes-EraseBytes-
+#72	REDUCE cov: 3 ft: 4 corp: 1/5035b lim: 1048576 exec/s: 0 rss: 73Mb L: 5035/5035 MS: 2 CopyPart-EraseBytes-
+#73	REDUCE cov: 3 ft: 4 corp: 1/3597b lim: 1048576 exec/s: 0 rss: 73Mb L: 3597/3597 MS: 1 EraseBytes-
+#77	REDUCE cov: 3 ft: 4 corp: 1/2659b lim: 1048576 exec/s: 0 rss: 73Mb L: 2659/2659 MS: 4 ChangeASCIIInt-ChangeByte-ChangeASCIIInt-EraseBytes-
+#81	REDUCE cov: 3 ft: 4 corp: 1/1980b lim: 1048576 exec/s: 0 rss: 73Mb L: 1980/1980 MS: 4 InsertRepeatedBytes-CrossOver-ChangeBit-EraseBytes-
+#83	REDUCE cov: 3 ft: 4 corp: 1/1266b lim: 1048576 exec/s: 0 rss: 73Mb L: 1266/1266 MS: 2 ChangeASCIIInt-EraseBytes-
+#85	REDUCE cov: 3 ft: 4 corp: 1/1121b lim: 1048576 exec/s: 0 rss: 73Mb L: 1121/1121 MS: 2 ChangeASCIIInt-EraseBytes-
+#86	REDUCE cov: 3 ft: 4 corp: 1/1016b lim: 1048576 exec/s: 0 rss: 73Mb L: 1016/1016 MS: 1 EraseBytes-
+#87	REDUCE cov: 3 ft: 4 corp: 1/925b lim: 1048576 exec/s: 0 rss: 73Mb L: 925/925 MS: 1 EraseBytes-
+#94	REDUCE cov: 3 ft: 4 corp: 1/890b lim: 1048576 exec/s: 0 rss: 73Mb L: 890/890 MS: 2 ChangeBinInt-EraseBytes-
+#101	REDUCE cov: 3 ft: 4 corp: 1/656b lim: 1048576 exec/s: 0 rss: 73Mb L: 656/656 MS: 2 CopyPart-EraseBytes-
+#109	REDUCE cov: 3 ft: 4 corp: 1/479b lim: 1048576 exec/s: 0 rss: 73Mb L: 479/479 MS: 3 ChangeASCIIInt-ChangeByte-EraseBytes-
+#111	REDUCE cov: 3 ft: 4 corp: 1/360b lim: 1048576 exec/s: 0 rss: 73Mb L: 360/360 MS: 2 ShuffleBytes-EraseBytes-
+#112	REDUCE cov: 3 ft: 4 corp: 1/340b lim: 1048576 exec/s: 0 rss: 73Mb L: 340/340 MS: 1 EraseBytes-
+#113	REDUCE cov: 3 ft: 4 corp: 1/317b lim: 1048576 exec/s: 0 rss: 73Mb L: 317/317 MS: 1 EraseBytes-
+#116	REDUCE cov: 3 ft: 4 corp: 1/233b lim: 1048576 exec/s: 0 rss: 73Mb L: 233/233 MS: 3 InsertByte-ChangeBinInt-EraseBytes-
+#131	REDUCE cov: 3 ft: 4 corp: 1/190b lim: 1048576 exec/s: 0 rss: 73Mb L: 190/190 MS: 5 ShuffleBytes-ShuffleBytes-ChangeByte-CMP-EraseBytes- DE: &quot;\365\260\004\000\000\000\000\000&quot;-
+#132	REDUCE cov: 3 ft: 4 corp: 1/105b lim: 1048576 exec/s: 0 rss: 73Mb L: 105/105 MS: 1 EraseBytes-
+#133	REDUCE cov: 3 ft: 4 corp: 1/63b lim: 1048576 exec/s: 0 rss: 73Mb L: 63/63 MS: 1 EraseBytes-
+#135	REDUCE cov: 3 ft: 4 corp: 1/56b lim: 1048576 exec/s: 0 rss: 73Mb L: 56/56 MS: 2 ShuffleBytes-EraseBytes-
+#145	REDUCE cov: 3 ft: 4 corp: 1/54b lim: 1048576 exec/s: 0 rss: 73Mb L: 54/54 MS: 5 ChangeASCIIInt-ChangeBinInt-ShuffleBytes-PersAutoDict-EraseBytes- DE: &quot;\365\260\004\000\000\000\000\000&quot;-
+#151	REDUCE cov: 3 ft: 4 corp: 1/29b lim: 1048576 exec/s: 0 rss: 73Mb L: 29/29 MS: 1 EraseBytes-
+#163	REDUCE cov: 3 ft: 4 corp: 1/18b lim: 1048576 exec/s: 0 rss: 73Mb L: 18/18 MS: 2 InsertByte-EraseBytes-
+#171	REDUCE cov: 4 ft: 5 corp: 2/49b lim: 1048576 exec/s: 0 rss: 73Mb L: 31/31 MS: 3 ChangeBinInt-ShuffleBytes-InsertRepeatedBytes-
+#173	REDUCE cov: 4 ft: 5 corp: 2/41b lim: 1048576 exec/s: 0 rss: 73Mb L: 10/31 MS: 2 ChangeBinInt-EraseBytes-
+#179	REDUCE cov: 4 ft: 5 corp: 2/33b lim: 1048576 exec/s: 0 rss: 73Mb L: 23/23 MS: 1 EraseBytes-
+#185	REDUCE cov: 4 ft: 5 corp: 2/31b lim: 1048576 exec/s: 0 rss: 73Mb L: 8/23 MS: 1 EraseBytes-
+#196	REDUCE cov: 4 ft: 5 corp: 2/28b lim: 1048576 exec/s: 0 rss: 73Mb L: 20/20 MS: 1 EraseBytes-
+#197	REDUCE cov: 4 ft: 5 corp: 2/20b lim: 1048576 exec/s: 0 rss: 73Mb L: 12/12 MS: 1 EraseBytes-
+#223	REDUCE cov: 4 ft: 5 corp: 2/19b lim: 1048576 exec/s: 0 rss: 73Mb L: 7/12 MS: 1 EraseBytes-
+#268	REDUCE cov: 4 ft: 5 corp: 2/16b lim: 1048576 exec/s: 0 rss: 73Mb L: 9/9 MS: 5 PersAutoDict-EraseBytes-InsertByte-InsertByte-EraseBytes- DE: &quot;\365\260\004\000\000\000\000\000&quot;-
+#292	REDUCE cov: 4 ft: 5 corp: 2/14b lim: 1048576 exec/s: 0 rss: 73Mb L: 7/7 MS: 4 CMP-ChangeBit-ChangeByte-EraseBytes- DE: &quot;\377\377\377\377&quot;-
+#309	REDUCE cov: 4 ft: 5 corp: 2/12b lim: 1048576 exec/s: 0 rss: 73Mb L: 5/7 MS: 2 ChangeBinInt-EraseBytes-
+#331	REDUCE cov: 4 ft: 5 corp: 2/10b lim: 1048576 exec/s: 0 rss: 73Mb L: 5/5 MS: 2 ChangeByte-EraseBytes-
+#334	REDUCE cov: 4 ft: 5 corp: 2/9b lim: 1048576 exec/s: 0 rss: 73Mb L: 4/5 MS: 3 CMP-ShuffleBytes-EraseBytes- DE: &quot;\000\000\000\000&quot;-
+==78266== ERROR: libFuzzer: fuzz target exited
+    #0 0x531161 in __sanitizer_print_stack_trace /src/llvm-project/compiler-rt/lib/asan/asan_stack.cpp:87:3
+    #1 0x471b98 in fuzzer::PrintStackTrace() cxa_noexception.cpp:0
+    #2 0x456b6c in fuzzer::Fuzzer::ExitCallback() cxa_noexception.cpp:0
+    #3 0x7f9b1e7e8a26 in libc.so.6
+    #4 0x7f9b1e7e8bdf in exit
+    #5 0xa53a03 in die_builtin /src/git/usage.c:69:2
+    #6 0xa540c2 in die /src/git/usage.c:170:2
+    #7 0x84f717 in st_left_shift /src/git/git-compat-util.h:876:3
+    #8 0x84f717 in unpack_object_header_buffer /src/git/packfile.c:1077:23
+    #9 0xd1f45c in LLVMFuzzerTestOneInput /src/git/fuzz-pack-headers.c:10:2
+    #10 0x458053 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #11 0x45783a in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*, bool, bool*) cxa_noexception.cpp:0
+    #12 0x4590db in fuzzer::Fuzzer::MutateAndTestOne() cxa_noexception.cpp:0
+    #13 0x459bc5 in fuzzer::Fuzzer::Loop(std::__Fuzzer::vector&lt;fuzzer::SizedFile, std::__Fuzzer::allocator&lt;fuzzer::SizedFile&gt; &gt;&amp;) cxa_noexception.cpp:0
+    #14 0x44930d in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #15 0x472352 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #16 0x7f9b1e7c60b2 in __libc_start_main
+    #17 0x420bed in _start
+
+SUMMARY: libFuzzer: fuzz target exited
+MS: 1 InsertRepeatedBytes-; base unit: 7b1388dec963ad0bff723ebb4a679cea65d60e02
+0x9e,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0x3a,0xb6,0x0,0x0,
+\236\377\377\377\377\377\377\377\377\377\377\377:\266\000\000
+artifact_prefix=&#x27;/clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/&#x27;; Test unit written to /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/crash-820d93acd8e0063b454e977bde97a0771bed98ee
+Base64: nv//////////////OrYAAA==
+stat::number_of_executed_units: 340
+stat::average_exec_per_sec:     0
+stat::new_units_added:          43
+stat::slowest_unit_time_sec:    0
+stat::peak_rss_mb:              73
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+#334	REDUCE cov: 4 ft: 5 corp: 2/9b lim: 1048576 exec/s: 0 rss: 73Mb L: 4/5 MS: 3 CMP-ShuffleBytes-EraseBytes- DE: &quot;\000\000\000\000&quot;-
+==78266== ERROR: libFuzzer: fuzz target exited
+    #0 0x531161  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/git_libfuzzer_asan/custom/fuzz-pack-headers+0x531161)
+    #1 0x471b98  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/git_libfuzzer_asan/custom/fuzz-pack-headers+0x471b98)
+    #2 0x456b6c  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/git_libfuzzer_asan/custom/fuzz-pack-headers+0x456b6c)
+    #3 0x7f9b1e7e8a26  (/lib/x86_64-linux-gnu/libc.so.6+0x49a26)
+    #4 0x7f9b1e7e8bdf  (/lib/x86_64-linux-gnu/libc.so.6+0x49bdf)
+    #5 0xa53a03  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/git_libfuzzer_asan/custom/fuzz-pack-headers+0xa53a03)
+    #6 0xa540c2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/git_libfuzzer_asan/custom/fuzz-pack-headers+0xa540c2)
+    #7 0x84f717  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/git_libfuzzer_asan/custom/fuzz-pack-headers+0x84f717)
+    #8 0xd1f45c  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/git_libfuzzer_asan/custom/fuzz-pack-headers+0xd1f45c)
+    #9 0x458053  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/git_libfuzzer_asan/custom/fuzz-pack-headers+0x458053)
+    #10 0x45783a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/git_libfuzzer_asan/custom/fuzz-pack-headers+0x45783a)
+    #11 0x4590db  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/git_libfuzzer_asan/custom/fuzz-pack-headers+0x4590db)
+    #12 0x459bc5  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/git_libfuzzer_asan/custom/fuzz-pack-headers+0x459bc5)
+    #13 0x44930d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/git_libfuzzer_asan/custom/fuzz-pack-headers+0x44930d)
+    #14 0x472352  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/git_libfuzzer_asan/custom/fuzz-pack-headers+0x472352)
+    #15 0x7f9b1e7c60b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #16 0x420bed  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/git_libfuzzer_asan/custom/fuzz-pack-headers+0x420bed)

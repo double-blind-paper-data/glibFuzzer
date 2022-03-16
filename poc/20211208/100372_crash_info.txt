@@ -1,0 +1,82 @@
+Testcase id: 100372
+Job: elfutils_libfuzzer_ubsan
+Crash Type: Unexpected-exit
+isSecurity: False
+Crash state: error
+process_file
+fuzz.cc
+Poc: 100372.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_testfuzz
+target: testfuzz
+name: libFuzzer
+[Environment] UBSAN_OPTIONS=allocator_release_to_os_interval_ms=500:exitcode=77:halt_on_error=1:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:print_stacktrace=1:print_summary=1:print_suppressions=0:silence_unsigned_overflow=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 3485733385
+INFO: Loaded 1 modules   (30184 inline 8-bit counters): 30184 [0x6ad4b0, 0x6b4a98),
+INFO: Loaded 1 PC tables (30184 PCs): 30184 [0x6b4a98,0x72a918),
+INFO:        0 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases-disk/temp-20/new
+INFO:        0 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases-disk/temp-20/mutations
+INFO:     1035 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/data-bundles/testfuzz
+INFO: -max_len is not provided; libFuzzer will not generate inputs larger than 90808 bytes
+INFO: seed corpus: files: 1035 min: 1b max: 90808b total: 10772695b rss: 85Mb
+testfuzz: write: No space left on device
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/elfutils_libfuzzer_ubsan/custom/testfuzz: cannot generate Elf descriptor: ELF version not set
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/elfutils_libfuzzer_ubsan/custom/testfuzz: dup: Bad file descriptor
+==224025== ERROR: libFuzzer: fuzz target exited
+    #0 0x4b33c4 in __sanitizer_print_stack_trace /src/llvm-project/compiler-rt/lib/ubsan/ubsan_diag_standalone.cpp:31:3
+    #1 0x45a038 in fuzzer::PrintStackTrace() cxa_noexception.cpp:0
+    #2 0x43f00c in fuzzer::Fuzzer::ExitCallback() cxa_noexception.cpp:0
+    #3 0x7f815de99a26 in libc.so.6
+    #4 0x7f815de99bdf in exit
+    #5 0x7f815df6f1d0 in libc.so.6
+    #6 0x7f815df6f272 in libc.so.6
+    #7 0x7f815df6f385 in error
+    #8 0x561eb6 in create_dwfl /src/elfutils/src/libreadelf.c:489:5
+    #9 0x561eb6 in process_file /src/elfutils/src/libreadelf.c:577:16
+    #10 0x4b4dd4 in LLVMFuzzerTestOneInput /src/elfutils/fuzz/fuzz.cc:94:5
+    #11 0x4404f3 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #12 0x43fcda in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*, bool, bool*) cxa_noexception.cpp:0
+    #13 0x441b34 in fuzzer::Fuzzer::ReadAndExecuteSeedCorpora(std::__Fuzzer::vector&lt;fuzzer::SizedFile, std::__Fuzzer::allocator&lt;fuzzer::SizedFile&gt; &gt;&amp;) cxa_noexception.cpp:0
+    #14 0x441d69 in fuzzer::Fuzzer::Loop(std::__Fuzzer::vector&lt;fuzzer::SizedFile, std::__Fuzzer::allocator&lt;fuzzer::SizedFile&gt; &gt;&amp;) cxa_noexception.cpp:0
+    #15 0x4317ad in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #16 0x45a7f2 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #17 0x7f815de770b2 in __libc_start_main
+    #18 0x40908d in _start
+
+SUMMARY: libFuzzer: fuzz target exited
+MS: 0 ; base unit: 0000000000000000000000000000000000000000
+0x2d,
+-
+artifact_prefix=&#x27;/clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/&#x27;; Test unit written to /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/crash-3bc15c8aae3e4124dd409035f32ea2fd6835efc9
+Base64: LQ==
+stat::number_of_executed_units: 2
+stat::average_exec_per_sec:     0
+stat::new_units_added:          0
+stat::slowest_unit_time_sec:    0
+stat::peak_rss_mb:              85
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/elfutils_libfuzzer_ubsan/custom/testfuzz: dup: Bad file descriptor
+==224025== ERROR: libFuzzer: fuzz target exited
+    #0 0x4b33c4  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/elfutils_libfuzzer_ubsan/custom/testfuzz+0x4b33c4)
+    #1 0x45a038  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/elfutils_libfuzzer_ubsan/custom/testfuzz+0x45a038)
+    #2 0x43f00c  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/elfutils_libfuzzer_ubsan/custom/testfuzz+0x43f00c)
+    #3 0x7f815de99a26  (/lib/x86_64-linux-gnu/libc.so.6+0x49a26)
+    #4 0x7f815de99bdf  (/lib/x86_64-linux-gnu/libc.so.6+0x49bdf)
+    #5 0x7f815df6f1d0  (/lib/x86_64-linux-gnu/libc.so.6+0x11f1d0)
+    #6 0x7f815df6f272  (/lib/x86_64-linux-gnu/libc.so.6+0x11f272)
+    #7 0x7f815df6f385  (/lib/x86_64-linux-gnu/libc.so.6+0x11f385)
+    #8 0x561eb6  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/elfutils_libfuzzer_ubsan/custom/testfuzz+0x561eb6)
+    #9 0x4b4dd4  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/elfutils_libfuzzer_ubsan/custom/testfuzz+0x4b4dd4)
+    #10 0x4404f3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/elfutils_libfuzzer_ubsan/custom/testfuzz+0x4404f3)
+    #11 0x43fcda  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/elfutils_libfuzzer_ubsan/custom/testfuzz+0x43fcda)
+    #12 0x441b34  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/elfutils_libfuzzer_ubsan/custom/testfuzz+0x441b34)
+    #13 0x441d69  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/elfutils_libfuzzer_ubsan/custom/testfuzz+0x441d69)
+    #14 0x4317ad  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/elfutils_libfuzzer_ubsan/custom/testfuzz+0x4317ad)
+    #15 0x45a7f2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/elfutils_libfuzzer_ubsan/custom/testfuzz+0x45a7f2)
+    #16 0x7f815de770b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #17 0x40908d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/elfutils_libfuzzer_ubsan/custom/testfuzz+0x40908d)

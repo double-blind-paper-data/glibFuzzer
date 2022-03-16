@@ -1,0 +1,46 @@
+Testcase id: 42013
+Job: dnsmasq_honggfuzz_msan
+Crash Type: Use-of-uninitialized-value
+isSecurity: True
+Crash state: indextoname
+dhcp6_packet
+fuzz_dhcp6.c
+Poc: 42013.testcase
+engine: honggfuzz
+fully_qualified_name: honggfuzz_fuzz_dhcp6
+target: fuzz_dhcp6
+name: honggfuzz
+[Environment] MSAN_OPTIONS=allocator_release_to_os_interval_ms=500:halt_on_error=1:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:print_stats=1:print_summary=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+==214453==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x555384 in indextoname /src/dnsmasq/src/network.c:25:7
+    #1 0x4dcbe3 in dhcp6_packet /src/dnsmasq/src/dhcp6.c:140:8
+    #2 0x4b676e in FuzzDhcp /src/fuzz_dhcp6.c:44:3
+    #3 0x4b676e in LLVMFuzzerTestOneInput /src/fuzz_dhcp6.c:73:3
+    #4 0x4a0d6e in main
+    #5 0x7ffff7c5b0b2 in __libc_start_main
+    #6 0x41e6ad in _start
+
+  Uninitialized value was created by an allocation of &#x27;control_u&#x27; in the stack frame of function &#x27;dhcp6_packet&#x27;
+    #0 0x4dc560 in dhcp6_packet /src/dnsmasq/src/dhcp6.c:91
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_honggfuzz_msan/custom/fuzz_dhcp6+0x555384)
+Unique heap origins: 56
+Stack depot allocated bytes: 1638400
+Unique origin histories: 0
+History depot allocated bytes: 0
+Exiting
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+==214453==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x555384  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_honggfuzz_msan/custom/fuzz_dhcp6+0x555384)
+    #1 0x4dcbe3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_honggfuzz_msan/custom/fuzz_dhcp6+0x4dcbe3)
+    #2 0x4b676e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_honggfuzz_msan/custom/fuzz_dhcp6+0x4b676e)
+    #3 0x4a0d6e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_honggfuzz_msan/custom/fuzz_dhcp6+0x4a0d6e)
+    #4 0x7ffff7c5b0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #5 0x41e6ad  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_honggfuzz_msan/custom/fuzz_dhcp6+0x41e6ad)
+
+  Uninitialized value was created by an allocation of &#x27;control_u&#x27; in the stack frame of function &#x27;dhcp6_packet&#x27;
+    #0 0x4dc560  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_honggfuzz_msan/custom/fuzz_dhcp6+0x4dc560)

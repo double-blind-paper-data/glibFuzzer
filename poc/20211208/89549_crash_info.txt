@@ -1,0 +1,281 @@
+Testcase id: 89549
+Job: go-ethereum_libfuzzer_asan
+Crash Type: Null-dereference READ
+isSecurity: True
+Crash state: pthread_create
+_cgo_try_pthread_create
+pthread_create
+Poc: 89549.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_fuzzKeystore
+target: fuzzKeystore
+name: libFuzzer
+[Environment] ASAN_OPTIONS=alloc_dealloc_mismatch=0:allocator_may_return_null=1:allocator_release_to_os_interval_ms=500:allow_user_segv_handler=0:check_malloc_usable_size=0:detect_leaks=1:detect_odr_violation=0:detect_stack_use_after_return=1:exitcode=77:fast_unwind_on_fatal=0:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:max_uar_stack_size_log=16:print_scariness=1:print_summary=1:print_suppressions=0:quarantine_size_mb=64:redzone=16:strict_memcmp=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 1660272908
+INFO: 16748 Extra Counters
+INFO:        0 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases-disk/temp-20/new
+INFO:        0 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases-disk/temp-20/mutations
+INFO:       10 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases-disk/temp-20/subset
+INFO: -max_len is not provided; libFuzzer will not generate inputs larger than 4096 bytes
+INFO: seed corpus: files: 10 min: 1b max: 113b total: 217b rss: 71Mb
+#8	pulse  ft: 2569 corp: 4/6b exec/s: 2 rss: 71Mb
+#15	INITED ft: 2970 corp: 10/217b exec/s: 2 rss: 71Mb
+#16	pulse  ft: 3020 corp: 10/217b lim: 113 exec/s: 2 rss: 71Mb
+#16	NEW    ft: 3020 corp: 11/220b lim: 113 exec/s: 2 rss: 71Mb L: 3/113 MS: 1 CopyPart-
+#17	NEW    ft: 3061 corp: 12/308b lim: 113 exec/s: 2 rss: 71Mb L: 88/113 MS: 1 CopyPart-
+#18	NEW    ft: 3090 corp: 13/359b lim: 113 exec/s: 2 rss: 71Mb L: 51/113 MS: 1 CrossOver-
+#20	NEW    ft: 3136 corp: 14/448b lim: 113 exec/s: 2 rss: 71Mb L: 89/113 MS: 1 EraseBytes-
+#21	NEW    ft: 3230 corp: 15/536b lim: 113 exec/s: 2 rss: 71Mb L: 88/113 MS: 1 ShuffleBytes-
+#22	NEW    ft: 3258 corp: 16/537b lim: 113 exec/s: 2 rss: 71Mb L: 1/113 MS: 1 ChangeByte-
+#23	NEW    ft: 3282 corp: 17/542b lim: 113 exec/s: 2 rss: 71Mb L: 5/113 MS: 1 CopyPart-
+#25	NEW    ft: 3298 corp: 18/546b lim: 113 exec/s: 2 rss: 71Mb L: 4/113 MS: 1 InsertByte-
+#26	NEW    ft: 3301 corp: 19/634b lim: 113 exec/s: 2 rss: 71Mb L: 88/113 MS: 1 CopyPart-
+#27	NEW    ft: 3306 corp: 20/636b lim: 113 exec/s: 2 rss: 71Mb L: 2/113 MS: 1 EraseBytes-
+#28	NEW    ft: 3350 corp: 21/637b lim: 113 exec/s: 2 rss: 71Mb L: 1/113 MS: 1 CopyPart-
+#29	NEW    ft: 3427 corp: 22/640b lim: 113 exec/s: 2 rss: 71Mb L: 3/113 MS: 1 ShuffleBytes-
+#30	NEW    ft: 3431 corp: 23/645b lim: 113 exec/s: 2 rss: 71Mb L: 5/113 MS: 1 CMP- DE: &quot;J\011\312\001&quot;-
+#31	NEW    ft: 3448 corp: 24/648b lim: 113 exec/s: 2 rss: 71Mb L: 3/113 MS: 1 ChangeByte-
+#32	pulse  ft: 3490 corp: 24/648b lim: 113 exec/s: 2 rss: 71Mb
+#32	NEW    ft: 3490 corp: 25/730b lim: 113 exec/s: 2 rss: 71Mb L: 82/113 MS: 1 ChangeByte-
+#33	NEW    ft: 3506 corp: 26/843b lim: 113 exec/s: 2 rss: 71Mb L: 113/113 MS: 1 CrossOver-
+#34	NEW    ft: 3509 corp: 27/847b lim: 113 exec/s: 2 rss: 71Mb L: 4/113 MS: 1 CrossOver-
+#35	NEW    ft: 3516 corp: 28/960b lim: 113 exec/s: 2 rss: 71Mb L: 113/113 MS: 1 ChangeBit-
+#36	NEW    ft: 3526 corp: 29/963b lim: 113 exec/s: 2 rss: 71Mb L: 3/113 MS: 1 ChangeBit-
+#37	NEW    ft: 3534 corp: 30/966b lim: 113 exec/s: 2 rss: 71Mb L: 3/113 MS: 1 ShuffleBytes-
+#39	NEW    ft: 3541 corp: 31/1079b lim: 113 exec/s: 2 rss: 71Mb L: 113/113 MS: 2 ShuffleBytes-CopyPart-
+#40	NEW    ft: 3571 corp: 32/1082b lim: 113 exec/s: 2 rss: 71Mb L: 3/113 MS: 1 ChangeByte-
+#41	NEW    ft: 3585 corp: 33/1085b lim: 113 exec/s: 2 rss: 71Mb L: 3/113 MS: 1 InsertByte-
+#43	NEW    ft: 3587 corp: 34/1088b lim: 113 exec/s: 2 rss: 71Mb L: 3/113 MS: 1 CopyPart-
+#44	NEW    ft: 3632 corp: 35/1090b lim: 113 exec/s: 2 rss: 71Mb L: 2/113 MS: 1 EraseBytes-
+#45	NEW    ft: 3696 corp: 36/1178b lim: 113 exec/s: 2 rss: 71Mb L: 88/113 MS: 1 ChangeBinInt-
+#46	NEW    ft: 3699 corp: 37/1267b lim: 113 exec/s: 2 rss: 71Mb L: 89/113 MS: 1 CrossOver-
+#48	NEW    ft: 3701 corp: 38/1269b lim: 113 exec/s: 2 rss: 71Mb L: 2/113 MS: 1 ChangeBinInt-
+#49	NEW    ft: 3720 corp: 39/1275b lim: 113 exec/s: 2 rss: 71Mb L: 6/113 MS: 1 InsertByte-
+#50	NEW    ft: 3721 corp: 40/1277b lim: 113 exec/s: 2 rss: 71Mb L: 2/113 MS: 1 InsertByte-
+#51	NEW    ft: 3723 corp: 41/1278b lim: 113 exec/s: 2 rss: 71Mb L: 1/113 MS: 1 ShuffleBytes-
+#52	NEW    ft: 3738 corp: 42/1280b lim: 113 exec/s: 2 rss: 71Mb L: 2/113 MS: 1 ShuffleBytes-
+#53	NEW    ft: 3756 corp: 43/1281b lim: 113 exec/s: 2 rss: 71Mb L: 1/113 MS: 1 EraseBytes-
+#54	NEW    ft: 3765 corp: 44/1394b lim: 113 exec/s: 2 rss: 71Mb L: 113/113 MS: 1 ChangeBinInt-
+#55	NEW    ft: 3788 corp: 45/1507b lim: 113 exec/s: 2 rss: 71Mb L: 113/113 MS: 1 CopyPart-
+#56	NEW    ft: 3803 corp: 46/1508b lim: 113 exec/s: 2 rss: 71Mb L: 1/113 MS: 1 CrossOver-
+#58	NEW    ft: 3825 corp: 47/1511b lim: 113 exec/s: 2 rss: 71Mb L: 3/113 MS: 1 CopyPart-
+#59	NEW    ft: 3830 corp: 48/1562b lim: 113 exec/s: 2 rss: 71Mb L: 51/113 MS: 1 ChangeBinInt-
+#61	NEW    ft: 3836 corp: 49/1563b lim: 113 exec/s: 2 rss: 71Mb L: 1/113 MS: 1 ShuffleBytes-
+#62	NEW    ft: 3838 corp: 50/1676b lim: 113 exec/s: 2 rss: 71Mb L: 113/113 MS: 1 PersAutoDict- DE: &quot;J\011\312\001&quot;-
+#64	NEW    ft: 3855 corp: 51/1683b lim: 113 exec/s: 2 rss: 71Mb L: 7/113 MS: 1 PersAutoDict- DE: &quot;J\011\312\001&quot;-
+#66	NEW    ft: 3917 corp: 52/1765b lim: 113 exec/s: 2 rss: 71Mb L: 82/113 MS: 1 ChangeBinInt-
+#67	NEW    ft: 3933 corp: 53/1853b lim: 113 exec/s: 2 rss: 71Mb L: 88/113 MS: 1 CopyPart-
+#68	NEW    ft: 3957 corp: 54/1904b lim: 113 exec/s: 2 rss: 71Mb L: 51/113 MS: 1 ChangeBit-
+#69	NEW    ft: 3973 corp: 55/1909b lim: 113 exec/s: 2 rss: 71Mb L: 5/113 MS: 1 CopyPart-
+#70	NEW    ft: 3982 corp: 56/1956b lim: 113 exec/s: 2 rss: 71Mb L: 47/113 MS: 1 CrossOver-
+#71	NEW    ft: 3994 corp: 57/2026b lim: 113 exec/s: 2 rss: 71Mb L: 70/113 MS: 1 EraseBytes-
+#73	NEW    ft: 3998 corp: 58/2030b lim: 113 exec/s: 2 rss: 71Mb L: 4/113 MS: 1 PersAutoDict- DE: &quot;J\011\312\001&quot;-
+#74	NEW    ft: 4000 corp: 59/2033b lim: 113 exec/s: 2 rss: 71Mb L: 3/113 MS: 1 ChangeByte-
+#76	NEW    ft: 4001 corp: 60/2035b lim: 113 exec/s: 2 rss: 71Mb L: 2/113 MS: 1 InsertByte-
+#78	NEW    ft: 4037 corp: 61/2130b lim: 113 exec/s: 2 rss: 71Mb L: 95/113 MS: 1 InsertRepeatedBytes-
+#80	NEW    ft: 4055 corp: 62/2133b lim: 113 exec/s: 2 rss: 71Mb L: 3/113 MS: 1 CrossOver-
+#81	NEW    ft: 4062 corp: 63/2215b lim: 113 exec/s: 2 rss: 71Mb L: 82/113 MS: 1 CopyPart-
+#82	NEW    ft: 4071 corp: 64/2218b lim: 113 exec/s: 2 rss: 71Mb L: 3/113 MS: 1 ShuffleBytes-
+#83	NEW    ft: 4075 corp: 65/2220b lim: 113 exec/s: 2 rss: 71Mb L: 2/113 MS: 1 CrossOver-
+#84	NEW    ft: 4088 corp: 66/2221b lim: 113 exec/s: 2 rss: 71Mb L: 1/113 MS: 1 EraseBytes-
+#85	NEW    ft: 4096 corp: 67/2224b lim: 113 exec/s: 2 rss: 71Mb L: 3/113 MS: 1 CopyPart-
+#86	NEW    ft: 4107 corp: 68/2337b lim: 113 exec/s: 2 rss: 71Mb L: 113/113 MS: 1 CopyPart-
+#87	NEW    ft: 4113 corp: 69/2425b lim: 113 exec/s: 2 rss: 71Mb L: 88/113 MS: 1 ShuffleBytes-
+#88	NEW    ft: 4118 corp: 70/2427b lim: 113 exec/s: 2 rss: 71Mb L: 2/113 MS: 1 InsertByte-
+#89	NEW    ft: 4122 corp: 71/2509b lim: 113 exec/s: 2 rss: 71Mb L: 82/113 MS: 1 ChangeBit-
+#90	NEW    ft: 4124 corp: 72/2622b lim: 113 exec/s: 2 rss: 71Mb L: 113/113 MS: 1 ChangeByte-
+#91	NEW    ft: 4126 corp: 73/2735b lim: 113 exec/s: 2 rss: 71Mb L: 113/113 MS: 1 ChangeByte-
+#92	NEW    ft: 4143 corp: 74/2738b lim: 113 exec/s: 2 rss: 71Mb L: 3/113 MS: 1 ChangeBit-
+#93	NEW    ft: 4154 corp: 75/2827b lim: 113 exec/s: 2 rss: 71Mb L: 89/113 MS: 1 CopyPart-
+#95	NEW    ft: 4163 corp: 76/2940b lim: 113 exec/s: 2 rss: 71Mb L: 113/113 MS: 1 ChangeBinInt-
+#96	NEW    ft: 4191 corp: 77/2941b lim: 113 exec/s: 2 rss: 71Mb L: 1/113 MS: 1 EraseBytes-
+#97	NEW    ft: 4197 corp: 78/3023b lim: 113 exec/s: 2 rss: 71Mb L: 82/113 MS: 1 ChangeByte-
+#99	NEW    ft: 4201 corp: 79/3040b lim: 113 exec/s: 2 rss: 71Mb L: 17/113 MS: 1 InsertRepeatedBytes-
+#101	NEW    ft: 4244 corp: 80/3042b lim: 113 exec/s: 2 rss: 71Mb L: 2/113 MS: 1 EraseBytes-
+#102	NEW    ft: 4246 corp: 81/3046b lim: 113 exec/s: 2 rss: 71Mb L: 4/113 MS: 1 InsertByte-
+#103	NEW    ft: 4252 corp: 82/3159b lim: 113 exec/s: 2 rss: 71Mb L: 113/113 MS: 1 ChangeBinInt-
+#104	NEW    ft: 4266 corp: 83/3162b lim: 113 exec/s: 2 rss: 71Mb L: 3/113 MS: 1 CrossOver-
+#105	NEW    ft: 4277 corp: 84/3233b lim: 113 exec/s: 2 rss: 71Mb L: 71/113 MS: 1 InsertByte-
+#107	NEW    ft: 4278 corp: 85/3236b lim: 113 exec/s: 2 rss: 71Mb L: 3/113 MS: 1 ChangeBit-
+#108	NEW    ft: 4313 corp: 86/3239b lim: 113 exec/s: 2 rss: 71Mb L: 3/113 MS: 1 ChangeBit-
+#109	NEW    ft: 4330 corp: 87/3321b lim: 113 exec/s: 2 rss: 71Mb L: 82/113 MS: 1 ShuffleBytes-
+#110	NEW    ft: 4331 corp: 88/3434b lim: 113 exec/s: 2 rss: 71Mb L: 113/113 MS: 1 CrossOver-
+#111	NEW    ft: 4335 corp: 89/3436b lim: 113 exec/s: 2 rss: 71Mb L: 2/113 MS: 1 ChangeASCIIInt-
+#112	NEW    ft: 4353 corp: 90/3439b lim: 113 exec/s: 2 rss: 71Mb L: 3/113 MS: 1 ChangeBinInt-
+#113	NEW    ft: 4356 corp: 91/3441b lim: 113 exec/s: 2 rss: 71Mb L: 2/113 MS: 1 ChangeBinInt-
+#114	NEW    ft: 4368 corp: 92/3447b lim: 113 exec/s: 2 rss: 71Mb L: 6/113 MS: 1 PersAutoDict- DE: &quot;J\011\312\001&quot;-
+#116	NEW    ft: 4374 corp: 93/3450b lim: 113 exec/s: 2 rss: 71Mb L: 3/113 MS: 1 CrossOver-
+#117	NEW    ft: 4389 corp: 94/3545b lim: 113 exec/s: 2 rss: 71Mb L: 95/113 MS: 1 InsertRepeatedBytes-
+#118	NEW    ft: 4392 corp: 95/3658b lim: 113 exec/s: 2 rss: 71Mb L: 113/113 MS: 1 CrossOver-
+#119	NEW    ft: 4410 corp: 96/3662b lim: 113 exec/s: 2 rss: 71Mb L: 4/113 MS: 1 CrossOver-
+#120	NEW    ft: 4421 corp: 97/3751b lim: 113 exec/s: 2 rss: 71Mb L: 89/113 MS: 1 InsertByte-
+#121	NEW    ft: 4426 corp: 98/3812b lim: 113 exec/s: 2 rss: 71Mb L: 61/113 MS: 1 InsertRepeatedBytes-
+#122	NEW    ft: 4430 corp: 99/3817b lim: 113 exec/s: 2 rss: 71Mb L: 5/113 MS: 1 CopyPart-
+#123	NEW    ft: 4434 corp: 100/3819b lim: 113 exec/s: 2 rss: 71Mb L: 2/113 MS: 1 EraseBytes-
+#124	NEW    ft: 4458 corp: 101/3880b lim: 113 exec/s: 2 rss: 71Mb L: 61/113 MS: 1 ChangeBinInt-
+#125	NEW    ft: 4501 corp: 102/3886b lim: 113 exec/s: 2 rss: 71Mb L: 6/113 MS: 1 CopyPart-
+#127	NEW    ft: 4510 corp: 103/3917b lim: 113 exec/s: 2 rss: 71Mb L: 31/113 MS: 2 ChangeBinInt-InsertRepeatedBytes-
+#128	pulse  ft: 4538 corp: 103/3917b lim: 113 exec/s: 2 rss: 71Mb
+#128	NEW    ft: 4538 corp: 104/3973b lim: 113 exec/s: 2 rss: 71Mb L: 56/113 MS: 1 InsertRepeatedBytes-
+#129	NEW    ft: 4569 corp: 105/4033b lim: 113 exec/s: 2 rss: 71Mb L: 60/113 MS: 1 InsertRepeatedBytes-
+#130	NEW    ft: 4573 corp: 106/4034b lim: 113 exec/s: 2 rss: 71Mb L: 1/113 MS: 1 ShuffleBytes-
+#131	NEW    ft: 4583 corp: 107/4037b lim: 113 exec/s: 2 rss: 71Mb L: 3/113 MS: 1 ShuffleBytes-
+#132	NEW    ft: 4598 corp: 108/4041b lim: 113 exec/s: 2 rss: 71Mb L: 4/113 MS: 1 InsertByte-
+#133	NEW    ft: 4609 corp: 109/4136b lim: 113 exec/s: 2 rss: 71Mb L: 95/113 MS: 1 ShuffleBytes-
+#134	NEW    ft: 4613 corp: 110/4144b lim: 113 exec/s: 2 rss: 71Mb L: 8/113 MS: 1 InsertRepeatedBytes-
+#136	NEW    ft: 4635 corp: 111/4147b lim: 113 exec/s: 2 rss: 71Mb L: 3/113 MS: 1 ChangeBit-
+#137	NEW    ft: 4643 corp: 112/4151b lim: 113 exec/s: 2 rss: 71Mb L: 4/113 MS: 1 CopyPart-
+#138	NEW    ft: 4653 corp: 113/4156b lim: 113 exec/s: 2 rss: 71Mb L: 5/113 MS: 1 EraseBytes-
+#139	NEW    ft: 4660 corp: 114/4244b lim: 113 exec/s: 2 rss: 71Mb L: 88/113 MS: 1 ChangeBinInt-
+#140	NEW    ft: 4661 corp: 115/4275b lim: 113 exec/s: 2 rss: 71Mb L: 31/113 MS: 1 PersAutoDict- DE: &quot;J\011\312\001&quot;-
+#141	NEW    ft: 4670 corp: 116/4281b lim: 113 exec/s: 2 rss: 71Mb L: 6/113 MS: 1 CopyPart-
+#142	NEW    ft: 4673 corp: 117/4284b lim: 113 exec/s: 2 rss: 71Mb L: 3/113 MS: 1 CopyPart-
+#144	NEW    ft: 4681 corp: 118/4290b lim: 113 exec/s: 2 rss: 71Mb L: 6/113 MS: 2 CopyPart-ChangeByte-
+#145	NEW    ft: 4682 corp: 119/4294b lim: 113 exec/s: 2 rss: 71Mb L: 4/113 MS: 1 ChangeByte-
+#146	NEW    ft: 4720 corp: 120/4299b lim: 113 exec/s: 2 rss: 71Mb L: 5/113 MS: 1 InsertByte-
+#147	NEW    ft: 4721 corp: 121/4300b lim: 113 exec/s: 2 rss: 71Mb L: 1/113 MS: 1 CopyPart-
+#148	NEW    ft: 4735 corp: 122/4301b lim: 113 exec/s: 2 rss: 71Mb L: 1/113 MS: 1 ShuffleBytes-
+#149	NEW    ft: 4742 corp: 123/4348b lim: 113 exec/s: 2 rss: 71Mb L: 47/113 MS: 1 ChangeByte-
+#150	NEW    ft: 4745 corp: 124/4440b lim: 113 exec/s: 2 rss: 71Mb L: 92/113 MS: 1 PersAutoDict- DE: &quot;J\011\312\001&quot;-
+#151	NEW    ft: 4749 corp: 125/4443b lim: 113 exec/s: 2 rss: 71Mb L: 3/113 MS: 1 ChangeASCIIInt-
+#152	NEW    ft: 4751 corp: 126/4447b lim: 113 exec/s: 2 rss: 71Mb L: 4/113 MS: 1 ShuffleBytes-
+#153	NEW    ft: 4753 corp: 127/4452b lim: 113 exec/s: 2 rss: 72Mb L: 5/113 MS: 1 InsertByte-
+#154	NEW    ft: 4757 corp: 128/4459b lim: 113 exec/s: 2 rss: 72Mb L: 7/113 MS: 1 PersAutoDict- DE: &quot;J\011\312\001&quot;-
+#155	NEW    ft: 4760 corp: 129/4572b lim: 113 exec/s: 2 rss: 72Mb L: 113/113 MS: 1 ShuffleBytes-
+#156	NEW    ft: 4762 corp: 130/4578b lim: 113 exec/s: 2 rss: 72Mb L: 6/113 MS: 1 CopyPart-
+#157	NEW    ft: 4767 corp: 131/4583b lim: 113 exec/s: 2 rss: 73Mb L: 5/113 MS: 1 CMP- DE: &quot;\004\377\377\377&quot;-
+#159	NEW    ft: 4770 corp: 132/4589b lim: 113 exec/s: 2 rss: 74Mb L: 6/113 MS: 1 PersAutoDict- DE: &quot;\004\377\377\377&quot;-
+#160	NEW    ft: 4771 corp: 133/4689b lim: 113 exec/s: 2 rss: 75Mb L: 100/113 MS: 1 CopyPart-
+#161	NEW    ft: 4778 corp: 134/4773b lim: 113 exec/s: 2 rss: 75Mb L: 84/113 MS: 1 InsertRepeatedBytes-
+#162	NEW    ft: 4779 corp: 135/4780b lim: 113 exec/s: 2 rss: 75Mb L: 7/113 MS: 1 CMP- DE: &quot;\0017\213\330&quot;-
+#163	NEW    ft: 4781 corp: 136/4859b lim: 113 exec/s: 2 rss: 75Mb L: 79/113 MS: 1 InsertRepeatedBytes-
+#164	NEW    ft: 4783 corp: 137/4941b lim: 113 exec/s: 2 rss: 75Mb L: 82/113 MS: 1 ShuffleBytes-
+#165	NEW    ft: 4898 corp: 138/4945b lim: 113 exec/s: 2 rss: 75Mb L: 4/113 MS: 1 InsertByte-
+#166	NEW    ft: 4899 corp: 139/4948b lim: 113 exec/s: 2 rss: 75Mb L: 3/113 MS: 1 InsertByte-
+#167	NEW    ft: 4904 corp: 140/4949b lim: 113 exec/s: 2 rss: 76Mb L: 1/113 MS: 1 ChangeByte-
+#168	NEW    ft: 4931 corp: 141/5031b lim: 113 exec/s: 2 rss: 76Mb L: 82/113 MS: 1 ChangeBinInt-
+#170	NEW    ft: 4939 corp: 142/5071b lim: 113 exec/s: 2 rss: 77Mb L: 40/113 MS: 1 InsertRepeatedBytes-
+#171	NEW    ft: 4941 corp: 143/5154b lim: 113 exec/s: 2 rss: 77Mb L: 83/113 MS: 1 CopyPart-
+#172	NEW    ft: 4965 corp: 144/5159b lim: 113 exec/s: 2 rss: 77Mb L: 5/113 MS: 1 ShuffleBytes-
+#173	NEW    ft: 5093 corp: 145/5166b lim: 113 exec/s: 2 rss: 77Mb L: 7/113 MS: 1 CopyPart-
+#174	NEW    ft: 5111 corp: 146/5178b lim: 113 exec/s: 2 rss: 79Mb L: 12/113 MS: 1 CopyPart-
+#175	NEW    ft: 5120 corp: 147/5179b lim: 113 exec/s: 2 rss: 79Mb L: 1/113 MS: 1 ChangeByte-
+#176	NEW    ft: 5159 corp: 148/5292b lim: 113 exec/s: 2 rss: 80Mb L: 113/113 MS: 1 ShuffleBytes-
+#177	NEW    ft: 5251 corp: 149/5297b lim: 113 exec/s: 2 rss: 81Mb L: 5/113 MS: 1 ShuffleBytes-
+#178	NEW    ft: 5321 corp: 150/5379b lim: 113 exec/s: 2 rss: 81Mb L: 82/113 MS: 1 ShuffleBytes-
+#179	NEW    ft: 5334 corp: 151/5381b lim: 113 exec/s: 2 rss: 82Mb L: 2/113 MS: 1 InsertByte-
+#180	NEW    ft: 5343 corp: 152/5383b lim: 113 exec/s: 2 rss: 82Mb L: 2/113 MS: 1 ShuffleBytes-
+#182	NEW    ft: 5352 corp: 153/5385b lim: 113 exec/s: 2 rss: 85Mb L: 2/113 MS: 1 ChangeByte-
+#184	NEW    ft: 5354 corp: 154/5471b lim: 113 exec/s: 2 rss: 86Mb L: 86/113 MS: 2 EraseBytes-PersAutoDict- DE: &quot;\0017\213\330&quot;-
+#185	NEW    ft: 5359 corp: 155/5583b lim: 113 exec/s: 2 rss: 86Mb L: 112/113 MS: 1 CopyPart-
+#187	NEW    ft: 5360 corp: 156/5592b lim: 113 exec/s: 2 rss: 87Mb L: 9/113 MS: 2 PersAutoDict-CopyPart- DE: &quot;\0017\213\330&quot;-
+#189	NEW    ft: 5370 corp: 157/5674b lim: 113 exec/s: 2 rss: 87Mb L: 82/113 MS: 2 ChangeBit-ChangeBinInt-
+#191	NEW    ft: 5375 corp: 158/5679b lim: 113 exec/s: 2 rss: 87Mb L: 5/113 MS: 2 ChangeBit-ChangeByte-
+#193	NEW    ft: 5382 corp: 159/5753b lim: 113 exec/s: 2 rss: 87Mb L: 74/113 MS: 2 EraseBytes-ChangeBit-
+#195	NEW    ft: 5383 corp: 160/5756b lim: 113 exec/s: 2 rss: 87Mb L: 3/113 MS: 2 InsertByte-ChangeBit-
+#196	NEW    ft: 5385 corp: 161/5759b lim: 113 exec/s: 2 rss: 88Mb L: 3/113 MS: 1 CrossOver-
+#197	NEW    ft: 5395 corp: 162/5819b lim: 113 exec/s: 2 rss: 88Mb L: 60/113 MS: 1 ChangeBit-
+#199	NEW    ft: 5400 corp: 163/5898b lim: 113 exec/s: 2 rss: 88Mb L: 79/113 MS: 2 EraseBytes-ChangeBinInt-
+#200	NEW    ft: 5401 corp: 164/6011b lim: 113 exec/s: 2 rss: 88Mb L: 113/113 MS: 1 CopyPart-
+#201	NEW    ft: 5410 corp: 165/6016b lim: 113 exec/s: 2 rss: 88Mb L: 5/113 MS: 1 ChangeBinInt-
+#204	NEW    ft: 5411 corp: 166/6071b lim: 113 exec/s: 2 rss: 88Mb L: 55/113 MS: 3 ChangeByte-PersAutoDict-ChangeBinInt- DE: &quot;\0017\213\330&quot;-
+#205	NEW    ft: 5419 corp: 167/6074b lim: 113 exec/s: 2 rss: 88Mb L: 3/113 MS: 1 ShuffleBytes-
+#208	NEW    ft: 5424 corp: 168/6178b lim: 113 exec/s: 2 rss: 88Mb L: 104/113 MS: 3 CopyPart-ShuffleBytes-InsertByte-
+#209	NEW    ft: 5428 corp: 169/6252b lim: 113 exec/s: 2 rss: 89Mb L: 74/113 MS: 1 EraseBytes-
+#210	NEW    ft: 5429 corp: 170/6332b lim: 113 exec/s: 2 rss: 89Mb L: 80/113 MS: 1 InsertRepeatedBytes-
+#213	NEW    ft: 5433 corp: 171/6371b lim: 113 exec/s: 2 rss: 91Mb L: 39/113 MS: 3 ShuffleBytes-EraseBytes-ShuffleBytes-
+#215	NEW    ft: 5438 corp: 172/6378b lim: 113 exec/s: 2 rss: 91Mb L: 7/113 MS: 2 PersAutoDict-ChangeBinInt- DE: &quot;\0017\213\330&quot;-
+#216	NEW    ft: 5439 corp: 173/6467b lim: 113 exec/s: 2 rss: 91Mb L: 89/113 MS: 1 PersAutoDict- DE: &quot;\004\377\377\377&quot;-
+#217	NEW    ft: 5440 corp: 174/6469b lim: 113 exec/s: 2 rss: 92Mb L: 2/113 MS: 1 EraseBytes-
+#220	NEW    ft: 5441 corp: 175/6520b lim: 113 exec/s: 2 rss: 92Mb L: 51/113 MS: 3 PersAutoDict-EraseBytes-InsertRepeatedBytes- DE: &quot;J\011\312\001&quot;-
+#221	NEW    ft: 5444 corp: 176/6608b lim: 113 exec/s: 2 rss: 93Mb L: 88/113 MS: 1 ChangeBit-
+#223	NEW    ft: 5446 corp: 177/6635b lim: 113 exec/s: 2 rss: 93Mb L: 27/113 MS: 2 InsertRepeatedBytes-ChangeBinInt-
+#225	NEW    ft: 5453 corp: 178/6720b lim: 113 exec/s: 2 rss: 93Mb L: 85/113 MS: 2 CrossOver-InsertByte-
+#227	NEW    ft: 5457 corp: 179/6814b lim: 113 exec/s: 2 rss: 93Mb L: 94/113 MS: 2 ChangeByte-CopyPart-
+#228	NEW    ft: 5458 corp: 180/6865b lim: 113 exec/s: 2 rss: 94Mb L: 51/113 MS: 1 ChangeBinInt-
+#229	NEW    ft: 5470 corp: 181/6872b lim: 113 exec/s: 2 rss: 94Mb L: 7/113 MS: 1 CopyPart-
+#233	NEW    ft: 5492 corp: 182/6942b lim: 113 exec/s: 2 rss: 94Mb L: 70/113 MS: 4 ChangeBinInt-ChangeBinInt-ChangeBinInt-EraseBytes-
+#234	NEW    ft: 5501 corp: 183/7024b lim: 113 exec/s: 2 rss: 94Mb L: 82/113 MS: 1 ShuffleBytes-
+#235	NEW    ft: 5519 corp: 184/7030b lim: 113 exec/s: 2 rss: 94Mb L: 6/113 MS: 1 ChangeBit-
+#236	NEW    ft: 5520 corp: 185/7112b lim: 113 exec/s: 2 rss: 94Mb L: 82/113 MS: 1 ShuffleBytes-
+#237	NEW    ft: 5534 corp: 186/7192b lim: 113 exec/s: 2 rss: 95Mb L: 80/113 MS: 1 ShuffleBytes-
+#239	NEW    ft: 5535 corp: 187/7193b lim: 113 exec/s: 2 rss: 95Mb L: 1/113 MS: 2 CopyPart-ShuffleBytes-
+#240	NEW    ft: 5536 corp: 188/7306b lim: 113 exec/s: 2 rss: 95Mb L: 113/113 MS: 1 ChangeBinInt-
+#241	NEW    ft: 5561 corp: 189/7310b lim: 113 exec/s: 2 rss: 95Mb L: 4/113 MS: 1 InsertByte-
+#245	NEW    ft: 5592 corp: 190/7358b lim: 113 exec/s: 2 rss: 95Mb L: 48/113 MS: 4 CrossOver-InsertRepeatedBytes-CrossOver-CMP- DE: &quot;\002\000\000\000\000\000\000\000&quot;-
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==96641==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000000 (pc 0x000000000000 bp 0x10c00029fe28 sp 0x10c00029fcf0 T52)
+==96641==Hint: pc points to the zero page.
+==96641==The signal is caused by a READ memory access.
+==96641==Hint: address points to the zero page.
+SCARINESS: 10 (null-deref)
+    #0 0x0  (&lt;unknown module&gt;)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV (&lt;unknown module&gt;)
+Thread T52 created by T35 here:
+    #0 0x50f3fc in pthread_create /src/llvm-project/compiler-rt/lib/asan/asan_interceptors.cpp:207:3
+    #1 0x55f110 in _cgo_try_pthread_create /_/runtime/cgo/gcc_libinit.c:100:9
+    #2 0x597ba6 in runtime.newm runtime/proc.go:2230
+    #3 0x59828e in runtime.startm runtime/proc.go:2485
+    #4 0x5987b9 in runtime.wakep runtime/proc.go:2584
+    #5 0x599f84 in runtime.resetspinning runtime/proc.go:3216
+    #6 0x59a53d in runtime.schedule runtime/proc.go:3374
+    #7 0x59aa6c in runtime.park_m runtime/proc.go:3516
+    #8 0x5be0c4 in runtime.mcall runtime/asm_amd64.s:307
+
+Thread T35 created by T0 here:
+    #0 0x50f3fc in pthread_create /src/llvm-project/compiler-rt/lib/asan/asan_interceptors.cpp:207:3
+    #1 0x55f110 in _cgo_try_pthread_create /_/runtime/cgo/gcc_libinit.c:100:9
+    #2 0x597ba6 in runtime.newm runtime/proc.go:2230
+    #3 0x59828e in runtime.startm runtime/proc.go:2485
+    #4 0x59872b in runtime.handoffp runtime/proc.go:2519
+    #5 0x598834 in runtime.stoplockedm runtime/proc.go:2598
+    #6 0x59a31c in runtime.schedule runtime/proc.go:3299
+    #7 0x59ab64 in runtime.goschedImpl runtime/proc.go:3531
+    #8 0x59ae54 in runtime.gopreempt_m runtime/proc.go:3559
+    #9 0x5aa104 in runtime.newstack runtime/stack.go:1055
+    #10 0x5be1ff in runtime.morestack.abi0 runtime/asm_amd64.s:461
+
+==96641==ABORTING
+MS: 3 CMP-InsertByte-ShuffleBytes- DE: &quot;\001\007y\304\031\313O\304&quot;-; base unit: 122ad892dc8305d0b8b020d230f1d8a49ca7b6b1
+0x32,0x83,0x83,0x83,0x1,0x7,0x79,0xc4,0x19,0xcb,0x4f,0xc4,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x7b,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x7b,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x12,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x83,0x2d,0x5e,
+2\203\203\203\001\007y\304\031\313O\304\203\203\203\203\203\203\203\203\203\203{\203\203\203\203\203\203\203{\203\203\203\203\203\203\203\203\203\203\203\203\203\203\203\203\203\203\022\203\203\203\203\203\203\203\203\203\203\203\203\203\203\203\203\203\203\203\203\203\203\203\203\203\203\203\203\203\203\203\203\203\203\203\203\203\203\203\203\203\203\203\203\203\203\203\203\203-^
+artifact_prefix=&#x27;/clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/&#x27;; Test unit written to /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/crash-7a5b67a00e642cdb1be4d4d6cfce0608e7f88d75
+Base64: MoODgwEHecQZy0/Eg4ODg4ODg4ODg3uDg4ODg4ODe4ODg4ODg4ODg4ODg4ODg4ODgxKDg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODLV4=
+stat::number_of_executed_units: 248
+stat::average_exec_per_sec:     2
+stat::new_units_added:          180
+stat::slowest_unit_time_sec:    0
+stat::peak_rss_mb:              96
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+SUMMARY: AddressSanitizer: SEGV (&lt;unknown module&gt;) 
+Thread T52 created by T35 here:
+    #0 0x50f3fc  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzzKeystore+0x50f3fc)
+    #1 0x55f110  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzzKeystore+0x55f110)
+    #2 0x597ba6  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzzKeystore+0x597ba6)
+    #3 0x59828e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzzKeystore+0x59828e)
+    #4 0x5987b9  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzzKeystore+0x5987b9)
+    #5 0x599f84  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzzKeystore+0x599f84)
+    #6 0x59a53d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzzKeystore+0x59a53d)
+    #7 0x59aa6c  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzzKeystore+0x59aa6c)
+    #8 0x5be0c4  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzzKeystore+0x5be0c4)
+
+Thread T35 created by T0 here:
+    #0 0x50f3fc  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzzKeystore+0x50f3fc)
+    #1 0x55f110  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzzKeystore+0x55f110)
+    #2 0x597ba6  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzzKeystore+0x597ba6)
+    #3 0x59828e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzzKeystore+0x59828e)
+    #4 0x59872b  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzzKeystore+0x59872b)
+    #5 0x598834  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzzKeystore+0x598834)
+    #6 0x59a31c  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzzKeystore+0x59a31c)
+    #7 0x59ab64  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzzKeystore+0x59ab64)
+    #8 0x59ae54  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzzKeystore+0x59ae54)
+    #9 0x5aa104  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzzKeystore+0x5aa104)
+    #10 0x5be1ff  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-ethereum_libfuzzer_asan/custom/fuzzKeystore+0x5be1ff)

@@ -1,0 +1,64 @@
+Testcase id: 105018
+Job: keystone_libfuzzer_asan
+Crash Type: Timeout
+isSecurity: False
+Crash state: fuzz_asm_hex
+Poc: 105018.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_fuzz_asm_hex
+target: fuzz_asm_hex
+name: libFuzzer
+[Environment] ASAN_OPTIONS=dedup_token_length=3:exitcode=77:symbolize=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+Command: /clusterfuzz/run_bot/clusterfuzz/bot/builds/keystone_libfuzzer_asan/custom/fuzz_asm_hex -rss_limit_mb=2560 -timeout=60 -runs=100 /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/timeout-baa1e2713b6d70d7b5cf6a0c216c57b5cbea26c9
+Time ran: 62.02547264099121
+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 1302051488
+INFO: Loaded 1 modules   (96160 inline 8-bit counters): 96160 [0x13852f8, 0x139ca98),
+INFO: Loaded 1 PC tables (96160 PCs): 96160 [0x139ca98,0x1514498),
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/keystone_libfuzzer_asan/custom/fuzz_asm_hex: Running 1 inputs 100 time(s) each.
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/timeout-baa1e2713b6d70d7b5cf6a0c216c57b5cbea26c9
+ALARM: working on the last Unit for 61 seconds
+       and the timeout value is 60 (use -timeout=N to change)
+==74049== ERROR: libFuzzer: timeout after 61 seconds
+    #0 0x547a71 in __sanitizer_print_stack_trace /src/llvm-project/compiler-rt/lib/asan/asan_stack.cpp:87:3
+    #1 0x4884a8 in fuzzer::PrintStackTrace() cxa_noexception.cpp:0
+    #2 0x46d339 in fuzzer::Fuzzer::AlarmCallback() cxa_noexception.cpp:0
+    #3 0x7f8a929f73bf in libpthread.so.0
+    #4 0x4860cd in AddValue /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerValueBitMap.h:39:18
+    #5 0x4860cd in HandleCmp&lt;unsigned int&gt; /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerTracePC.cpp:391:19
+    #6 0x4860cd in __sanitizer_cov_trace_const_cmp4 /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerTracePC.cpp:510:15
+    #7 0x5d5b61 in llvm_ks::AsmToken::isNot(llvm_ks::AsmToken::TokenKind) const /src/keystone/llvm/include/llvm/MC/MCParser/MCAsmLexer.h:73:47
+    #8 0x5d5b61 in llvm_ks::MCAsmLexer::isNot(llvm_ks::AsmToken::TokenKind) const /src/keystone/llvm/include/llvm/MC/MCParser/MCAsmLexer.h:220:61
+    #9 0x5d5b61 in (anonymous namespace)::AsmParser::Run(bool, unsigned long, bool) /src/keystone/llvm/lib/MC/MCParser/AsmParser.cpp:710:16
+    #10 0x57dff5 in ks_asm /src/keystone/llvm/keystone/ks.cpp:659:27
+    #11 0x57700c in LLVMFuzzerTestOneInput /src/keystone/suite/fuzz/fuzz_asm_hex.c:42:9
+    #12 0x46e963 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #13 0x45a272 in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:324:6
+    #14 0x45fd3a in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #15 0x488c62 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #16 0x7f8a927eb0b2 in __libc_start_main
+    #17 0x4374fd in _start
+
+SUMMARY: libFuzzer: timeout
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+       and the timeout value is 60 (use -timeout=N to change)
+==74049== ERROR: libFuzzer: timeout after 61 seconds
+    #0 0x547a71  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/keystone_libfuzzer_asan/custom/fuzz_asm_hex+0x547a71)
+    #1 0x4884a8  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/keystone_libfuzzer_asan/custom/fuzz_asm_hex+0x4884a8)
+    #2 0x46d339  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/keystone_libfuzzer_asan/custom/fuzz_asm_hex+0x46d339)
+    #3 0x7f8a929f73bf  (/lib/x86_64-linux-gnu/libpthread.so.0+0x153bf)
+    #4 0x4860cd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/keystone_libfuzzer_asan/custom/fuzz_asm_hex+0x4860cd)
+    #5 0x5d5b61  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/keystone_libfuzzer_asan/custom/fuzz_asm_hex+0x5d5b61)
+    #6 0x57dff5  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/keystone_libfuzzer_asan/custom/fuzz_asm_hex+0x57dff5)
+    #7 0x57700c  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/keystone_libfuzzer_asan/custom/fuzz_asm_hex+0x57700c)
+    #8 0x46e963  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/keystone_libfuzzer_asan/custom/fuzz_asm_hex+0x46e963)
+    #9 0x45a272  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/keystone_libfuzzer_asan/custom/fuzz_asm_hex+0x45a272)
+    #10 0x45fd3a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/keystone_libfuzzer_asan/custom/fuzz_asm_hex+0x45fd3a)
+    #11 0x488c62  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/keystone_libfuzzer_asan/custom/fuzz_asm_hex+0x488c62)
+    #12 0x7f8a927eb0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #13 0x4374fd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/keystone_libfuzzer_asan/custom/fuzz_asm_hex+0x4374fd)

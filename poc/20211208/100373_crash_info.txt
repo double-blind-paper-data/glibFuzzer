@@ -1,0 +1,69 @@
+Testcase id: 100373
+Job: htslib_libfuzzer_msan
+Crash Type: Use-of-uninitialized-value
+isSecurity: True
+Crash state: rans_uncompress_to_4x16
+rans_uncompress_4x16
+cram_uncompress_block
+Poc: 100373.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_hts_open_fuzzer
+target: hts_open_fuzzer
+name: libFuzzer
+[Environment] MSAN_OPTIONS=exitcode=77
++----------------------------------------Release Build Stacktrace----------------------------------------+
+Command: /clusterfuzz/run_bot/clusterfuzz/bot/builds/htslib_libfuzzer_msan/custom/hts_open_fuzzer -rss_limit_mb=2560 -timeout=60 -runs=100 /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/crash-b7d031dedfadce7e1ea09c3f85556d163e07c00a
+Time ran: 0.4015464782714844
+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 3635023228
+INFO: Loaded 1 modules   (31620 inline 8-bit counters): 31620 [0xa84dcc, 0xa8c950),
+INFO: Loaded 1 PC tables (31620 PCs): 31620 [0x9afa10,0xa2b250),
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/htslib_libfuzzer_msan/custom/hts_open_fuzzer: Running 1 inputs 100 time(s) each.
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/crash-b7d031dedfadce7e1ea09c3f85556d163e07c00a
+==209662==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x874dfd in rans_uncompress_to_4x16 /src/htslib/htscodecs/htscodecs/rANS_static4x16pr.c:1452:9
+    #1 0x87edc7 in rans_uncompress_4x16 /src/htslib/htscodecs/htscodecs/rANS_static4x16pr.c:1640:12
+    #2 0x7c244a in cram_uncompress_block /src/htslib/cram/cram_io.c:1683:26
+    #3 0x7e7e7e in cram_read_SAM_hdr /src/htslib/cram/cram_io.c:4672:13
+    #4 0x7ef3d1 in cram_dopen /src/htslib/cram/cram_io.c:5198:28
+    #5 0x58ef4f in hts_hopen /src/htslib/hts.c:1466:23
+    #6 0x529f5d in LLVMFuzzerTestOneInput /src/htslib/test/fuzz/hts_open_fuzzer.c:133:24
+    #7 0x457ce3 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #8 0x4435f2 in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:324:6
+    #9 0x4490ba in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #10 0x471fe2 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #11 0x7f470d6a70b2 in __libc_start_main
+    #12 0x42087d in _start
+
+  Uninitialized value was created by an allocation of &#x27;usize2120&#x27; in the stack frame of function &#x27;cram_uncompress_block&#x27;
+    #0 0x7c1640 in cram_uncompress_block /src/htslib/cram/cram_io.c:1565
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/htslib_libfuzzer_msan/custom/hts_open_fuzzer+0x874dfd)
+Unique heap origins: 71
+Stack depot allocated bytes: 1900544
+Unique origin histories: 15
+History depot allocated bytes: 196608
+Exiting
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/crash-b7d031dedfadce7e1ea09c3f85556d163e07c00a
+==209662==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x874dfd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/htslib_libfuzzer_msan/custom/hts_open_fuzzer+0x874dfd)
+    #1 0x87edc7  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/htslib_libfuzzer_msan/custom/hts_open_fuzzer+0x87edc7)
+    #2 0x7c244a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/htslib_libfuzzer_msan/custom/hts_open_fuzzer+0x7c244a)
+    #3 0x7e7e7e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/htslib_libfuzzer_msan/custom/hts_open_fuzzer+0x7e7e7e)
+    #4 0x7ef3d1  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/htslib_libfuzzer_msan/custom/hts_open_fuzzer+0x7ef3d1)
+    #5 0x58ef4f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/htslib_libfuzzer_msan/custom/hts_open_fuzzer+0x58ef4f)
+    #6 0x529f5d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/htslib_libfuzzer_msan/custom/hts_open_fuzzer+0x529f5d)
+    #7 0x457ce3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/htslib_libfuzzer_msan/custom/hts_open_fuzzer+0x457ce3)
+    #8 0x4435f2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/htslib_libfuzzer_msan/custom/hts_open_fuzzer+0x4435f2)
+    #9 0x4490ba  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/htslib_libfuzzer_msan/custom/hts_open_fuzzer+0x4490ba)
+    #10 0x471fe2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/htslib_libfuzzer_msan/custom/hts_open_fuzzer+0x471fe2)
+    #11 0x7f470d6a70b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #12 0x42087d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/htslib_libfuzzer_msan/custom/hts_open_fuzzer+0x42087d)
+
+  Uninitialized value was created by an allocation of &#x27;usize2120&#x27; in the stack frame of function &#x27;cram_uncompress_block&#x27;
+    #0 0x7c1640  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/htslib_libfuzzer_msan/custom/hts_open_fuzzer+0x7c1640)

@@ -1,0 +1,66 @@
+Testcase id: 14634
+Job: htslib_honggfuzz_msan
+Crash Type: Use-of-uninitialized-value
+isSecurity: True
+Crash state: decode_names
+cram_uncompress_block
+cram_read_SAM_hdr
+Poc: 14634.testcase
+engine: honggfuzz
+fully_qualified_name: honggfuzz_hts_open_fuzzer
+target: hts_open_fuzzer
+name: honggfuzz
+[Environment] MSAN_OPTIONS=allocator_release_to_os_interval_ms=500:halt_on_error=1:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:print_stats=1:print_summary=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+==6766==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x86743e in decode_name /src/htslib/htscodecs/htscodecs/tokenise_name3.c:1026:9
+    #1 0x86743e in decode_names /src/htslib/htscodecs/htscodecs/tokenise_name3.c:1678:19
+    #2 0x76c769 in cram_uncompress_block /src/htslib/cram/cram_io.c:1723:23
+    #3 0x7951da in cram_read_SAM_hdr /src/htslib/cram/cram_io.c:4672:13
+    #4 0x79c6a6 in cram_dopen /src/htslib/cram/cram_io.c:5198:28
+    #5 0x5199f1 in hts_hopen /src/htslib/hts.c:1466:23
+    #6 0x4a3bec in LLVMFuzzerTestOneInput /src/htslib/test/fuzz/hts_open_fuzzer.c:133:24
+    #7 0x4a522e in main
+    #8 0x7ffff789c0b2 in __libc_start_main
+    #9 0x41f8cd in _start
+
+  Uninitialized value was created by a heap allocation
+    #0 0x4506ad in malloc /src/llvm-project/compiler-rt/lib/msan/msan_interceptors.cpp:912:3
+    #1 0x86234c in decode_names /src/htslib/htscodecs/htscodecs/tokenise_name3.c:1645:21
+    #2 0x76c769 in cram_uncompress_block /src/htslib/cram/cram_io.c:1723:23
+    #3 0x7951da in cram_read_SAM_hdr /src/htslib/cram/cram_io.c:4672:13
+    #4 0x79c6a6 in cram_dopen /src/htslib/cram/cram_io.c:5198:28
+    #5 0x5199f1 in hts_hopen /src/htslib/hts.c:1466:23
+    #6 0x4a3bec in LLVMFuzzerTestOneInput /src/htslib/test/fuzz/hts_open_fuzzer.c:133:24
+    #7 0x4a522e in main
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/htslib_honggfuzz_msan/custom/hts_open_fuzzer+0x86743e)
+Unique heap origins: 170
+Stack depot allocated bytes: 1900544
+Unique origin histories: 22
+History depot allocated bytes: 196608
+Exiting
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+==6766==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x86743e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/htslib_honggfuzz_msan/custom/hts_open_fuzzer+0x86743e)
+    #1 0x76c769  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/htslib_honggfuzz_msan/custom/hts_open_fuzzer+0x76c769)
+    #2 0x7951da  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/htslib_honggfuzz_msan/custom/hts_open_fuzzer+0x7951da)
+    #3 0x79c6a6  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/htslib_honggfuzz_msan/custom/hts_open_fuzzer+0x79c6a6)
+    #4 0x5199f1  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/htslib_honggfuzz_msan/custom/hts_open_fuzzer+0x5199f1)
+    #5 0x4a3bec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/htslib_honggfuzz_msan/custom/hts_open_fuzzer+0x4a3bec)
+    #6 0x4a522e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/htslib_honggfuzz_msan/custom/hts_open_fuzzer+0x4a522e)
+    #7 0x7ffff789c0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #8 0x41f8cd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/htslib_honggfuzz_msan/custom/hts_open_fuzzer+0x41f8cd)
+
+  Uninitialized value was created by a heap allocation
+    #0 0x4506ad  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/htslib_honggfuzz_msan/custom/hts_open_fuzzer+0x4506ad)
+    #1 0x86234c  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/htslib_honggfuzz_msan/custom/hts_open_fuzzer+0x86234c)
+    #2 0x76c769  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/htslib_honggfuzz_msan/custom/hts_open_fuzzer+0x76c769)
+    #3 0x7951da  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/htslib_honggfuzz_msan/custom/hts_open_fuzzer+0x7951da)
+    #4 0x79c6a6  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/htslib_honggfuzz_msan/custom/hts_open_fuzzer+0x79c6a6)
+    #5 0x5199f1  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/htslib_honggfuzz_msan/custom/hts_open_fuzzer+0x5199f1)
+    #6 0x4a3bec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/htslib_honggfuzz_msan/custom/hts_open_fuzzer+0x4a3bec)
+    #7 0x4a522e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/htslib_honggfuzz_msan/custom/hts_open_fuzzer+0x4a522e)

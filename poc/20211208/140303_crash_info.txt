@@ -1,0 +1,47 @@
+Testcase id: 140303
+Job: cppcheck_honggfuzz_msan
+Crash Type: Null-dereference READ
+isSecurity: False
+Crash state: CheckCondition::multiCondition2
+CheckCondition::runChecks
+CppCheck::checkNormalTokens
+Poc: 140303.testcase
+engine: honggfuzz
+fully_qualified_name: honggfuzz_oss-fuzz-client
+target: oss-fuzz-client
+name: honggfuzz
+[Environment] MSAN_OPTIONS=allocator_release_to_os_interval_ms=500:halt_on_error=1:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:print_stats=1:print_summary=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+==1912==ERROR: MemorySanitizer: SEGV on unknown address 0x000000000048 (pc 0x000000816509 bp 0x7fffffffb490 sp 0x7fffffffb040 T1912)
+==1912==The signal is caused by a READ memory access.
+==1912==Hint: address points to the zero page.
+    #0 0x816509 in varId /src/cppcheck/lib/token.h:0
+    #1 0x816509 in CheckCondition::multiCondition2() /src/cppcheck/lib/checkcondition.cpp:666:62
+    #2 0x8591c2 in CheckCondition::runChecks(Tokenizer const*, Settings const*, ErrorLogger*) /src/cppcheck/lib/checkcondition.h:60:24
+    #3 0xc0e463 in CppCheck::checkNormalTokens(Tokenizer const&amp;) /src/cppcheck/lib/cppcheck.cpp:1006:20
+    #4 0xc25494 in CppCheck::checkFile(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; const&amp;, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; const&amp;, std::__1::basic_istream&lt;char, std::__1::char_traits&lt;char&gt; &gt;&amp;) /src/cppcheck/lib/cppcheck.cpp:853:17
+    #5 0xc2c8aa in CppCheck::check(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; const&amp;, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; const&amp;) /src/cppcheck/lib/cppcheck.cpp:529:12
+    #6 0x4cfc5d in run /src/cppcheck/oss-fuzz/main.cpp:20:18
+    #7 0x4cfc5d in LLVMFuzzerTestOneInput /src/cppcheck/oss-fuzz/main.cpp:51:26
+    #8 0x16c534e in main
+    #9 0x7ffff7c5b0b2 in __libc_start_main
+    #10 0x44b8dd in _start
+
+MemorySanitizer can not provide additional info.
+SUMMARY: MemorySanitizer: SEGV (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cppcheck_honggfuzz_msan/custom/oss-fuzz-client+0x816509)
+==1912==ABORTING
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+==1912==The signal is caused by a READ memory access.
+==1912==Hint: address points to the zero page.
+    #0 0x816509  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cppcheck_honggfuzz_msan/custom/oss-fuzz-client+0x816509)
+    #1 0x8591c2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cppcheck_honggfuzz_msan/custom/oss-fuzz-client+0x8591c2)
+    #2 0xc0e463  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cppcheck_honggfuzz_msan/custom/oss-fuzz-client+0xc0e463)
+    #3 0xc25494  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cppcheck_honggfuzz_msan/custom/oss-fuzz-client+0xc25494)
+    #4 0xc2c8aa  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cppcheck_honggfuzz_msan/custom/oss-fuzz-client+0xc2c8aa)
+    #5 0x4cfc5d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cppcheck_honggfuzz_msan/custom/oss-fuzz-client+0x4cfc5d)
+    #6 0x16c534e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cppcheck_honggfuzz_msan/custom/oss-fuzz-client+0x16c534e)
+    #7 0x7ffff7c5b0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #8 0x44b8dd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cppcheck_honggfuzz_msan/custom/oss-fuzz-client+0x44b8dd)

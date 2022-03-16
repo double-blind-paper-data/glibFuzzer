@@ -1,0 +1,61 @@
+Testcase id: 59398
+Job: libssh_honggfuzz_msan
+Crash Type: Use-of-uninitialized-value
+isSecurity: True
+Crash state: ssh_path_expand_escape
+ssh_config_parse_line
+ssh_config_parse_string
+Poc: 59398.testcase
+engine: honggfuzz
+fully_qualified_name: honggfuzz_ssh_client_config_fuzzer
+target: ssh_client_config_fuzzer
+name: honggfuzz
+[Environment] MSAN_OPTIONS=allocator_release_to_os_interval_ms=500:halt_on_error=1:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:print_stats=1:print_summary=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+Uninitialized bytes in __interceptor_strlen at offset 0 inside [0x701000000060, 2)
+==132409==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x4c5035 in ssh_path_expand_escape /src/libssh/src/misc.c:1225:14
+    #1 0x4b1091 in ssh_config_parse_line /src/libssh/src/config.c:777:19
+    #2 0x4b5e8a in ssh_config_parse_string /src/libssh/src/config.c:1229:14
+    #3 0x4a33a3 in LLVMFuzzerTestOneInput /src/libssh/tests/fuzz/ssh_client_config_fuzzer.cpp:45:5
+    #4 0x4a3b3e in main
+    #5 0x7ffff7c5b0b2 in __libc_start_main
+    #6 0x41f06d in _start
+
+  Uninitialized value was stored to memory at
+    #0 0x44a2d7 in strdup /src/llvm-project/compiler-rt/lib/msan/msan_interceptors.cpp:326:3
+    #1 0x4c4fcc in ssh_path_expand_escape /src/libssh/src/misc.c:0
+    #2 0x4b1091 in ssh_config_parse_line /src/libssh/src/config.c:777:19
+    #3 0x4b5e8a in ssh_config_parse_string /src/libssh/src/config.c:1229:14
+    #4 0x4a33a3 in LLVMFuzzerTestOneInput /src/libssh/tests/fuzz/ssh_client_config_fuzzer.cpp:45:5
+    #5 0x4a3b3e in main
+
+  Uninitialized value was created by an allocation of &#x27;host&#x27; in the stack frame of function &#x27;ssh_path_expand_escape&#x27;
+    #0 0x4c4600 in ssh_path_expand_escape /src/libssh/src/misc.c:1106
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libssh_honggfuzz_msan/custom/ssh_client_config_fuzzer+0x4c5035)
+Exiting
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+Uninitialized bytes in __interceptor_strlen at offset 0 inside [0x701000000060, 2)
+==132409==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x4c5035  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libssh_honggfuzz_msan/custom/ssh_client_config_fuzzer+0x4c5035)
+    #1 0x4b1091  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libssh_honggfuzz_msan/custom/ssh_client_config_fuzzer+0x4b1091)
+    #2 0x4b5e8a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libssh_honggfuzz_msan/custom/ssh_client_config_fuzzer+0x4b5e8a)
+    #3 0x4a33a3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libssh_honggfuzz_msan/custom/ssh_client_config_fuzzer+0x4a33a3)
+    #4 0x4a3b3e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libssh_honggfuzz_msan/custom/ssh_client_config_fuzzer+0x4a3b3e)
+    #5 0x7ffff7c5b0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #6 0x41f06d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libssh_honggfuzz_msan/custom/ssh_client_config_fuzzer+0x41f06d)
+
+  Uninitialized value was stored to memory at
+    #0 0x44a2d7  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libssh_honggfuzz_msan/custom/ssh_client_config_fuzzer+0x44a2d7)
+    #1 0x4c4fcc  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libssh_honggfuzz_msan/custom/ssh_client_config_fuzzer+0x4c4fcc)
+    #2 0x4b1091  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libssh_honggfuzz_msan/custom/ssh_client_config_fuzzer+0x4b1091)
+    #3 0x4b5e8a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libssh_honggfuzz_msan/custom/ssh_client_config_fuzzer+0x4b5e8a)
+    #4 0x4a33a3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libssh_honggfuzz_msan/custom/ssh_client_config_fuzzer+0x4a33a3)
+    #5 0x4a3b3e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libssh_honggfuzz_msan/custom/ssh_client_config_fuzzer+0x4a3b3e)
+
+  Uninitialized value was created by an allocation of &#x27;host&#x27; in the stack frame of function &#x27;ssh_path_expand_escape&#x27;
+    #0 0x4c4600  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libssh_honggfuzz_msan/custom/ssh_client_config_fuzzer+0x4c4600)

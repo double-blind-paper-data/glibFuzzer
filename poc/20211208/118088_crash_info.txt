@@ -1,0 +1,82 @@
+Testcase id: 118088
+Job: elfutils_libfuzzer_ubsan
+Crash Type: Unexpected-exit
+isSecurity: False
+Crash state: error
+print_symtab
+process_elf_file
+Poc: 118088.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_testfuzz
+target: testfuzz
+name: libFuzzer
+[Environment] UBSAN_OPTIONS=exitcode=77:silence_unsigned_overflow=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+Command: /clusterfuzz/run_bot/clusterfuzz/bot/builds/elfutils_libfuzzer_ubsan/custom/testfuzz -rss_limit_mb=2560 -timeout=60 -runs=100 /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/crash-f0624b3439054363e42a21eba4eb472588fee3bf
+Time ran: 0.020369768142700195
+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 1133407461
+INFO: Loaded 1 modules   (30184 inline 8-bit counters): 30184 [0x6ad4b0, 0x6b4a98),
+INFO: Loaded 1 PC tables (30184 PCs): 30184 [0x6b4a98,0x72a918),
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/elfutils_libfuzzer_ubsan/custom/testfuzz: Running 1 inputs 100 time(s) each.
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/crash-f0624b3439054363e42a21eba4eb472588fee3bf
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/elfutils_libfuzzer_ubsan/custom/testfuzz: cannot generate Elf descriptor: ELF version not set
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/elfutils_libfuzzer_ubsan/custom/testfuzz: bad compression header for section 14: invalid section flags
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/elfutils_libfuzzer_ubsan/custom/testfuzz: bad compression header for section 16: invalid section flags
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/elfutils_libfuzzer_ubsan/custom/testfuzz: bad compression header for section 17: invalid section header
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/elfutils_libfuzzer_ubsan/custom/testfuzz: bad compression header for section 19: invalid section header
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/elfutils_libfuzzer_ubsan/custom/testfuzz: bad compression header for section 23: invalid section header
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/elfutils_libfuzzer_ubsan/custom/testfuzz: bad compression header for section 24: invalid section header
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/elfutils_libfuzzer_ubsan/custom/testfuzz: bad compression header for section 25: invalid section header
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/elfutils_libfuzzer_ubsan/custom/testfuzz: invalid sh_link value in section 27
+==2075== ERROR: libFuzzer: fuzz target exited
+    #0 0x4b33c4 in __sanitizer_print_stack_trace /src/llvm-project/compiler-rt/lib/ubsan/ubsan_diag_standalone.cpp:31:3
+    #1 0x45a038 in fuzzer::PrintStackTrace() cxa_noexception.cpp:0
+    #2 0x43f00c in fuzzer::Fuzzer::ExitCallback() cxa_noexception.cpp:0
+    #3 0x7f1a62dc9a26 in libc.so.6
+    #4 0x7f1a62dc9bdf in exit
+    #5 0x7f1a62e9f1d0 in libc.so.6
+    #6 0x7f1a62e9f272 in libc.so.6
+    #7 0x7f1a62e9f385 in error
+    #8 0x56af49 in handle_symtab /src/elfutils/src/libreadelf.c:2149:5
+    #9 0x56af49 in print_symtab /src/elfutils/src/libreadelf.c:2085:4
+    #10 0x568e98 in process_elf_file /src/elfutils/src/libreadelf.c:709:5
+    #11 0x56216a in process_dwflmod /src/elfutils/src/libreadelf.c:450:3
+    #12 0x5098ed in dwfl_getmodules /src/elfutils/libdwfl/dwfl_getmodules.c:86:16
+    #13 0x561e02 in process_file /src/elfutils/src/libreadelf.c:589:7
+    #14 0x4b4dd4 in LLVMFuzzerTestOneInput /src/elfutils/fuzz/fuzz.cc:94:5
+    #15 0x4404f3 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #16 0x42be02 in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:324:6
+    #17 0x4318ca in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #18 0x45a7f2 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #19 0x7f1a62da70b2 in __libc_start_main
+    #20 0x40908d in _start
+
+SUMMARY: libFuzzer: fuzz target exited
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/elfutils_libfuzzer_ubsan/custom/testfuzz: invalid sh_link value in section 27
+==2075== ERROR: libFuzzer: fuzz target exited
+    #0 0x4b33c4  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/elfutils_libfuzzer_ubsan/custom/testfuzz+0x4b33c4)
+    #1 0x45a038  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/elfutils_libfuzzer_ubsan/custom/testfuzz+0x45a038)
+    #2 0x43f00c  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/elfutils_libfuzzer_ubsan/custom/testfuzz+0x43f00c)
+    #3 0x7f1a62dc9a26  (/lib/x86_64-linux-gnu/libc.so.6+0x49a26)
+    #4 0x7f1a62dc9bdf  (/lib/x86_64-linux-gnu/libc.so.6+0x49bdf)
+    #5 0x7f1a62e9f1d0  (/lib/x86_64-linux-gnu/libc.so.6+0x11f1d0)
+    #6 0x7f1a62e9f272  (/lib/x86_64-linux-gnu/libc.so.6+0x11f272)
+    #7 0x7f1a62e9f385  (/lib/x86_64-linux-gnu/libc.so.6+0x11f385)
+    #8 0x56af49  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/elfutils_libfuzzer_ubsan/custom/testfuzz+0x56af49)
+    #9 0x568e98  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/elfutils_libfuzzer_ubsan/custom/testfuzz+0x568e98)
+    #10 0x56216a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/elfutils_libfuzzer_ubsan/custom/testfuzz+0x56216a)
+    #11 0x5098ed  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/elfutils_libfuzzer_ubsan/custom/testfuzz+0x5098ed)
+    #12 0x561e02  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/elfutils_libfuzzer_ubsan/custom/testfuzz+0x561e02)
+    #13 0x4b4dd4  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/elfutils_libfuzzer_ubsan/custom/testfuzz+0x4b4dd4)
+    #14 0x4404f3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/elfutils_libfuzzer_ubsan/custom/testfuzz+0x4404f3)
+    #15 0x42be02  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/elfutils_libfuzzer_ubsan/custom/testfuzz+0x42be02)
+    #16 0x4318ca  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/elfutils_libfuzzer_ubsan/custom/testfuzz+0x4318ca)
+    #17 0x45a7f2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/elfutils_libfuzzer_ubsan/custom/testfuzz+0x45a7f2)
+    #18 0x7f1a62da70b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #19 0x40908d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/elfutils_libfuzzer_ubsan/custom/testfuzz+0x40908d)

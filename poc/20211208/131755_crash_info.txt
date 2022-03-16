@@ -1,0 +1,95 @@
+Testcase id: 131755
+Job: libvips_honggfuzz_asan
+Crash Type: Segv on unknown address
+isSecurity: True
+Crash state: jxl::N_AVX3::SingleFromSingle
+jxl::ThreadPool::SequentialRunnerStatic
+jxl::ModularFrameDecoder::ModularImageToDecodedRect
+Poc: 131755.testcase
+engine: honggfuzz
+fully_qualified_name: honggfuzz_pngsave_buffer_fuzzer
+target: pngsave_buffer_fuzzer
+name: honggfuzz
+[Environment] ASAN_OPTIONS=alloc_dealloc_mismatch=0:allocator_may_return_null=1:allocator_release_to_os_interval_ms=500:allow_user_segv_handler=0:check_malloc_usable_size=0:detect_leaks=1:detect_odr_violation=0:detect_stack_use_after_return=1:fast_unwind_on_fatal=0:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:max_uar_stack_size_log=16:print_scariness=1:print_summary=1:print_suppressions=0:quarantine_size_mb=64:redzone=32:strict_memcmp=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+=================================================================
+==140056==ERROR: AddressSanitizer: SEGV on unknown address (pc 0x000002dd2296 bp 0x7fffcd35d4b0 sp 0x7fffcd35d3c0 T42494)
+==140056==The signal is caused by a READ memory access.
+==140056==Hint: this fault was caused by a dereference of a high value address (see register values below).  Disassemble the provided pc to learn which register was used.
+SCARINESS: 20 (wild-addr-read)
+    #0 0x2dd2296 in Store /src/libjxl/third_party/highway/hwy/ops/x86_512-inl.h:1863:3
+    #1 0x2dd2296 in jxl::N_AVX3::SingleFromSingle(unsigned long, int const*, float, jxl::Image3&lt;float&gt;*, unsigned long, unsigned long, jxl::Rect&amp;) /src/libjxl/lib/jxl/dec_modular.cc:88:5
+    #2 0x25ff171 in jxl::ThreadPool::SequentialRunnerStatic(void*, void*, int (*)(void*, unsigned long), void (*)(void*, unsigned int, unsigned long), unsigned int, unsigned int) /src/libjxl/lib/jxl/base/data_parallel.cc:18:5
+    #3 0x2ddade2 in Run&lt;jxl::Status (unsigned long), (lambda at /src/libjxl/lib/jxl/dec_modular.cc:541:13)&gt; /src/libjxl/lib/jxl/base/data_parallel.h:51:12
+    #4 0x2ddade2 in Run&lt;(lambda at /src/libjxl/lib/jxl/dec_modular.cc:541:13)&gt; /src/libjxl/lib/jxl/base/data_parallel.h:60:12
+    #5 0x2ddade2 in RunOnPool&lt;jxl::ThreadPool::SkipInit, (lambda at /src/libjxl/lib/jxl/dec_modular.cc:541:13)&gt; /src/libjxl/lib/jxl/base/data_parallel.h:115:24
+    #6 0x2ddade2 in jxl::ModularFrameDecoder::ModularImageToDecodedRect(jxl::Image&amp;, jxl::PassesDecoderState*, jxl::ThreadPool*, jxl::ImageBundle*, jxl::Rect) /src/libjxl/lib/jxl/dec_modular.cc:539:9
+    #7 0x2dd8af1 in jxl::ModularFrameDecoder::DecodeGroup(jxl::Rect const&amp;, jxl::BitReader*, int, int, jxl::ModularStreamId const&amp;, bool, jxl::PassesDecoderState*, jxl::ImageBundle*, bool) /src/libjxl/lib/jxl/dec_modular.cc:320:5
+    #8 0x2c8fe16 in jxl::FrameDecoder::ProcessACGroup(unsigned long, jxl::BitReader* restrict*, unsigned long, unsigned long, bool, bool) /src/libjxl/lib/jxl/dec_frame.cc:638:7
+    #9 0x2c992ea in operator() /src/libjxl/lib/jxl/dec_frame.cc:790:16
+    #10 0x2c992ea in jxl::ThreadPool::RunCallState&lt;jxl::FrameDecoder::ProcessSections(jxl::FrameDecoder::SectionInfo const*, unsigned long, jxl::FrameDecoder::SectionStatus*)::$_1, jxl::FrameDecoder::ProcessSections(jxl::FrameDecoder::SectionInfo const*, unsigned long, jxl::FrameDecoder::SectionStatus*)::$_2&gt;::CallDataFunc(void*, unsigned int, unsigned long) /src/libjxl/lib/jxl/base/data_parallel.h:88:14
+    #11 0x320bd79 in RunRange /src/libjxl/lib/threads/thread_parallel_runner_internal.cc:139:7
+    #12 0x320bd79 in jpegxl::ThreadParallelRunner::ThreadFunc(jpegxl::ThreadParallelRunner*, int) /src/libjxl/lib/threads/thread_parallel_runner_internal.cc:169:9
+    #13 0x320e193 in __invoke&lt;void (*)(jpegxl::ThreadParallelRunner *, int), jpegxl::ThreadParallelRunner *, unsigned int&gt; /usr/local/include/c++/v1/type_traits:3662:23
+    #14 0x320e193 in __thread_execute&lt;std::__1::unique_ptr&lt;std::__1::__thread_struct, std::__1::default_delete&lt;std::__1::__thread_struct&gt; &gt;, void (*)(jpegxl::ThreadParallelRunner *, int), jpegxl::ThreadParallelRunner *, unsigned int, 2UL, 3UL&gt; /usr/local/include/c++/v1/thread:280:5
+    #15 0x320e193 in void* std::__1::__thread_proxy&lt;std::__1::tuple&lt;std::__1::unique_ptr&lt;std::__1::__thread_struct, std::__1::default_delete&lt;std::__1::__thread_struct&gt; &gt;, void (*)(jpegxl::ThreadParallelRunner*, int), jpegxl::ThreadParallelRunner*, unsigned int&gt; &gt;(void*) /usr/local/include/c++/v1/thread:291:5
+    #16 0x7ffff7e5b608 in start_thread
+    #17 0x7ffff7d56292 in __clone
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_honggfuzz_asan/custom/pngsave_buffer_fuzzer+0x2dd2296)
+Thread T42494 created by T0 here:
+    #0 0x48e7dc in __interceptor_pthread_create /src/llvm-project/compiler-rt/lib/asan/asan_interceptors.cpp:207:3
+    #1 0x320c5ef in __libcpp_thread_create /usr/local/include/c++/v1/__threading_support:514:10
+    #2 0x320c5ef in thread&lt;void (&amp;)(jpegxl::ThreadParallelRunner *, int), jpegxl::ThreadParallelRunner *, unsigned int &amp;, void&gt; /usr/local/include/c++/v1/thread:307:16
+    #3 0x320c5ef in construct&lt;std::__1::thread, void (&amp;)(jpegxl::ThreadParallelRunner *, int), jpegxl::ThreadParallelRunner *, unsigned int &amp;&gt; /usr/local/include/c++/v1/__memory/allocator.h:151:28
+    #4 0x320c5ef in construct&lt;std::__1::thread, void (&amp;)(jpegxl::ThreadParallelRunner *, int), jpegxl::ThreadParallelRunner *, unsigned int &amp;, void&gt; /usr/local/include/c++/v1/__memory/allocator_traits.h:290:13
+    #5 0x320c5ef in __construct_one_at_end&lt;void (&amp;)(jpegxl::ThreadParallelRunner *, int), jpegxl::ThreadParallelRunner *, unsigned int &amp;&gt; /usr/local/include/c++/v1/vector:933:5
+    #6 0x320c5ef in emplace_back&lt;void (&amp;)(jpegxl::ThreadParallelRunner *, int), jpegxl::ThreadParallelRunner *, unsigned int &amp;&gt; /usr/local/include/c++/v1/vector:1693:9
+    #7 0x320c5ef in jpegxl::ThreadParallelRunner::ThreadParallelRunner(int) /src/libjxl/lib/threads/thread_parallel_runner_internal.cc:196:14
+    #8 0x320abfa in JxlThreadParallelRunnerCreate /src/libjxl/lib/threads/thread_parallel_runner.cc:81:19
+    #9 0x733369 in vips_foreign_load_jxl_build /src/libvips/libvips/foreign/jxlload.c:158:16
+    #10 0x735673 in vips_foreign_load_jxl_buffer_build /src/libvips/libvips/foreign/jxlload.c:828:6
+    #11 0x4fd684 in vips_object_build /src/libvips/libvips/iofuncs/object.c:367:6
+    #12 0x7e43d1 in vips_cache_operation_buildp /src/libvips/libvips/iofuncs/cache.c:910:7
+    #13 0x50d1a7 in vips_call_required_optional /src/libvips/libvips/iofuncs/operation.c:880:6
+    #14 0x50ffea in vips_call_by_name /src/libvips/libvips/iofuncs/operation.c:920:11
+    #15 0x5103ac in vips_call_split_option_string /src/libvips/libvips/iofuncs/operation.c:1039:11
+    #16 0x4f0663 in vips_image_new_from_buffer /src/libvips/libvips/iofuncs/image.c:2158:11
+    #17 0x4de473 in LLVMFuzzerTestOneInput /src/libvips/fuzz/pngsave_buffer_fuzzer.cc:20:16
+    #18 0x323086e in main
+
+==140056==ABORTING
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+==140056==Hint: this fault was caused by a dereference of a high value address (see register values below).  Disassemble the provided pc to learn which register was used.
+SCARINESS: 20 (wild-addr-read)
+    #0 0x2dd2296  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_honggfuzz_asan/custom/pngsave_buffer_fuzzer+0x2dd2296)
+    #1 0x25ff171  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_honggfuzz_asan/custom/pngsave_buffer_fuzzer+0x25ff171)
+    #2 0x2ddade2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_honggfuzz_asan/custom/pngsave_buffer_fuzzer+0x2ddade2)
+    #3 0x2dd8af1  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_honggfuzz_asan/custom/pngsave_buffer_fuzzer+0x2dd8af1)
+    #4 0x2c8fe16  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_honggfuzz_asan/custom/pngsave_buffer_fuzzer+0x2c8fe16)
+    #5 0x2c992ea  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_honggfuzz_asan/custom/pngsave_buffer_fuzzer+0x2c992ea)
+    #6 0x320bd79  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_honggfuzz_asan/custom/pngsave_buffer_fuzzer+0x320bd79)
+    #7 0x320e193  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_honggfuzz_asan/custom/pngsave_buffer_fuzzer+0x320e193)
+    #8 0x7ffff7e5b608  (/lib/x86_64-linux-gnu/libpthread.so.0+0x9608)
+    #9 0x7ffff7d56292  (/lib/x86_64-linux-gnu/libc.so.6+0x122292)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_honggfuzz_asan/custom/pngsave_buffer_fuzzer+0x2dd2296) 
+Thread T42494 created by T0 here:
+    #0 0x48e7dc  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_honggfuzz_asan/custom/pngsave_buffer_fuzzer+0x48e7dc)
+    #1 0x320c5ef  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_honggfuzz_asan/custom/pngsave_buffer_fuzzer+0x320c5ef)
+    #2 0x320abfa  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_honggfuzz_asan/custom/pngsave_buffer_fuzzer+0x320abfa)
+    #3 0x733369  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_honggfuzz_asan/custom/pngsave_buffer_fuzzer+0x733369)
+    #4 0x735673  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_honggfuzz_asan/custom/pngsave_buffer_fuzzer+0x735673)
+    #5 0x4fd684  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_honggfuzz_asan/custom/pngsave_buffer_fuzzer+0x4fd684)
+    #6 0x7e43d1  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_honggfuzz_asan/custom/pngsave_buffer_fuzzer+0x7e43d1)
+    #7 0x50d1a7  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_honggfuzz_asan/custom/pngsave_buffer_fuzzer+0x50d1a7)
+    #8 0x50ffea  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_honggfuzz_asan/custom/pngsave_buffer_fuzzer+0x50ffea)
+    #9 0x5103ac  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_honggfuzz_asan/custom/pngsave_buffer_fuzzer+0x5103ac)
+    #10 0x4f0663  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_honggfuzz_asan/custom/pngsave_buffer_fuzzer+0x4f0663)
+    #11 0x4de473  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_honggfuzz_asan/custom/pngsave_buffer_fuzzer+0x4de473)
+    #12 0x323086e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libvips_honggfuzz_asan/custom/pngsave_buffer_fuzzer+0x323086e)

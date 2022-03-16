@@ -1,0 +1,36 @@
+Testcase id: 118089
+Job: double-conversion_libfuzzer_msan
+Crash Type: Out-of-memory
+isSecurity: False
+Crash state: string_to_double_fuzzer
+Poc: 118089.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_string_to_double_fuzzer
+target: string_to_double_fuzzer
+name: libFuzzer
+[Environment] MSAN_OPTIONS=allocator_release_to_os_interval_ms=500:exitcode=77:halt_on_error=1:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:print_stats=1:print_summary=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+INFO: found LLVMFuzzerCustomMutator (0x7f1154e21f90). Disabling -len_control by default.
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 993002647
+INFO: Loaded 1 modules   (2639 inline 8-bit counters): 2639 [0x73fac0, 0x74050f),
+INFO: Loaded 1 PC tables (2639 PCs): 2639 [0x6d4798,0x6dec88),
+INFO:        0 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases-disk/temp-20/new
+INFO:     7135 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/data-bundles/string_to_double_fuzzer
+INFO: -max_len is not provided; libFuzzer will not generate inputs larger than 522239 bytes
+INFO: seed corpus: files: 7135 min: 1b max: 522239b total: 4991323b rss: 2700Mb
+#7136	INITED cov: 548 ft: 1592 corp: 638/56Kb exec/s: 0 rss: 2700Mb
+==183625== ERROR: libFuzzer: out-of-memory (used: 2700Mb; limit: 2560Mb)
+   To change the out-of-memory limit use -rss_limit_mb=&lt;N&gt;
+
+MS: 2 Custom-Custom-; base unit: 1cdeea9c531651f4d8b12965534bb8acc2fd1fb7
+
+
+artifact_prefix=&#x27;/clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/&#x27;; Test unit written to /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/oom-da39a3ee5e6b4b0d3255bfef95601890afd80709
+Base64:
+SUMMARY: libFuzzer: out-of-memory
+stat::number_of_executed_units: 7973
+stat::average_exec_per_sec:     7973
+stat::new_units_added:          0
+stat::slowest_unit_time_sec:    0
+stat::peak_rss_mb:              2700

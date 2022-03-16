@@ -1,0 +1,101 @@
+Testcase id: 67407
+Job: libtsm_libfuzzer_asan
+Crash Type: Indirect-leak
+isSecurity: False
+Crash state: tsm_screen_resize
+tsm_screen_new
+libtsm_fuzzer.c
+Poc: 67407.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_libtsm_fuzzer
+target: libtsm_fuzzer
+name: libFuzzer
+[Environment] ASAN_OPTIONS=alloc_dealloc_mismatch=0:allocator_may_return_null=1:allocator_release_to_os_interval_ms=500:allow_user_segv_handler=0:check_malloc_usable_size=0:detect_leaks=1:detect_odr_violation=0:detect_stack_use_after_return=1:exitcode=77:fast_unwind_on_fatal=0:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:max_uar_stack_size_log=16:print_scariness=1:print_summary=1:print_suppressions=0:quarantine_size_mb=64:redzone=32:strict_memcmp=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 765761669
+INFO: Loaded 1 modules   (3160 inline 8-bit counters): 3160 [0x5f78e0, 0x5f8538),
+INFO: Loaded 1 PC tables (3160 PCs): 3160 [0x5f8538,0x604ab8),
+INFO:        0 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases-disk/temp-20/new
+INFO:        0 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases-disk/temp-20/mutations
+INFO:     2147 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/data-bundles/libtsm_fuzzer
+INFO: -max_len is not provided; libFuzzer will not generate inputs larger than 245305 bytes
+INFO: seed corpus: files: 2147 min: 1b max: 245305b total: 79505113b rss: 83Mb
+
+=================================================================
+==215802==ERROR: LeakSanitizer: detected memory leaks
+
+Indirect leak of 61440 byte(s) in 24 object(s) allocated from:
+    #0 0x52676d in __interceptor_malloc /src/llvm-project/compiler-rt/lib/asan/asan_malloc_linux.cpp:129:3
+    #1 0x562e7a in line_new /src/libtsm/src/tsm/tsm-screen.c:138:16
+<b>    #2 0x562e7a in tsm_screen_resize /src/libtsm/src/tsm/tsm-screen.c:632:10</b>
+<b>    #3 0x5617d7 in tsm_screen_new /src/libtsm/src/tsm/tsm-screen.c:490:8</b>
+<b>    #4 0x55face in LLVMFuzzerTestOneInput /src/libtsm_fuzzer.c:39:3</b>
+<b>    #5 0x4575a3 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0</b>
+<b>    #6 0x456d8a in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*, bool, bool*) cxa_noexception.cpp:0</b>
+<b>    #7 0x458be4 in fuzzer::Fuzzer::ReadAndExecuteSeedCorpora(std::__Fuzzer::vector&lt;fuzzer::SizedFile, std::__Fuzzer::allocator&lt;fuzzer::SizedFile&gt; &gt;&amp;) cxa_noexception.cpp:0</b>
+<b>    #8 0x458e19 in fuzzer::Fuzzer::Loop(std::__Fuzzer::vector&lt;fuzzer::SizedFile, std::__Fuzzer::allocator&lt;fuzzer::SizedFile&gt; &gt;&amp;) cxa_noexception.cpp:0</b>
+<b>    #9 0x44885d in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0</b>
+<b>    #10 0x4718a2 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10</b>
+<b>    #11 0x7f36ced6b0b2 in __libc_start_main</b>
+
+Indirect leak of 1152 byte(s) in 24 object(s) allocated from:
+    #0 0x52676d in __interceptor_malloc /src/llvm-project/compiler-rt/lib/asan/asan_malloc_linux.cpp:129:3
+    #1 0x562df8 in line_new /src/libtsm/src/tsm/tsm-screen.c:130:9
+<b>    #2 0x562df8 in tsm_screen_resize /src/libtsm/src/tsm/tsm-screen.c:632:10</b>
+<b>    #3 0x5617d7 in tsm_screen_new /src/libtsm/src/tsm/tsm-screen.c:490:8</b>
+<b>    #4 0x55face in LLVMFuzzerTestOneInput /src/libtsm_fuzzer.c:39:3</b>
+<b>    #5 0x4575a3 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0</b>
+<b>    #6 0x456d8a in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*, bool, bool*) cxa_noexception.cpp:0</b>
+<b>    #7 0x458be4 in fuzzer::Fuzzer::ReadAndExecuteSeedCorpora(std::__Fuzzer::vector&lt;fuzzer::SizedFile, std::__Fuzzer::allocator&lt;fuzzer::SizedFile&gt; &gt;&amp;) cxa_noexception.cpp:0</b>
+<b>    #8 0x458e19 in fuzzer::Fuzzer::Loop(std::__Fuzzer::vector&lt;fuzzer::SizedFile, std::__Fuzzer::allocator&lt;fuzzer::SizedFile&gt; &gt;&amp;) cxa_noexception.cpp:0</b>
+<b>    #9 0x44885d in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0</b>
+<b>    #10 0x4718a2 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10</b>
+<b>    #11 0x7f36ced6b0b2 in __libc_start_main</b>
+
+SUMMARY: AddressSanitizer: 62592 byte(s) leaked in 48 allocation(s).
+
+INFO: a leak has been found in the initial corpus.
+
+INFO: to ignore leaks on libFuzzer side use -detect_leaks=0.
+
+MS: 0 ; base unit: 0000000000000000000000000000000000000000
+0xff,0xff,0xff,0xff,0xff,0xff,0xff,0x3c,0xb0,0x1,0x0,0x0,0x1,0x0,0x0,0x0,0x0,0x0,0x0,0x3a,0xb,0xb,0x31,0x5c,0x0,0x0,0x2d,0x0,0x0,0x3a,0x0,0x0,0xfd,0x38,0x1b,0xb,0xb,0xb,0xb,0x2d,0xb,0xb,0xb,0xb,0xb,0xb,0xb,0xb,0xb,0xb,0xb,0xb,0xb,0xb,0xb,0xb,0xb,0xb,0xb,0xb,0xd6,0xb,0x81,0x8,0xa5,0xcc,0x89,0xa4,0xa4,0x17,0x17,0x17,0x17,0x17,0x17,0x17,0x17,0x17,0x17,0x17,0x17,0x17,0x17,0x17,0xb,0xb,0xb,0x8,0x4,0x0,0xb,0x10,0x4c,0x31,0xb,0xb,0x30,0xb,0xb,0xb,0xb,0xb,0xb,0xb,0xb,0xb,0xb,0xa4,0x0,0xb,0x31,0xb,0xb,0xb,0xb,0x39,
+\377\377\377\377\377\377\377&lt;\260\001\000\000\001\000\000\000\000\000\000:\013\0131\\\000\000-\000\000:\000\000\3758\033\013\013\013\013-\013\013\013\013\013\013\013\013\013\013\013\013\013\013\013\013\013\013\013\013\326\013\201\010\245\314\211\244\244\027\027\027\027\027\027\027\027\027\027\027\027\027\027\027\013\013\013\010\004\000\013\020L1\013\0130\013\013\013\013\013\013\013\013\013\013\244\000\0131\013\013\013\0139
+artifact_prefix=&#x27;/clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/&#x27;; Test unit written to /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/leak-4de6927ee301f216f50140f57e52d0443e0f82ff
+Base64: /////////zywAQAAAQAAAAAAADoLCzFcAAAtAAA6AAD9OBsLCwsLLQsLCwsLCwsLCwsLCwsLCwsLCwsL1guBCKXMiaSkFxcXFxcXFxcXFxcXFxcXCwsLCAQACxBMMQsLMAsLCwsLCwsLCwukAAsxCwsLCzk=
+stat::number_of_executed_units: 202
+stat::average_exec_per_sec:     0
+stat::new_units_added:          0
+stat::slowest_unit_time_sec:    0
+stat::peak_rss_mb:              83
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+
+Indirect leak of 61440 byte(s) in 24 object(s) allocated from:
+    #0 0x52676d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libtsm_libfuzzer_asan/custom/libtsm_fuzzer+0x52676d)
+    #1 0x562e7a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libtsm_libfuzzer_asan/custom/libtsm_fuzzer+0x562e7a)
+    #2 0x5617d7  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libtsm_libfuzzer_asan/custom/libtsm_fuzzer+0x5617d7)
+    #3 0x55face  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libtsm_libfuzzer_asan/custom/libtsm_fuzzer+0x55face)
+    #4 0x4575a3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libtsm_libfuzzer_asan/custom/libtsm_fuzzer+0x4575a3)
+    #5 0x456d8a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libtsm_libfuzzer_asan/custom/libtsm_fuzzer+0x456d8a)
+    #6 0x458be4  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libtsm_libfuzzer_asan/custom/libtsm_fuzzer+0x458be4)
+    #7 0x458e19  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libtsm_libfuzzer_asan/custom/libtsm_fuzzer+0x458e19)
+    #8 0x44885d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libtsm_libfuzzer_asan/custom/libtsm_fuzzer+0x44885d)
+    #9 0x4718a2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libtsm_libfuzzer_asan/custom/libtsm_fuzzer+0x4718a2)
+    #10 0x7f36ced6b0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 1152 byte(s) in 24 object(s) allocated from:
+    #0 0x52676d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libtsm_libfuzzer_asan/custom/libtsm_fuzzer+0x52676d)
+    #1 0x562df8  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libtsm_libfuzzer_asan/custom/libtsm_fuzzer+0x562df8)
+    #2 0x5617d7  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libtsm_libfuzzer_asan/custom/libtsm_fuzzer+0x5617d7)
+    #3 0x55face  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libtsm_libfuzzer_asan/custom/libtsm_fuzzer+0x55face)
+    #4 0x4575a3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libtsm_libfuzzer_asan/custom/libtsm_fuzzer+0x4575a3)
+    #5 0x456d8a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libtsm_libfuzzer_asan/custom/libtsm_fuzzer+0x456d8a)
+    #6 0x458be4  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libtsm_libfuzzer_asan/custom/libtsm_fuzzer+0x458be4)
+    #7 0x458e19  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libtsm_libfuzzer_asan/custom/libtsm_fuzzer+0x458e19)
+    #8 0x44885d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libtsm_libfuzzer_asan/custom/libtsm_fuzzer+0x44885d)
+    #9 0x4718a2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libtsm_libfuzzer_asan/custom/libtsm_fuzzer+0x4718a2)
+    #10 0x7f36ced6b0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)

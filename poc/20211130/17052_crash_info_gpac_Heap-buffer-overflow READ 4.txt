@@ -1,0 +1,106 @@
+Testcase id: 17052
+Job: gpac_honggfuzz_asan
+Crash Type: Heap-buffer-overflow READ 4
+isSecurity: True
+Crash state: stsz_box_read
+gf_isom_box_read
+gf_isom_box_parse_ex
+Poc: 17052.testcase
+engine: honggfuzz
+fully_qualified_name: honggfuzz_fuzz_parse
+target: fuzz_parse
+name: honggfuzz
+[Environment] ASAN_OPTIONS=alloc_dealloc_mismatch=0:allocator_may_return_null=1:allocator_release_to_os_interval_ms=500:allow_user_segv_handler=0:check_malloc_usable_size=0:detect_leaks=1:detect_odr_violation=0:detect_stack_use_after_return=1:fast_unwind_on_fatal=0:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:max_uar_stack_size_log=16:print_scariness=1:print_summary=1:print_suppressions=0:quarantine_size_mb=64:redzone=256:strict_memcmp=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+=================================================================
+==5939==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x61400000d5c8 at pc 0x0000007b0506 bp 0x7fffffffc8f0 sp 0x7fffffffc8e8
+READ of size 4 at 0x61400000d5c8 thread T0
+SCARINESS: 17 (4-byte-read-heap-buffer-overflow)
+    #0 0x7b0505 in stsz_box_read /src/gpac/src/isomedia/box_code_base.c:5677:24
+    #1 0x802f47 in gf_isom_box_read /src/gpac/src/isomedia/box_funcs.c:1817:9
+    #2 0x80134b in gf_isom_box_parse_ex /src/gpac/src/isomedia/box_funcs.c:263:14
+    #3 0x80020a in gf_isom_parse_root_box /src/gpac/src/isomedia/box_funcs.c:38:8
+    #4 0x4e3155 in gf_isom_parse_movie_boxes_internal /src/gpac/src/isomedia/isom_intern.c:320:7
+    #5 0x4e3155 in gf_isom_parse_movie_boxes /src/gpac/src/isomedia/isom_intern.c:783:6
+    #6 0x4e8f91 in gf_isom_open_file /src/gpac/src/isomedia/isom_intern.c:903:19
+    #7 0x4e0dfc in LLVMFuzzerTestOneInput /src/gpac/fuzz_parse.c:19:13
+    #8 0x4d709e in main
+    #9 0x7ffff7c3d0b2 in __libc_start_main
+    #10 0x41eb9d in _start
+
+0x61400000d5c8 is located 0 bytes to the right of 200-byte region [0x61400000d500,0x61400000d5c8)
+allocated by thread T0 here:
+    #0 0x49fe1d in __interceptor_malloc /src/llvm-project/compiler-rt/lib/asan/asan_malloc_linux.cpp:129:3
+    #1 0x6e204c in gf_malloc /src/gpac/src/utils/alloc.c:150:9
+    #2 0x7afaec in stsz_box_read /src/gpac/src/isomedia/box_code_base.c:5656:24
+    #3 0x802f47 in gf_isom_box_read /src/gpac/src/isomedia/box_funcs.c:1817:9
+    #4 0x80134b in gf_isom_box_parse_ex /src/gpac/src/isomedia/box_funcs.c:263:14
+    #5 0x80020a in gf_isom_parse_root_box /src/gpac/src/isomedia/box_funcs.c:38:8
+    #6 0x4e3155 in gf_isom_parse_movie_boxes_internal /src/gpac/src/isomedia/isom_intern.c:320:7
+    #7 0x4e3155 in gf_isom_parse_movie_boxes /src/gpac/src/isomedia/isom_intern.c:783:6
+    #8 0x4e8f91 in gf_isom_open_file /src/gpac/src/isomedia/isom_intern.c:903:19
+    #9 0x4e0dfc in LLVMFuzzerTestOneInput /src/gpac/fuzz_parse.c:19:13
+    #10 0x4d709e in main
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/clusterfuzz/run_bot/clusterfuzz/bot/builds/gpac_honggfuzz_asan/custom/fuzz_parse+0x7b0505)
+Shadow bytes around the buggy address:
+  0x0c287fff9a60: fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd
+  0x0c287fff9a70: fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd fa
+  0x0c287fff9a80: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c287fff9a90: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c287fff9aa0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=&gt;0x0c287fff9ab0: 00 00 00 00 00 00 00 00 00[fa]fa fa fa fa fa fa
+  0x0c287fff9ac0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c287fff9ad0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c287fff9ae0: fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd
+  0x0c287fff9af0: fd fd fd fd fd fd fd fd fd fd fd fd fd fa fa fa
+  0x0c287fff9b00: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==5939==ABORTING
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+READ of size 4 at 0x61400000d5c8 thread T0
+SCARINESS: 17 (4-byte-read-heap-buffer-overflow)
+    #0 0x7b0505  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/gpac_honggfuzz_asan/custom/fuzz_parse+0x7b0505)
+    #1 0x802f47  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/gpac_honggfuzz_asan/custom/fuzz_parse+0x802f47)
+    #2 0x80134b  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/gpac_honggfuzz_asan/custom/fuzz_parse+0x80134b)
+    #3 0x80020a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/gpac_honggfuzz_asan/custom/fuzz_parse+0x80020a)
+    #4 0x4e3155  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/gpac_honggfuzz_asan/custom/fuzz_parse+0x4e3155)
+    #5 0x4e8f91  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/gpac_honggfuzz_asan/custom/fuzz_parse+0x4e8f91)
+    #6 0x4e0dfc  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/gpac_honggfuzz_asan/custom/fuzz_parse+0x4e0dfc)
+    #7 0x4d709e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/gpac_honggfuzz_asan/custom/fuzz_parse+0x4d709e)
+    #8 0x7ffff7c3d0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #9 0x41eb9d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/gpac_honggfuzz_asan/custom/fuzz_parse+0x41eb9d)
+
+0x61400000d5c8 is located 0 bytes to the right of 200-byte region [0x61400000d500,0x61400000d5c8)
+allocated by thread T0 here:
+    #0 0x49fe1d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/gpac_honggfuzz_asan/custom/fuzz_parse+0x49fe1d)
+    #1 0x6e204c  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/gpac_honggfuzz_asan/custom/fuzz_parse+0x6e204c)
+    #2 0x7afaec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/gpac_honggfuzz_asan/custom/fuzz_parse+0x7afaec)
+    #3 0x802f47  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/gpac_honggfuzz_asan/custom/fuzz_parse+0x802f47)
+    #4 0x80134b  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/gpac_honggfuzz_asan/custom/fuzz_parse+0x80134b)
+    #5 0x80020a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/gpac_honggfuzz_asan/custom/fuzz_parse+0x80020a)
+    #6 0x4e3155  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/gpac_honggfuzz_asan/custom/fuzz_parse+0x4e3155)
+    #7 0x4e8f91  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/gpac_honggfuzz_asan/custom/fuzz_parse+0x4e8f91)
+    #8 0x4e0dfc  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/gpac_honggfuzz_asan/custom/fuzz_parse+0x4e0dfc)
+    #9 0x4d709e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/gpac_honggfuzz_asan/custom/fuzz_parse+0x4d709e)

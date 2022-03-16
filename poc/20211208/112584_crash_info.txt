@@ -1,0 +1,58 @@
+Testcase id: 112584
+Job: assimp_libfuzzer_ubsan
+Crash Type: Null-dereference
+isSecurity: False
+Crash state: Assimp::X3DImporter::InternReadFile
+Assimp::BaseImporter::ReadFile
+Assimp::Importer::ReadFile
+Poc: 112584.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_assimp_fuzzer
+target: assimp_fuzzer
+name: libFuzzer
+[Environment] UBSAN_OPTIONS=exitcode=77:print_stacktrace=1:silence_unsigned_overflow=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+Command: /clusterfuzz/run_bot/clusterfuzz/bot/builds/assimp_libfuzzer_ubsan/custom/assimp_fuzzer -rss_limit_mb=2560 -timeout=60 -runs=100 /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/b89ee9404c5b21be1ecaa2c6c404db33e793491b1c6ea0fd8b46cd9f32e592fc
+Time ran: 0.01986408233642578
+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 3963740453
+INFO: Loaded 1 modules   (221787 inline 8-bit counters): 221787 [0x15fc240, 0x163249b),
+INFO: Loaded 1 PC tables (221787 PCs): 221787 [0x16324a0,0x1994a50),
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/assimp_libfuzzer_ubsan/custom/assimp_fuzzer: Running 1 inputs 100 time(s) each.
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/b89ee9404c5b21be1ecaa2c6c404db33e793491b1c6ea0fd8b46cd9f32e592fc
+Info,  T0: Load $$$___magic___$$$.
+Info,  T0: File extension not known, trying signature-based detection
+Info,  T0: Found a matching importer for this file format: Extensible 3D(X3D) Importer.
+Info,  T0: Import root directory is &#x27;./&#x27;
+/src/assimp/code/AssetLib/X3D/X3DImporter.cpp:269:29: runtime error: member access within null pointer of type &#x27;X3DNodeElementBase&#x27;
+    #0 0xb78427 in Assimp::X3DImporter::InternReadFile(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; const&amp;, aiScene*, Assimp::IOSystem*) /src/assimp/code/AssetLib/X3D/X3DImporter.cpp:269:29
+    #1 0x4f541b in Assimp::BaseImporter::ReadFile(Assimp::Importer*, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; const&amp;, Assimp::IOSystem*) /src/assimp/code/Common/BaseImporter.cpp:111:9
+    #2 0x5142d1 in Assimp::Importer::ReadFile(char const*, unsigned int) /src/assimp/code/Common/Importer.cpp:675:30
+    #3 0x5130ef in Assimp::Importer::ReadFileFromMemory(void const*, unsigned long, unsigned int, char const*) /src/assimp/code/Common/Importer.cpp:512:5
+    #4 0x4b66c1 in LLVMFuzzerTestOneInput /src/assimp/fuzz/assimp_fuzzer.cc:53:34
+    #5 0x4422b3 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #6 0x42dbc2 in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:324:6
+    #7 0x43368a in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #8 0x45c5b2 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #9 0x7fb8d13ca0b2 in __libc_start_main
+    #10 0x40ae4d in _start
+
+SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior /src/assimp/code/AssetLib/X3D/X3DImporter.cpp:269:29 in
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+Info,  T0: Import root directory is &#x27;./&#x27;
+/src/assimp/code/AssetLib/X3D/X3DImporter.cpp:269:29: runtime error: member access within null pointer of type &#x27;X3DNodeElementBase&#x27;
+    #0 0xb78427  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/assimp_libfuzzer_ubsan/custom/assimp_fuzzer+0xb78427)
+    #1 0x4f541b  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/assimp_libfuzzer_ubsan/custom/assimp_fuzzer+0x4f541b)
+    #2 0x5142d1  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/assimp_libfuzzer_ubsan/custom/assimp_fuzzer+0x5142d1)
+    #3 0x5130ef  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/assimp_libfuzzer_ubsan/custom/assimp_fuzzer+0x5130ef)
+    #4 0x4b66c1  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/assimp_libfuzzer_ubsan/custom/assimp_fuzzer+0x4b66c1)
+    #5 0x4422b3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/assimp_libfuzzer_ubsan/custom/assimp_fuzzer+0x4422b3)
+    #6 0x42dbc2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/assimp_libfuzzer_ubsan/custom/assimp_fuzzer+0x42dbc2)
+    #7 0x43368a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/assimp_libfuzzer_ubsan/custom/assimp_fuzzer+0x43368a)
+    #8 0x45c5b2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/assimp_libfuzzer_ubsan/custom/assimp_fuzzer+0x45c5b2)
+    #9 0x7fb8d13ca0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #10 0x40ae4d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/assimp_libfuzzer_ubsan/custom/assimp_fuzzer+0x40ae4d)

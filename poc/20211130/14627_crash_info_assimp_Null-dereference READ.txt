@@ -1,0 +1,43 @@
+Testcase id: 14627
+Job: assimp_honggfuzz_msan
+Crash Type: Null-dereference READ
+isSecurity: False
+Crash state: Assimp::X3DImporter::InternReadFile
+Assimp::BaseImporter::ReadFile
+Assimp::Importer::ReadFile
+Poc: 14627.testcase
+engine: honggfuzz
+fully_qualified_name: honggfuzz_assimp_fuzzer
+target: assimp_fuzzer
+name: honggfuzz
+[Environment] MSAN_OPTIONS=allocator_release_to_os_interval_ms=500:halt_on_error=1:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:print_stats=1:print_summary=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+==82692==ERROR: MemorySanitizer: SEGV on unknown address 0x000000000008 (pc 0x0000017adfa3 bp 0x7fffffffc740 sp 0x7fffffffc5f0 T82692)
+==82692==The signal is caused by a READ memory access.
+==82692==Hint: address points to the zero page.
+    #0 0x17adfa3 in Assimp::X3DImporter::InternReadFile(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; const&amp;, aiScene*, Assimp::IOSystem*) /src/assimp/code/AssetLib/X3D/X3DImporter.cpp:269:29
+    #1 0x1ca0a70 in Assimp::BaseImporter::ReadFile(Assimp::Importer*, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; const&amp;, Assimp::IOSystem*) /src/assimp/code/Common/BaseImporter.cpp:111:9
+    #2 0x5da155 in Assimp::Importer::ReadFile(char const*, unsigned int) /src/assimp/code/Common/Importer.cpp:675:30
+    #3 0x5d7245 in Assimp::Importer::ReadFileFromMemory(void const*, unsigned long, unsigned int, char const*) /src/assimp/code/Common/Importer.cpp:512:5
+    #4 0x4b4920 in LLVMFuzzerTestOneInput /src/assimp/fuzz/assimp_fuzzer.cc:53:34
+    #5 0x4aab14 in main
+    #6 0x7ffff7c5b0b2 in __libc_start_main
+    #7 0x42638d in _start
+
+MemorySanitizer can not provide additional info.
+SUMMARY: MemorySanitizer: SEGV (/clusterfuzz/run_bot/clusterfuzz/bot/builds/assimp_honggfuzz_msan/custom/assimp_fuzzer+0x17adfa3)
+==82692==ABORTING
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+==82692==The signal is caused by a READ memory access.
+==82692==Hint: address points to the zero page.
+    #0 0x17adfa3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/assimp_honggfuzz_msan/custom/assimp_fuzzer+0x17adfa3)
+    #1 0x1ca0a70  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/assimp_honggfuzz_msan/custom/assimp_fuzzer+0x1ca0a70)
+    #2 0x5da155  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/assimp_honggfuzz_msan/custom/assimp_fuzzer+0x5da155)
+    #3 0x5d7245  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/assimp_honggfuzz_msan/custom/assimp_fuzzer+0x5d7245)
+    #4 0x4b4920  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/assimp_honggfuzz_msan/custom/assimp_fuzzer+0x4b4920)
+    #5 0x4aab14  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/assimp_honggfuzz_msan/custom/assimp_fuzzer+0x4aab14)
+    #6 0x7ffff7c5b0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #7 0x42638d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/assimp_honggfuzz_msan/custom/assimp_fuzzer+0x42638d)

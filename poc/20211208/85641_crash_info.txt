@@ -1,0 +1,35 @@
+Testcase id: 85641
+Job: libspng_honggfuzz_msan
+Crash Type: Use-of-uninitialized-value
+isSecurity: True
+Crash state: spng_read_fuzzer.c
+Poc: 85641.testcase
+engine: honggfuzz
+fully_qualified_name: honggfuzz_spng_read_fuzzer_structure_aware
+target: spng_read_fuzzer_structure_aware
+name: honggfuzz
+[Environment] MSAN_OPTIONS=allocator_release_to_os_interval_ms=500:halt_on_error=1:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:print_stats=1:print_summary=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+==212177==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x4b13ce in LLVMFuzzerTestOneInput /src/libspng/tests/spng_read_fuzzer.c:33:17
+    #1 0x4c6f1e in main
+    #2 0x7ffff7c5b0b2 in __libc_start_main
+    #3 0x420f8d in _start
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libspng_honggfuzz_msan/custom/spng_read_fuzzer_structure_aware+0x4b13ce)
+  ORIGIN: invalid (0). Might be a bug in MemorySanitizer origin tracking.
+    This could still be a bug in your code, too!
+Unique heap origins: 19
+Stack depot allocated bytes: 1638400
+Unique origin histories: 0
+History depot allocated bytes: 0
+Exiting
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+==212177==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x4b13ce  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libspng_honggfuzz_msan/custom/spng_read_fuzzer_structure_aware+0x4b13ce)
+    #1 0x4c6f1e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libspng_honggfuzz_msan/custom/spng_read_fuzzer_structure_aware+0x4c6f1e)
+    #2 0x7ffff7c5b0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #3 0x420f8d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libspng_honggfuzz_msan/custom/spng_read_fuzzer_structure_aware+0x420f8d)

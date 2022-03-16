@@ -1,0 +1,62 @@
+Testcase id: 59391
+Job: libraw_libfuzzer_msan
+Crash Type: Use-of-uninitialized-value
+isSecurity: True
+Crash state: LibRaw::parse_rollei
+LibRaw::identify
+LibRaw::open_datastream
+Poc: 59391.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_libraw_fuzzer
+target: libraw_fuzzer
+name: libFuzzer
+[Environment] MSAN_OPTIONS=exitcode=77
++----------------------------------------Release Build Stacktrace----------------------------------------+
+Command: /clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_libfuzzer_msan/custom/libraw_fuzzer -rss_limit_mb=2560 -timeout=60 -runs=100 /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/a89cc3c232762227f5c000e9471cc6ab27fecf1d6eacfa896e59c762d9f4fa5e
+Time ran: 0.05306386947631836
+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 3335356181
+INFO: Loaded 1 modules   (20376 inline 8-bit counters): 20376 [0xa1fde0, 0xa24d78),
+INFO: Loaded 1 PC tables (20376 PCs): 20376 [0x9309e8,0x980368),
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_libfuzzer_msan/custom/libraw_fuzzer: Running 1 inputs 100 time(s) each.
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/a89cc3c232762227f5c000e9471cc6ab27fecf1d6eacfa896e59c762d9f4fa5e
+Uninitialized bytes in __interceptor_strchr at offset 64 inside [0x7ffc55bcb460, 65)
+==226504==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x7275dd in LibRaw::parse_rollei() /src/libraw/src/metadata/misc_parsers.cpp:311:16
+    #1 0x6fa46a in LibRaw::identify() /src/libraw/src/metadata/identify.cpp:678:5
+    #2 0x557ed8 in LibRaw::open_datastream(LibRaw_abstract_datastream*) /src/libraw/src/utils/open.cpp:480:4
+    #3 0x5563e5 in LibRaw::open_buffer(void const*, unsigned long) /src/libraw/src/utils/open.cpp:240:13
+    #4 0x528c72 in LLVMFuzzerTestOneInput /src/libraw_fuzzer.cc:41:24
+    #5 0x456a63 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #6 0x442372 in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:324:6
+    #7 0x447e3a in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #8 0x470d62 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #9 0x7f420656b0b2 in __libc_start_main
+    #10 0x41f5fd in _start
+
+  Uninitialized value was created by an allocation of &#x27;line&#x27; in the stack frame of function &#x27;_ZN6LibRaw12parse_rolleiEv&#x27;
+    #0 0x7271d0 in LibRaw::parse_rollei() /src/libraw/src/metadata/misc_parsers.cpp:298
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_libfuzzer_msan/custom/libraw_fuzzer+0x7275dd)
+Exiting
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+Uninitialized bytes in __interceptor_strchr at offset 64 inside [0x7ffc55bcb460, 65)
+==226504==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x7275dd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_libfuzzer_msan/custom/libraw_fuzzer+0x7275dd)
+    #1 0x6fa46a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_libfuzzer_msan/custom/libraw_fuzzer+0x6fa46a)
+    #2 0x557ed8  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_libfuzzer_msan/custom/libraw_fuzzer+0x557ed8)
+    #3 0x5563e5  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_libfuzzer_msan/custom/libraw_fuzzer+0x5563e5)
+    #4 0x528c72  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_libfuzzer_msan/custom/libraw_fuzzer+0x528c72)
+    #5 0x456a63  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_libfuzzer_msan/custom/libraw_fuzzer+0x456a63)
+    #6 0x442372  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_libfuzzer_msan/custom/libraw_fuzzer+0x442372)
+    #7 0x447e3a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_libfuzzer_msan/custom/libraw_fuzzer+0x447e3a)
+    #8 0x470d62  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_libfuzzer_msan/custom/libraw_fuzzer+0x470d62)
+    #9 0x7f420656b0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #10 0x41f5fd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_libfuzzer_msan/custom/libraw_fuzzer+0x41f5fd)
+
+  Uninitialized value was created by an allocation of &#x27;line&#x27; in the stack frame of function &#x27;_ZN6LibRaw12parse_rolleiEv&#x27;
+    #0 0x7271d0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_libfuzzer_msan/custom/libraw_fuzzer+0x7271d0)

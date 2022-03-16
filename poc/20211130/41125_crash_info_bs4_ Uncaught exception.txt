@@ -1,0 +1,1148 @@
+Testcase id: 41125
+Job: bs4_libfuzzer_asan
+Crash Type: Uncaught exception
+isSecurity: False
+Crash state: bs4_fuzzer.pkg
+bs4_fuzzer.pkg
+bs4_fuzzer.pkg
+Poc: 41125.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_bs4_fuzzer
+target: bs4_fuzzer
+name: libFuzzer
+[Environment] ASAN_OPTIONS=exitcode=77
++----------------------------------------Release Build Stacktrace----------------------------------------+
+Command: /clusterfuzz/run_bot/clusterfuzz/bot/builds/bs4_libfuzzer_asan/custom/bs4_fuzzer -rss_limit_mb=2560 -timeout=60 -runs=100 /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/dc30405e838497d73ccc80fcb0226c7d1ea8c4dca5258aa4a9bc0fd3f206cbe6
+Time ran: 10.673917293548584
+
+INFO: Using preloaded libfuzzer
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 897540048
+INFO: Loaded 1 modules   (16826 inline 8-bit counters): 16826 [0x629000b8b200, 0x629000b8f3ba),
+INFO: Loaded 1 PC tables (16826 PCs): 16826 [0x7f204e9e8800,0x7f204ea2a3a0),
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/bs4_libfuzzer_asan/custom/bs4_fuzzer.pkg: Running 1 inputs 100 time(s) each.
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/dc30405e838497d73ccc80fcb0226c7d1ea8c4dca5258aa4a9bc0fd3f206cbe6
+
+ === Uncaught Python exception: ===
+RecursionError: maximum recursion depth exceeded while calling a Python object
+Traceback (most recent call last):
+  File &quot;bs4_fuzzer.py&quot;, line 57, in TestOneInput
+  File &quot;bs4/element.py&quot;, line 1754, in prettify
+  File &quot;bs4/__init__.py&quot;, line 775, in decode
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1789, in decode_contents
+  File &quot;bs4/element.py&quot;, line 1695, in decode
+  File &quot;bs4/element.py&quot;, line 1787, in decode_contents
+  File &quot;bs4/element.py&quot;, line 974, in output_ready
+  File &quot;bs4/element.py&quot;, line 208, in format_string
+  File &quot;bs4/formatter.py&quot;, line 99, in substitute
+  File &quot;bs4/dammit.py&quot;, line 2513, in substitute_xml
+  File &quot;bs4/dammit.py&quot;, line 2459, in _substitute_xml_entity
+
+INFO: Instrumenting logging
+WARNING: It looks like this module is imported by a custom loader. Atheris has experimental support for this. However, it may be incompatible with certain libraries. If you experience unusual errors or poor coverage collection, try atheris.instrument_all() instead, add enable_loader_override=False to instrument_imports(), or file an issue on GitHub.
+INFO: Instrumenting traceback
+INFO: Instrumenting linecache
+INFO: Instrumenting tokenize
+INFO: Instrumenting token
+INFO: Instrumenting string
+INFO: Instrumenting bs4
+INFO: Instrumenting bs4.builder
+INFO: Instrumenting bs4.element
+INFO: Instrumenting soupsieve
+INFO: Instrumenting soupsieve.__meta__
+INFO: Instrumenting soupsieve.css_parser
+INFO: Instrumenting soupsieve.util
+INFO: Instrumenting typing
+INFO: Instrumenting soupsieve.css_match
+INFO: Instrumenting datetime
+INFO: Instrumenting soupsieve.css_types
+INFO: Instrumenting soupsieve.pretty
+INFO: Instrumenting bs4.formatter
+INFO: Instrumenting bs4.dammit
+INFO: Instrumenting html
+INFO: Instrumenting html.entities
+INFO: Instrumenting bs4.builder._htmlparser
+INFO: Instrumenting html.parser
+INFO: Instrumenting _markupbase
+INFO: Instrumenting bs4.builder._html5lib
+INFO: Instrumenting html5lib
+INFO: Instrumenting __future__
+INFO: Instrumenting html5lib.html5parser
+INFO: Instrumenting six
+INFO: Instrumenting html5lib._inputstream
+INFO: Instrumenting http
+INFO: Instrumenting http.client
+INFO: Instrumenting email
+INFO: Instrumenting email.parser
+INFO: Instrumenting email.feedparser
+INFO: Instrumenting email.errors
+INFO: Instrumenting email._policybase
+INFO: Instrumenting email.header
+INFO: Instrumenting email.quoprimime
+INFO: Instrumenting email.base64mime
+INFO: Instrumenting base64
+INFO: Instrumenting email.charset
+INFO: Instrumenting email.encoders
+INFO: Instrumenting quopri
+INFO: Instrumenting email.utils
+INFO: Instrumenting random
+INFO: Instrumenting bisect
+INFO: Instrumenting urllib
+INFO: Instrumenting urllib.parse
+INFO: Instrumenting email._parseaddr
+INFO: Instrumenting calendar
+INFO: Instrumenting locale
+INFO: Instrumenting email.message
+INFO: Instrumenting uu
+INFO: Instrumenting email._encoded_words
+INFO: Instrumenting email.iterators
+INFO: Instrumenting ssl
+INFO: Instrumenting webencodings
+INFO: Instrumenting webencodings.labels
+INFO: Instrumenting encodings.utf_16_le
+INFO: Instrumenting encodings.utf_16_be
+INFO: Instrumenting html5lib.constants
+INFO: Instrumenting html5lib._utils
+INFO: Instrumenting xml
+INFO: Instrumenting xml.etree
+INFO: Instrumenting xml.etree.ElementTree
+INFO: Instrumenting xml.etree.ElementPath
+INFO: Instrumenting copy
+INFO: Instrumenting html5lib._tokenizer
+INFO: Instrumenting html5lib._trie
+INFO: Instrumenting html5lib._trie.py
+INFO: Instrumenting html5lib._trie._base
+INFO: Instrumenting html5lib.treebuilders
+INFO: Instrumenting html5lib.treebuilders.base
+INFO: Instrumenting html5lib.treewalkers
+INFO: Instrumenting html5lib.serializer
+INFO: Instrumenting xml.sax
+INFO: Instrumenting xml.sax.xmlreader
+INFO: Instrumenting xml.sax.handler
+INFO: Instrumenting xml.sax._exceptions
+INFO: Instrumenting xml.sax.saxutils
+INFO: Instrumenting urllib.request
+INFO: Instrumenting hashlib
+INFO: Instrumenting tempfile
+INFO: Instrumenting shutil
+INFO: Instrumenting fnmatch
+INFO: Instrumenting bz2
+INFO: Instrumenting _compression
+INFO: Instrumenting lzma
+INFO: Instrumenting urllib.error
+INFO: Instrumenting urllib.response
+INFO: Instrumenting bs4.builder._lxml
+INFO: Instrumenting lxml
+INFO: Instrumenting inspect
+INFO: Instrumenting gzip
+==22283== ERROR: libFuzzer: fuzz target exited
+    #0 0x7f2051e23041 in __sanitizer_print_stack_trace /src/llvm-project/compiler-rt/lib/asan/asan_stack.cpp:87:3
+    #1 0x7f2051d63aa8 in fuzzer::PrintStackTrace() cxa_noexception.cpp
+    #2 0x7f2051d48a7c in fuzzer::Fuzzer::ExitCallback() cxa_noexception.cpp
+    #0 0x7f2051b10a26 in libc.so.6
+    #4 0x7f2051b10bdf in exit (/lib/x86_64-linux-gnu/libc.so.6+0x49bdf)
+    #5 0x7f2050857ef8 in Py_Exit /tmp/Python-3.8.3/Python/pylifecycle.c:2299:5
+    #6 0x7f205085cd0b in handle_system_exit /tmp/Python-3.8.3/Python/pythonrun.c:658:9
+    #7 0x7f205085cd0b in _PyErr_PrintEx /tmp/Python-3.8.3/Python/pythonrun.c:668:5
+    #1 0x562dee11575a in bs4_fuzzer.pkg
+    #2 0x562dee115aac in bs4_fuzzer.pkg
+    #10 0x7f2051aee0b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #3 0x562dee1144d9 in bs4_fuzzer.pkg
+
+SUMMARY: libFuzzer: fuzz target exited
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+    #1 0x7f2051d63aa8 in fuzzer::PrintStackTrace() cxa_noexception.cpp
+    #2 0x7f2051d48a7c in fuzzer::Fuzzer::ExitCallback() cxa_noexception.cpp
+    #3 0x7f2051b10a26  (/lib/x86_64-linux-gnu/libc.so.6+0x49a26)
+    #4 0x7f2051b10bdf in exit (/lib/x86_64-linux-gnu/libc.so.6+0x49bdf)
+    #5 0x7f2050857ef8 in Py_Exit /tmp/Python-3.8.3/Python/pylifecycle.c:2299:5
+    #6 0x7f205085cd0b in handle_system_exit /tmp/Python-3.8.3/Python/pythonrun.c:658:9
+    #7 0x7f205085cd0b in _PyErr_PrintEx /tmp/Python-3.8.3/Python/pythonrun.c:668:5
+    #8 0x562dee11575a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/bs4_libfuzzer_asan/custom/bs4_fuzzer.pkg+0x375a)
+    #9 0x562dee115aac  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/bs4_libfuzzer_asan/custom/bs4_fuzzer.pkg+0x3aac)
+    #10 0x7f2051aee0b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #11 0x562dee1144d9  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/bs4_libfuzzer_asan/custom/bs4_fuzzer.pkg+0x24d9)

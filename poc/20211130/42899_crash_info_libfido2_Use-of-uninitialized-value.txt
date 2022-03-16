@@ -1,0 +1,599 @@
+Testcase id: 42899
+Job: libfido2_afl_msan
+Crash Type: Use-of-uninitialized-value
+isSecurity: True
+Crash state: nlmsg_get_status
+nl_parse_reply
+nl_get_nfc_family
+Poc: 42899.testcase
+engine: afl
+fully_qualified_name: afl_fuzz_netlink
+target: fuzz_netlink
+name: afl
+[Environment] MSAN_OPTIONS=allocator_release_to_os_interval_ms=500:exit_code=86:halt_on_error=1:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:print_stats=1:print_summary=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+==46327==WARNING: MemorySanitizer: use-of-uninitialized-value
+<b>    #0 0x7fb79b9349cb in nlmsg_get_status /src/libfido2/src/netlink.c:0:10</b>
+<b>    #1 0x7fb79b91fc82 in nl_parse_reply /src/libfido2/src/netlink.c:427:8</b>
+<b>    #2 0x7fb79b92c4b2 in nl_get_nfc_family /src/libfido2/src/netlink.c:530:12</b>
+<b>    #3 0x7fb79b9299fd in fido_nl_new /src/libfido2/src/netlink.c:763:6</b>
+<b>    #4 0x563bed048603 in test /src/libfido2/fuzz/fuzz_netlink.c:136:12</b>
+<b>    #5 0x563bed04ca44 in LLVMFuzzerTestOneInput /src/libfido2/fuzz/libfuzzer.c:131:3</b>
+<b>    #6 0x563bed043a6f in main /src/aflplusplus/utils/aflpp_driver/aflpp_driver.c:303:7</b>
+<b>    #7 0x7fb79962c0b2 in __libc_start_main</b>
+<b>    #8 0x563becfc15ed in _start</b>
+
+  Uninitialized value was created by an allocation of &#x27;status&#x27; in the stack frame of function &#x27;nlmsg_get_status&#x27;
+    #0 0x7fb79b933c70 in nlmsg_get_status /src/libfido2/src/netlink.c:257
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24d9cb)
+Unique heap origins: 9
+Stack depot allocated bytes: 1900544
+Unique origin histories: 7
+History depot allocated bytes: 196608
+Exiting
+==46329==WARNING: MemorySanitizer: use-of-uninitialized-value
+<b>    #0 0x7fb79b9349cb in nlmsg_get_status /src/libfido2/src/netlink.c:0:10</b>
+<b>    #1 0x7fb79b91fc82 in nl_parse_reply /src/libfido2/src/netlink.c:427:8</b>
+<b>    #2 0x7fb79b92c4b2 in nl_get_nfc_family /src/libfido2/src/netlink.c:530:12</b>
+<b>    #3 0x7fb79b9299fd in fido_nl_new /src/libfido2/src/netlink.c:763:6</b>
+<b>    #4 0x563bed048603 in test /src/libfido2/fuzz/fuzz_netlink.c:136:12</b>
+<b>    #5 0x563bed04ca44 in LLVMFuzzerTestOneInput /src/libfido2/fuzz/libfuzzer.c:131:3</b>
+<b>    #6 0x563bed043a6f in main /src/aflplusplus/utils/aflpp_driver/aflpp_driver.c:303:7</b>
+<b>    #7 0x7fb79962c0b2 in __libc_start_main</b>
+<b>    #8 0x563becfc15ed in _start</b>
+
+  Uninitialized value was created by an allocation of &#x27;status&#x27; in the stack frame of function &#x27;nlmsg_get_status&#x27;
+    #0 0x7fb79b933c70 in nlmsg_get_status /src/libfido2/src/netlink.c:257
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24d9cb)
+Unique heap origins: 9
+Stack depot allocated bytes: 1900544
+Unique origin histories: 7
+History depot allocated bytes: 196608
+Exiting
+==46330==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x7fb79b9349cb in nlmsg_get_status /src/libfido2/src/netlink.c:0:10
+    #1 0x7fb79b91fc82 in nl_parse_reply /src/libfido2/src/netlink.c:427:8
+    #2 0x7fb79b919dd3 in fido_nl_power_nfc /src/libfido2/src/netlink.c:583:12
+    #3 0x563bed0487a6 in test /src/libfido2/fuzz/fuzz_netlink.c:144:2
+    #4 0x563bed04ca44 in LLVMFuzzerTestOneInput /src/libfido2/fuzz/libfuzzer.c:131:3
+    #5 0x563bed043a6f in main /src/aflplusplus/utils/aflpp_driver/aflpp_driver.c:303:7
+    #6 0x7fb79962c0b2 in __libc_start_main
+    #7 0x563becfc15ed in _start
+
+  Uninitialized value was created by an allocation of &#x27;status&#x27; in the stack frame of function &#x27;nlmsg_get_status&#x27;
+    #0 0x7fb79b933c70 in nlmsg_get_status /src/libfido2/src/netlink.c:257
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24d9cb)
+Unique heap origins: 11
+Stack depot allocated bytes: 1900544
+Unique origin histories: 9
+History depot allocated bytes: 196608
+Exiting
+==46331==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x7fb79b9349cb in nlmsg_get_status /src/libfido2/src/netlink.c:0:10
+    #1 0x7fb79b91fc82 in nl_parse_reply /src/libfido2/src/netlink.c:427:8
+    #2 0x7fb79b919dd3 in fido_nl_power_nfc /src/libfido2/src/netlink.c:583:12
+    #3 0x563bed0487a6 in test /src/libfido2/fuzz/fuzz_netlink.c:144:2
+    #4 0x563bed04ca44 in LLVMFuzzerTestOneInput /src/libfido2/fuzz/libfuzzer.c:131:3
+    #5 0x563bed043a6f in main /src/aflplusplus/utils/aflpp_driver/aflpp_driver.c:303:7
+    #6 0x7fb79962c0b2 in __libc_start_main
+    #7 0x563becfc15ed in _start
+
+  Uninitialized value was created by an allocation of &#x27;status&#x27; in the stack frame of function &#x27;nlmsg_get_status&#x27;
+    #0 0x7fb79b933c70 in nlmsg_get_status /src/libfido2/src/netlink.c:257
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24d9cb)
+Unique heap origins: 10
+Stack depot allocated bytes: 1900544
+Unique origin histories: 8
+History depot allocated bytes: 196608
+Exiting
+==46332==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x7fb79b9349cb in nlmsg_get_status /src/libfido2/src/netlink.c:0:10
+    #1 0x7fb79b91fc82 in nl_parse_reply /src/libfido2/src/netlink.c:427:8
+    #2 0x7fb79b92c4b2 in nl_get_nfc_family /src/libfido2/src/netlink.c:530:12
+    #3 0x7fb79b9299fd in fido_nl_new /src/libfido2/src/netlink.c:763:6
+    #4 0x563bed048603 in test /src/libfido2/fuzz/fuzz_netlink.c:136:12
+    #5 0x563bed04ca44 in LLVMFuzzerTestOneInput /src/libfido2/fuzz/libfuzzer.c:131:3
+    #6 0x563bed043a6f in main /src/aflplusplus/utils/aflpp_driver/aflpp_driver.c:303:7
+    #7 0x7fb79962c0b2 in __libc_start_main
+    #8 0x563becfc15ed in _start
+
+  Uninitialized value was created by an allocation of &#x27;status&#x27; in the stack frame of function &#x27;nlmsg_get_status&#x27;
+    #0 0x7fb79b933c70 in nlmsg_get_status /src/libfido2/src/netlink.c:257
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24d9cb)
+Unique heap origins: 16
+Stack depot allocated bytes: 1900544
+Unique origin histories: 13
+History depot allocated bytes: 196608
+Exiting
+==46333==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x7fb79b9349cb in nlmsg_get_status /src/libfido2/src/netlink.c:0:10
+    #1 0x7fb79b91fc82 in nl_parse_reply /src/libfido2/src/netlink.c:427:8
+    #2 0x7fb79b92c4b2 in nl_get_nfc_family /src/libfido2/src/netlink.c:530:12
+    #3 0x7fb79b9299fd in fido_nl_new /src/libfido2/src/netlink.c:763:6
+    #4 0x563bed048603 in test /src/libfido2/fuzz/fuzz_netlink.c:136:12
+    #5 0x563bed04ca44 in LLVMFuzzerTestOneInput /src/libfido2/fuzz/libfuzzer.c:131:3
+    #6 0x563bed043a6f in main /src/aflplusplus/utils/aflpp_driver/aflpp_driver.c:303:7
+    #7 0x7fb79962c0b2 in __libc_start_main
+    #8 0x563becfc15ed in _start
+
+  Uninitialized value was created by an allocation of &#x27;status&#x27; in the stack frame of function &#x27;nlmsg_get_status&#x27;
+    #0 0x7fb79b933c70 in nlmsg_get_status /src/libfido2/src/netlink.c:257
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24d9cb)
+Unique heap origins: 13
+Stack depot allocated bytes: 1900544
+Unique origin histories: 11
+History depot allocated bytes: 196608
+Exiting
+==46334==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x7fb79b9349cb in nlmsg_get_status /src/libfido2/src/netlink.c:0:10
+    #1 0x7fb79b91fc82 in nl_parse_reply /src/libfido2/src/netlink.c:427:8
+    #2 0x7fb79b919dd3 in fido_nl_power_nfc /src/libfido2/src/netlink.c:583:12
+    #3 0x563bed0487a6 in test /src/libfido2/fuzz/fuzz_netlink.c:144:2
+    #4 0x563bed04ca44 in LLVMFuzzerTestOneInput /src/libfido2/fuzz/libfuzzer.c:131:3
+    #5 0x563bed043a6f in main /src/aflplusplus/utils/aflpp_driver/aflpp_driver.c:303:7
+    #6 0x7fb79962c0b2 in __libc_start_main
+    #7 0x563becfc15ed in _start
+
+  Uninitialized value was created by an allocation of &#x27;status&#x27; in the stack frame of function &#x27;nlmsg_get_status&#x27;
+    #0 0x7fb79b933c70 in nlmsg_get_status /src/libfido2/src/netlink.c:257
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24d9cb)
+Unique heap origins: 10
+Stack depot allocated bytes: 1900544
+Unique origin histories: 8
+History depot allocated bytes: 196608
+Exiting
+==46335==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x7fb79b9349cb in nlmsg_get_status /src/libfido2/src/netlink.c:0:10
+    #1 0x7fb79b91fc82 in nl_parse_reply /src/libfido2/src/netlink.c:427:8
+    #2 0x7fb79b92c4b2 in nl_get_nfc_family /src/libfido2/src/netlink.c:530:12
+    #3 0x7fb79b9299fd in fido_nl_new /src/libfido2/src/netlink.c:763:6
+    #4 0x563bed048603 in test /src/libfido2/fuzz/fuzz_netlink.c:136:12
+    #5 0x563bed04ca44 in LLVMFuzzerTestOneInput /src/libfido2/fuzz/libfuzzer.c:131:3
+    #6 0x563bed043a6f in main /src/aflplusplus/utils/aflpp_driver/aflpp_driver.c:303:7
+    #7 0x7fb79962c0b2 in __libc_start_main
+    #8 0x563becfc15ed in _start
+
+  Uninitialized value was created by an allocation of &#x27;status&#x27; in the stack frame of function &#x27;nlmsg_get_status&#x27;
+    #0 0x7fb79b933c70 in nlmsg_get_status /src/libfido2/src/netlink.c:257
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24d9cb)
+Unique heap origins: 12
+Stack depot allocated bytes: 1900544
+Unique origin histories: 10
+History depot allocated bytes: 196608
+Exiting
+==46336==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x7fb79b9349cb in nlmsg_get_status /src/libfido2/src/netlink.c:0:10
+    #1 0x7fb79b91fc82 in nl_parse_reply /src/libfido2/src/netlink.c:427:8
+    #2 0x7fb79b919dd3 in fido_nl_power_nfc /src/libfido2/src/netlink.c:583:12
+    #3 0x563bed0487a6 in test /src/libfido2/fuzz/fuzz_netlink.c:144:2
+    #4 0x563bed04ca44 in LLVMFuzzerTestOneInput /src/libfido2/fuzz/libfuzzer.c:131:3
+    #5 0x563bed043a6f in main /src/aflplusplus/utils/aflpp_driver/aflpp_driver.c:303:7
+    #6 0x7fb79962c0b2 in __libc_start_main
+    #7 0x563becfc15ed in _start
+
+  Uninitialized value was created by an allocation of &#x27;status&#x27; in the stack frame of function &#x27;nlmsg_get_status&#x27;
+    #0 0x7fb79b933c70 in nlmsg_get_status /src/libfido2/src/netlink.c:257
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24d9cb)
+Unique heap origins: 13
+Stack depot allocated bytes: 1900544
+Unique origin histories: 11
+History depot allocated bytes: 196608
+Exiting
+==46337==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x7fb79b9349cb in nlmsg_get_status /src/libfido2/src/netlink.c:0:10
+    #1 0x7fb79b91fc82 in nl_parse_reply /src/libfido2/src/netlink.c:427:8
+    #2 0x7fb79b919dd3 in fido_nl_power_nfc /src/libfido2/src/netlink.c:583:12
+    #3 0x563bed0487a6 in test /src/libfido2/fuzz/fuzz_netlink.c:144:2
+    #4 0x563bed04ca44 in LLVMFuzzerTestOneInput /src/libfido2/fuzz/libfuzzer.c:131:3
+    #5 0x563bed043a6f in main /src/aflplusplus/utils/aflpp_driver/aflpp_driver.c:303:7
+    #6 0x7fb79962c0b2 in __libc_start_main
+    #7 0x563becfc15ed in _start
+
+  Uninitialized value was created by an allocation of &#x27;status&#x27; in the stack frame of function &#x27;nlmsg_get_status&#x27;
+    #0 0x7fb79b933c70 in nlmsg_get_status /src/libfido2/src/netlink.c:257
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24d9cb)
+Unique heap origins: 11
+Stack depot allocated bytes: 1900544
+Unique origin histories: 9
+History depot allocated bytes: 196608
+Exiting
+==46338==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x7fb79b9349cb in nlmsg_get_status /src/libfido2/src/netlink.c:0:10
+    #1 0x7fb79b91fc82 in nl_parse_reply /src/libfido2/src/netlink.c:427:8
+    #2 0x7fb79b92c4b2 in nl_get_nfc_family /src/libfido2/src/netlink.c:530:12
+    #3 0x7fb79b9299fd in fido_nl_new /src/libfido2/src/netlink.c:763:6
+    #4 0x563bed048603 in test /src/libfido2/fuzz/fuzz_netlink.c:136:12
+    #5 0x563bed04ca44 in LLVMFuzzerTestOneInput /src/libfido2/fuzz/libfuzzer.c:131:3
+    #6 0x563bed043a6f in main /src/aflplusplus/utils/aflpp_driver/aflpp_driver.c:303:7
+    #7 0x7fb79962c0b2 in __libc_start_main
+    #8 0x563becfc15ed in _start
+
+  Uninitialized value was created by an allocation of &#x27;status&#x27; in the stack frame of function &#x27;nlmsg_get_status&#x27;
+    #0 0x7fb79b933c70 in nlmsg_get_status /src/libfido2/src/netlink.c:257
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24d9cb)
+Unique heap origins: 17
+Stack depot allocated bytes: 1900544
+Unique origin histories: 15
+History depot allocated bytes: 196608
+Exiting
+==46339==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x7fb79b9349cb in nlmsg_get_status /src/libfido2/src/netlink.c:0:10
+    #1 0x7fb79b91fc82 in nl_parse_reply /src/libfido2/src/netlink.c:427:8
+    #2 0x7fb79b92c4b2 in nl_get_nfc_family /src/libfido2/src/netlink.c:530:12
+    #3 0x7fb79b9299fd in fido_nl_new /src/libfido2/src/netlink.c:763:6
+    #4 0x563bed048603 in test /src/libfido2/fuzz/fuzz_netlink.c:136:12
+    #5 0x563bed04ca44 in LLVMFuzzerTestOneInput /src/libfido2/fuzz/libfuzzer.c:131:3
+    #6 0x563bed043a6f in main /src/aflplusplus/utils/aflpp_driver/aflpp_driver.c:303:7
+    #7 0x7fb79962c0b2 in __libc_start_main
+    #8 0x563becfc15ed in _start
+
+  Uninitialized value was created by an allocation of &#x27;status&#x27; in the stack frame of function &#x27;nlmsg_get_status&#x27;
+    #0 0x7fb79b933c70 in nlmsg_get_status /src/libfido2/src/netlink.c:257
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24d9cb)
+Unique heap origins: 15
+Stack depot allocated bytes: 1900544
+Unique origin histories: 12
+History depot allocated bytes: 196608
+Exiting
+==46340==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x7fb79b9349cb in nlmsg_get_status /src/libfido2/src/netlink.c:0:10
+    #1 0x7fb79b91fc82 in nl_parse_reply /src/libfido2/src/netlink.c:427:8
+    #2 0x7fb79b92c4b2 in nl_get_nfc_family /src/libfido2/src/netlink.c:530:12
+    #3 0x7fb79b9299fd in fido_nl_new /src/libfido2/src/netlink.c:763:6
+    #4 0x563bed048603 in test /src/libfido2/fuzz/fuzz_netlink.c:136:12
+    #5 0x563bed04ca44 in LLVMFuzzerTestOneInput /src/libfido2/fuzz/libfuzzer.c:131:3
+    #6 0x563bed043a6f in main /src/aflplusplus/utils/aflpp_driver/aflpp_driver.c:303:7
+    #7 0x7fb79962c0b2 in __libc_start_main
+    #8 0x563becfc15ed in _start
+
+  Uninitialized value was created by an allocation of &#x27;status&#x27; in the stack frame of function &#x27;nlmsg_get_status&#x27;
+    #0 0x7fb79b933c70 in nlmsg_get_status /src/libfido2/src/netlink.c:257
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24d9cb)
+Unique heap origins: 18
+Stack depot allocated bytes: 1900544
+Unique origin histories: 14
+History depot allocated bytes: 196608
+Exiting
+==46341==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x7fb79b9349cb in nlmsg_get_status /src/libfido2/src/netlink.c:0:10
+    #1 0x7fb79b91fc82 in nl_parse_reply /src/libfido2/src/netlink.c:427:8
+    #2 0x7fb79b919dd3 in fido_nl_power_nfc /src/libfido2/src/netlink.c:583:12
+    #3 0x563bed0487a6 in test /src/libfido2/fuzz/fuzz_netlink.c:144:2
+    #4 0x563bed04ca44 in LLVMFuzzerTestOneInput /src/libfido2/fuzz/libfuzzer.c:131:3
+    #5 0x563bed043a6f in main /src/aflplusplus/utils/aflpp_driver/aflpp_driver.c:303:7
+    #6 0x7fb79962c0b2 in __libc_start_main
+    #7 0x563becfc15ed in _start
+
+  Uninitialized value was created by an allocation of &#x27;status&#x27; in the stack frame of function &#x27;nlmsg_get_status&#x27;
+    #0 0x7fb79b933c70 in nlmsg_get_status /src/libfido2/src/netlink.c:257
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24d9cb)
+Unique heap origins: 10
+Stack depot allocated bytes: 1900544
+Unique origin histories: 8
+History depot allocated bytes: 196608
+Exiting
+==46342==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x7fb79b9349cb in nlmsg_get_status /src/libfido2/src/netlink.c:0:10
+    #1 0x7fb79b91fc82 in nl_parse_reply /src/libfido2/src/netlink.c:427:8
+    #2 0x7fb79b92c4b2 in nl_get_nfc_family /src/libfido2/src/netlink.c:530:12
+    #3 0x7fb79b9299fd in fido_nl_new /src/libfido2/src/netlink.c:763:6
+    #4 0x563bed048603 in test /src/libfido2/fuzz/fuzz_netlink.c:136:12
+    #5 0x563bed04ca44 in LLVMFuzzerTestOneInput /src/libfido2/fuzz/libfuzzer.c:131:3
+    #6 0x563bed043a6f in main /src/aflplusplus/utils/aflpp_driver/aflpp_driver.c:303:7
+    #7 0x7fb79962c0b2 in __libc_start_main
+    #8 0x563becfc15ed in _start
+
+  Uninitialized value was created by an allocation of &#x27;status&#x27; in the stack frame of function &#x27;nlmsg_get_status&#x27;
+    #0 0x7fb79b933c70 in nlmsg_get_status /src/libfido2/src/netlink.c:257
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24d9cb)
+Unique heap origins: 54
+Stack depot allocated bytes: 1900544
+Unique origin histories: 50
+History depot allocated bytes: 196608
+Exiting
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+==46327==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x7fb79b9349cb  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24d9cb)
+    #1 0x7fb79b91fc82  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x238c82)
+    #2 0x7fb79b92c4b2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x2454b2)
+    #3 0x7fb79b9299fd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x2429fd)
+    #4 0x563bed048603  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0xa8603)
+    #5 0x563bed04ca44  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0xaca44)
+    #6 0x563bed043a6f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0xa3a6f)
+    #7 0x7fb79962c0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #8 0x563becfc15ed  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0x215ed)
+
+  Uninitialized value was created by an allocation of &#x27;status&#x27; in the stack frame of function &#x27;nlmsg_get_status&#x27;
+    #0 0x7fb79b933c70  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24cc70)
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24d9cb) 
+Unique heap origins: 9
+Stack depot allocated bytes: 1900544
+Unique origin histories: 7
+History depot allocated bytes: 196608
+Exiting
+==46329==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x7fb79b9349cb  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24d9cb)
+    #1 0x7fb79b91fc82  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x238c82)
+    #2 0x7fb79b92c4b2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x2454b2)
+    #3 0x7fb79b9299fd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x2429fd)
+    #4 0x563bed048603  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0xa8603)
+    #5 0x563bed04ca44  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0xaca44)
+    #6 0x563bed043a6f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0xa3a6f)
+    #7 0x7fb79962c0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #8 0x563becfc15ed  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0x215ed)
+
+  Uninitialized value was created by an allocation of &#x27;status&#x27; in the stack frame of function &#x27;nlmsg_get_status&#x27;
+    #0 0x7fb79b933c70  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24cc70)
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24d9cb) 
+Unique heap origins: 9
+Stack depot allocated bytes: 1900544
+Unique origin histories: 7
+History depot allocated bytes: 196608
+Exiting
+==46330==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x7fb79b9349cb  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24d9cb)
+    #1 0x7fb79b91fc82  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x238c82)
+    #2 0x7fb79b919dd3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x232dd3)
+    #3 0x563bed0487a6  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0xa87a6)
+    #4 0x563bed04ca44  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0xaca44)
+    #5 0x563bed043a6f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0xa3a6f)
+    #6 0x7fb79962c0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #7 0x563becfc15ed  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0x215ed)
+
+  Uninitialized value was created by an allocation of &#x27;status&#x27; in the stack frame of function &#x27;nlmsg_get_status&#x27;
+    #0 0x7fb79b933c70  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24cc70)
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24d9cb) 
+Unique heap origins: 11
+Stack depot allocated bytes: 1900544
+Unique origin histories: 9
+History depot allocated bytes: 196608
+Exiting
+==46331==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x7fb79b9349cb  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24d9cb)
+    #1 0x7fb79b91fc82  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x238c82)
+    #2 0x7fb79b919dd3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x232dd3)
+    #3 0x563bed0487a6  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0xa87a6)
+    #4 0x563bed04ca44  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0xaca44)
+    #5 0x563bed043a6f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0xa3a6f)
+    #6 0x7fb79962c0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #7 0x563becfc15ed  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0x215ed)
+
+  Uninitialized value was created by an allocation of &#x27;status&#x27; in the stack frame of function &#x27;nlmsg_get_status&#x27;
+    #0 0x7fb79b933c70  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24cc70)
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24d9cb) 
+Unique heap origins: 10
+Stack depot allocated bytes: 1900544
+Unique origin histories: 8
+History depot allocated bytes: 196608
+Exiting
+==46332==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x7fb79b9349cb  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24d9cb)
+    #1 0x7fb79b91fc82  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x238c82)
+    #2 0x7fb79b92c4b2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x2454b2)
+    #3 0x7fb79b9299fd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x2429fd)
+    #4 0x563bed048603  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0xa8603)
+    #5 0x563bed04ca44  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0xaca44)
+    #6 0x563bed043a6f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0xa3a6f)
+    #7 0x7fb79962c0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #8 0x563becfc15ed  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0x215ed)
+
+  Uninitialized value was created by an allocation of &#x27;status&#x27; in the stack frame of function &#x27;nlmsg_get_status&#x27;
+    #0 0x7fb79b933c70  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24cc70)
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24d9cb) 
+Unique heap origins: 16
+Stack depot allocated bytes: 1900544
+Unique origin histories: 13
+History depot allocated bytes: 196608
+Exiting
+==46333==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x7fb79b9349cb  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24d9cb)
+    #1 0x7fb79b91fc82  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x238c82)
+    #2 0x7fb79b92c4b2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x2454b2)
+    #3 0x7fb79b9299fd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x2429fd)
+    #4 0x563bed048603  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0xa8603)
+    #5 0x563bed04ca44  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0xaca44)
+    #6 0x563bed043a6f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0xa3a6f)
+    #7 0x7fb79962c0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #8 0x563becfc15ed  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0x215ed)
+
+  Uninitialized value was created by an allocation of &#x27;status&#x27; in the stack frame of function &#x27;nlmsg_get_status&#x27;
+    #0 0x7fb79b933c70  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24cc70)
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24d9cb) 
+Unique heap origins: 13
+Stack depot allocated bytes: 1900544
+Unique origin histories: 11
+History depot allocated bytes: 196608
+Exiting
+==46334==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x7fb79b9349cb  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24d9cb)
+    #1 0x7fb79b91fc82  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x238c82)
+    #2 0x7fb79b919dd3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x232dd3)
+    #3 0x563bed0487a6  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0xa87a6)
+    #4 0x563bed04ca44  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0xaca44)
+    #5 0x563bed043a6f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0xa3a6f)
+    #6 0x7fb79962c0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #7 0x563becfc15ed  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0x215ed)
+
+  Uninitialized value was created by an allocation of &#x27;status&#x27; in the stack frame of function &#x27;nlmsg_get_status&#x27;
+    #0 0x7fb79b933c70  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24cc70)
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24d9cb) 
+Unique heap origins: 10
+Stack depot allocated bytes: 1900544
+Unique origin histories: 8
+History depot allocated bytes: 196608
+Exiting
+==46335==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x7fb79b9349cb  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24d9cb)
+    #1 0x7fb79b91fc82  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x238c82)
+    #2 0x7fb79b92c4b2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x2454b2)
+    #3 0x7fb79b9299fd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x2429fd)
+    #4 0x563bed048603  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0xa8603)
+    #5 0x563bed04ca44  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0xaca44)
+    #6 0x563bed043a6f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0xa3a6f)
+    #7 0x7fb79962c0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #8 0x563becfc15ed  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0x215ed)
+
+  Uninitialized value was created by an allocation of &#x27;status&#x27; in the stack frame of function &#x27;nlmsg_get_status&#x27;
+    #0 0x7fb79b933c70  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24cc70)
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24d9cb) 
+Unique heap origins: 12
+Stack depot allocated bytes: 1900544
+Unique origin histories: 10
+History depot allocated bytes: 196608
+Exiting
+==46336==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x7fb79b9349cb  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24d9cb)
+    #1 0x7fb79b91fc82  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x238c82)
+    #2 0x7fb79b919dd3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x232dd3)
+    #3 0x563bed0487a6  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0xa87a6)
+    #4 0x563bed04ca44  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0xaca44)
+    #5 0x563bed043a6f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0xa3a6f)
+    #6 0x7fb79962c0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #7 0x563becfc15ed  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0x215ed)
+
+  Uninitialized value was created by an allocation of &#x27;status&#x27; in the stack frame of function &#x27;nlmsg_get_status&#x27;
+    #0 0x7fb79b933c70  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24cc70)
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24d9cb) 
+Unique heap origins: 13
+Stack depot allocated bytes: 1900544
+Unique origin histories: 11
+History depot allocated bytes: 196608
+Exiting
+==46337==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x7fb79b9349cb  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24d9cb)
+    #1 0x7fb79b91fc82  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x238c82)
+    #2 0x7fb79b919dd3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x232dd3)
+    #3 0x563bed0487a6  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0xa87a6)
+    #4 0x563bed04ca44  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0xaca44)
+    #5 0x563bed043a6f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0xa3a6f)
+    #6 0x7fb79962c0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #7 0x563becfc15ed  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0x215ed)
+
+  Uninitialized value was created by an allocation of &#x27;status&#x27; in the stack frame of function &#x27;nlmsg_get_status&#x27;
+    #0 0x7fb79b933c70  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24cc70)
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24d9cb) 
+Unique heap origins: 11
+Stack depot allocated bytes: 1900544
+Unique origin histories: 9
+History depot allocated bytes: 196608
+Exiting
+==46338==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x7fb79b9349cb  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24d9cb)
+    #1 0x7fb79b91fc82  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x238c82)
+    #2 0x7fb79b92c4b2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x2454b2)
+    #3 0x7fb79b9299fd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x2429fd)
+    #4 0x563bed048603  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0xa8603)
+    #5 0x563bed04ca44  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0xaca44)
+    #6 0x563bed043a6f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0xa3a6f)
+    #7 0x7fb79962c0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #8 0x563becfc15ed  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0x215ed)
+
+  Uninitialized value was created by an allocation of &#x27;status&#x27; in the stack frame of function &#x27;nlmsg_get_status&#x27;
+    #0 0x7fb79b933c70  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24cc70)
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24d9cb) 
+Unique heap origins: 17
+Stack depot allocated bytes: 1900544
+Unique origin histories: 15
+History depot allocated bytes: 196608
+Exiting
+==46339==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x7fb79b9349cb  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24d9cb)
+    #1 0x7fb79b91fc82  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x238c82)
+    #2 0x7fb79b92c4b2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x2454b2)
+    #3 0x7fb79b9299fd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x2429fd)
+    #4 0x563bed048603  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0xa8603)
+    #5 0x563bed04ca44  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0xaca44)
+    #6 0x563bed043a6f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0xa3a6f)
+    #7 0x7fb79962c0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #8 0x563becfc15ed  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0x215ed)
+
+  Uninitialized value was created by an allocation of &#x27;status&#x27; in the stack frame of function &#x27;nlmsg_get_status&#x27;
+    #0 0x7fb79b933c70  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24cc70)
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24d9cb) 
+Unique heap origins: 15
+Stack depot allocated bytes: 1900544
+Unique origin histories: 12
+History depot allocated bytes: 196608
+Exiting
+==46340==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x7fb79b9349cb  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24d9cb)
+    #1 0x7fb79b91fc82  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x238c82)
+    #2 0x7fb79b92c4b2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x2454b2)
+    #3 0x7fb79b9299fd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x2429fd)
+    #4 0x563bed048603  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0xa8603)
+    #5 0x563bed04ca44  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0xaca44)
+    #6 0x563bed043a6f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0xa3a6f)
+    #7 0x7fb79962c0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #8 0x563becfc15ed  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0x215ed)
+
+  Uninitialized value was created by an allocation of &#x27;status&#x27; in the stack frame of function &#x27;nlmsg_get_status&#x27;
+    #0 0x7fb79b933c70  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24cc70)
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24d9cb) 
+Unique heap origins: 18
+Stack depot allocated bytes: 1900544
+Unique origin histories: 14
+History depot allocated bytes: 196608
+Exiting
+==46341==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x7fb79b9349cb  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24d9cb)
+    #1 0x7fb79b91fc82  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x238c82)
+    #2 0x7fb79b919dd3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x232dd3)
+    #3 0x563bed0487a6  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0xa87a6)
+    #4 0x563bed04ca44  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0xaca44)
+    #5 0x563bed043a6f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0xa3a6f)
+    #6 0x7fb79962c0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #7 0x563becfc15ed  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0x215ed)
+
+  Uninitialized value was created by an allocation of &#x27;status&#x27; in the stack frame of function &#x27;nlmsg_get_status&#x27;
+    #0 0x7fb79b933c70  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24cc70)
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24d9cb) 
+Unique heap origins: 10
+Stack depot allocated bytes: 1900544
+Unique origin histories: 8
+History depot allocated bytes: 196608
+Exiting
+==46342==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x7fb79b9349cb  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24d9cb)
+    #1 0x7fb79b91fc82  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x238c82)
+    #2 0x7fb79b92c4b2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x2454b2)
+    #3 0x7fb79b9299fd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x2429fd)
+    #4 0x563bed048603  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0xa8603)
+    #5 0x563bed04ca44  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0xaca44)
+    #6 0x563bed043a6f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0xa3a6f)
+    #7 0x7fb79962c0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #8 0x563becfc15ed  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/fuzz_netlink+0x215ed)
+
+  Uninitialized value was created by an allocation of &#x27;status&#x27; in the stack frame of function &#x27;nlmsg_get_status&#x27;
+    #0 0x7fb79b933c70  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libfido2_afl_msan/custom/lib/libfido2.so.1+0x24cc70)

@@ -1,0 +1,147 @@
+Testcase id: 120968
+Job: dnsmasq_afl_msan
+Crash Type: Use-of-uninitialized-value
+isSecurity: True
+Crash state: answer_auth
+FuzzAuth
+fuzz_auth.c
+Poc: 120968.testcase
+engine: afl
+fully_qualified_name: afl_fuzz_auth
+target: fuzz_auth
+name: afl
+[Environment] MSAN_OPTIONS=allocator_release_to_os_interval_ms=500:exit_code=86:halt_on_error=1:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:print_stats=1:print_summary=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+==75869==WARNING: MemorySanitizer: use-of-uninitialized-value
+<b>    #0 0x4baebf in answer_auth /src/dnsmasq/src/auth.c:441:12</b>
+<b>    #1 0x4a889e in FuzzAuth /src/fuzz_auth.c:35:3</b>
+<b>    #2 0x4a8c1b in LLVMFuzzerTestOneInput /src/fuzz_auth.c:62:3</b>
+<b>    #3 0x4a0acf in main /src/aflplusplus/utils/aflpp_driver/aflpp_driver.c:303:7</b>
+<b>    #4 0x7f4d45e4e0b2 in __libc_start_main</b>
+<b>    #5 0x41e64d in _start</b>
+
+  Uninitialized value was created by an allocation of &#x27;peer_addr&#x27; in the stack frame of function &#x27;FuzzAuth&#x27;
+    #0 0x4a8470 in FuzzAuth /src/fuzz_auth.c:18
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_afl_msan/custom/fuzz_auth+0x4baebf)
+Unique heap origins: 2
+Stack depot allocated bytes: 1638400
+Unique origin histories: 0
+History depot allocated bytes: 0
+Exiting
+==75870==WARNING: MemorySanitizer: use-of-uninitialized-value
+<b>    #0 0x4baebf in answer_auth /src/dnsmasq/src/auth.c:441:12</b>
+<b>    #1 0x4a889e in FuzzAuth /src/fuzz_auth.c:35:3</b>
+<b>    #2 0x4a8c1b in LLVMFuzzerTestOneInput /src/fuzz_auth.c:62:3</b>
+<b>    #3 0x4a0acf in main /src/aflplusplus/utils/aflpp_driver/aflpp_driver.c:303:7</b>
+<b>    #4 0x7f4d45e4e0b2 in __libc_start_main</b>
+<b>    #5 0x41e64d in _start</b>
+
+  Uninitialized value was created by an allocation of &#x27;peer_addr&#x27; in the stack frame of function &#x27;FuzzAuth&#x27;
+    #0 0x4a8470 in FuzzAuth /src/fuzz_auth.c:18
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_afl_msan/custom/fuzz_auth+0x4baebf)
+Unique heap origins: 2
+Stack depot allocated bytes: 1638400
+Unique origin histories: 0
+History depot allocated bytes: 0
+Exiting
+==75871==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x4baebf in answer_auth /src/dnsmasq/src/auth.c:441:12
+    #1 0x4a889e in FuzzAuth /src/fuzz_auth.c:35:3
+    #2 0x4a8c1b in LLVMFuzzerTestOneInput /src/fuzz_auth.c:62:3
+    #3 0x4a0acf in main /src/aflplusplus/utils/aflpp_driver/aflpp_driver.c:303:7
+    #4 0x7f4d45e4e0b2 in __libc_start_main
+    #5 0x41e64d in _start
+
+  Uninitialized value was created by an allocation of &#x27;peer_addr&#x27; in the stack frame of function &#x27;FuzzAuth&#x27;
+    #0 0x4a8470 in FuzzAuth /src/fuzz_auth.c:18
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_afl_msan/custom/fuzz_auth+0x4baebf)
+Unique heap origins: 2
+Stack depot allocated bytes: 1638400
+Unique origin histories: 0
+History depot allocated bytes: 0
+Exiting
+==75973==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x4baebf in answer_auth /src/dnsmasq/src/auth.c:441:12
+    #1 0x4a889e in FuzzAuth /src/fuzz_auth.c:35:3
+    #2 0x4a8c1b in LLVMFuzzerTestOneInput /src/fuzz_auth.c:62:3
+    #3 0x4a0acf in main /src/aflplusplus/utils/aflpp_driver/aflpp_driver.c:303:7
+    #4 0x7f4d45e4e0b2 in __libc_start_main
+    #5 0x41e64d in _start
+
+  Uninitialized value was created by an allocation of &#x27;peer_addr&#x27; in the stack frame of function &#x27;FuzzAuth&#x27;
+    #0 0x4a8470 in FuzzAuth /src/fuzz_auth.c:18
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_afl_msan/custom/fuzz_auth+0x4baebf)
+Unique heap origins: 2
+Stack depot allocated bytes: 1638400
+Unique origin histories: 0
+History depot allocated bytes: 0
+Exiting
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+==75869==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x4baebf  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_afl_msan/custom/fuzz_auth+0x4baebf)
+    #1 0x4a889e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_afl_msan/custom/fuzz_auth+0x4a889e)
+    #2 0x4a8c1b  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_afl_msan/custom/fuzz_auth+0x4a8c1b)
+    #3 0x4a0acf  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_afl_msan/custom/fuzz_auth+0x4a0acf)
+    #4 0x7f4d45e4e0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #5 0x41e64d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_afl_msan/custom/fuzz_auth+0x41e64d)
+
+  Uninitialized value was created by an allocation of &#x27;peer_addr&#x27; in the stack frame of function &#x27;FuzzAuth&#x27;
+    #0 0x4a8470  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_afl_msan/custom/fuzz_auth+0x4a8470)
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_afl_msan/custom/fuzz_auth+0x4baebf) 
+Unique heap origins: 2
+Stack depot allocated bytes: 1638400
+Unique origin histories: 0
+History depot allocated bytes: 0
+Exiting
+==75870==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x4baebf  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_afl_msan/custom/fuzz_auth+0x4baebf)
+    #1 0x4a889e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_afl_msan/custom/fuzz_auth+0x4a889e)
+    #2 0x4a8c1b  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_afl_msan/custom/fuzz_auth+0x4a8c1b)
+    #3 0x4a0acf  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_afl_msan/custom/fuzz_auth+0x4a0acf)
+    #4 0x7f4d45e4e0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #5 0x41e64d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_afl_msan/custom/fuzz_auth+0x41e64d)
+
+  Uninitialized value was created by an allocation of &#x27;peer_addr&#x27; in the stack frame of function &#x27;FuzzAuth&#x27;
+    #0 0x4a8470  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_afl_msan/custom/fuzz_auth+0x4a8470)
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_afl_msan/custom/fuzz_auth+0x4baebf) 
+Unique heap origins: 2
+Stack depot allocated bytes: 1638400
+Unique origin histories: 0
+History depot allocated bytes: 0
+Exiting
+==75871==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x4baebf  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_afl_msan/custom/fuzz_auth+0x4baebf)
+    #1 0x4a889e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_afl_msan/custom/fuzz_auth+0x4a889e)
+    #2 0x4a8c1b  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_afl_msan/custom/fuzz_auth+0x4a8c1b)
+    #3 0x4a0acf  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_afl_msan/custom/fuzz_auth+0x4a0acf)
+    #4 0x7f4d45e4e0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #5 0x41e64d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_afl_msan/custom/fuzz_auth+0x41e64d)
+
+  Uninitialized value was created by an allocation of &#x27;peer_addr&#x27; in the stack frame of function &#x27;FuzzAuth&#x27;
+    #0 0x4a8470  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_afl_msan/custom/fuzz_auth+0x4a8470)
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_afl_msan/custom/fuzz_auth+0x4baebf) 
+Unique heap origins: 2
+Stack depot allocated bytes: 1638400
+Unique origin histories: 0
+History depot allocated bytes: 0
+Exiting
+==75973==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x4baebf  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_afl_msan/custom/fuzz_auth+0x4baebf)
+    #1 0x4a889e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_afl_msan/custom/fuzz_auth+0x4a889e)
+    #2 0x4a8c1b  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_afl_msan/custom/fuzz_auth+0x4a8c1b)
+    #3 0x4a0acf  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_afl_msan/custom/fuzz_auth+0x4a0acf)
+    #4 0x7f4d45e4e0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #5 0x41e64d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_afl_msan/custom/fuzz_auth+0x41e64d)
+
+  Uninitialized value was created by an allocation of &#x27;peer_addr&#x27; in the stack frame of function &#x27;FuzzAuth&#x27;
+    #0 0x4a8470  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_afl_msan/custom/fuzz_auth+0x4a8470)

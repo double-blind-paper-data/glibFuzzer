@@ -1,0 +1,38 @@
+Testcase id: 131882
+Job: libcoap_honggfuzz_msan
+Crash Type: Bus on unknown address
+isSecurity: False
+Crash state: coap_split_uri_sub
+coap_split_uri
+Poc: 131882.testcase
+engine: honggfuzz
+fully_qualified_name: honggfuzz_split_uri_fuzzer
+target: split_uri_fuzzer
+name: honggfuzz
+[Environment] MSAN_OPTIONS=allocator_release_to_os_interval_ms=500:halt_on_error=1:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:print_stats=1:print_summary=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+==155263==ERROR: MemorySanitizer: BUS on unknown address (pc 0x0000004a28a7 bp 0x7fffffffcf20 sp 0x7fffffffcdf0 T155263)
+==155263==The signal is caused by a READ memory access.
+==155263==Hint: this fault was caused by a dereference of a high value address (see register values below).  Disassemble the provided pc to learn which register was used.
+    #0 0x4a28a7 in coap_split_uri_sub /src/libcoap/src/uri.c:72:7
+    #1 0x4a2727 in coap_split_uri /src/libcoap/src/uri.c:242:10
+    #2 0x4a2670 in LLVMFuzzerTestOneInput
+    #3 0x560f7e in main
+    #4 0x7ffff7c5b0b2 in __libc_start_main
+    #5 0x41e4dd in _start
+
+MemorySanitizer can not provide additional info.
+SUMMARY: MemorySanitizer: BUS (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libcoap_honggfuzz_msan/custom/split_uri_fuzzer+0x4a28a7)
+==155263==ABORTING
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+==155263==The signal is caused by a READ memory access.
+==155263==Hint: this fault was caused by a dereference of a high value address (see register values below).  Disassemble the provided pc to learn which register was used.
+    #0 0x4a28a7  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libcoap_honggfuzz_msan/custom/split_uri_fuzzer+0x4a28a7)
+    #1 0x4a2727  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libcoap_honggfuzz_msan/custom/split_uri_fuzzer+0x4a2727)
+    #2 0x4a2670  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libcoap_honggfuzz_msan/custom/split_uri_fuzzer+0x4a2670)
+    #3 0x560f7e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libcoap_honggfuzz_msan/custom/split_uri_fuzzer+0x560f7e)
+    #4 0x7ffff7c5b0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #5 0x41e4dd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libcoap_honggfuzz_msan/custom/split_uri_fuzzer+0x41e4dd)

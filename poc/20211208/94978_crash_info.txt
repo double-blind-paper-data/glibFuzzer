@@ -1,0 +1,533 @@
+Testcase id: 94978
+Job: libpg_query_libfuzzer_asan
+Crash Type: Stack-overflow
+isSecurity: False
+Crash state: _outNode
+_outAExpr
+Poc: 94978.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_fuzz_parser
+target: fuzz_parser
+name: libFuzzer
+[Environment] ASAN_OPTIONS=detect_stack_use_after_return=1:exitcode=77:handle_sigfpe=2:print_scariness=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+Command: /clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser -rss_limit_mb=2560 -timeout=60 -runs=100 /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/b824d09878fd14123395b903cd0e64ae173844316d79456f30bd94a7e7e0af22
+Time ran: 0.21444082260131836
+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 744974766
+INFO: Loaded 1 modules   (21368 inline 8-bit counters): 21368 [0x993c80, 0x998ff8),
+INFO: Loaded 1 PC tables (21368 PCs): 21368 [0x998ff8,0x9ec778),
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser: Running 1 inputs 100 time(s) each.
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/b824d09878fd14123395b903cd0e64ae173844316d79456f30bd94a7e7e0af22
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==176779==ERROR: AddressSanitizer: stack-overflow on address 0x7ffd14f68fe8 (pc 0x0000005254fe bp 0x7ffd14f69830 sp 0x7ffd14f68ff0 T0)
+SCARINESS: 10 (stack-overflow)
+    #0 0x5254fe in __asan_memmove /src/llvm-project/compiler-rt/lib/asan/asan_interceptors_memintrinsics.cpp:30:3
+    #1 0x6bb0ad in dostr /src/libpg_query/src/postgres/src_port_snprintf.c:1320:3
+    #2 0x6bb0ad in dopr /src/libpg_query/src/postgres/src_port_snprintf.c:441:4
+    #3 0x6ba8bf in pg_vsnprintf /src/libpg_query/src/postgres/src_port_snprintf.c:223:2
+    #4 0x6174b3 in pvsnprintf /src/libpg_query/src/postgres/src_common_psprintf.c:117:13
+    #5 0x60ff12 in appendStringInfoVA /src/libpg_query/src/postgres/src_common_stringinfo.c:153:13
+    #6 0x60ff12 in appendStringInfo /src/libpg_query/src/postgres/src_common_stringinfo.c:107:12
+    #7 0x61c355 in _outString /src/libpg_query/src/pg_query_outfuncs_json.c:214:2
+    #8 0x61b8e9 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:10:3
+    #9 0x65949b in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1865:3
+    #10 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #11 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #12 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #13 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #14 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #15 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #16 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #17 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #18 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #19 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #20 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #21 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #22 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #23 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #24 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #25 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #26 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #27 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #28 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #29 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #30 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #31 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #32 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #33 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #34 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #35 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #36 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #37 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #38 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #39 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #40 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #41 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #42 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #43 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #44 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #45 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #46 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #47 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #48 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #49 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #50 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #51 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #52 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #53 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #54 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #55 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #56 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #57 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #58 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #59 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #60 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #61 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #62 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #63 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #64 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #65 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #66 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #67 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #68 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #69 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #70 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #71 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #72 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #73 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #74 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #75 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #76 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #77 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #78 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #79 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #80 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #81 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #82 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #83 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #84 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #85 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #86 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #87 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #88 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #89 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #90 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #91 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #92 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #93 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #94 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #95 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #96 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #97 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #98 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #99 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #100 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #101 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #102 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #103 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #104 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #105 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #106 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #107 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #108 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #109 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #110 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #111 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #112 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #113 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #114 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #115 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #116 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #117 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #118 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #119 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #120 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #121 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #122 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #123 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #124 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #125 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #126 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #127 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #128 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #129 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #130 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #131 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #132 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #133 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #134 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #135 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #136 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #137 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #138 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #139 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #140 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #141 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #142 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #143 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #144 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #145 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #146 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #147 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #148 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #149 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #150 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #151 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #152 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #153 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #154 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #155 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #156 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #157 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #158 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #159 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #160 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #161 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #162 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #163 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #164 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #165 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #166 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #167 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #168 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #169 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #170 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #171 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #172 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #173 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #174 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #175 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #176 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #177 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #178 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #179 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #180 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #181 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #182 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #183 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #184 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #185 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #186 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #187 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #188 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #189 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #190 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #191 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #192 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #193 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #194 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #195 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #196 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #197 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #198 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #199 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #200 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #201 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #202 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #203 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #204 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #205 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #206 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #207 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #208 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #209 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #210 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #211 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #212 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #213 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #214 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #215 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #216 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #217 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #218 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #219 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #220 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #221 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #222 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #223 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #224 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #225 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #226 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #227 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #228 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #229 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #230 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #231 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #232 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #233 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #234 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #235 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #236 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #237 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #238 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #239 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #240 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #241 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #242 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #243 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #244 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #245 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #246 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #247 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+    #248 0x61a909 in _outNode /src/libpg_query/src/pg_query_outfuncs_conds.c:526:3
+    #249 0x659661 in _outAExpr /src/libpg_query/src/pg_query_outfuncs_defs.c:1866:3
+
+SUMMARY: AddressSanitizer: stack-overflow (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x5254fe)
+==176779==ABORTING
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+==176779==ERROR: AddressSanitizer: stack-overflow on address 0x7ffd14f68fe8 (pc 0x0000005254fe bp 0x7ffd14f69830 sp 0x7ffd14f68ff0 T0)
+SCARINESS: 10 (stack-overflow)
+    #0 0x5254fe  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x5254fe)
+    #1 0x6bb0ad  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x6bb0ad)
+    #2 0x6ba8bf  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x6ba8bf)
+    #3 0x6174b3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x6174b3)
+    #4 0x60ff12  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x60ff12)
+    #5 0x61c355  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61c355)
+    #6 0x61b8e9  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61b8e9)
+    #7 0x65949b  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x65949b)
+    #8 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #9 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #10 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #11 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #12 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #13 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #14 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #15 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #16 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #17 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #18 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #19 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #20 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #21 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #22 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #23 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #24 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #25 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #26 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #27 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #28 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #29 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #30 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #31 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #32 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #33 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #34 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #35 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #36 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #37 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #38 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #39 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #40 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #41 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #42 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #43 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #44 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #45 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #46 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #47 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #48 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #49 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #50 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #51 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #52 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #53 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #54 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #55 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #56 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #57 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #58 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #59 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #60 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #61 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #62 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #63 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #64 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #65 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #66 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #67 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #68 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #69 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #70 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #71 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #72 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #73 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #74 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #75 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #76 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #77 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #78 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #79 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #80 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #81 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #82 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #83 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #84 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #85 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #86 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #87 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #88 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #89 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #90 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #91 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #92 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #93 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #94 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #95 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #96 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #97 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #98 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #99 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #100 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #101 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #102 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #103 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #104 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #105 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #106 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #107 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #108 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #109 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #110 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #111 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #112 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #113 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #114 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #115 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #116 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #117 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #118 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #119 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #120 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #121 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #122 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #123 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #124 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #125 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #126 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #127 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #128 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #129 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #130 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #131 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #132 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #133 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #134 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #135 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #136 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #137 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #138 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #139 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #140 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #141 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #142 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #143 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #144 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #145 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #146 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #147 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #148 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #149 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #150 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #151 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #152 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #153 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #154 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #155 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #156 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #157 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #158 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #159 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #160 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #161 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #162 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #163 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #164 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #165 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #166 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #167 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #168 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #169 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #170 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #171 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #172 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #173 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #174 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #175 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #176 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #177 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #178 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #179 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #180 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #181 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #182 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #183 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #184 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #185 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #186 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #187 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #188 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #189 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #190 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #191 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #192 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #193 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #194 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #195 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #196 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #197 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #198 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #199 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #200 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #201 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #202 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #203 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #204 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #205 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #206 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #207 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #208 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #209 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #210 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #211 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #212 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #213 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #214 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #215 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #216 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #217 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #218 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #219 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #220 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #221 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #222 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #223 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #224 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #225 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #226 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #227 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #228 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #229 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #230 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #231 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #232 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #233 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #234 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #235 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #236 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #237 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #238 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #239 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #240 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #241 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #242 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #243 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #244 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #245 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)
+    #246 0x61a909  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x61a909)
+    #247 0x659661  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x659661)

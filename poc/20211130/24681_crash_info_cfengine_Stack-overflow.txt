@@ -1,0 +1,534 @@
+Testcase id: 24681
+Job: cfengine_libfuzzer_asan
+Crash Type: Stack-overflow
+isSecurity: False
+Crash state: ParseStringExpression
+Poc: 24681.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_string_fuzzer
+target: string_fuzzer
+name: libFuzzer
+[Environment] ASAN_OPTIONS=dedup_token_length=3:exitcode=77:symbolize=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+Command: /clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer -rss_limit_mb=2560 -timeout=60 -runs=100 /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/e7721b94f7e48a10a3ba4a67d6643aaadd27eaad9f25efadcfd11df64c037271
+Time ran: 0.0975651741027832
+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 2442935271
+INFO: Loaded 1 modules   (1117 inline 8-bit counters): 1117 [0x5cf080, 0x5cf4dd),
+INFO: Loaded 1 PC tables (1117 PCs): 1117 [0x5cf4e0,0x5d3ab0),
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer: Running 1 inputs 100 time(s) each.
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/e7721b94f7e48a10a3ba4a67d6643aaadd27eaad9f25efadcfd11df64c037271
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==1982==ERROR: AddressSanitizer: stack-overflow on address 0x7ffe08012ff8 (pc 0x0000004548c4 bp 0x7ffe08013000 sp 0x7ffe08013000 T0)
+    #0 0x4548c4 in fuzzer::Fuzzer::HandleMalloc(unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerLoop.cpp:125
+    #1 0x45482a in fuzzer::MallocHook(void const volatile*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerLoop.cpp:100:6
+    #2 0x537237 in __sanitizer::RunMallocHooks(void const*, unsigned long) /src/llvm-project/compiler-rt/lib/sanitizer_common/sanitizer_common.cpp:308:5
+    #3 0x4a6253 in __asan::Allocator::Allocate(unsigned long, unsigned long, __sanitizer::BufferedStackTrace*, __asan::AllocType, bool) /src/llvm-project/compiler-rt/lib/asan/asan_allocator.cpp:611:5
+    #4 0x4a5b83 in __asan::asan_malloc(unsigned long, __sanitizer::BufferedStackTrace*) /src/llvm-project/compiler-rt/lib/asan/asan_allocator.cpp:965:34
+    #5 0x525d7b in __interceptor_malloc /src/llvm-project/compiler-rt/lib/asan/asan_malloc_linux.cpp:130:10
+    #6 0x4b9ef2 in __interceptor_strndup /src/llvm-project/compiler-rt/lib/sanitizer_common/sanitizer_common_interceptors.inc:414:3
+    #7 0x55ddf3 in xstrndup /src/core/libntech/libutils/alloc.c:63:24
+    #8 0x55ce35 in ParseToken /src/core/libpromises/string_expressions.c:200:36
+    #9 0x55ce35 in ParseTerm /src/core/libpromises/string_expressions.c:214:29
+    #10 0x55ce35 in ParseStringExpression /src/core/libpromises/string_expressions.c:230:29
+    #11 0x55d03b in ParseQname /src/core/libpromises/string_expressions.c:42:11
+    #12 0x55d03b in ParseVarRef /src/core/libpromises/string_expressions.c:88:37
+    #13 0x55d03b in ParseTerm /src/core/libpromises/string_expressions.c:222:16
+    #14 0x55d03b in ParseStringExpression /src/core/libpromises/string_expressions.c:230:29
+    #15 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #16 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #17 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #18 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #19 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #20 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #21 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #22 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #23 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #24 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #25 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #26 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #27 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #28 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #29 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #30 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #31 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #32 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #33 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #34 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #35 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #36 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #37 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #38 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #39 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #40 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #41 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #42 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #43 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #44 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #45 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #46 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #47 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #48 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #49 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #50 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #51 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #52 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #53 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #54 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #55 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #56 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #57 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #58 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #59 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #60 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #61 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #62 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #63 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #64 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #65 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #66 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #67 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #68 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #69 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #70 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #71 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #72 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #73 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #74 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #75 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #76 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #77 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #78 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #79 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #80 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #81 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #82 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #83 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #84 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #85 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #86 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #87 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #88 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #89 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #90 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #91 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #92 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #93 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #94 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #95 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #96 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #97 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #98 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #99 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #100 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #101 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #102 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #103 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #104 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #105 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #106 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #107 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #108 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #109 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #110 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #111 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #112 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #113 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #114 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #115 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #116 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #117 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #118 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #119 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #120 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #121 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #122 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #123 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #124 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #125 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #126 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #127 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #128 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #129 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #130 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #131 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #132 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #133 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #134 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #135 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #136 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #137 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #138 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #139 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #140 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #141 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #142 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #143 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #144 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #145 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #146 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #147 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #148 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #149 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #150 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #151 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #152 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #153 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #154 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #155 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #156 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #157 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #158 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #159 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #160 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #161 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #162 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #163 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #164 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #165 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #166 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #167 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #168 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #169 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #170 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #171 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #172 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #173 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #174 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #175 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #176 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #177 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #178 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #179 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #180 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #181 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #182 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #183 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #184 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #185 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #186 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #187 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #188 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #189 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #190 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #191 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #192 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #193 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #194 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #195 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #196 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #197 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #198 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #199 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #200 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #201 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #202 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #203 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #204 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #205 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #206 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #207 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #208 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #209 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #210 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #211 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #212 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #213 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #214 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #215 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #216 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #217 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #218 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #219 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #220 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #221 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #222 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #223 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #224 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #225 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #226 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #227 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #228 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #229 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #230 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #231 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #232 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #233 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #234 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #235 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #236 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #237 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #238 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #239 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #240 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #241 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #242 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #243 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #244 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #245 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #246 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #247 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #248 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #249 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #250 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #251 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+    #252 0x55ceec in ParseStringExpression /src/core/libpromises/string_expressions.c:234:33
+
+SUMMARY: AddressSanitizer: stack-overflow (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x4548c4)
+==1982==ABORTING
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+=================================================================
+==1982==ERROR: AddressSanitizer: stack-overflow on address 0x7ffe08012ff8 (pc 0x0000004548c4 bp 0x7ffe08013000 sp 0x7ffe08013000 T0)
+    #0 0x4548c4  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x4548c4)
+    #1 0x45482a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x45482a)
+    #2 0x537237  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x537237)
+    #3 0x4a6253  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x4a6253)
+    #4 0x4a5b83  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x4a5b83)
+    #5 0x525d7b  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x525d7b)
+    #6 0x4b9ef2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x4b9ef2)
+    #7 0x55ddf3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ddf3)
+    #8 0x55ce35  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ce35)
+    #9 0x55d03b  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55d03b)
+    #10 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #11 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #12 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #13 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #14 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #15 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #16 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #17 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #18 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #19 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #20 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #21 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #22 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #23 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #24 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #25 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #26 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #27 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #28 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #29 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #30 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #31 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #32 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #33 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #34 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #35 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #36 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #37 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #38 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #39 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #40 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #41 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #42 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #43 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #44 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #45 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #46 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #47 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #48 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #49 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #50 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #51 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #52 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #53 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #54 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #55 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #56 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #57 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #58 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #59 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #60 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #61 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #62 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #63 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #64 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #65 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #66 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #67 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #68 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #69 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #70 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #71 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #72 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #73 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #74 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #75 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #76 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #77 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #78 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #79 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #80 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #81 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #82 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #83 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #84 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #85 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #86 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #87 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #88 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #89 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #90 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #91 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #92 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #93 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #94 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #95 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #96 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #97 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #98 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #99 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #100 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #101 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #102 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #103 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #104 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #105 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #106 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #107 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #108 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #109 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #110 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #111 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #112 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #113 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #114 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #115 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #116 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #117 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #118 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #119 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #120 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #121 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #122 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #123 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #124 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #125 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #126 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #127 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #128 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #129 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #130 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #131 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #132 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #133 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #134 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #135 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #136 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #137 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #138 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #139 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #140 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #141 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #142 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #143 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #144 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #145 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #146 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #147 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #148 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #149 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #150 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #151 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #152 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #153 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #154 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #155 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #156 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #157 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #158 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #159 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #160 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #161 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #162 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #163 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #164 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #165 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #166 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #167 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #168 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #169 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #170 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #171 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #172 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #173 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #174 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #175 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #176 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #177 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #178 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #179 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #180 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #181 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #182 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #183 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #184 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #185 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #186 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #187 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #188 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #189 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #190 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #191 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #192 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #193 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #194 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #195 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #196 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #197 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #198 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #199 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #200 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #201 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #202 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #203 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #204 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #205 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #206 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #207 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #208 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #209 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #210 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #211 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #212 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #213 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #214 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #215 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #216 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #217 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #218 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #219 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #220 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #221 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #222 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #223 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #224 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #225 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #226 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #227 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #228 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #229 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #230 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #231 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #232 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #233 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #234 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #235 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #236 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #237 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #238 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #239 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #240 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #241 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #242 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #243 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #244 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #245 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #246 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)
+    #247 0x55ceec  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cfengine_libfuzzer_asan/custom/string_fuzzer+0x55ceec)

@@ -1,0 +1,233 @@
+Testcase id: 35312
+Job: libheif_libfuzzer_msan
+Crash Type: Use-of-uninitialized-value
+isSecurity: True
+Crash state: transform_4x4_luma_add_16_fallback
+void scale_coefficients_internal<unsigned short>
+scale_coefficients
+Poc: 35312.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_file-fuzzer
+target: file-fuzzer
+name: libFuzzer
+[Environment] MSAN_OPTIONS=exitcode=77
++----------------------------------------Release Build Stacktrace----------------------------------------+
+Command: /clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer -rss_limit_mb=2560 -timeout=60 -runs=100 /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/1476d894d1d56195d7d22099588fd97c98a27bfd8d5a5593cbd8622de51c0bf3
+Time ran: 0.06356453895568848
+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 3173190850
+INFO: Loaded 1 modules   (134138 inline 8-bit counters): 134138 [0x358c08d, 0x35acc87),
+INFO: Loaded 1 PC tables (134138 PCs): 134138 [0x35acc88,0x37b8c28),
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer: Running 1 inputs 100 time(s) each.
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/1476d894d1d56195d7d22099588fd97c98a27bfd8d5a5593cbd8622de51c0bf3
+==16106==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x25880e8 in transform_4x4_luma_add_16_fallback(unsigned short*, short const*, long, int) /src/libde265/libde265/fallback-dct.cc:401:25
+    #1 0x264550b in transform_coefficients&lt;unsigned short&gt; /src/libde265/libde265/transform.cc:0
+    #2 0x264550b in void scale_coefficients_internal&lt;unsigned short&gt;(thread_context*, int, int, int, int, int, int, bool, bool, int) /src/libde265/libde265/transform.cc:609:9
+    #3 0x2642496 in scale_coefficients(thread_context*, int, int, int, int, int, int, bool, bool, int) /src/libde265/libde265/transform.cc:645:5
+    #4 0x260efd2 in decode_TU(thread_context*, int, int, int, int, int, int, PredMode, bool) /src/libde265/libde265/slice.cc:0
+    #5 0x260c4f0 in read_transform_unit(thread_context*, int, int, int, int, int, int, int, int, int, int, int, int) /src/libde265/libde265/slice.cc:3665:3
+    #6 0x2611e38 in read_transform_tree(thread_context*, int, int, int, int, int, int, int, int, int, int, int, PredMode, unsigned char, unsigned char) /src/libde265/libde265/slice.cc:3963:5
+    #7 0x26115e6 in read_transform_tree(thread_context*, int, int, int, int, int, int, int, int, int, int, int, PredMode, unsigned char, unsigned char) /src/libde265/libde265/slice.cc:3940:5
+    #8 0x261e74f in read_coding_unit(thread_context*, int, int, int, int) /src/libde265/libde265/slice.cc:4575:9
+    #9 0x2604191 in read_coding_quadtree(thread_context*, int, int, int, int) /src/libde265/libde265/slice.cc:4652:5
+    #10 0x2603d68 in read_coding_quadtree(thread_context*, int, int, int, int) /src/libde265/libde265/slice.cc:4641:7
+    #11 0x26023c0 in read_coding_tree_unit(thread_context*) /src/libde265/libde265/slice.cc:2861:3
+    #12 0x26208eb in decode_substream(thread_context*, bool, bool) /src/libde265/libde265/slice.cc:4741:5
+    #13 0x2624fc9 in read_slice_segment_data(thread_context*) /src/libde265/libde265/slice.cc:5054:14
+    #14 0x256950a in decoder_context::decode_slice_unit_sequential(image_unit*, slice_unit*) /src/libde265/libde265/decctx.cc:843:7
+    #15 0x2566b06 in decoder_context::decode_slice_unit_parallel(image_unit*, slice_unit*) /src/libde265/libde265/decctx.cc:945:11
+    #16 0x2563c25 in decoder_context::decode_some(bool*) /src/libde265/libde265/decctx.cc:730:13
+    #17 0x255fefd in decoder_context::read_slice_NAL(bitreader&amp;, NAL_unit*, nal_header&amp;) /src/libde265/libde265/decctx.cc:688:9
+    #18 0x256cd5f in decoder_context::decode_NAL(NAL_unit*) /src/libde265/libde265/decctx.cc:1230:11
+    #19 0x256d8df in decoder_context::decode(int*) /src/libde265/libde265/decctx.cc:1318:16
+    #20 0x255357e in de265_decode /src/libde265/libde265/de265.cc:352:15
+    #21 0x74ef73 in libde265_v1_decode_image(void*, heif_image**) /src/libheif/libheif/heif_decoder_libde265.cc:313:18
+    #22 0x68be84 in heif::HeifContext::decode_image_planar(unsigned int, std::__1::shared_ptr&lt;heif::HeifPixelImage&gt;&amp;, heif_colorspace, heif_decoding_options const*, bool) const /src/libheif/libheif/heif_context.cc:1101:11
+    #23 0x6836a4 in heif::HeifContext::decode_image_user(unsigned int, std::__1::shared_ptr&lt;heif::HeifPixelImage&gt;&amp;, heif_colorspace, heif_chroma, heif_decoding_options const*) const /src/libheif/libheif/heif_context.cc:1014:15
+    #24 0x63c262 in heif_decode_image /src/libheif/libheif/heif.cc:917:35
+    #25 0x76270f in TestDecodeImage(heif_context*, heif_image_handle const*, unsigned long) /src/libheif/libheif/file_fuzzer.cc:61:9
+    #26 0x761809 in LLVMFuzzerTestOneInput /src/libheif/libheif/file_fuzzer.cc:102:5
+    #27 0x45b093 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #28 0x4469a2 in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:324:6
+    #29 0x44c46a in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #30 0x475392 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #31 0x7f879a3870b2 in __libc_start_main
+    #32 0x423c2d in _start
+
+  Uninitialized value was stored to memory at
+    #0 0x26c4a46 in intra_prediction_planar&lt;unsigned short&gt; /src/libde265/libde265/intrapred.h:272:28
+    #1 0x26c4a46 in void decode_intra_prediction_internal&lt;unsigned short&gt;(de265_image*, int, int, IntraPredMode, unsigned short*, int, int, int) /src/libde265/libde265/intrapred.cc:295:5
+    #2 0x26c3965 in decode_intra_prediction(de265_image*, int, int, IntraPredMode, int, int) /src/libde265/libde265/intrapred.cc:329:5
+    #3 0x260f54d in decode_TU(thread_context*, int, int, int, int, int, int, PredMode, bool) /src/libde265/libde265/slice.cc:3453:7
+    #4 0x260c4f0 in read_transform_unit(thread_context*, int, int, int, int, int, int, int, int, int, int, int, int) /src/libde265/libde265/slice.cc:3665:3
+    #5 0x2611e38 in read_transform_tree(thread_context*, int, int, int, int, int, int, int, int, int, int, int, PredMode, unsigned char, unsigned char) /src/libde265/libde265/slice.cc:3963:5
+    #6 0x26115e6 in read_transform_tree(thread_context*, int, int, int, int, int, int, int, int, int, int, int, PredMode, unsigned char, unsigned char) /src/libde265/libde265/slice.cc:3940:5
+    #7 0x261e74f in read_coding_unit(thread_context*, int, int, int, int) /src/libde265/libde265/slice.cc:4575:9
+    #8 0x2604191 in read_coding_quadtree(thread_context*, int, int, int, int) /src/libde265/libde265/slice.cc:4652:5
+    #9 0x2603d68 in read_coding_quadtree(thread_context*, int, int, int, int) /src/libde265/libde265/slice.cc:4641:7
+    #10 0x26023c0 in read_coding_tree_unit(thread_context*) /src/libde265/libde265/slice.cc:2861:3
+    #11 0x26208eb in decode_substream(thread_context*, bool, bool) /src/libde265/libde265/slice.cc:4741:5
+    #12 0x2624fc9 in read_slice_segment_data(thread_context*) /src/libde265/libde265/slice.cc:5054:14
+    #13 0x256950a in decoder_context::decode_slice_unit_sequential(image_unit*, slice_unit*) /src/libde265/libde265/decctx.cc:843:7
+    #14 0x2566b06 in decoder_context::decode_slice_unit_parallel(image_unit*, slice_unit*) /src/libde265/libde265/decctx.cc:945:11
+    #15 0x2563c25 in decoder_context::decode_some(bool*) /src/libde265/libde265/decctx.cc:730:13
+    #16 0x255fefd in decoder_context::read_slice_NAL(bitreader&amp;, NAL_unit*, nal_header&amp;) /src/libde265/libde265/decctx.cc:688:9
+    #17 0x256cd5f in decoder_context::decode_NAL(NAL_unit*) /src/libde265/libde265/decctx.cc:1230:11
+    #18 0x256d8df in decoder_context::decode(int*) /src/libde265/libde265/decctx.cc:1318:16
+    #19 0x255357e in de265_decode /src/libde265/libde265/de265.cc:352:15
+    #20 0x74ef73 in libde265_v1_decode_image(void*, heif_image**) /src/libheif/libheif/heif_decoder_libde265.cc:313:18
+
+  Uninitialized value was stored to memory at
+    #0 0x26ccaa2 in intra_border_computer&lt;unsigned short&gt;::fill_from_image() /src/libde265/libde265/intrapred.h:568:32
+    #1 0x26c3d23 in fill_border_samples&lt;unsigned short&gt; /src/libde265/libde265/intrapred.cc:260:5
+    #2 0x26c3d23 in void decode_intra_prediction_internal&lt;unsigned short&gt;(de265_image*, int, int, IntraPredMode, unsigned short*, int, int, int) /src/libde265/libde265/intrapred.cc:284:3
+    #3 0x26c3965 in decode_intra_prediction(de265_image*, int, int, IntraPredMode, int, int) /src/libde265/libde265/intrapred.cc:329:5
+    #4 0x260f54d in decode_TU(thread_context*, int, int, int, int, int, int, PredMode, bool) /src/libde265/libde265/slice.cc:3453:7
+    #5 0x260c4f0 in read_transform_unit(thread_context*, int, int, int, int, int, int, int, int, int, int, int, int) /src/libde265/libde265/slice.cc:3665:3
+    #6 0x2611e38 in read_transform_tree(thread_context*, int, int, int, int, int, int, int, int, int, int, int, PredMode, unsigned char, unsigned char) /src/libde265/libde265/slice.cc:3963:5
+    #7 0x26115e6 in read_transform_tree(thread_context*, int, int, int, int, int, int, int, int, int, int, int, PredMode, unsigned char, unsigned char) /src/libde265/libde265/slice.cc:3940:5
+    #8 0x261e74f in read_coding_unit(thread_context*, int, int, int, int) /src/libde265/libde265/slice.cc:4575:9
+    #9 0x2604191 in read_coding_quadtree(thread_context*, int, int, int, int) /src/libde265/libde265/slice.cc:4652:5
+    #10 0x2603d68 in read_coding_quadtree(thread_context*, int, int, int, int) /src/libde265/libde265/slice.cc:4641:7
+    #11 0x26023c0 in read_coding_tree_unit(thread_context*) /src/libde265/libde265/slice.cc:2861:3
+    #12 0x26208eb in decode_substream(thread_context*, bool, bool) /src/libde265/libde265/slice.cc:4741:5
+    #13 0x2624fc9 in read_slice_segment_data(thread_context*) /src/libde265/libde265/slice.cc:5054:14
+    #14 0x256950a in decoder_context::decode_slice_unit_sequential(image_unit*, slice_unit*) /src/libde265/libde265/decctx.cc:843:7
+    #15 0x2566b06 in decoder_context::decode_slice_unit_parallel(image_unit*, slice_unit*) /src/libde265/libde265/decctx.cc:945:11
+    #16 0x2563c25 in decoder_context::decode_some(bool*) /src/libde265/libde265/decctx.cc:730:13
+    #17 0x255fefd in decoder_context::read_slice_NAL(bitreader&amp;, NAL_unit*, nal_header&amp;) /src/libde265/libde265/decctx.cc:688:9
+    #18 0x256cd5f in decoder_context::decode_NAL(NAL_unit*) /src/libde265/libde265/decctx.cc:1230:11
+    #19 0x256d8df in decoder_context::decode(int*) /src/libde265/libde265/decctx.cc:1318:16
+    #20 0x255357e in de265_decode /src/libde265/libde265/de265.cc:352:15
+
+  Uninitialized value was created by a heap allocation
+    #0 0x4d3575 in posix_memalign /src/llvm-project/compiler-rt/lib/msan/msan_interceptors.cpp:172:3
+    #1 0x25ad669 in ALLOC_ALIGNED /src/libde265/libde265/image.cc:55:9
+    #2 0x25ad669 in de265_image_get_buffer(void*, de265_image_spec*, de265_image*, void*) /src/libde265/libde265/image.cc:129:21
+    #3 0x25aff69 in de265_image::alloc_image(int, int, de265_chroma, std::__1::shared_ptr&lt;seq_parameter_set const&gt;, bool, decoder_context*, long, void*, bool) /src/libde265/libde265/image.cc:385:25
+    #4 0x25a4df8 in decoded_picture_buffer::new_image(std::__1::shared_ptr&lt;seq_parameter_set const&gt;, decoder_context*, long, void*, bool) /src/libde265/libde265/dpb.cc:262:8
+    #5 0x2561830 in decoder_context::process_slice_segment_header(slice_segment_header*, de265_error*, long, nal_header*, void*) /src/libde265/libde265/decctx.cc:2012:28
+    #6 0x255efc5 in decoder_context::read_slice_NAL(bitreader&amp;, NAL_unit*, nal_header&amp;) /src/libde265/libde265/decctx.cc:639:7
+    #7 0x256cd5f in decoder_context::decode_NAL(NAL_unit*) /src/libde265/libde265/decctx.cc:1230:11
+    #8 0x256d8df in decoder_context::decode(int*) /src/libde265/libde265/decctx.cc:1318:16
+    #9 0x255357e in de265_decode /src/libde265/libde265/de265.cc:352:15
+    #10 0x74ef73 in libde265_v1_decode_image(void*, heif_image**) /src/libheif/libheif/heif_decoder_libde265.cc:313:18
+    #11 0x68be84 in heif::HeifContext::decode_image_planar(unsigned int, std::__1::shared_ptr&lt;heif::HeifPixelImage&gt;&amp;, heif_colorspace, heif_decoding_options const*, bool) const /src/libheif/libheif/heif_context.cc:1101:11
+    #12 0x6836a4 in heif::HeifContext::decode_image_user(unsigned int, std::__1::shared_ptr&lt;heif::HeifPixelImage&gt;&amp;, heif_colorspace, heif_chroma, heif_decoding_options const*) const /src/libheif/libheif/heif_context.cc:1014:15
+    #13 0x63c262 in heif_decode_image /src/libheif/libheif/heif.cc:917:35
+    #14 0x76270f in TestDecodeImage(heif_context*, heif_image_handle const*, unsigned long) /src/libheif/libheif/file_fuzzer.cc:61:9
+    #15 0x761809 in LLVMFuzzerTestOneInput /src/libheif/libheif/file_fuzzer.cc:102:5
+    #16 0x45b093 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #17 0x4469a2 in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:324:6
+    #18 0x44c46a in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #19 0x475392 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #20 0x7f879a3870b2 in __libc_start_main
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x25880e8)
+Exiting
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/1476d894d1d56195d7d22099588fd97c98a27bfd8d5a5593cbd8622de51c0bf3
+==16106==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x25880e8  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x25880e8)
+    #1 0x264550b  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x264550b)
+    #2 0x2642496  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x2642496)
+    #3 0x260efd2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x260efd2)
+    #4 0x260c4f0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x260c4f0)
+    #5 0x2611e38  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x2611e38)
+    #6 0x26115e6  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x26115e6)
+    #7 0x261e74f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x261e74f)
+    #8 0x2604191  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x2604191)
+    #9 0x2603d68  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x2603d68)
+    #10 0x26023c0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x26023c0)
+    #11 0x26208eb  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x26208eb)
+    #12 0x2624fc9  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x2624fc9)
+    #13 0x256950a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x256950a)
+    #14 0x2566b06  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x2566b06)
+    #15 0x2563c25  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x2563c25)
+    #16 0x255fefd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x255fefd)
+    #17 0x256cd5f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x256cd5f)
+    #18 0x256d8df  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x256d8df)
+    #19 0x255357e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x255357e)
+    #20 0x74ef73  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x74ef73)
+    #21 0x68be84  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x68be84)
+    #22 0x6836a4  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x6836a4)
+    #23 0x63c262  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x63c262)
+    #24 0x76270f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x76270f)
+    #25 0x761809  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x761809)
+    #26 0x45b093  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x45b093)
+    #27 0x4469a2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x4469a2)
+    #28 0x44c46a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x44c46a)
+    #29 0x475392  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x475392)
+    #30 0x7f879a3870b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #31 0x423c2d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x423c2d)
+
+  Uninitialized value was stored to memory at
+    #0 0x26c4a46  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x26c4a46)
+    #1 0x26c3965  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x26c3965)
+    #2 0x260f54d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x260f54d)
+    #3 0x260c4f0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x260c4f0)
+    #4 0x2611e38  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x2611e38)
+    #5 0x26115e6  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x26115e6)
+    #6 0x261e74f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x261e74f)
+    #7 0x2604191  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x2604191)
+    #8 0x2603d68  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x2603d68)
+    #9 0x26023c0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x26023c0)
+    #10 0x26208eb  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x26208eb)
+    #11 0x2624fc9  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x2624fc9)
+    #12 0x256950a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x256950a)
+    #13 0x2566b06  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x2566b06)
+    #14 0x2563c25  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x2563c25)
+    #15 0x255fefd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x255fefd)
+    #16 0x256cd5f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x256cd5f)
+    #17 0x256d8df  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x256d8df)
+    #18 0x255357e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x255357e)
+    #19 0x74ef73  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x74ef73)
+
+  Uninitialized value was stored to memory at
+    #0 0x26ccaa2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x26ccaa2)
+    #1 0x26c3d23  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x26c3d23)
+    #2 0x26c3965  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x26c3965)
+    #3 0x260f54d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x260f54d)
+    #4 0x260c4f0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x260c4f0)
+    #5 0x2611e38  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x2611e38)
+    #6 0x26115e6  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x26115e6)
+    #7 0x261e74f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x261e74f)
+    #8 0x2604191  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x2604191)
+    #9 0x2603d68  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x2603d68)
+    #10 0x26023c0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x26023c0)
+    #11 0x26208eb  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x26208eb)
+    #12 0x2624fc9  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x2624fc9)
+    #13 0x256950a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x256950a)
+    #14 0x2566b06  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x2566b06)
+    #15 0x2563c25  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x2563c25)
+    #16 0x255fefd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x255fefd)
+    #17 0x256cd5f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x256cd5f)
+    #18 0x256d8df  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x256d8df)
+    #19 0x255357e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x255357e)
+
+  Uninitialized value was created by a heap allocation
+    #0 0x4d3575  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x4d3575)
+    #1 0x25ad669  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x25ad669)
+    #2 0x25aff69  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x25aff69)
+    #3 0x25a4df8  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x25a4df8)
+    #4 0x2561830  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x2561830)
+    #5 0x255efc5  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x255efc5)
+    #6 0x256cd5f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x256cd5f)
+    #7 0x256d8df  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x256d8df)
+    #8 0x255357e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x255357e)
+    #9 0x74ef73  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x74ef73)
+    #10 0x68be84  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x68be84)
+    #11 0x6836a4  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x6836a4)
+    #12 0x63c262  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x63c262)
+    #13 0x76270f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x76270f)
+    #14 0x761809  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x761809)
+    #15 0x45b093  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x45b093)
+    #16 0x4469a2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x4469a2)
+    #17 0x44c46a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x44c46a)
+    #18 0x475392  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_msan/custom/file-fuzzer+0x475392)
+    #19 0x7f879a3870b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)

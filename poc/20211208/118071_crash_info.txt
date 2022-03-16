@@ -1,0 +1,78 @@
+Testcase id: 118071
+Job: e2fsprogs_libfuzzer_ubsan
+Crash Type: UNKNOWN WRITE
+isSecurity: True
+Crash state: prim_lraw
+vm
+radamsa
+Poc: 118071.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_ext2fs_check_directory_fuzzer
+target: ext2fs_check_directory_fuzzer
+name: libFuzzer
+[Environment] UBSAN_OPTIONS=allocator_release_to_os_interval_ms=500:exitcode=77:halt_on_error=1:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:print_stacktrace=1:print_summary=1:print_suppressions=0:silence_unsigned_overflow=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+INFO: found LLVMFuzzerCustomMutator (0x7f0e5f585f90). Disabling -len_control by default.
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 2490978168
+INFO: Loaded 1 modules   (10373 inline 8-bit counters): 10373 [0x5d4bc0, 0x5d7445),
+INFO: Loaded 1 PC tables (10373 PCs): 10373 [0x557c80,0x5804d0),
+INFO:        0 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases-disk/temp-20/new
+INFO:        4 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/data-bundles/ext2fs_check_directory_fuzzer
+INFO: -max_len is not provided; libFuzzer will not generate inputs larger than 4096 bytes
+INFO: seed corpus: files: 4 min: 1b max: 10b total: 16b rss: 57Mb
+#5	INITED cov: 38 ft: 64 corp: 1/1b exec/s: 0 rss: 57Mb
+#2048	pulse  cov: 38 ft: 64 corp: 1/1b lim: 4096 exec/s: 341 rss: 72Mb
+#4096	pulse  cov: 38 ft: 64 corp: 1/1b lim: 4096 exec/s: 585 rss: 72Mb
+#8192	pulse  cov: 38 ft: 64 corp: 1/1b lim: 4096 exec/s: 910 rss: 72Mb
+#16384	pulse  cov: 38 ft: 64 corp: 1/1b lim: 4096 exec/s: 1170 rss: 72Mb
+#32768	pulse  cov: 38 ft: 64 corp: 1/1b lim: 4096 exec/s: 1310 rss: 72Mb
+#65536	pulse  cov: 38 ft: 64 corp: 1/1b lim: 4096 exec/s: 1285 rss: 73Mb
+#131072	pulse  cov: 38 ft: 64 corp: 1/1b lim: 4096 exec/s: 1260 rss: 76Mb
+#262144	pulse  cov: 38 ft: 64 corp: 1/1b lim: 4096 exec/s: 1254 rss: 76Mb
+#524288	pulse  cov: 38 ft: 64 corp: 1/1b lim: 4096 exec/s: 1202 rss: 78Mb
+#1048576	pulse  cov: 38 ft: 64 corp: 1/1b lim: 4096 exec/s: 1208 rss: 86Mb
+#2097152	pulse  cov: 38 ft: 64 corp: 1/1b lim: 4096 exec/s: 1148 rss: 100Mb
+UndefinedBehaviorSanitizer:DEADLYSIGNAL
+==769==ERROR: UndefinedBehaviorSanitizer: SEGV on unknown address 0x7f0e58428c15 (pc 0x7f0e5f553bf0 bp 0x7f0e57eb3fb0 sp 0x7ffe2246c6c8 T769)
+==769==The signal is caused by a WRITE memory access.
+    #0 0x7f0e5f553bf0 in prim_lraw libradamsa.c:0
+    #1 0x7f0e5f574527 in vm libradamsa.c:0
+    #2 0x7f0e5f585f69 in radamsa
+    #3 0x453244 in fuzzer::MutationDispatcher::MutateImpl(unsigned char*, unsigned long, unsigned long, std::__Fuzzer::vector&lt;fuzzer::MutationDispatcher::Mutator, std::__Fuzzer::allocator&lt;fuzzer::MutationDispatcher::Mutator&gt; &gt;&amp;) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMutate.cpp:550:22
+    #4 0x4401a3 in fuzzer::Fuzzer::MutateAndTestOne() cxa_noexception.cpp:0
+    #5 0x440cc5 in fuzzer::Fuzzer::Loop(std::__Fuzzer::vector&lt;fuzzer::SizedFile, std::__Fuzzer::allocator&lt;fuzzer::SizedFile&gt; &gt;&amp;) cxa_noexception.cpp:0
+    #6 0x43040d in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #7 0x459452 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #8 0x7f0e5f1df0b2 in __libc_start_main
+    #9 0x407ced in _start
+
+UndefinedBehaviorSanitizer can not provide additional info.
+SUMMARY: UndefinedBehaviorSanitizer: SEGV (/clusterfuzz/run_bot/clusterfuzz/resources/platform/linux/radamsa/libradamsa.so+0x2bf0)
+==769==ABORTING
+MS: 1 Custom-; base unit: b858cb282617fb0956d960215c8e84d1ccf909c6
+
+
+artifact_prefix=&#x27;/clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/&#x27;; Test unit written to /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/crash-da39a3ee5e6b4b0d3255bfef95601890afd80709
+Base64:
+stat::number_of_executed_units: 3416871
+stat::average_exec_per_sec:     1166
+stat::new_units_added:          0
+stat::slowest_unit_time_sec:    0
+stat::peak_rss_mb:              110
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+==769==ERROR: UndefinedBehaviorSanitizer: SEGV on unknown address 0x7f0e58428c15 (pc 0x7f0e5f553bf0 bp 0x7f0e57eb3fb0 sp 0x7ffe2246c6c8 T769)
+==769==The signal is caused by a WRITE memory access.
+    #0 0x7f0e5f553bf0  (/clusterfuzz/run_bot/clusterfuzz/resources/platform/linux/radamsa/libradamsa.so+0x2bf0)
+    #1 0x7f0e5f574527  (/clusterfuzz/run_bot/clusterfuzz/resources/platform/linux/radamsa/libradamsa.so+0x23527)
+    #2 0x7f0e5f585f69  (/clusterfuzz/run_bot/clusterfuzz/resources/platform/linux/radamsa/libradamsa.so+0x34f69)
+    #3 0x453244  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/e2fsprogs_libfuzzer_ubsan/custom/ext2fs_check_directory_fuzzer+0x453244)
+    #4 0x4401a3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/e2fsprogs_libfuzzer_ubsan/custom/ext2fs_check_directory_fuzzer+0x4401a3)
+    #5 0x440cc5  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/e2fsprogs_libfuzzer_ubsan/custom/ext2fs_check_directory_fuzzer+0x440cc5)
+    #6 0x43040d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/e2fsprogs_libfuzzer_ubsan/custom/ext2fs_check_directory_fuzzer+0x43040d)
+    #7 0x459452  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/e2fsprogs_libfuzzer_ubsan/custom/ext2fs_check_directory_fuzzer+0x459452)
+    #8 0x7f0e5f1df0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #9 0x407ced  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/e2fsprogs_libfuzzer_ubsan/custom/ext2fs_check_directory_fuzzer+0x407ced)

@@ -1,0 +1,76 @@
+Testcase id: 3695
+Job: h2o_libfuzzer_msan
+Crash Type: Use-of-uninitialized-value
+isSecurity: True
+Crash state: driver_h3.cc
+Poc: 3695.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_h2o-fuzzer-http3
+target: h2o-fuzzer-http3
+name: libFuzzer
+[Environment] MSAN_OPTIONS=exitcode=77
++----------------------------------------Release Build Stacktrace----------------------------------------+
+Command: /clusterfuzz/run_bot/clusterfuzz/bot/builds/h2o_libfuzzer_msan/custom/h2o-fuzzer-http3 -close_fd_mask=3 -rss_limit_mb=2560 -timeout=60 -runs=100 /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/bc7ab2961bd1e8bfd76a3b780e93c0870deb303f1f6c4002f5334bcda6e27542
+Time ran: 0.08845376968383789
+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 1799594251
+INFO: Loaded 1 modules   (35623 inline 8-bit counters): 35623 [0x1045d94, 0x104e8bb),
+INFO: Loaded 1 PC tables (35623 PCs): 35623 [0xebe7e8,0xf49a58),
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/h2o_libfuzzer_msan/custom/h2o-fuzzer-http3: Running 1 inputs 100 time(s) each.
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/bc7ab2961bd1e8bfd76a3b780e93c0870deb303f1f6c4002f5334bcda6e27542
+==5913==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x506818 in LLVMFuzzerTestOneInput /src/h2o/fuzz/driver_h3.cc:190:13
+    #1 0xbb5393 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #2 0xba0ca2 in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:324:6
+    #3 0xba676a in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #4 0xbcf692 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #5 0x7f0cca4600b2 in __libc_start_main
+    #6 0x480edd in _start
+
+  Uninitialized value was stored to memory at
+    #0 0x506baf in on_stream_send_cb(st_mquicly_on_stream_send_t*, st_quicly_conn_t*, st_quicly_stream_t*, void const*, unsigned long, unsigned long, int) /src/h2o/fuzz/driver_h3.cc:93:19
+    #1 0x509271 in quicly_send_stream /src/h2o/fuzz/quicly_mock.c:193:9
+    #2 0x8aa8c1 in scheduler_do_send /src/h2o/lib/http3/server.c:1643:24
+    #3 0x50c80e in quicly_send /src/h2o/fuzz/quicly_mock.c:449:11
+    #4 0x888459 in h2o_quic_send /src/h2o/lib/http3/common.c:1162:15
+    #5 0x69c08a in h2o_evloop_run /src/h2o/lib/common/socket/evloop.c.h:654:13
+    #6 0x505fa9 in LLVMFuzzerTestOneInput /src/h2o/fuzz/driver_h3.cc:184:9
+    #7 0xbb5393 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #8 0xba0ca2 in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:324:6
+    #9 0xba676a in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #10 0xbcf692 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #11 0x7f0cca4600b2 in __libc_start_main
+
+  Uninitialized value was created
+    &lt;empty stack&gt;
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/h2o_libfuzzer_msan/custom/h2o-fuzzer-http3+0x506818)
+Exiting
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/bc7ab2961bd1e8bfd76a3b780e93c0870deb303f1f6c4002f5334bcda6e27542
+==5913==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x506818  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/h2o_libfuzzer_msan/custom/h2o-fuzzer-http3+0x506818)
+    #1 0xbb5393  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/h2o_libfuzzer_msan/custom/h2o-fuzzer-http3+0xbb5393)
+    #2 0xba0ca2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/h2o_libfuzzer_msan/custom/h2o-fuzzer-http3+0xba0ca2)
+    #3 0xba676a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/h2o_libfuzzer_msan/custom/h2o-fuzzer-http3+0xba676a)
+    #4 0xbcf692  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/h2o_libfuzzer_msan/custom/h2o-fuzzer-http3+0xbcf692)
+    #5 0x7f0cca4600b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #6 0x480edd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/h2o_libfuzzer_msan/custom/h2o-fuzzer-http3+0x480edd)
+
+  Uninitialized value was stored to memory at
+    #0 0x506baf  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/h2o_libfuzzer_msan/custom/h2o-fuzzer-http3+0x506baf)
+    #1 0x509271  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/h2o_libfuzzer_msan/custom/h2o-fuzzer-http3+0x509271)
+    #2 0x8aa8c1  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/h2o_libfuzzer_msan/custom/h2o-fuzzer-http3+0x8aa8c1)
+    #3 0x50c80e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/h2o_libfuzzer_msan/custom/h2o-fuzzer-http3+0x50c80e)
+    #4 0x888459  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/h2o_libfuzzer_msan/custom/h2o-fuzzer-http3+0x888459)
+    #5 0x69c08a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/h2o_libfuzzer_msan/custom/h2o-fuzzer-http3+0x69c08a)
+    #6 0x505fa9  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/h2o_libfuzzer_msan/custom/h2o-fuzzer-http3+0x505fa9)
+    #7 0xbb5393  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/h2o_libfuzzer_msan/custom/h2o-fuzzer-http3+0xbb5393)
+    #8 0xba0ca2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/h2o_libfuzzer_msan/custom/h2o-fuzzer-http3+0xba0ca2)
+    #9 0xba676a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/h2o_libfuzzer_msan/custom/h2o-fuzzer-http3+0xba676a)
+    #10 0xbcf692  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/h2o_libfuzzer_msan/custom/h2o-fuzzer-http3+0xbcf692)
+    #11 0x7f0cca4600b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)

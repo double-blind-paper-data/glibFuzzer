@@ -1,0 +1,73 @@
+Testcase id: 112587
+Job: freeimage_libfuzzer_ubsan
+Crash Type: Undefined-shift
+isSecurity: False
+Crash state: LibRaw::identify_finetune_dcr
+LibRaw::identify
+LibRaw::open_datastream
+Poc: 112587.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_load_from_memory_fuzzer
+target: load_from_memory_fuzzer
+name: libFuzzer
+[Environment] UBSAN_OPTIONS=allocator_release_to_os_interval_ms=500:exitcode=77:halt_on_error=1:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:print_stacktrace=1:print_summary=1:print_suppressions=0:silence_unsigned_overflow=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 3659051917
+INFO: Loaded 1 modules   (201193 inline 8-bit counters): 201193 [0x157f508, 0x15b06f1),
+INFO: Loaded 1 PC tables (201193 PCs): 201193 [0x15b06f8,0x18c2588),
+INFO:        0 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases-disk/temp-20/new
+INFO:        0 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases-disk/temp-20/mutations
+INFO:      100 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases-disk/temp-20/subset
+INFO: -max_len is not provided; libFuzzer will not generate inputs larger than 4096 bytes
+INFO: seed corpus: files: 100 min: 2b max: 1636b total: 17086b rss: 67Mb
+Source/LibRawLite/src/metadata/identify.cpp:1865:11: runtime error: shift exponent 4294967284 is too large for 32-bit type &#x27;int&#x27;
+    #0 0xb0c4c9 in LibRaw::identify_finetune_dcr(char*, int, int) /src/freeimage-svn/FreeImage/trunk/Source/LibRawLite/src/metadata/identify.cpp:1865:11
+    #1 0xad4347 in LibRaw::identify() /src/freeimage-svn/FreeImage/trunk/Source/LibRawLite/src/metadata/identify.cpp:1082:3
+    #2 0x79c83d in LibRaw::open_datastream(LibRaw_abstract_datastream*) /src/freeimage-svn/FreeImage/trunk/Source/LibRawLite/src/utils/open.cpp:480:4
+    #3 0x5159f6 in Validate(FreeImageIO*, void*) /src/freeimage-svn/FreeImage/trunk/Source/FreeImage/PluginRAW.cpp:645:21
+    #4 0x4c55b8 in FreeImage_ValidateFIF /src/freeimage-svn/FreeImage/trunk/Source/FreeImage/Plugin.cpp:811:95
+    #5 0x4c0059 in FreeImage_GetFileTypeFromHandle /src/freeimage-svn/FreeImage/trunk/Source/FreeImage/GetType.cpp:43:8
+    #6 0x4c0059 in FreeImage_GetFileTypeFromMemory /src/freeimage-svn/FreeImage/trunk/Source/FreeImage/GetType.cpp:109:10
+    #7 0x4b54d8 in LLVMFuzzerTestOneInput /src/load_from_memory_fuzzer.cc:33:27
+    #8 0x4410b3 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #9 0x44089a in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*, bool, bool*) cxa_noexception.cpp:0
+    #10 0x4426f4 in fuzzer::Fuzzer::ReadAndExecuteSeedCorpora(std::__Fuzzer::vector&lt;fuzzer::SizedFile, std::__Fuzzer::allocator&lt;fuzzer::SizedFile&gt; &gt;&amp;) cxa_noexception.cpp:0
+    #11 0x442929 in fuzzer::Fuzzer::Loop(std::__Fuzzer::vector&lt;fuzzer::SizedFile, std::__Fuzzer::allocator&lt;fuzzer::SizedFile&gt; &gt;&amp;) cxa_noexception.cpp:0
+    #12 0x43236d in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #13 0x45b3b2 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #14 0x7fb8d50d90b2 in __libc_start_main
+    #15 0x409c4d in _start
+
+SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior Source/LibRawLite/src/metadata/identify.cpp:1865:11 in
+MS: 0 ; base unit: 0000000000000000000000000000000000000000
+0x50,0x57,0x41,0x44,0xd,0x0,0x0,0x0,0x0,0xad,0x72,0x0,0x0,0x0,0x80,0x80,0x36,0x34,0x44,0x67,0x38,0x37,0x38,0x38,0x31,0x38,0x34,0x34,0x36,0x37,0x34,0x34,0x30,0x37,0x33,0x37,0x30,0x39,0x35,0x35,0x31,0x36,0x31,0x34,0x6e,0x69,0x63,0x61,0xbb,0x82,0x45,0x50,0xed,0x77,0x53,0x6f,0x6e,0x79,0x43,0x20,0x7d,0x61,0x67,0x65,0x4a,0x49,0x46,0x49,0x4c,0x49,0x4d,0x47,0xd,0xa,0x1a,0xa,0x0,0xb3,0x2a,0x2f,0x96,0xa,0xff,0x78,0x78,0x78,0x78,0x78,0x78,0x78,0x78,0xff,0xff,0xff,0xff,0x78,0x78,0x28,0x54,0x79,0x70,0x20,0x32,0x31,0x32,0x29,0xf5,0x6f,0xcd,0xeb,0xf2,0xc5,0x76,0x98,0x20,0x31,0x38,0x34,0x34,0x3,0x0,0x0,0x0,0x36,0x37,0x34,0x34,0x30,0x37,0x33,0xf3,0x49,0x37,0x30,0x39,0x35,0x35,0x31,
+PWAD\015\000\000\000\000\255r\000\000\000\200\20064Dg878818446744073709551614nica\273\202EP\355wSonyC }ageJIFILIMG\015\012\032\012\000\263*/\226\012\377xxxxxxxx\377\377\377\377xx(Typ 212)\365o\315\353\362\305v\230 1844\003\000\000\0006744073\363I709551
+artifact_prefix=&#x27;/clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/&#x27;; Test unit written to /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/crash-ba5351b4eba310d2941c738e7f34bf4082ee6876
+Base64: UFdBRA0AAAAArXIAAACAgDY0RGc4Nzg4MTg0NDY3NDQwNzM3MDk1NTE2MTRuaWNhu4JFUO13U29ueUMgfWFnZUpJRklMSU1HDQoaCgCzKi+WCv94eHh4eHh4eP////94eChUeXAgMjEyKfVvzevyxXaYIDE4NDQDAAAANjc0NDA3M/NJNzA5NTUx
+stat::number_of_executed_units: 73
+stat::average_exec_per_sec:     0
+stat::new_units_added:          0
+stat::slowest_unit_time_sec:    0
+stat::peak_rss_mb:              67
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+INFO: seed corpus: files: 100 min: 2b max: 1636b total: 17086b rss: 67Mb
+Source/LibRawLite/src/metadata/identify.cpp:1865:11: runtime error: shift exponent 4294967284 is too large for 32-bit type &#x27;int&#x27;
+    #0 0xb0c4c9  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/freeimage_libfuzzer_ubsan/custom/load_from_memory_fuzzer+0xb0c4c9)
+    #1 0xad4347  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/freeimage_libfuzzer_ubsan/custom/load_from_memory_fuzzer+0xad4347)
+    #2 0x79c83d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/freeimage_libfuzzer_ubsan/custom/load_from_memory_fuzzer+0x79c83d)
+    #3 0x5159f6  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/freeimage_libfuzzer_ubsan/custom/load_from_memory_fuzzer+0x5159f6)
+    #4 0x4c55b8  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/freeimage_libfuzzer_ubsan/custom/load_from_memory_fuzzer+0x4c55b8)
+    #5 0x4c0059  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/freeimage_libfuzzer_ubsan/custom/load_from_memory_fuzzer+0x4c0059)
+    #6 0x4b54d8  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/freeimage_libfuzzer_ubsan/custom/load_from_memory_fuzzer+0x4b54d8)
+    #7 0x4410b3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/freeimage_libfuzzer_ubsan/custom/load_from_memory_fuzzer+0x4410b3)
+    #8 0x44089a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/freeimage_libfuzzer_ubsan/custom/load_from_memory_fuzzer+0x44089a)
+    #9 0x4426f4  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/freeimage_libfuzzer_ubsan/custom/load_from_memory_fuzzer+0x4426f4)
+    #10 0x442929  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/freeimage_libfuzzer_ubsan/custom/load_from_memory_fuzzer+0x442929)
+    #11 0x43236d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/freeimage_libfuzzer_ubsan/custom/load_from_memory_fuzzer+0x43236d)
+    #12 0x45b3b2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/freeimage_libfuzzer_ubsan/custom/load_from_memory_fuzzer+0x45b3b2)
+    #13 0x7fb8d50d90b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #14 0x409c4d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/freeimage_libfuzzer_ubsan/custom/load_from_memory_fuzzer+0x409c4d)

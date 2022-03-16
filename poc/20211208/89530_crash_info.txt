@@ -1,0 +1,67 @@
+Testcase id: 89530
+Job: libyaml_afl_msan
+Crash Type: Use-of-uninitialized-value
+isSecurity: True
+Crash state: yaml_emitter_write_indent
+yaml_emitter_emit_flow_sequence_item
+yaml_emitter_state_machine
+Poc: 89530.testcase
+engine: afl
+fully_qualified_name: afl_libyaml_dumper_fuzzer
+target: libyaml_dumper_fuzzer
+name: afl
+[Environment] MSAN_OPTIONS=allocator_release_to_os_interval_ms=500:exit_code=86:halt_on_error=1:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:print_stats=1:print_summary=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+==30696==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x4d73ba in yaml_emitter_write_indent /src/libyaml/src/emitter.c:1797:5
+    #1 0x4d12dc in yaml_emitter_emit_flow_sequence_item /src/libyaml/src/emitter.c:765:18
+    #2 0x4ce886 in yaml_emitter_state_machine /src/libyaml/src/emitter.c:0
+    #3 0x4cd4ab in yaml_emitter_emit /src/libyaml/src/emitter.c:291:14
+    #4 0x4bab93 in yaml_emitter_close /src/libyaml/src/dumper.c:98:10
+    #5 0x4a4a4c in LLVMFuzzerTestOneInput /src/libyaml_dumper_fuzzer.c:268:3
+    #6 0x4a55bf in main /src/aflplusplus/utils/aflpp_driver/aflpp_driver.c:303:7
+    #7 0x7fdd9834a0b2 in __libc_start_main
+    #8 0x41e36d in _start
+
+  Uninitialized value was stored to memory at
+    #0 0x4d1907 in yaml_emitter_emit_flow_sequence_item /src/libyaml/src/emitter.c:761:25
+    #1 0x4ce886 in yaml_emitter_state_machine /src/libyaml/src/emitter.c:0
+    #2 0x4cd4ab in yaml_emitter_emit /src/libyaml/src/emitter.c:291:14
+    #3 0x4bab93 in yaml_emitter_close /src/libyaml/src/dumper.c:98:10
+    #4 0x4a4a4c in LLVMFuzzerTestOneInput /src/libyaml_dumper_fuzzer.c:268:3
+    #5 0x4a55bf in main /src/aflplusplus/utils/aflpp_driver/aflpp_driver.c:303:7
+
+  Uninitialized value was created by a heap deallocation
+    #0 0x448df9 in free /src/llvm-project/compiler-rt/lib/msan/msan_interceptors.cpp:224:3
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libyaml_afl_msan/custom/libyaml_dumper_fuzzer+0x4d73ba)
+Unique heap origins: 84
+Stack depot allocated bytes: 1900544
+Unique origin histories: 80
+History depot allocated bytes: 196608
+Exiting
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+==30696==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x4d73ba  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libyaml_afl_msan/custom/libyaml_dumper_fuzzer+0x4d73ba)
+    #1 0x4d12dc  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libyaml_afl_msan/custom/libyaml_dumper_fuzzer+0x4d12dc)
+    #2 0x4ce886  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libyaml_afl_msan/custom/libyaml_dumper_fuzzer+0x4ce886)
+    #3 0x4cd4ab  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libyaml_afl_msan/custom/libyaml_dumper_fuzzer+0x4cd4ab)
+    #4 0x4bab93  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libyaml_afl_msan/custom/libyaml_dumper_fuzzer+0x4bab93)
+    #5 0x4a4a4c  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libyaml_afl_msan/custom/libyaml_dumper_fuzzer+0x4a4a4c)
+    #6 0x4a55bf  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libyaml_afl_msan/custom/libyaml_dumper_fuzzer+0x4a55bf)
+    #7 0x7fdd9834a0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #8 0x41e36d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libyaml_afl_msan/custom/libyaml_dumper_fuzzer+0x41e36d)
+
+  Uninitialized value was stored to memory at
+    #0 0x4d1907  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libyaml_afl_msan/custom/libyaml_dumper_fuzzer+0x4d1907)
+    #1 0x4ce886  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libyaml_afl_msan/custom/libyaml_dumper_fuzzer+0x4ce886)
+    #2 0x4cd4ab  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libyaml_afl_msan/custom/libyaml_dumper_fuzzer+0x4cd4ab)
+    #3 0x4bab93  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libyaml_afl_msan/custom/libyaml_dumper_fuzzer+0x4bab93)
+    #4 0x4a4a4c  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libyaml_afl_msan/custom/libyaml_dumper_fuzzer+0x4a4a4c)
+    #5 0x4a55bf  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libyaml_afl_msan/custom/libyaml_dumper_fuzzer+0x4a55bf)
+
+  Uninitialized value was created by a heap deallocation
+    #0 0x448df9  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libyaml_afl_msan/custom/libyaml_dumper_fuzzer+0x448df9)

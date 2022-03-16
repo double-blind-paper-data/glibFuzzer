@@ -1,0 +1,66 @@
+Testcase id: 89583
+Job: libraw_honggfuzz_msan
+Crash Type: Use-of-uninitialized-value
+isSecurity: True
+Crash state: LibRaw::kodak_radc_load_raw
+LibRaw::unpack
+libraw_fuzzer.cc
+Poc: 89583.testcase
+engine: honggfuzz
+fully_qualified_name: honggfuzz_libraw_cr2_fuzzer
+target: libraw_cr2_fuzzer
+name: honggfuzz
+[Environment] MSAN_OPTIONS=allocator_release_to_os_interval_ms=500:halt_on_error=1:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:print_stats=1:print_summary=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+==64541==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x604a3c in LibRaw::kodak_radc_load_raw() /src/libraw/src/decoders/kodak_decoders.cpp:153:20
+    #1 0x4af625 in LibRaw::unpack() /src/libraw/src/decoders/unpack.cpp:291:7
+    #2 0x4a2973 in LLVMFuzzerTestOneInput /src/libraw_fuzzer.cc:47:20
+    #3 0x4a32ae in main
+    #4 0x7ffff7c5b0b2 in __libc_start_main
+    #5 0x41e60d in _start
+
+  Uninitialized value was stored to memory at
+    #0 0x60423d in LibRaw::kodak_radc_load_raw() /src/libraw/src/decoders/kodak_decoders.cpp:149:21
+    #1 0x4af625 in LibRaw::unpack() /src/libraw/src/decoders/unpack.cpp:291:7
+    #2 0x4a2973 in LLVMFuzzerTestOneInput /src/libraw_fuzzer.cc:47:20
+    #3 0x4a32ae in main
+
+  Uninitialized value was created by a heap allocation
+    #0 0x44f3ed in __interceptor_malloc /src/llvm-project/compiler-rt/lib/msan/msan_interceptors.cpp:912:3
+    #1 0x4fabbe in malloc /src/libraw/libraw/libraw_alloc.h:49:17
+    #2 0x4fabbe in LibRaw::malloc(unsigned long) /src/libraw/src/utils/utils_libraw.cpp:251:20
+    #3 0x4adf2a in LibRaw::unpack() /src/libraw/src/decoders/unpack.cpp:241:37
+    #4 0x4a2973 in LLVMFuzzerTestOneInput /src/libraw_fuzzer.cc:47:20
+    #5 0x4a32ae in main
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_honggfuzz_msan/custom/libraw_cr2_fuzzer+0x604a3c)
+Unique heap origins: 86
+Stack depot allocated bytes: 1900544
+Unique origin histories: 13
+History depot allocated bytes: 196608
+Exiting
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+==64541==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x604a3c  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_honggfuzz_msan/custom/libraw_cr2_fuzzer+0x604a3c)
+    #1 0x4af625  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_honggfuzz_msan/custom/libraw_cr2_fuzzer+0x4af625)
+    #2 0x4a2973  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_honggfuzz_msan/custom/libraw_cr2_fuzzer+0x4a2973)
+    #3 0x4a32ae  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_honggfuzz_msan/custom/libraw_cr2_fuzzer+0x4a32ae)
+    #4 0x7ffff7c5b0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #5 0x41e60d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_honggfuzz_msan/custom/libraw_cr2_fuzzer+0x41e60d)
+
+  Uninitialized value was stored to memory at
+    #0 0x60423d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_honggfuzz_msan/custom/libraw_cr2_fuzzer+0x60423d)
+    #1 0x4af625  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_honggfuzz_msan/custom/libraw_cr2_fuzzer+0x4af625)
+    #2 0x4a2973  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_honggfuzz_msan/custom/libraw_cr2_fuzzer+0x4a2973)
+    #3 0x4a32ae  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_honggfuzz_msan/custom/libraw_cr2_fuzzer+0x4a32ae)
+
+  Uninitialized value was created by a heap allocation
+    #0 0x44f3ed  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_honggfuzz_msan/custom/libraw_cr2_fuzzer+0x44f3ed)
+    #1 0x4fabbe  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_honggfuzz_msan/custom/libraw_cr2_fuzzer+0x4fabbe)
+    #2 0x4adf2a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_honggfuzz_msan/custom/libraw_cr2_fuzzer+0x4adf2a)
+    #3 0x4a2973  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_honggfuzz_msan/custom/libraw_cr2_fuzzer+0x4a2973)
+    #4 0x4a32ae  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_honggfuzz_msan/custom/libraw_cr2_fuzzer+0x4a32ae)

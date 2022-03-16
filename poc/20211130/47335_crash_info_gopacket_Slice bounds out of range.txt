@@ -1,0 +1,37 @@
+Testcase id: 47335
+Job: gopacket_afl_msan
+Crash Type: Slice bounds out of range
+isSecurity: False
+Crash state: layers.SCTPChunkType.Decode
+gopacket.(*lazyPacket).decodeNextLayer
+gopacket.(*lazyPacket).Layers
+Poc: 47335.testcase
+engine: afl
+fully_qualified_name: afl_fuzz_layers
+target: fuzz_layers
+name: afl
+[Environment] MSAN_OPTIONS=allocator_release_to_os_interval_ms=500:exit_code=86:halt_on_error=1:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:print_stats=1:print_summary=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+panic: runtime error: slice bounds out of range [:4] with capacity 2
+
+goroutine 17 [running, locked to thread]:
+github.com/google/gopacket/layers.decodeSCTPChunk({0x7f8fb4352013, 0xc000042000, 0xc0003a2c40})
+	github.com/google/gopacket/layers/sctp.go:116 +0x2f2
+github.com/google/gopacket/layers.decodeSCTPData({0x7f8fb4352013, 0xc0003b3b80, 0xc0000bbca0}, {0x6b2d90, 0xc0003b3b80})
+	github.com/google/gopacket/layers/sctp.go:293 +0x8f
+github.com/google/gopacket.DecodeFunc.Decode(0x0, {0x7f8fb4352013, 0xc0003b3b80, 0x160}, {0x6b2d90, 0xc0003b3b80})
+	github.com/google/gopacket/decode.go:87 +0x4d
+github.com/google/gopacket/layers.SCTPChunkType.Decode(...)
+	github.com/google/gopacket/layers/enums_generated.go:179
+github.com/google/gopacket/layers.decodeWithSCTPChunkTypePrefix({0x7f8fb4352013, 0x4ad8ce, 0x5ec740}, {0x6b2d90, 0xc0003b3b80})
+	github.com/google/gopacket/layers/sctp.go:50 +0x67
+github.com/google/gopacket.DecodeFunc.Decode(0xc0003a2c40, {0x7f8fb4352013, 0xc0000bbd28, 0x4af8e7}, {0x6b2d90, 0xc0003b3b80})
+	github.com/google/gopacket/decode.go:87 +0x4d
+github.com/google/gopacket.(*lazyPacket).decodeNextLayer(0xc0003b3b80)
+	github.com/google/gopacket/packet.go:527 +0x18b
+github.com/google/gopacket.(*lazyPacket).Layers(0xc0003b3b80)
+	github.com/google/gopacket/packet.go:564 +0x3e
+github.com/google/gopacket/layers.FuzzLayer({0x7f8fb4352004, 0x11, 0x11})
+	github.com/google/gopacket/layers/fuzz_layer.go:32 +0x15e
+main.LLVMFuzzerTestOneInput(...)
+	./main.1603277226.go:21

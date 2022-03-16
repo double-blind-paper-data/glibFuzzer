@@ -1,0 +1,78 @@
+Testcase id: 95055
+Job: libssh_libfuzzer_msan
+Crash Type: Use-of-uninitialized-value
+isSecurity: True
+Crash state: mem_puts
+BIO_puts
+PEM_read_bio_ex
+Poc: 95055.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_ssh_server_fuzzer
+target: ssh_server_fuzzer
+name: libFuzzer
+[Environment] MSAN_OPTIONS=exitcode=77
++----------------------------------------Release Build Stacktrace----------------------------------------+
+Command: /clusterfuzz/run_bot/clusterfuzz/bot/builds/libssh_libfuzzer_msan/custom/ssh_server_fuzzer -rss_limit_mb=2560 -timeout=60 -runs=100 /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/eff3ea95f07a6f29bef3206879f92ea65e6b4b0d3255bfef95601890afd80709
+Time ran: 0.0400540828704834
+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 174258556
+INFO: Loaded 1 modules   (9218 inline 8-bit counters): 9218 [0x910068, 0x91246a),
+INFO: Loaded 1 PC tables (9218 PCs): 9218 [0x912470,0x936490),
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/libssh_libfuzzer_msan/custom/ssh_server_fuzzer: Running 1 inputs 100 time(s) each.
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/eff3ea95f07a6f29bef3206879f92ea65e6b4b0d3255bfef95601890afd80709
+Uninitialized bytes in __interceptor_strlen at offset 65 inside [0x710000000100, 66)
+==137487==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x65faf8 in mem_puts bss_mem.o:0
+    #1 0x65e950 in BIO_puts
+    #2 0x736644 in PEM_read_bio_ex
+    #3 0x736dfc in pem_bytes_read_bio_flags pem_lib.o:0
+    #4 0x737252 in PEM_bytes_read_bio_secmem
+    #5 0x6ac5ce in PEM_read_bio_PrivateKey
+    #6 0x5cf815 in pki_private_key_from_base64 /src/libssh/src/pki_crypto.c:0
+    #7 0x58cef1 in ssh_pki_import_privkey_base64 /src/libssh/src/pki.c:814:15
+    #8 0x58de84 in ssh_pki_import_privkey_file /src/libssh/src/pki.c:979:10
+    #9 0x5f4490 in ssh_bind_import_keys /src/libssh/src/bind.c:207:12
+    #10 0x5f6d27 in ssh_bind_accept_fd /src/libssh/src/bind.c:525:14
+    #11 0x52aeb0 in LLVMFuzzerTestOneInput /src/libssh/tests/fuzz/ssh_server_fuzzer.cpp:189:10
+    #12 0x458303 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #13 0x443c12 in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:324:6
+    #14 0x4496da in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #15 0x472602 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #16 0x7f09167d30b2 in __libc_start_main
+    #17 0x420e9d in _start
+
+  Uninitialized value was created by a heap allocation
+    #0 0x4d702d in __interceptor_malloc /src/llvm-project/compiler-rt/lib/msan/msan_interceptors.cpp:912:3
+    #1 0x736573 in PEM_read_bio_ex
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libssh_libfuzzer_msan/custom/ssh_server_fuzzer+0x65faf8)
+Exiting
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+Uninitialized bytes in __interceptor_strlen at offset 65 inside [0x710000000100, 66)
+==137487==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x65faf8  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libssh_libfuzzer_msan/custom/ssh_server_fuzzer+0x65faf8)
+    #1 0x65e950  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libssh_libfuzzer_msan/custom/ssh_server_fuzzer+0x65e950)
+    #2 0x736644  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libssh_libfuzzer_msan/custom/ssh_server_fuzzer+0x736644)
+    #3 0x736dfc  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libssh_libfuzzer_msan/custom/ssh_server_fuzzer+0x736dfc)
+    #4 0x737252  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libssh_libfuzzer_msan/custom/ssh_server_fuzzer+0x737252)
+    #5 0x6ac5ce  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libssh_libfuzzer_msan/custom/ssh_server_fuzzer+0x6ac5ce)
+    #6 0x5cf815  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libssh_libfuzzer_msan/custom/ssh_server_fuzzer+0x5cf815)
+    #7 0x58cef1  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libssh_libfuzzer_msan/custom/ssh_server_fuzzer+0x58cef1)
+    #8 0x58de84  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libssh_libfuzzer_msan/custom/ssh_server_fuzzer+0x58de84)
+    #9 0x5f4490  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libssh_libfuzzer_msan/custom/ssh_server_fuzzer+0x5f4490)
+    #10 0x5f6d27  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libssh_libfuzzer_msan/custom/ssh_server_fuzzer+0x5f6d27)
+    #11 0x52aeb0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libssh_libfuzzer_msan/custom/ssh_server_fuzzer+0x52aeb0)
+    #12 0x458303  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libssh_libfuzzer_msan/custom/ssh_server_fuzzer+0x458303)
+    #13 0x443c12  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libssh_libfuzzer_msan/custom/ssh_server_fuzzer+0x443c12)
+    #14 0x4496da  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libssh_libfuzzer_msan/custom/ssh_server_fuzzer+0x4496da)
+    #15 0x472602  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libssh_libfuzzer_msan/custom/ssh_server_fuzzer+0x472602)
+    #16 0x7f09167d30b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #17 0x420e9d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libssh_libfuzzer_msan/custom/ssh_server_fuzzer+0x420e9d)
+
+  Uninitialized value was created by a heap allocation
+    #0 0x4d702d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libssh_libfuzzer_msan/custom/ssh_server_fuzzer+0x4d702d)
+    #1 0x736573  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libssh_libfuzzer_msan/custom/ssh_server_fuzzer+0x736573)

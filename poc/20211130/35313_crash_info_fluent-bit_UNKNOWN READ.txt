@@ -1,0 +1,56 @@
+Testcase id: 35313
+Job: fluent-bit_libfuzzer_msan
+Crash Type: UNKNOWN READ
+isSecurity: True
+Crash state: mk_rconf_read
+mk_rconf_open
+flb_parser_conf_file
+Poc: 35313.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_flb-it-fuzz-config_random_fuzzer_OSSFUZZ
+target: flb-it-fuzz-config_random_fuzzer_OSSFUZZ
+name: libFuzzer
+[Environment] MSAN_OPTIONS=exitcode=77
++----------------------------------------Release Build Stacktrace----------------------------------------+
+Command: /clusterfuzz/run_bot/clusterfuzz/bot/builds/fluent-bit_libfuzzer_msan/custom/flb-it-fuzz-config_random_fuzzer_OSSFUZZ -rss_limit_mb=2560 -timeout=60 -runs=100 /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/526bab8724d73b670d895c0f19d0f865b0cff93f52b521d7420e43f6eda2784f
+Time ran: 0.03940987586975098
+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 1857993285
+INFO: Loaded 1 modules   (86898 inline 8-bit counters): 86898 [0x180a60b, 0x181f97d),
+INFO: Loaded 1 PC tables (86898 PCs): 86898 [0x181f980,0x19730a0),
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/fluent-bit_libfuzzer_msan/custom/flb-it-fuzz-config_random_fuzzer_OSSFUZZ: Running 1 inputs 100 time(s) each.
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/526bab8724d73b670d895c0f19d0f865b0cff93f52b521d7420e43f6eda2784f
+MemorySanitizer:DEADLYSIGNAL
+==81190==ERROR: MemorySanitizer: SEGV on unknown address 0x71ffffffffff (pc 0x000001621955 bp 0x7fff62bf2d00 sp 0x7fff62bf1b00 T81190)
+==81190==The signal is caused by a READ memory access.
+    #0 0x1621955 in mk_rconf_read /src/fluent-bit/lib/monkey/mk_core/mk_rconf.c:260:13
+    #1 0x1620ee5 in mk_rconf_open /src/fluent-bit/lib/monkey/mk_core/mk_rconf.c:633:11
+    #2 0x58a290 in flb_parser_conf_file /src/fluent-bit/src/flb_parser.c:842:13
+    #3 0x5572b5 in LLVMFuzzerTestOneInput /src/fluent-bit/tests/internal/fuzzers/config_random_fuzzer.c:45:5
+    #4 0x486d73 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #5 0x472682 in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:324:6
+    #6 0x47814a in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #7 0x4a1072 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #8 0x7fbad00cf0b2 in __libc_start_main
+    #9 0x44f90d in _start
+
+MemorySanitizer can not provide additional info.
+SUMMARY: MemorySanitizer: SEGV (/clusterfuzz/run_bot/clusterfuzz/bot/builds/fluent-bit_libfuzzer_msan/custom/flb-it-fuzz-config_random_fuzzer_OSSFUZZ+0x1621955)
+==81190==ABORTING
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+==81190==ERROR: MemorySanitizer: SEGV on unknown address 0x71ffffffffff (pc 0x000001621955 bp 0x7fff62bf2d00 sp 0x7fff62bf1b00 T81190)
+==81190==The signal is caused by a READ memory access.
+    #0 0x1621955  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/fluent-bit_libfuzzer_msan/custom/flb-it-fuzz-config_random_fuzzer_OSSFUZZ+0x1621955)
+    #1 0x1620ee5  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/fluent-bit_libfuzzer_msan/custom/flb-it-fuzz-config_random_fuzzer_OSSFUZZ+0x1620ee5)
+    #2 0x58a290  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/fluent-bit_libfuzzer_msan/custom/flb-it-fuzz-config_random_fuzzer_OSSFUZZ+0x58a290)
+    #3 0x5572b5  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/fluent-bit_libfuzzer_msan/custom/flb-it-fuzz-config_random_fuzzer_OSSFUZZ+0x5572b5)
+    #4 0x486d73  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/fluent-bit_libfuzzer_msan/custom/flb-it-fuzz-config_random_fuzzer_OSSFUZZ+0x486d73)
+    #5 0x472682  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/fluent-bit_libfuzzer_msan/custom/flb-it-fuzz-config_random_fuzzer_OSSFUZZ+0x472682)
+    #6 0x47814a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/fluent-bit_libfuzzer_msan/custom/flb-it-fuzz-config_random_fuzzer_OSSFUZZ+0x47814a)
+    #7 0x4a1072  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/fluent-bit_libfuzzer_msan/custom/flb-it-fuzz-config_random_fuzzer_OSSFUZZ+0x4a1072)
+    #8 0x7fbad00cf0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #9 0x44f90d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/fluent-bit_libfuzzer_msan/custom/flb-it-fuzz-config_random_fuzzer_OSSFUZZ+0x44f90d)

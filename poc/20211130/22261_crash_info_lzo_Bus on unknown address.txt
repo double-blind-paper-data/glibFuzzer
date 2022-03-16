@@ -1,0 +1,36 @@
+Testcase id: 22261
+Job: lzo_honggfuzz_msan
+Crash Type: Bus on unknown address
+isSecurity: False
+Crash state: lzo1f_decompress_safe
+lzo_decompress_target.c
+Poc: 22261.testcase
+engine: honggfuzz
+fully_qualified_name: honggfuzz_lzo_decompress_target
+target: lzo_decompress_target
+name: honggfuzz
+[Environment] MSAN_OPTIONS=allocator_release_to_os_interval_ms=500:halt_on_error=1:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:print_stats=1:print_summary=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+==10393==ERROR: MemorySanitizer: BUS on unknown address (pc 0x0000004b154d bp 0x7ffffffbcf70 sp 0x7ffffffbce70 T10393)
+==10393==The signal is caused by a READ memory access.
+==10393==Hint: this fault was caused by a dereference of a high value address (see register values below).  Disassemble the provided pc to learn which register was used.
+    #0 0x4b154d in lzo1f_decompress_safe /src/lzo-2.10/src/lzo1f_d.ch:112:30
+    #1 0x4a190c in LLVMFuzzerTestOneInput /src/lzo_decompress_target.c:85:9
+    #2 0x4a200e in main
+    #3 0x7ffff7c5b0b2 in __libc_start_main
+    #4 0x41d41d in _start
+
+MemorySanitizer can not provide additional info.
+SUMMARY: MemorySanitizer: BUS (/clusterfuzz/run_bot/clusterfuzz/bot/builds/lzo_honggfuzz_msan/custom/lzo_decompress_target+0x4b154d)
+==10393==ABORTING
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+==10393==The signal is caused by a READ memory access.
+==10393==Hint: this fault was caused by a dereference of a high value address (see register values below).  Disassemble the provided pc to learn which register was used.
+    #0 0x4b154d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/lzo_honggfuzz_msan/custom/lzo_decompress_target+0x4b154d)
+    #1 0x4a190c  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/lzo_honggfuzz_msan/custom/lzo_decompress_target+0x4a190c)
+    #2 0x4a200e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/lzo_honggfuzz_msan/custom/lzo_decompress_target+0x4a200e)
+    #3 0x7ffff7c5b0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #4 0x41d41d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/lzo_honggfuzz_msan/custom/lzo_decompress_target+0x41d41d)

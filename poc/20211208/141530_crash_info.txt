@@ -1,0 +1,63 @@
+Testcase id: 141530
+Job: geos_libfuzzer_ubsan
+Crash Type: Integer-overflow
+isSecurity: False
+Crash state: geos::operation::overlay::ElevationMatrix::getCell
+geos::operation::overlay::ElevationMatrix::add
+geos::operation::overlay::OverlayOp::OverlayOp
+Poc: 141530.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_fuzz_geo2
+target: fuzz_geo2
+name: libFuzzer
+[Environment] UBSAN_OPTIONS=exitcode=77:print_stacktrace=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+Command: /clusterfuzz/run_bot/clusterfuzz/bot/builds/geos_libfuzzer_ubsan/custom/fuzz_geo2 -rss_limit_mb=2560 -timeout=60 -runs=100 /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/6a48f11ddf48e651e11bbb22078113a0a9e0d6cf5ba667f671ef1e5a7ee9cd35
+Time ran: 0.020725488662719727
+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 1155759234
+INFO: Loaded 1 modules   (69343 inline 8-bit counters): 69343 [0xabc040, 0xaccf1f),
+INFO: Loaded 1 PC tables (69343 PCs): 69343 [0xaccf20,0xbdbd10),
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/geos_libfuzzer_ubsan/custom/fuzz_geo2: Running 1 inputs 100 time(s) each.
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/6a48f11ddf48e651e11bbb22078113a0a9e0d6cf5ba667f671ef1e5a7ee9cd35
+/src/geos/src/operation/overlay/ElevationMatrix.cpp:172:45: runtime error: signed integer overflow: 3 * -2147483648 cannot be represented in type &#x27;int&#x27;
+    #0 0x76a98a in geos::operation::overlay::ElevationMatrix::getCell(geos::geom::Coordinate const&amp;) /src/geos/src/operation/overlay/ElevationMatrix.cpp:172:45
+    #1 0x76ae3e in geos::operation::overlay::ElevationMatrix::add(geos::geom::Coordinate const&amp;) /src/geos/src/operation/overlay/ElevationMatrix.cpp:135:36
+    #2 0x644882 in geos::operation::overlay::OverlayOp::OverlayOp(geos::geom::Geometry const*, geos::geom::Geometry const*) /src/geos/src/operation/overlay/OverlayOp.cpp:165:22
+    #3 0x643da4 in geos::operation::overlay::OverlayOp::overlayOp(geos::geom::Geometry const*, geos::geom::Geometry const*, geos::operation::overlay::OverlayOp::OpCode) /src/geos/src/operation/overlay/OverlayOp.cpp:92:15
+    #4 0x542881 in geos::geom::HeuristicOverlay(geos::geom::Geometry const*, geos::geom::Geometry const*, int) /src/geos/src/geom/HeuristicOverlay.cpp:446:19
+    #5 0x52a217 in geos::geom::Geometry::Union(geos::geom::Geometry const*) const /src/geos/src/geom/Geometry.cpp:593:12
+    #6 0x4c7349 in operator() /src/geos/capi/geos_ts_c.cpp:1361:27
+    #7 0x4c7349 in _Z7executeIZ11GEOSUnion_rE4$_61LDn0EEDTclfp0_EEP20GEOSContextHandle_HSOT_ /src/geos/capi/geos_ts_c.cpp:408:16
+    #8 0x4c7258 in GEOSUnion_r /src/geos/capi/geos_ts_c.cpp:1360:16
+    #9 0x4b44cb in LLVMFuzzerTestOneInput /src/geos/tests/fuzz/fuzz_geo2.c:57:18
+    #10 0x43fe13 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #11 0x42b722 in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:324:6
+    #12 0x4311ea in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #13 0x45a112 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #14 0x7ffb9819a0b2 in __libc_start_main
+    #15 0x4089ad in _start
+
+SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior /src/geos/src/operation/overlay/ElevationMatrix.cpp:172:45 in
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/6a48f11ddf48e651e11bbb22078113a0a9e0d6cf5ba667f671ef1e5a7ee9cd35
+/src/geos/src/operation/overlay/ElevationMatrix.cpp:172:45: runtime error: signed integer overflow: 3 * -2147483648 cannot be represented in type &#x27;int&#x27;
+    #0 0x76a98a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/geos_libfuzzer_ubsan/custom/fuzz_geo2+0x76a98a)
+    #1 0x76ae3e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/geos_libfuzzer_ubsan/custom/fuzz_geo2+0x76ae3e)
+    #2 0x644882  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/geos_libfuzzer_ubsan/custom/fuzz_geo2+0x644882)
+    #3 0x643da4  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/geos_libfuzzer_ubsan/custom/fuzz_geo2+0x643da4)
+    #4 0x542881  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/geos_libfuzzer_ubsan/custom/fuzz_geo2+0x542881)
+    #5 0x52a217  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/geos_libfuzzer_ubsan/custom/fuzz_geo2+0x52a217)
+    #6 0x4c7349  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/geos_libfuzzer_ubsan/custom/fuzz_geo2+0x4c7349)
+    #7 0x4c7258  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/geos_libfuzzer_ubsan/custom/fuzz_geo2+0x4c7258)
+    #8 0x4b44cb  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/geos_libfuzzer_ubsan/custom/fuzz_geo2+0x4b44cb)
+    #9 0x43fe13  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/geos_libfuzzer_ubsan/custom/fuzz_geo2+0x43fe13)
+    #10 0x42b722  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/geos_libfuzzer_ubsan/custom/fuzz_geo2+0x42b722)
+    #11 0x4311ea  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/geos_libfuzzer_ubsan/custom/fuzz_geo2+0x4311ea)
+    #12 0x45a112  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/geos_libfuzzer_ubsan/custom/fuzz_geo2+0x45a112)
+    #13 0x7ffb9819a0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #14 0x4089ad  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/geos_libfuzzer_ubsan/custom/fuzz_geo2+0x4089ad)

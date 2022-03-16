@@ -1,0 +1,132 @@
+Testcase id: 25566
+Job: exiv2_libfuzzer_msan
+Crash Type: Use-of-uninitialized-value
+isSecurity: True
+Crash state: Exiv2::MemIo::seek
+Exiv2::BasicIo::seekOrThrow
+Exiv2::Image::printIFDStructure
+Poc: 25566.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_fuzz-read-print-write
+target: fuzz-read-print-write
+name: libFuzzer
+[Environment] MSAN_OPTIONS=exitcode=77
++----------------------------------------Release Build Stacktrace----------------------------------------+
+Command: /clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write -rss_limit_mb=2560 -timeout=60 -runs=100 /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/8f144b8f8a800024b9dcc46f832f0c6aed24150847db7498350897b10f261d17
+Time ran: 0.048044681549072266
+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 2682438498
+INFO: Loaded 1 modules   (48948 inline 8-bit counters): 48948 [0x103c0f0, 0x1048024),
+INFO: Loaded 1 PC tables (48948 PCs): 48948 [0x1048028,0x1107368),
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write: Running 1 inputs 100 time(s) each.
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/8f144b8f8a800024b9dcc46f832f0c6aed24150847db7498350897b10f261d17
+==1990==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x8330c0 in Exiv2::MemIo::seek(long, Exiv2::BasicIo::Position) /src/exiv2/src/basicio.cpp:1319:13
+    #1 0x824fe2 in Exiv2::BasicIo::seekOrThrow(long, Exiv2::BasicIo::Position, Exiv2::ErrorCode) /src/exiv2/src/basicio.cpp:92:23
+    #2 0x5ad2f6 in Exiv2::Image::printIFDStructure(Exiv2::BasicIo&amp;, std::__1::basic_ostream&lt;char, std::__1::char_traits&lt;char&gt; &gt;&amp;, Exiv2::PrintStructureOption, unsigned int, bool, char, int) /src/exiv2/src/image.cpp:332:16
+    #3 0x5ba711 in Exiv2::Image::printTiffStructure(Exiv2::BasicIo&amp;, std::__1::basic_ostream&lt;char, std::__1::char_traits&lt;char&gt; &gt;&amp;, Exiv2::PrintStructureOption, int, unsigned long) /src/exiv2/src/image.cpp:532:13
+    #4 0x740e29 in Exiv2::PngImage::printStructure(std::__1::basic_ostream&lt;char, std::__1::char_traits&lt;char&gt; &gt;&amp;, Exiv2::PrintStructureOption, int) /src/exiv2/src/pngimage.cpp:368:37
+    #5 0x52f7da in LLVMFuzzerTestOneInput /src/exiv2/fuzz/fuzz-read-print-write.cpp:40:12
+    #6 0x45c4e3 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #7 0x447df2 in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:324:6
+    #8 0x44d8ba in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #9 0x4767e2 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #10 0x7fde3368c0b2 in __libc_start_main
+    #11 0x42507d in _start
+
+  Uninitialized value was stored to memory at
+    #0 0x4d45d9 in __msan_memcpy /src/llvm-project/compiler-rt/lib/msan/msan_interceptors.cpp:1585:3
+    #1 0x833976 in memcpy /usr/include/x86_64-linux-gnu/bits/string_fortified.h:34:10
+    #2 0x833976 in Exiv2::MemIo::read(unsigned char*, long) /src/exiv2/src/basicio.cpp:1383:13
+    #3 0x824bd0 in Exiv2::BasicIo::readOrThrow(unsigned char*, long, Exiv2::ErrorCode) /src/exiv2/src/basicio.cpp:82:28
+    #4 0x5ba483 in Exiv2::Image::printTiffStructure(Exiv2::BasicIo&amp;, std::__1::basic_ostream&lt;char, std::__1::char_traits&lt;char&gt; &gt;&amp;, Exiv2::PrintStructureOption, int, unsigned long) /src/exiv2/src/image.cpp:526:16
+    #5 0x740e29 in Exiv2::PngImage::printStructure(std::__1::basic_ostream&lt;char, std::__1::char_traits&lt;char&gt; &gt;&amp;, Exiv2::PrintStructureOption, int) /src/exiv2/src/pngimage.cpp:368:37
+    #6 0x52f7da in LLVMFuzzerTestOneInput /src/exiv2/fuzz/fuzz-read-print-write.cpp:40:12
+    #7 0x45c4e3 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #8 0x447df2 in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:324:6
+    #9 0x44d8ba in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #10 0x4767e2 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #11 0x7fde3368c0b2 in __libc_start_main
+
+  Uninitialized value was stored to memory at
+    #0 0x4d45d9 in __msan_memcpy /src/llvm-project/compiler-rt/lib/msan/msan_interceptors.cpp:1585:3
+    #1 0x68e0b5 in memcpy /usr/include/x86_64-linux-gnu/bits/string_fortified.h:34:10
+    #2 0x68e0b5 in Exiv2::DataBuf::copyBytes(unsigned long, void const*, unsigned long) /src/exiv2/src/types.cpp:265:9
+    #3 0x81da7f in Exiv2::Internal::PngChunk::readRawProfile(Exiv2::DataBuf const&amp;, bool) /src/exiv2/src/pngchunk_int.cpp:613:18
+    #4 0x740c07 in Exiv2::PngImage::printStructure(std::__1::basic_ostream&lt;char, std::__1::char_traits&lt;char&gt; &gt;&amp;, Exiv2::PrintStructureOption, int) /src/exiv2/src/pngimage.cpp:360:49
+    #5 0x52f7da in LLVMFuzzerTestOneInput /src/exiv2/fuzz/fuzz-read-print-write.cpp:40:12
+    #6 0x45c4e3 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #7 0x447df2 in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:324:6
+    #8 0x44d8ba in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #9 0x4767e2 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #10 0x7fde3368c0b2 in __libc_start_main
+
+  Uninitialized value was created by a heap allocation
+    #0 0x52d799 in operator new[](unsigned long) /src/llvm-project/compiler-rt/lib/msan/msan_new_delete.cpp:47:37
+    #1 0x68a5bd in Exiv2::DataBuf::alloc(long) /src/exiv2/src/types.cpp:168:22
+    #2 0x740221 in tEXtToDataBuf /src/exiv2/src/pngimage.cpp:188:16
+    #3 0x740221 in Exiv2::PngImage::printStructure(std::__1::basic_ostream&lt;char, std::__1::char_traits&lt;char&gt; &gt;&amp;, Exiv2::PrintStructureOption, int) /src/exiv2/src/pngimage.cpp:340:33
+    #4 0x52f7da in LLVMFuzzerTestOneInput /src/exiv2/fuzz/fuzz-read-print-write.cpp:40:12
+    #5 0x45c4e3 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #6 0x447df2 in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:324:6
+    #7 0x44d8ba in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #8 0x4767e2 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #9 0x7fde3368c0b2 in __libc_start_main
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x8330c0)
+Exiting
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/8f144b8f8a800024b9dcc46f832f0c6aed24150847db7498350897b10f261d17
+==1990==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x8330c0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x8330c0)
+    #1 0x824fe2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x824fe2)
+    #2 0x5ad2f6  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x5ad2f6)
+    #3 0x5ba711  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x5ba711)
+    #4 0x740e29  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x740e29)
+    #5 0x52f7da  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x52f7da)
+    #6 0x45c4e3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x45c4e3)
+    #7 0x447df2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x447df2)
+    #8 0x44d8ba  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x44d8ba)
+    #9 0x4767e2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x4767e2)
+    #10 0x7fde3368c0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #11 0x42507d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x42507d)
+
+  Uninitialized value was stored to memory at
+    #0 0x4d45d9  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x4d45d9)
+    #1 0x833976  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x833976)
+    #2 0x824bd0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x824bd0)
+    #3 0x5ba483  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x5ba483)
+    #4 0x740e29  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x740e29)
+    #5 0x52f7da  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x52f7da)
+    #6 0x45c4e3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x45c4e3)
+    #7 0x447df2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x447df2)
+    #8 0x44d8ba  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x44d8ba)
+    #9 0x4767e2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x4767e2)
+    #10 0x7fde3368c0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+  Uninitialized value was stored to memory at
+    #0 0x4d45d9  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x4d45d9)
+    #1 0x68e0b5  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x68e0b5)
+    #2 0x81da7f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x81da7f)
+    #3 0x740c07  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x740c07)
+    #4 0x52f7da  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x52f7da)
+    #5 0x45c4e3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x45c4e3)
+    #6 0x447df2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x447df2)
+    #7 0x44d8ba  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x44d8ba)
+    #8 0x4767e2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x4767e2)
+    #9 0x7fde3368c0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+  Uninitialized value was created by a heap allocation
+    #0 0x52d799  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x52d799)
+    #1 0x68a5bd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x68a5bd)
+    #2 0x740221  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x740221)
+    #3 0x52f7da  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x52f7da)
+    #4 0x45c4e3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x45c4e3)
+    #5 0x447df2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x447df2)
+    #6 0x44d8ba  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x44d8ba)
+    #7 0x4767e2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x4767e2)
+    #8 0x7fde3368c0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)

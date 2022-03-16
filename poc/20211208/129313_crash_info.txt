@@ -1,0 +1,47 @@
+Testcase id: 129313
+Job: bind9_libfuzzer_msan
+Crash Type: Out-of-memory
+isSecurity: False
+Crash state: isc_lex_getmastertoken_fuzzer
+Poc: 129313.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_isc_lex_getmastertoken_fuzzer
+target: isc_lex_getmastertoken_fuzzer
+name: libFuzzer
+[Environment] MSAN_OPTIONS=allocator_release_to_os_interval_ms=500:exitcode=77:halt_on_error=1:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:print_stats=1:print_summary=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 476376244
+INFO: Loaded 1 modules   (1534 inline 8-bit counters): 1534 [0x5bf460, 0x5bfa5e),
+INFO: Loaded 1 PC tables (1534 PCs): 1534 [0x5bfa60,0x5c5a40),
+INFO:        0 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases-disk/temp-20/new
+INFO:     1658 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/data-bundles/isc_lex_getmastertoken_fuzzer
+INFO: -max_len is not provided; libFuzzer will not generate inputs larger than 62978 bytes
+INFO: seed corpus: files: 1658 min: 1b max: 62978b total: 860125b rss: 77Mb
+#1659	INITED cov: 200 ft: 1026 corp: 356/71Kb exec/s: 0 rss: 82Mb
+#2829	REDUCE cov: 200 ft: 1026 corp: 356/71Kb lim: 16543 exec/s: 0 rss: 227Mb L: 138/16529 MS: 5 CopyPart-CopyPart-EraseBytes-CopyPart-EraseBytes-
+#3565	REDUCE cov: 200 ft: 1026 corp: 356/71Kb lim: 16543 exec/s: 0 rss: 323Mb L: 165/16529 MS: 1 EraseBytes-
+#3736	REDUCE cov: 200 ft: 1026 corp: 356/71Kb lim: 16543 exec/s: 0 rss: 344Mb L: 150/16529 MS: 1 EraseBytes-
+#4662	REDUCE cov: 200 ft: 1026 corp: 356/71Kb lim: 16543 exec/s: 0 rss: 463Mb L: 7659/16529 MS: 1 EraseBytes-
+#5362	REDUCE cov: 200 ft: 1026 corp: 356/70Kb lim: 16543 exec/s: 0 rss: 553Mb L: 7585/16529 MS: 5 InsertByte-ChangeBit-ChangeByte-ChangeASCIIInt-CrossOver-
+#8268	REDUCE cov: 200 ft: 1026 corp: 356/70Kb lim: 16571 exec/s: 8268 rss: 923Mb L: 389/16529 MS: 1 EraseBytes-
+#9837	REDUCE cov: 200 ft: 1026 corp: 356/70Kb lim: 16585 exec/s: 9837 rss: 1123Mb L: 22/16529 MS: 3 CopyPart-ShuffleBytes-EraseBytes-
+#11058	REDUCE cov: 200 ft: 1026 corp: 356/70Kb lim: 16585 exec/s: 11058 rss: 1281Mb L: 7/16529 MS: 1 EraseBytes-
+#13049	REDUCE cov: 200 ft: 1026 corp: 356/70Kb lim: 16599 exec/s: 13049 rss: 1536Mb L: 78/16529 MS: 1 EraseBytes-
+#14235	REDUCE cov: 200 ft: 1026 corp: 356/70Kb lim: 16599 exec/s: 7117 rss: 1686Mb L: 8/16529 MS: 1 EraseBytes-
+#15288	REDUCE cov: 200 ft: 1026 corp: 356/67Kb lim: 16599 exec/s: 7644 rss: 1821Mb L: 3627/16529 MS: 3 ChangeBinInt-ChangeBit-CrossOver-
+#16384	pulse  cov: 200 ft: 1026 corp: 356/67Kb lim: 16599 exec/s: 8192 rss: 1961Mb
+#17338	REDUCE cov: 200 ft: 1026 corp: 356/63Kb lim: 16613 exec/s: 8669 rss: 2082Mb L: 285/16529 MS: 5 ShuffleBytes-ChangeASCIIInt-ShuffleBytes-CrossOver-CrossOver-
+#18889	REDUCE cov: 200 ft: 1026 corp: 356/63Kb lim: 16627 exec/s: 9444 rss: 2278Mb L: 224/16529 MS: 1 EraseBytes-
+#19850	REDUCE cov: 200 ft: 1026 corp: 356/63Kb lim: 16627 exec/s: 9925 rss: 2400Mb L: 150/16529 MS: 1 EraseBytes-
+==1900== ERROR: libFuzzer: out-of-memory (used: 2601Mb; limit: 2560Mb)
+   To change the out-of-memory limit use -rss_limit_mb=&lt;N&gt;
+
+MS: 1 InsertRepeatedBytes-; base unit: 066b96c5b80bc8822d4eb958fd7acc8d91ab9976
+artifact_prefix=&#x27;/clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/&#x27;; Test unit written to /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/oom-b96c0b79f94356d25d7dd03219997db900f6b9d4
+SUMMARY: libFuzzer: out-of-memory
+stat::number_of_executed_units: 21436
+stat::average_exec_per_sec:     7145
+stat::new_units_added:          14
+stat::slowest_unit_time_sec:    0
+stat::peak_rss_mb:              2601

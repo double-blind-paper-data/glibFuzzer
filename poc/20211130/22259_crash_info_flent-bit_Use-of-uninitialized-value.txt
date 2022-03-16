@@ -1,0 +1,76 @@
+Testcase id: 22259
+Job: fluent-bit_libfuzzer_msan
+Crash Type: Use-of-uninitialized-value
+isSecurity: True
+Crash state: _flb_strptime
+flb_strptime
+strp_fuzzer.c
+Poc: 22259.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_flb-it-fuzz-strp_fuzzer_OSSFUZZ
+target: flb-it-fuzz-strp_fuzzer_OSSFUZZ
+name: libFuzzer
+[Environment] MSAN_OPTIONS=allocator_release_to_os_interval_ms=500:exitcode=77:halt_on_error=1:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:print_stats=1:print_summary=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+INFO: found LLVMFuzzerCustomMutator (0x7fed98f2cf90). Disabling -len_control by default.
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 3374060159
+INFO: Loaded 1 modules   (353 inline 8-bit counters): 353 [0x585fe6, 0x586147),
+INFO: Loaded 1 PC tables (353 PCs): 353 [0x586148,0x587758),
+INFO:        0 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases-disk/temp-22/new
+INFO:        0 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases-disk/temp-22/mutations
+INFO:      125 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases-disk/temp-22/subset
+INFO: -max_len is not provided; libFuzzer will not generate inputs larger than 8192 bytes
+INFO: seed corpus: files: 125 min: 4b max: 8192b total: 91665b rss: 65Mb
+==45654==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x52f942 in _flb_strptime /src/fluent-bit/src/flb_strptime.c:382:9
+    #1 0x526f26 in flb_strptime /src/fluent-bit/src/flb_strptime.c:138:9
+    #2 0x526daf in LLVMFuzzerTestOneInput /src/fluent-bit/tests/internal/fuzzers/strp_fuzzer.c:26:5
+    #3 0x4568f3 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #4 0x4560da in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*, bool, bool*) cxa_noexception.cpp:0
+    #5 0x457f34 in fuzzer::Fuzzer::ReadAndExecuteSeedCorpora(std::__Fuzzer::vector&lt;fuzzer::SizedFile, std::__Fuzzer::allocator&lt;fuzzer::SizedFile&gt; &gt;&amp;) cxa_noexception.cpp:0
+    #6 0x458169 in fuzzer::Fuzzer::Loop(std::__Fuzzer::vector&lt;fuzzer::SizedFile, std::__Fuzzer::allocator&lt;fuzzer::SizedFile&gt; &gt;&amp;) cxa_noexception.cpp:0
+    #7 0x447bad in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #8 0x470bf2 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #9 0x7fed989a40b2 in __libc_start_main
+    #10 0x41f48d in _start
+
+  Uninitialized value was created by an allocation of &#x27;tt&#x27; in the stack frame of function &#x27;LLVMFuzzerTestOneInput&#x27;
+    #0 0x526b20 in LLVMFuzzerTestOneInput /src/fluent-bit/tests/internal/fuzzers/strp_fuzzer.c:17
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/fluent-bit_libfuzzer_msan/custom/flb-it-fuzz-strp_fuzzer_OSSFUZZ+0x52f942)
+Unique heap origins: 138
+Stack depot allocated bytes: 1900544
+Unique origin histories: 104
+History depot allocated bytes: 196608
+Exiting
+MS: 0 ; base unit: 0000000000000000000000000000000000000000
+0x25,0x70,0x70,0xbf,0x7d,0xa5,0x6,0x63,0x54,0x4e,0x8b,0x50,0xb4,0xb1,0xe3,0x15,0x18,0x8e,0x7e,0xd3,0xef,0x7c,0xd0,0x64,0xfe,0xd3,0xb4,0xa3,0x91,0xa7,0x20,0xe,0xbc,0xa,0x26,0x37,0x34,0x14,0x72,0x93,0xb9,0x98,0xfc,0xe2,0x1c,0x5f,0x1a,0xdc,0x2b,0xed,0x94,0x62,0x1d,0x18,0x77,0x9a,0x39,0xb7,0xf4,0x3d,0xf,0xb2,0x54,0x68,0x75,0x46,0x72,0x69,0x64,0x61,0x79,0x6f,0x6e,0x64,0x61,0x79,0x79,0x7,0x34,0x34,0x34,0x31,0x31,0x31,0x31,0x31,0x31,0x31,0x31,0x31,0x31,0x31,0x31,0x31,0x31,0x31,0x31,0x31,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x2d,0x37,0x33,0x34,0x39,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x4d,0x53,0x54,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x70,0x3a,0xf2,0xa9,0x31,0x34,0x32,0x39,0x38,0x38,0x38,0x34,0x30,
+%pp\277}\245\006cTN\213P\264\261\343\025\030\216~\323\357|\320d\376\323\264\243\221\247 \016\274\012&amp;74\024r\223\271\230\374\342\034_\032\334+\355\224b\035\030w\2329\267\364=\017\262ThuFridayondayy\00744411111111111111111ppppppppppppppppp-7349ppppppppppppppppppppppppppppppppppppppppppppMSTpppppppppppppp:\362\251142988840
+artifact_prefix=&#x27;/clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/&#x27;; Test unit written to /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/crash-36c91dfc09ae83978a93ad325b84fb7c8e8388ae
+Base64: JXBwv32lBmNUTotQtLHjFRiOftPvfNBk/tO0o5GnIA68CiY3NBRyk7mY/OIcXxrcK+2UYh0Yd5o5t/Q9D7JUaHVGcmlkYXlvbmRheXkHNDQ0MTExMTExMTExMTExMTExMTFwcHBwcHBwcHBwcHBwcHBwcC03MzQ5cHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBNU1RwcHBwcHBwcHBwcHBwcDryqTE0Mjk4ODg0MA==
+stat::number_of_executed_units: 48
+stat::average_exec_per_sec:     0
+stat::new_units_added:          0
+stat::slowest_unit_time_sec:    0
+stat::peak_rss_mb:              65
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+INFO: seed corpus: files: 125 min: 4b max: 8192b total: 91665b rss: 65Mb
+==45654==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x52f942  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/fluent-bit_libfuzzer_msan/custom/flb-it-fuzz-strp_fuzzer_OSSFUZZ+0x52f942)
+    #1 0x526f26  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/fluent-bit_libfuzzer_msan/custom/flb-it-fuzz-strp_fuzzer_OSSFUZZ+0x526f26)
+    #2 0x526daf  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/fluent-bit_libfuzzer_msan/custom/flb-it-fuzz-strp_fuzzer_OSSFUZZ+0x526daf)
+    #3 0x4568f3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/fluent-bit_libfuzzer_msan/custom/flb-it-fuzz-strp_fuzzer_OSSFUZZ+0x4568f3)
+    #4 0x4560da  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/fluent-bit_libfuzzer_msan/custom/flb-it-fuzz-strp_fuzzer_OSSFUZZ+0x4560da)
+    #5 0x457f34  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/fluent-bit_libfuzzer_msan/custom/flb-it-fuzz-strp_fuzzer_OSSFUZZ+0x457f34)
+    #6 0x458169  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/fluent-bit_libfuzzer_msan/custom/flb-it-fuzz-strp_fuzzer_OSSFUZZ+0x458169)
+    #7 0x447bad  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/fluent-bit_libfuzzer_msan/custom/flb-it-fuzz-strp_fuzzer_OSSFUZZ+0x447bad)
+    #8 0x470bf2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/fluent-bit_libfuzzer_msan/custom/flb-it-fuzz-strp_fuzzer_OSSFUZZ+0x470bf2)
+    #9 0x7fed989a40b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #10 0x41f48d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/fluent-bit_libfuzzer_msan/custom/flb-it-fuzz-strp_fuzzer_OSSFUZZ+0x41f48d)
+
+  Uninitialized value was created by an allocation of &#x27;tt&#x27; in the stack frame of function &#x27;LLVMFuzzerTestOneInput&#x27;
+    #0 0x526b20  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/fluent-bit_libfuzzer_msan/custom/flb-it-fuzz-strp_fuzzer_OSSFUZZ+0x526b20)

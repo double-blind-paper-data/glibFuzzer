@@ -1,0 +1,50 @@
+Testcase id: 6769
+Job: go-sqlite3_libfuzzer_msan
+Crash Type: Use-of-uninitialized-value
+isSecurity: True
+Crash state: sqlite3ParseUri
+openDatabase
+_cgo_6eNUMBER_Cfunc__sqlite3_open_v2
+Poc: 6769.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_fuzz_open_exec
+target: fuzz_open_exec
+name: libFuzzer
+[Environment] MSAN_OPTIONS=allocator_release_to_os_interval_ms=500:exitcode=77:halt_on_error=1:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:print_stats=1:print_summary=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 1393414746
+INFO: 12151 Extra Counters
+INFO:        0 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases-disk/temp-22/new
+INFO:        0 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases-disk/temp-22/mutations
+INFO:        4 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/data-bundles/fuzz_open_exec
+INFO: -max_len is not provided; libFuzzer will not generate inputs larger than 8217 bytes
+INFO: seed corpus: files: 4 min: 1b max: 8217b total: 16437b rss: 63Mb
+Uninitialized bytes in __interceptor_strlen at offset 0 inside [0x701000000040, 13)
+==3922==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x74d3c2 in sqlite3Strlen30 /_/github.com/mattn/go-sqlite3@/sqlite3-binding.c:31763:28
+    #1 0x74d3c2 in sqlite3ParseUri /_/github.com/mattn/go-sqlite3@/sqlite3-binding.c:167936:14
+    #2 0x6a7154 in openDatabase /_/github.com/mattn/go-sqlite3@/sqlite3-binding.c:168385:10
+    #3 0x68c7c4 in _sqlite3_open_v2 /_/github.com/mattn/go-sqlite3@/sqlite3.go:53:10
+    #4 0x68c7c4 in _cgo_6e4747213938_Cfunc__sqlite3_open_v2 /tmp/go-build/cgo-gcc-prolog:152:11
+    #5 0x58a847 in runtime.asmcgocall.abi0 runtime/asm_amd64.s:765
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-sqlite3_libfuzzer_msan/custom/fuzz_open_exec+0x74d3c2)
+Exiting
+MS: 0 ; base unit: 0000000000000000000000000000000000000000
+artifact_prefix=&#x27;/clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/&#x27;; Test unit written to /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/crash-d52901fb4bcc2377d233ca83ae522dd83cc9372e
+stat::number_of_executed_units: 4
+stat::average_exec_per_sec:     0
+stat::new_units_added:          0
+stat::slowest_unit_time_sec:    0
+stat::peak_rss_mb:              63
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+Uninitialized bytes in __interceptor_strlen at offset 0 inside [0x701000000040, 13)
+==3922==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x74d3c2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-sqlite3_libfuzzer_msan/custom/fuzz_open_exec+0x74d3c2)
+    #1 0x6a7154  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-sqlite3_libfuzzer_msan/custom/fuzz_open_exec+0x6a7154)
+    #2 0x68c7c4  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-sqlite3_libfuzzer_msan/custom/fuzz_open_exec+0x68c7c4)
+    #3 0x58a847  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/go-sqlite3_libfuzzer_msan/custom/fuzz_open_exec+0x58a847)

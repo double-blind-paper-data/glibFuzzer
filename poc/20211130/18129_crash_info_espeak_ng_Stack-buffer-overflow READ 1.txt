@@ -1,0 +1,111 @@
+Testcase id: 18129
+Job: espeak-ng_afl_asan
+Crash Type: Stack-buffer-overflow READ 1
+isSecurity: True
+Crash state: TranslateRoman
+TranslateWord3
+TranslateWord
+Poc: 18129.testcase
+engine: afl
+fully_qualified_name: afl_ssml-fuzzer
+target: ssml-fuzzer
+name: afl
+[Environment] ASAN_OPTIONS=abort_on_error=1:alloc_dealloc_mismatch=0:allocator_may_return_null=1:allocator_release_to_os_interval_ms=500:allow_user_segv_handler=0:check_malloc_usable_size=0:detect_leaks=1:detect_odr_violation=0:detect_stack_use_after_return=1:fast_unwind_on_fatal=0:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:max_uar_stack_size_log=16:print_scariness=1:print_summary=1:print_suppressions=0:quarantine_size_mb=64:redzone=128:strict_memcmp=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+=================================================================
+==6361==ERROR: AddressSanitizer: stack-buffer-overflow on address 0x7f674b8f01cf at pc 0x0000005a701a bp 0x7ffe777e5f30 sp 0x7ffe777e5f28
+READ of size 1 at 0x7f674b8f01cf thread T0
+SCARINESS: 27 (1-byte-read-stack-buffer-overflow)
+    #0 0x5a7019 in TranslateRoman /src/espeak-ng/src/libespeak-ng/numbers.c:1051:102
+    #1 0x4ff884 in TranslateWord3 /src/espeak-ng/src/libespeak-ng/translate.c:653:19
+    #2 0x4fd122 in TranslateWord /src/espeak-ng/src/libespeak-ng/translate.c:1100:14
+    #3 0x510bda in TranslateWord2 /src/espeak-ng/src/libespeak-ng/translate.c:1351:11
+    #4 0x50d39e in TranslateClause /src/espeak-ng/src/libespeak-ng/translate.c:2588:18
+    #5 0x4f598f in SpeakNextClause /src/espeak-ng/src/libespeak-ng/synthesize.c:1569:2
+    #6 0x4db895 in Synthesize /src/espeak-ng/src/libespeak-ng/speech.c:457:2
+    #7 0x4db4e2 in sync_espeak_Synth /src/espeak-ng/src/libespeak-ng/speech.c:570:29
+    #8 0x4dc6d9 in espeak_ng_Synthesize /src/espeak-ng/src/libespeak-ng/speech.c:678:10
+    #9 0x4d9683 in espeak_Synth /src/espeak-ng/src/libespeak-ng/espeak_api.c:90:32
+    #10 0x4d9238 in LLVMFuzzerTestOneInput /src/espeak-ng/tests/ssml-fuzzer.c:67:8
+    #11 0x4d8f3f in main /src/aflplusplus/utils/aflpp_driver/aflpp_driver.c:303:7
+    #12 0x7f674c4ff0b2 in __libc_start_main
+    #13 0x41e60d in _start
+
+Address 0x7f674b8f01cf is located in stack of thread T0 at offset 6607 in frame
+    #0 0x504cdf in TranslateClause /src/espeak-ng/src/libespeak-ng/translate.c:1918
+
+  This frame has 16 object(s):
+    [32, 36) &#x27;cc&#x27; (line 1921)
+    [48, 52) &#x27;source_index&#x27; (line 1922)
+    [64, 68) &#x27;prev_in&#x27; (line 1925)
+    [80, 84) &#x27;prev_out&#x27; (line 1926)
+    [96, 100) &#x27;next_in&#x27; (line 1929)
+    [112, 116) &#x27;char_inserted&#x27; (line 1931)
+    [128, 132) &#x27;word_flags&#x27; (line 1940)
+    [144, 148) &#x27;charix_top&#x27; (line 1952)
+    [160, 1768) &#x27;charix&#x27; (line 1954)
+    [1904, 5504) &#x27;words&#x27; (line 1955)
+    [5632, 6432) &#x27;sbuf&#x27; (line 1959)
+    [6560, 6564) &#x27;tone&#x27; (line 1962)
+    [6576, 6580) &#x27;next2_in&#x27; (line 2271)
+    [6592, 6596) &#x27;c_temp&#x27; (line 2493)
+    [6608, 6758) &#x27;number_buf&#x27; (line 2497) &lt;== Memory access at offset 6607 underflows this variable
+    [6832, 7432) &#x27;num_wtab&#x27; (line 2498)
+HINT: this may be a false positive if your program uses some custom stack unwind mechanism, swapcontext or vfork
+      (longjmp and C++ exceptions *are* supported)
+SUMMARY: AddressSanitizer: stack-buffer-overflow (/clusterfuzz/run_bot/clusterfuzz/bot/builds/espeak-ng_afl_asan/custom/ssml-fuzzer+0x5a7019)
+Shadow bytes around the buggy address:
+  0x0fed69715fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0fed69715ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0fed69716000: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0fed69716010: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0fed69716020: 00 00 00 00 f2 f2 f2 f2 f2 f2 f2 f2 f2 f2 f2 f2
+=&gt;0x0fed69716030: f2 f2 f2 f2 04 f2 f8 f2 04[f2]00 00 00 00 00 00
+  0x0fed69716040: 00 00 00 00 00 00 00 00 00 00 00 00 06 f2 f2 f2
+  0x0fed69716050: f2 f2 f2 f2 f2 f2 00 00 00 00 00 00 00 00 00 00
+  0x0fed69716060: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0fed69716070: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0fed69716080: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==6361==ABORTING
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+READ of size 1 at 0x7f674b8f01cf thread T0
+SCARINESS: 27 (1-byte-read-stack-buffer-overflow)
+    #0 0x5a7019  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/espeak-ng_afl_asan/custom/ssml-fuzzer+0x5a7019)
+    #1 0x4ff884  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/espeak-ng_afl_asan/custom/ssml-fuzzer+0x4ff884)
+    #2 0x4fd122  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/espeak-ng_afl_asan/custom/ssml-fuzzer+0x4fd122)
+    #3 0x510bda  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/espeak-ng_afl_asan/custom/ssml-fuzzer+0x510bda)
+    #4 0x50d39e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/espeak-ng_afl_asan/custom/ssml-fuzzer+0x50d39e)
+    #5 0x4f598f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/espeak-ng_afl_asan/custom/ssml-fuzzer+0x4f598f)
+    #6 0x4db895  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/espeak-ng_afl_asan/custom/ssml-fuzzer+0x4db895)
+    #7 0x4db4e2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/espeak-ng_afl_asan/custom/ssml-fuzzer+0x4db4e2)
+    #8 0x4dc6d9  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/espeak-ng_afl_asan/custom/ssml-fuzzer+0x4dc6d9)
+    #9 0x4d9683  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/espeak-ng_afl_asan/custom/ssml-fuzzer+0x4d9683)
+    #10 0x4d9238  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/espeak-ng_afl_asan/custom/ssml-fuzzer+0x4d9238)
+    #11 0x4d8f3f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/espeak-ng_afl_asan/custom/ssml-fuzzer+0x4d8f3f)
+    #12 0x7f674c4ff0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #13 0x41e60d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/espeak-ng_afl_asan/custom/ssml-fuzzer+0x41e60d)
+
+Address 0x7f674b8f01cf is located in stack of thread T0 at offset 6607 in frame
+    #0 0x504cdf  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/espeak-ng_afl_asan/custom/ssml-fuzzer+0x504cdf)

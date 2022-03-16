@@ -1,0 +1,38 @@
+Testcase id: 18291
+Job: civetweb_honggfuzz_msan
+Crash Type: Use-of-uninitialized-value
+isSecurity: True
+Crash state: logLog
+fuzzmain.c
+Poc: 18291.testcase
+engine: honggfuzz
+fully_qualified_name: honggfuzz_civetweb_fuzz2
+target: civetweb_fuzz2
+name: honggfuzz
+[Environment] MSAN_OPTIONS=allocator_release_to_os_interval_ms=500:halt_on_error=1:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:print_stats=1:print_summary=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+Uninitialized bytes in __interceptor_localtime_r at offset 0 inside [0x7fffffffcc88, 8)
+==85912==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x4a26f2 in logLog
+    #1 0x4a0dca in main
+    #2 0x7ffff7c5b0b2 in __libc_start_main
+    #3 0x41e69d in _start
+
+  Uninitialized value was created by an allocation of &#x27;client_data_buf.i.i&#x27; in the stack frame of function &#x27;LLVMFuzzerTestOneInput&#x27;
+    #0 0x554a50 in LLVMFuzzerTestOneInput /src/civetweb/fuzztest/fuzzmain.c:497
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/civetweb_honggfuzz_msan/custom/civetweb_fuzz2+0x4a26f2)
+Exiting
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+Uninitialized bytes in __interceptor_localtime_r at offset 0 inside [0x7fffffffcc88, 8)
+==85912==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x4a26f2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/civetweb_honggfuzz_msan/custom/civetweb_fuzz2+0x4a26f2)
+    #1 0x4a0dca  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/civetweb_honggfuzz_msan/custom/civetweb_fuzz2+0x4a0dca)
+    #2 0x7ffff7c5b0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #3 0x41e69d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/civetweb_honggfuzz_msan/custom/civetweb_fuzz2+0x41e69d)
+
+  Uninitialized value was created by an allocation of &#x27;client_data_buf.i.i&#x27; in the stack frame of function &#x27;LLVMFuzzerTestOneInput&#x27;
+    #0 0x554a50  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/civetweb_honggfuzz_msan/custom/civetweb_fuzz2+0x554a50)

@@ -1,0 +1,47 @@
+Testcase id: 42012
+Job: kamailio_honggfuzz_msan
+Crash Type: Bus on unknown address
+isSecurity: False
+Crash state: syslog
+parse_identityinfo
+parse_identityinfo_header
+Poc: 42012.testcase
+engine: honggfuzz
+fully_qualified_name: honggfuzz_fuzz_parse_msg
+target: fuzz_parse_msg
+name: honggfuzz
+[Environment] MSAN_OPTIONS=allocator_release_to_os_interval_ms=500:halt_on_error=1:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:print_stats=1:print_summary=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+==162394==ERROR: MemorySanitizer: BUS on unknown address (pc 0x7ffff7da19c3 bp 0x7fffffffc350 sp 0x7fffffffbdd8 T162394)
+==162394==The signal is caused by a READ memory access.
+==162394==Hint: this fault was caused by a dereference of a high value address (see register values below).  Disassemble the provided pc to learn which register was used.
+    #0 0x7ffff7da19c3 in libc.so.6
+    #1 0x7ffff7c90209 in libc.so.6
+    #2 0x7ffff7d30f32 in libc.so.6
+    #3 0x7ffff7d313e9 in syslog
+    #4 0x659667 in parse_identityinfo /src/kamailio/src/core/parser/parse_identityinfo.c:315:3
+    #5 0x65bb4d in parse_identityinfo_header /src/kamailio/src/core/parser/parse_identityinfo.c:346:2
+    #6 0x4d9439 in LLVMFuzzerTestOneInput /src/kamailio/misc/fuzz/fuzz_parse_msg.c:53:5
+    #7 0x4a0e1e in main
+    #8 0x7ffff7c3d0b2 in __libc_start_main
+    #9 0x41e75d in _start
+
+MemorySanitizer can not provide additional info.
+SUMMARY: MemorySanitizer: BUS (/lib/x86_64-linux-gnu/libc.so.6+0x18b9c3)
+==162394==ABORTING
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+==162394==The signal is caused by a READ memory access.
+==162394==Hint: this fault was caused by a dereference of a high value address (see register values below).  Disassemble the provided pc to learn which register was used.
+    #0 0x7ffff7da19c3  (/lib/x86_64-linux-gnu/libc.so.6+0x18b9c3)
+    #1 0x7ffff7c90209  (/lib/x86_64-linux-gnu/libc.so.6+0x7a209)
+    #2 0x7ffff7d30f32  (/lib/x86_64-linux-gnu/libc.so.6+0x11af32)
+    #3 0x7ffff7d313e9  (/lib/x86_64-linux-gnu/libc.so.6+0x11b3e9)
+    #4 0x659667  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/kamailio_honggfuzz_msan/custom/fuzz_parse_msg+0x659667)
+    #5 0x65bb4d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/kamailio_honggfuzz_msan/custom/fuzz_parse_msg+0x65bb4d)
+    #6 0x4d9439  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/kamailio_honggfuzz_msan/custom/fuzz_parse_msg+0x4d9439)
+    #7 0x4a0e1e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/kamailio_honggfuzz_msan/custom/fuzz_parse_msg+0x4a0e1e)
+    #8 0x7ffff7c3d0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #9 0x41e75d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/kamailio_honggfuzz_msan/custom/fuzz_parse_msg+0x41e75d)

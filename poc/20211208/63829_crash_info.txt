@@ -1,0 +1,69 @@
+Testcase id: 63829
+Job: hoextdown_libfuzzer_asan
+Crash Type: Timeout
+isSecurity: False
+Crash state: hoedown_fuzzer
+Poc: 63829.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_hoedown_fuzzer
+target: hoedown_fuzzer
+name: libFuzzer
+[Environment] ASAN_OPTIONS=dedup_token_length=3:exitcode=77:symbolize=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+Command: /clusterfuzz/run_bot/clusterfuzz/bot/builds/hoextdown_libfuzzer_asan/custom/hoedown_fuzzer -rss_limit_mb=2560 -timeout=60 -runs=100 /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/6bd5e977e8376f5ed432534a5155fb36c96788f2b8a04c067b6a0440a6e4d315
+Time ran: 62.01753616333008
+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 2024402837
+INFO: Loaded 1 modules   (3344 inline 8-bit counters): 3344 [0x5fb030, 0x5fbd40),
+INFO: Loaded 1 PC tables (3344 PCs): 3344 [0x5fbd40,0x608e40),
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/hoextdown_libfuzzer_asan/custom/hoedown_fuzzer: Running 1 inputs 100 time(s) each.
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/6bd5e977e8376f5ed432534a5155fb36c96788f2b8a04c067b6a0440a6e4d315
+ALARM: working on the last Unit for 61 seconds
+       and the timeout value is 60 (use -timeout=N to change)
+==144550== ERROR: libFuzzer: timeout after 61 seconds
+    #0 0x52fc21 in __sanitizer_print_stack_trace /src/llvm-project/compiler-rt/lib/asan/asan_stack.cpp:87:3
+    #1 0x470658 in fuzzer::PrintStackTrace() cxa_noexception.cpp:0
+    #2 0x4554e9 in fuzzer::Fuzzer::AlarmCallback() cxa_noexception.cpp:0
+    #3 0x7feadf8d73bf in libpthread.so.0
+    #4 0x46e391 in HandleCmp&lt;unsigned char&gt; /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerTracePC.cpp:0:32
+    #5 0x46e391 in __sanitizer_cov_trace_cmp1 /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerTracePC.cpp:534:15
+    #6 0x586af6 in find_emph_char /src/hoextdown/src/document.c:803:27
+    #7 0x57ea2a in char_link /src/hoextdown/src/document.c:1406:7
+    #8 0x56b1fc in parse_inline /src/hoextdown/src/document.c:598:10
+    #9 0x576f1c in parse_paragraph /src/hoextdown/src/document.c:2211:3
+    #10 0x569f4c in parse_block /src/hoextdown/src/document.c:3608:11
+    #11 0x56654a in hoedown_document_render /src/hoextdown/src/document.c:4162:3
+    #12 0x55f035 in LLVMFuzzerTestOneInput /src/hoextdown/test/hoedown_fuzzer.c:89:3
+    #13 0x456b13 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #14 0x442422 in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:324:6
+    #15 0x447eea in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #16 0x470e12 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #17 0x7feadf6cb0b2 in __libc_start_main
+    #18 0x41f6ad in _start
+
+SUMMARY: libFuzzer: timeout
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+       and the timeout value is 60 (use -timeout=N to change)
+==144550== ERROR: libFuzzer: timeout after 61 seconds
+    #0 0x52fc21  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/hoextdown_libfuzzer_asan/custom/hoedown_fuzzer+0x52fc21)
+    #1 0x470658  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/hoextdown_libfuzzer_asan/custom/hoedown_fuzzer+0x470658)
+    #2 0x4554e9  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/hoextdown_libfuzzer_asan/custom/hoedown_fuzzer+0x4554e9)
+    #3 0x7feadf8d73bf  (/lib/x86_64-linux-gnu/libpthread.so.0+0x153bf)
+    #4 0x46e391  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/hoextdown_libfuzzer_asan/custom/hoedown_fuzzer+0x46e391)
+    #5 0x586af6  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/hoextdown_libfuzzer_asan/custom/hoedown_fuzzer+0x586af6)
+    #6 0x57ea2a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/hoextdown_libfuzzer_asan/custom/hoedown_fuzzer+0x57ea2a)
+    #7 0x56b1fc  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/hoextdown_libfuzzer_asan/custom/hoedown_fuzzer+0x56b1fc)
+    #8 0x576f1c  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/hoextdown_libfuzzer_asan/custom/hoedown_fuzzer+0x576f1c)
+    #9 0x569f4c  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/hoextdown_libfuzzer_asan/custom/hoedown_fuzzer+0x569f4c)
+    #10 0x56654a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/hoextdown_libfuzzer_asan/custom/hoedown_fuzzer+0x56654a)
+    #11 0x55f035  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/hoextdown_libfuzzer_asan/custom/hoedown_fuzzer+0x55f035)
+    #12 0x456b13  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/hoextdown_libfuzzer_asan/custom/hoedown_fuzzer+0x456b13)
+    #13 0x442422  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/hoextdown_libfuzzer_asan/custom/hoedown_fuzzer+0x442422)
+    #14 0x447eea  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/hoextdown_libfuzzer_asan/custom/hoedown_fuzzer+0x447eea)
+    #15 0x470e12  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/hoextdown_libfuzzer_asan/custom/hoedown_fuzzer+0x470e12)
+    #16 0x7feadf6cb0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #17 0x41f6ad  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/hoextdown_libfuzzer_asan/custom/hoedown_fuzzer+0x41f6ad)

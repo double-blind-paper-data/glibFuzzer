@@ -1,0 +1,71 @@
+Testcase id: 119311
+Job: dropbear_honggfuzz_asan
+Crash Type: Global-buffer-overflow READ 4
+isSecurity: True
+Crash state: wrapfd_new_fuzzinput
+fuzz_run_server
+fuzzer-postauth_nomaths.c
+Poc: 119311.testcase
+engine: honggfuzz
+fully_qualified_name: honggfuzz_fuzzer-postauth_nomaths
+target: fuzzer-postauth_nomaths
+name: honggfuzz
+[Environment] ASAN_OPTIONS=alloc_dealloc_mismatch=0:allocator_may_return_null=1:allocator_release_to_os_interval_ms=500:allow_user_segv_handler=0:check_malloc_usable_size=0:detect_leaks=1:detect_odr_violation=0:detect_stack_use_after_return=1:fast_unwind_on_fatal=0:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:max_uar_stack_size_log=16:print_scariness=1:print_summary=1:print_suppressions=0:quarantine_size_mb=64:redzone=512:strict_memcmp=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+=================================================================
+==71923==ERROR: AddressSanitizer: global-buffer-overflow on address 0x00000100bab0 at pc 0x000000502b27 bp 0x7fffffffcdb0 sp 0x7fffffffcda8
+READ of size 4 at 0x00000100bab0 thread T0
+SCARINESS: 27 (4-byte-read-global-buffer-overflow-far-from-bounds)
+    #0 0x502b26 in wrapfd_new_fuzzinput /src/dropbear/fuzz/fuzz-wrapfd.c:62:2
+    #1 0x501ff6 in fuzz_run_server /src/dropbear/fuzz/fuzz-common.c:282:20
+    #2 0x4d8d7b in LLVMFuzzerTestOneInput /src/dropbear/fuzz/fuzzer-postauth_nomaths.c:4:9
+    #3 0x57e1ce in main
+    #4 0x7ffff7c190b2 in __libc_start_main
+    #5 0x41e83d in _start
+
+0x00000100bab0 is located 720 bytes to the right of global variable &#x27;wrap_fds&#x27; defined in &#x27;fuzz/fuzz-wrapfd.c:24:22&#x27; (0x10087e0) of size 12288
+SUMMARY: AddressSanitizer: global-buffer-overflow (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dropbear_honggfuzz_asan/custom/fuzzer-postauth_nomaths+0x502b26)
+Shadow bytes around the buggy address:
+  0x0000801f9700: f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9
+  0x0000801f9710: f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9
+  0x0000801f9720: f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9
+  0x0000801f9730: f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9
+  0x0000801f9740: f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9
+=&gt;0x0000801f9750: f9 f9 f9 f9 f9 f9[f9]f9 f9 f9 f9 f9 f9 f9 f9 f9
+  0x0000801f9760: f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9
+  0x0000801f9770: f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9
+  0x0000801f9780: f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9
+  0x0000801f9790: f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9
+  0x0000801f97a0: f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==71923==ABORTING
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+READ of size 4 at 0x00000100bab0 thread T0
+SCARINESS: 27 (4-byte-read-global-buffer-overflow-far-from-bounds)
+    #0 0x502b26  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dropbear_honggfuzz_asan/custom/fuzzer-postauth_nomaths+0x502b26)
+    #1 0x501ff6  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dropbear_honggfuzz_asan/custom/fuzzer-postauth_nomaths+0x501ff6)
+    #2 0x4d8d7b  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dropbear_honggfuzz_asan/custom/fuzzer-postauth_nomaths+0x4d8d7b)
+    #3 0x57e1ce  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dropbear_honggfuzz_asan/custom/fuzzer-postauth_nomaths+0x57e1ce)
+    #4 0x7ffff7c190b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #5 0x41e83d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dropbear_honggfuzz_asan/custom/fuzzer-postauth_nomaths+0x41e83d)

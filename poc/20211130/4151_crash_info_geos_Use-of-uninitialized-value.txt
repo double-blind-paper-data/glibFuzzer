@@ -1,0 +1,86 @@
+Testcase id: 4151
+Job: geos_honggfuzz_msan
+Crash Type: Use-of-uninitialized-value
+isSecurity: True
+Crash state: geos::geomgraph::PlanarGraph::~PlanarGraph
+geos::operation::overlay::OverlayOp::~OverlayOp
+geos::operation::overlay::OverlayOp::overlayOp
+Poc: 4151.testcase
+engine: honggfuzz
+fully_qualified_name: honggfuzz_fuzz_geo2
+target: fuzz_geo2
+name: honggfuzz
+[Environment] MSAN_OPTIONS=allocator_release_to_os_interval_ms=500:halt_on_error=1:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:print_stats=1:print_summary=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+==3758==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x686227 in geos::geomgraph::PlanarGraph::~PlanarGraph() /src/geos/src/geomgraph/PlanarGraph.cpp:88:9
+    #1 0x894d28 in geos::operation::overlay::OverlayOp::~OverlayOp() /src/geos/src/operation/overlay/OverlayOp.cpp:184:1
+    #2 0x892b60 in geos::operation::overlay::OverlayOp::overlayOp(geos::geom::Geometry const*, geos::geom::Geometry const*, geos::operation::overlay::OverlayOp::OpCode) /src/geos/src/operation/overlay/OverlayOp.cpp:94:1
+    #3 0x5e4244 in geos::geom::HeuristicOverlay(geos::geom::Geometry const*, geos::geom::Geometry const*, int) /src/geos/src/geom/HeuristicOverlay.cpp:446:19
+    #4 0x5b5dc4 in geos::geom::Geometry::Union(geos::geom::Geometry const*) const /src/geos/src/geom/Geometry.cpp:593:12
+    #5 0x4d4407 in operator() /src/geos/capi/geos_ts_c.cpp:1361:27
+    #6 0x4d4407 in execute&lt;(lambda at /src/geos/capi/geos_ts_c.cpp:1360:35), nullptr&gt; /src/geos/capi/geos_ts_c.cpp:408:16
+    #7 0x4d4407 in GEOSUnion_r /src/geos/capi/geos_ts_c.cpp:1360:16
+    #8 0x4a971c in GEOSUnion /src/geos/capi/geos_c.cpp:540:16
+    #9 0x4a6175 in LLVMFuzzerTestOneInput /src/geos/tests/fuzz/fuzz_geo2.c:57:18
+    #10 0x55e0be in main
+    #11 0x7ffff7c5b0b2 in __libc_start_main
+    #12 0x42146d in _start
+
+  Uninitialized value was created by a heap deallocation
+    #0 0x4a4d29 in operator delete(void*) /src/llvm-project/compiler-rt/lib/msan/msan_new_delete.cpp:74:44
+    #1 0xaf0467 in operator() /usr/local/include/c++/v1/__memory/unique_ptr.h:54:5
+    #2 0xaf0467 in reset /usr/local/include/c++/v1/__memory/unique_ptr.h:315:7
+    #3 0xaf0467 in std::__1::unique_ptr&lt;geos::geomgraph::EdgeEnd, std::__1::default_delete&lt;geos::geomgraph::EdgeEnd&gt; &gt;::~unique_ptr() /usr/local/include/c++/v1/__memory/unique_ptr.h:269:19
+    #4 0xaf033f in geos::geomgraph::Node::add(geos::geomgraph::EdgeEnd*) /src/geos/src/geomgraph/Node.cpp:163:1
+    #5 0x6873d3 in geos::geomgraph::PlanarGraph::add(geos::geomgraph::EdgeEnd*) /src/geos/src/geomgraph/PlanarGraph.cpp:147:12
+    #6 0x68873f in geos::geomgraph::PlanarGraph::addEdges(std::__1::vector&lt;geos::geomgraph::Edge*, std::__1::allocator&lt;geos::geomgraph::Edge*&gt; &gt; const&amp;) /src/geos/src/geomgraph/PlanarGraph.cpp:225:9
+    #7 0x896467 in geos::operation::overlay::OverlayOp::computeOverlay(geos::operation::overlay::OverlayOp::OpCode) /src/geos/src/operation/overlay/OverlayOp.cpp:837:11
+    #8 0x892ab6 in getResultGeometry /src/geos/src/operation/overlay/OverlayOp.cpp:191:5
+    #9 0x892ab6 in geos::operation::overlay::OverlayOp::overlayOp(geos::geom::Geometry const*, geos::geom::Geometry const*, geos::operation::overlay::OverlayOp::OpCode) /src/geos/src/operation/overlay/OverlayOp.cpp:93:16
+    #10 0x5e4244 in geos::geom::HeuristicOverlay(geos::geom::Geometry const*, geos::geom::Geometry const*, int) /src/geos/src/geom/HeuristicOverlay.cpp:446:19
+    #11 0x5b5dc4 in geos::geom::Geometry::Union(geos::geom::Geometry const*) const /src/geos/src/geom/Geometry.cpp:593:12
+    #12 0x4d4407 in operator() /src/geos/capi/geos_ts_c.cpp:1361:27
+    #13 0x4d4407 in execute&lt;(lambda at /src/geos/capi/geos_ts_c.cpp:1360:35), nullptr&gt; /src/geos/capi/geos_ts_c.cpp:408:16
+    #14 0x4d4407 in GEOSUnion_r /src/geos/capi/geos_ts_c.cpp:1360:16
+    #15 0x4a971c in GEOSUnion /src/geos/capi/geos_c.cpp:540:16
+    #16 0x4a6175 in LLVMFuzzerTestOneInput /src/geos/tests/fuzz/fuzz_geo2.c:57:18
+    #17 0x55e0be in main
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/geos_honggfuzz_msan/custom/fuzz_geo2+0x686227)
+Unique heap origins: 6631
+Stack depot allocated bytes: 2752512
+Unique origin histories: 3348
+History depot allocated bytes: 196608
+Exiting
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+==3758==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x686227  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/geos_honggfuzz_msan/custom/fuzz_geo2+0x686227)
+    #1 0x894d28  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/geos_honggfuzz_msan/custom/fuzz_geo2+0x894d28)
+    #2 0x892b60  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/geos_honggfuzz_msan/custom/fuzz_geo2+0x892b60)
+    #3 0x5e4244  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/geos_honggfuzz_msan/custom/fuzz_geo2+0x5e4244)
+    #4 0x5b5dc4  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/geos_honggfuzz_msan/custom/fuzz_geo2+0x5b5dc4)
+    #5 0x4d4407  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/geos_honggfuzz_msan/custom/fuzz_geo2+0x4d4407)
+    #6 0x4a971c  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/geos_honggfuzz_msan/custom/fuzz_geo2+0x4a971c)
+    #7 0x4a6175  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/geos_honggfuzz_msan/custom/fuzz_geo2+0x4a6175)
+    #8 0x55e0be  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/geos_honggfuzz_msan/custom/fuzz_geo2+0x55e0be)
+    #9 0x7ffff7c5b0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #10 0x42146d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/geos_honggfuzz_msan/custom/fuzz_geo2+0x42146d)
+
+  Uninitialized value was created by a heap deallocation
+    #0 0x4a4d29  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/geos_honggfuzz_msan/custom/fuzz_geo2+0x4a4d29)
+    #1 0xaf0467  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/geos_honggfuzz_msan/custom/fuzz_geo2+0xaf0467)
+    #2 0xaf033f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/geos_honggfuzz_msan/custom/fuzz_geo2+0xaf033f)
+    #3 0x6873d3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/geos_honggfuzz_msan/custom/fuzz_geo2+0x6873d3)
+    #4 0x68873f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/geos_honggfuzz_msan/custom/fuzz_geo2+0x68873f)
+    #5 0x896467  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/geos_honggfuzz_msan/custom/fuzz_geo2+0x896467)
+    #6 0x892ab6  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/geos_honggfuzz_msan/custom/fuzz_geo2+0x892ab6)
+    #7 0x5e4244  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/geos_honggfuzz_msan/custom/fuzz_geo2+0x5e4244)
+    #8 0x5b5dc4  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/geos_honggfuzz_msan/custom/fuzz_geo2+0x5b5dc4)
+    #9 0x4d4407  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/geos_honggfuzz_msan/custom/fuzz_geo2+0x4d4407)
+    #10 0x4a971c  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/geos_honggfuzz_msan/custom/fuzz_geo2+0x4a971c)
+    #11 0x4a6175  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/geos_honggfuzz_msan/custom/fuzz_geo2+0x4a6175)
+    #12 0x55e0be  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/geos_honggfuzz_msan/custom/fuzz_geo2+0x55e0be)

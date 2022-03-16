@@ -1,0 +1,33 @@
+Testcase id: 131762
+Job: cifuzz-example_honggfuzz_msan
+Crash Type: Bus on unknown address
+isSecurity: False
+Crash state: do_stuff_fuzzer.cpp
+Poc: 131762.testcase
+engine: honggfuzz
+fully_qualified_name: honggfuzz_do_stuff_fuzzer
+target: do_stuff_fuzzer
+name: honggfuzz
+[Environment] MSAN_OPTIONS=allocator_release_to_os_interval_ms=500:halt_on_error=1:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:print_stats=1:print_summary=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+==25205==ERROR: MemorySanitizer: BUS on unknown address (pc 0x0000004a2945 bp 0x7fffffffcfd0 sp 0x7fffffffcf50 T25205)
+==25205==The signal is caused by a READ memory access.
+==25205==Hint: this fault was caused by a dereference of a high value address (see register values below).  Disassemble the provided pc to learn which register was used.
+    #0 0x4a2945 in LLVMFuzzerTestOneInput /src/cifuzz-example/do_stuff_fuzzer.cpp:13:7
+    #1 0x4a4a5e in main
+    #2 0x7ffff7c5b0b2 in __libc_start_main
+    #3 0x41e4cd in _start
+
+MemorySanitizer can not provide additional info.
+SUMMARY: MemorySanitizer: BUS (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cifuzz-example_honggfuzz_msan/custom/do_stuff_fuzzer+0x4a2945)
+==25205==ABORTING
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+==25205==The signal is caused by a READ memory access.
+==25205==Hint: this fault was caused by a dereference of a high value address (see register values below).  Disassemble the provided pc to learn which register was used.
+    #0 0x4a2945  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cifuzz-example_honggfuzz_msan/custom/do_stuff_fuzzer+0x4a2945)
+    #1 0x4a4a5e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cifuzz-example_honggfuzz_msan/custom/do_stuff_fuzzer+0x4a4a5e)
+    #2 0x7ffff7c5b0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #3 0x41e4cd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cifuzz-example_honggfuzz_msan/custom/do_stuff_fuzzer+0x41e4cd)

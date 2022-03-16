@@ -1,0 +1,85 @@
+Testcase id: 36271
+Job: vlc_libfuzzer_asan
+Crash Type: Out-of-memory
+isSecurity: False
+Crash state: vlc-demux-libfuzzer
+Poc: 36271.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_vlc-demux-libfuzzer
+target: vlc-demux-libfuzzer
+name: libFuzzer
+[Environment] ASAN_OPTIONS=alloc_dealloc_mismatch=0:allocator_may_return_null=1:allocator_release_to_os_interval_ms=500:allow_user_segv_handler=0:check_malloc_usable_size=0:detect_leaks=1:detect_odr_violation=0:detect_stack_use_after_return=1:exitcode=77:fast_unwind_on_fatal=0:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:max_uar_stack_size_log=16:print_scariness=1:print_summary=1:print_suppressions=0:quarantine_size_mb=64:redzone=32:strict_memcmp=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 1788027777
+INFO: Loaded 1 modules   (54141 inline 8-bit counters): 54141 [0xccfc00, 0xcdcf7d),
+INFO: Loaded 1 PC tables (54141 PCs): 54141 [0xafc6c0,0xbcfe90),
+INFO:        0 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases-disk/temp-20/new
+INFO:        0 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases-disk/temp-20/mutations
+INFO:     3487 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/data-bundles/vlc-demux-libfuzzer
+INFO: -max_len is not provided; libFuzzer will not generate inputs larger than 4096 bytes
+INFO: seed corpus: files: 3487 min: 2b max: 134b total: 92507b rss: 64Mb
+==140974== ERROR: libFuzzer: out-of-memory (used: 2650Mb; limit: 2560Mb)
+   To change the out-of-memory limit use -rss_limit_mb=&lt;N&gt;
+
+Live Heap Allocations: 1792287023 bytes in 10048924 chunks; quarantined: 1031370 bytes in 160 chunks; 50961 other chunks; total chunks: 10100045; showing top 95% (at most 8 unique contexts)
+1767042816 byte(s) (98%) in 10040016 allocation(s)
+    #0 0x5272cd in malloc /src/llvm-project/compiler-rt/lib/asan/asan_malloc_linux.cpp:129:3
+    #1 0x910e7e in block_Alloc /src/vlc/src/misc/block.c:122:18
+    #2 0x725e4c in GetOutBuffer /src/vlc/modules/packetizer/dts.c:118:24
+    #3 0x725e4c in PacketizeBlock /src/vlc/modules/packetizer/dts.c:357:34
+    #4 0x5d3dfd in Parse /src/vlc/modules/demux/mpeg/es.c:655:28
+    #5 0x5c3cfb in OpenCommon /src/vlc/modules/demux/mpeg/es.c:285:13
+    #6 0x5c2996 in OpenAudio /src/vlc/modules/demux/mpeg/es.c:300:20
+    #7 0x86b5c8 in demux_Probe /src/vlc/src/input/demux.c:111:15
+    #8 0x83fa2c in vlc_module_load /src/vlc/src/modules/modules.c:243:19
+    #9 0x86b022 in demux_NewAdvanced /src/vlc/src/input/demux.c:192:20
+    #10 0x86a395 in demux_New /src/vlc/src/input/demux.c:76:12
+    #11 0x55e2c6 in demux_process_stream /src/vlc/test/src/input/demux-run.c:297:22
+    #12 0x55ee51 in libvlc_demux_process_memory /src/vlc/test/src/input/demux-run.c:379:12
+    #13 0x55df62 in LLVMFuzzerTestOneInput /src/vlc/test/vlc-demux-libfuzzer.c:54:5
+    #14 0x458103 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #15 0x4578ea in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*, bool, bool*) cxa_noexception.cpp:0
+    #16 0x459744 in fuzzer::Fuzzer::ReadAndExecuteSeedCorpora(std::__Fuzzer::vector&lt;fuzzer::SizedFile, std::__Fuzzer::allocator&lt;fuzzer::SizedFile&gt; &gt;&amp;) cxa_noexception.cpp:0
+    #17 0x459979 in fuzzer::Fuzzer::Loop(std::__Fuzzer::vector&lt;fuzzer::SizedFile, std::__Fuzzer::allocator&lt;fuzzer::SizedFile&gt; &gt;&amp;) cxa_noexception.cpp:0
+    #18 0x4493bd in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #19 0x472402 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #20 0x7fbf698f60b2 in __libc_start_main
+
+MS: 0 ; base unit: 0000000000000000000000000000000000000000
+0xa,0x80,0x19,0x21,0x2,0x0,0xff,0xf7,0xf7,0xf7,0xf7,0xf7,0xf7,0xf7,0xf7,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x70,0x70,0x70,0x2d,0x69,0x64,0x64,0x64,0xff,
+\012\200\031!\002\000\377\367\367\367\367\367\367\367\367\000\000\000\000\000\000\000\000\000\000\000\000ppp-iddd\377
+artifact_prefix=&#x27;/clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/&#x27;; Test unit written to /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/oom-119ea1d5d5bc1a5adfcb6a49ef82ddf03ff2b7f1
+Base64: CoAZIQIA//f39/f39/f3AAAAAAAAAAAAAAAAcHBwLWlkZGT/
+SUMMARY: libFuzzer: out-of-memory
+stat::number_of_executed_units: 2913
+stat::average_exec_per_sec:     93
+stat::new_units_added:          0
+stat::slowest_unit_time_sec:    0
+stat::peak_rss_mb:              2650
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+Live Heap Allocations: 1792287023 bytes in 10048924 chunks; quarantined: 1031370 bytes in 160 chunks; 50961 other chunks; total chunks: 10100045; showing top 95% (at most 8 unique contexts)
+1767042816 byte(s) (98%) in 10040016 allocation(s)
+    #0 0x5272cd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_libfuzzer_asan/custom/vlc-demux-libfuzzer+0x5272cd)
+    #1 0x910e7e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_libfuzzer_asan/custom/vlc-demux-libfuzzer+0x910e7e)
+    #2 0x725e4c  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_libfuzzer_asan/custom/vlc-demux-libfuzzer+0x725e4c)
+    #3 0x5d3dfd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_libfuzzer_asan/custom/vlc-demux-libfuzzer+0x5d3dfd)
+    #4 0x5c3cfb  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_libfuzzer_asan/custom/vlc-demux-libfuzzer+0x5c3cfb)
+    #5 0x5c2996  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_libfuzzer_asan/custom/vlc-demux-libfuzzer+0x5c2996)
+    #6 0x86b5c8  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_libfuzzer_asan/custom/vlc-demux-libfuzzer+0x86b5c8)
+    #7 0x83fa2c  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_libfuzzer_asan/custom/vlc-demux-libfuzzer+0x83fa2c)
+    #8 0x86b022  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_libfuzzer_asan/custom/vlc-demux-libfuzzer+0x86b022)
+    #9 0x86a395  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_libfuzzer_asan/custom/vlc-demux-libfuzzer+0x86a395)
+    #10 0x55e2c6  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_libfuzzer_asan/custom/vlc-demux-libfuzzer+0x55e2c6)
+    #11 0x55ee51  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_libfuzzer_asan/custom/vlc-demux-libfuzzer+0x55ee51)
+    #12 0x55df62  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_libfuzzer_asan/custom/vlc-demux-libfuzzer+0x55df62)
+    #13 0x458103  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_libfuzzer_asan/custom/vlc-demux-libfuzzer+0x458103)
+    #14 0x4578ea  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_libfuzzer_asan/custom/vlc-demux-libfuzzer+0x4578ea)
+    #15 0x459744  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_libfuzzer_asan/custom/vlc-demux-libfuzzer+0x459744)
+    #16 0x459979  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_libfuzzer_asan/custom/vlc-demux-libfuzzer+0x459979)
+    #17 0x4493bd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_libfuzzer_asan/custom/vlc-demux-libfuzzer+0x4493bd)
+    #18 0x472402  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_libfuzzer_asan/custom/vlc-demux-libfuzzer+0x472402)
+    #19 0x7fbf698f60b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)

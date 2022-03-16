@@ -1,0 +1,80 @@
+Testcase id: 4149
+Job: keystone_libfuzzer_msan
+Crash Type: Timeout
+isSecurity: False
+Crash state: fuzz_asm_arm_armv8be
+Poc: 4149.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_fuzz_asm_arm_armv8be
+target: fuzz_asm_arm_armv8be
+name: libFuzzer
+[Environment] MSAN_OPTIONS=allocator_release_to_os_interval_ms=500:exitcode=77:halt_on_error=1:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:print_stats=1:print_summary=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 1046319744
+INFO: Loaded 1 modules   (93937 inline 8-bit counters): 93937 [0x165c4c8, 0x16733b9),
+INFO: Loaded 1 PC tables (93937 PCs): 93937 [0x16733c0,0x17e22d0),
+INFO:        0 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases-disk/temp-22/new
+INFO:        0 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases-disk/temp-22/mutations
+INFO:      125 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases-disk/temp-22/subset
+INFO: seed corpus: files: 125 min: 2b max: 116b total: 2123b rss: 65Mb
+ALARM: working on the last Unit for 25 seconds
+       and the timeout value is 25 (use -timeout=N to change)
+MS: 0 ; base unit: 0000000000000000000000000000000000000000
+0x3c,0xfe,
+&lt;\376
+artifact_prefix=&#x27;/clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/&#x27;; Test unit written to /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/timeout-b79ea90bce4d0284b7d9973fe215e440a7794806
+Base64: PP4=
+==4677== ERROR: libFuzzer: timeout after 25 seconds
+    #0 0x4f8549 in __sanitizer_print_stack_trace /src/llvm-project/compiler-rt/lib/msan/msan.cpp:733:3
+    #1 0x49dae8 in fuzzer::PrintStackTrace() cxa_noexception.cpp:0
+    #2 0x482979 in fuzzer::Fuzzer::AlarmCallback() cxa_noexception.cpp:0
+    #3 0x547084 in SignalAction(int, void*, void*) /src/llvm-project/compiler-rt/lib/msan/msan_interceptors.cpp:1018:3
+    #4 0x7fd4f03fe3bf in libpthread.so.0
+    #5 0x55361a in __msan::CopyOrigin(void const*, void const*, unsigned long, __sanitizer::StackTrace*) /src/llvm-project/compiler-rt/lib/msan/msan_poisoning.cpp:83:18
+    #6 0x4fc10a in __msan_memcpy /src/llvm-project/compiler-rt/lib/msan/msan_interceptors.cpp:1587:3
+    #7 0x60102c in llvm_ks::AsmToken::AsmToken(llvm_ks::AsmToken const&amp;) /src/keystone/llvm/include/llvm/MC/MCParser/MCAsmLexer.h:22:7
+    #8 0x60102c in (anonymous namespace)::AsmParser::parseStatement((anonymous namespace)::ParseStatementInfo&amp;, llvm_ks::MCAsmParserSemaCallback*, unsigned long&amp;) /src/keystone/llvm/lib/MC/MCParser/AsmParser.cpp:1458:17
+    #9 0x5e8fe6 in (anonymous namespace)::AsmParser::Run(bool, unsigned long, bool) /src/keystone/llvm/lib/MC/MCParser/AsmParser.cpp:712:10
+    #10 0x55e4f0 in ks_asm /src/keystone/llvm/keystone/ks.cpp:659:27
+    #11 0x5564b9 in LLVMFuzzerTestOneInput /src/keystone/suite/fuzz/fuzz_asm_arm_armv8be.c:42:9
+    #12 0x483fa3 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #13 0x48378a in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*, bool, bool*) cxa_noexception.cpp:0
+    #14 0x4855e4 in fuzzer::Fuzzer::ReadAndExecuteSeedCorpora(std::__Fuzzer::vector&lt;fuzzer::SizedFile, std::__Fuzzer::allocator&lt;fuzzer::SizedFile&gt; &gt;&amp;) cxa_noexception.cpp:0
+    #15 0x485819 in fuzzer::Fuzzer::Loop(std::__Fuzzer::vector&lt;fuzzer::SizedFile, std::__Fuzzer::allocator&lt;fuzzer::SizedFile&gt; &gt;&amp;) cxa_noexception.cpp:0
+    #16 0x47525d in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #17 0x49e2a2 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #18 0x7fd4f01f20b2 in __libc_start_main
+    #19 0x44cb3d in _start
+
+SUMMARY: libFuzzer: timeout
+stat::number_of_executed_units: 7
+stat::average_exec_per_sec:     0
+stat::new_units_added:          0
+stat::slowest_unit_time_sec:    0
+stat::peak_rss_mb:              65
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+Base64: PP4=
+==4677== ERROR: libFuzzer: timeout after 25 seconds
+    #0 0x4f8549  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/keystone_libfuzzer_msan/custom/fuzz_asm_arm_armv8be+0x4f8549)
+    #1 0x49dae8  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/keystone_libfuzzer_msan/custom/fuzz_asm_arm_armv8be+0x49dae8)
+    #2 0x482979  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/keystone_libfuzzer_msan/custom/fuzz_asm_arm_armv8be+0x482979)
+    #3 0x547084  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/keystone_libfuzzer_msan/custom/fuzz_asm_arm_armv8be+0x547084)
+    #4 0x7fd4f03fe3bf  (/lib/x86_64-linux-gnu/libpthread.so.0+0x153bf)
+    #5 0x55361a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/keystone_libfuzzer_msan/custom/fuzz_asm_arm_armv8be+0x55361a)
+    #6 0x4fc10a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/keystone_libfuzzer_msan/custom/fuzz_asm_arm_armv8be+0x4fc10a)
+    #7 0x60102c  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/keystone_libfuzzer_msan/custom/fuzz_asm_arm_armv8be+0x60102c)
+    #8 0x5e8fe6  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/keystone_libfuzzer_msan/custom/fuzz_asm_arm_armv8be+0x5e8fe6)
+    #9 0x55e4f0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/keystone_libfuzzer_msan/custom/fuzz_asm_arm_armv8be+0x55e4f0)
+    #10 0x5564b9  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/keystone_libfuzzer_msan/custom/fuzz_asm_arm_armv8be+0x5564b9)
+    #11 0x483fa3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/keystone_libfuzzer_msan/custom/fuzz_asm_arm_armv8be+0x483fa3)
+    #12 0x48378a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/keystone_libfuzzer_msan/custom/fuzz_asm_arm_armv8be+0x48378a)
+    #13 0x4855e4  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/keystone_libfuzzer_msan/custom/fuzz_asm_arm_armv8be+0x4855e4)
+    #14 0x485819  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/keystone_libfuzzer_msan/custom/fuzz_asm_arm_armv8be+0x485819)
+    #15 0x47525d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/keystone_libfuzzer_msan/custom/fuzz_asm_arm_armv8be+0x47525d)
+    #16 0x49e2a2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/keystone_libfuzzer_msan/custom/fuzz_asm_arm_armv8be+0x49e2a2)
+    #17 0x7fd4f01f20b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #18 0x44cb3d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/keystone_libfuzzer_msan/custom/fuzz_asm_arm_armv8be+0x44cb3d)

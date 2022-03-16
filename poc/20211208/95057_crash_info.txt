@@ -1,0 +1,44 @@
+Testcase id: 95057
+Job: cifuzz-example_libfuzzer_ubsan
+Crash Type: No-return-value
+isSecurity: False
+Crash state: do_stuff_fuzzer.cpp
+Poc: 95057.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_do_stuff_fuzzer
+target: do_stuff_fuzzer
+name: libFuzzer
+[Environment] UBSAN_OPTIONS=exitcode=77:print_stacktrace=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+Command: /clusterfuzz/run_bot/clusterfuzz/bot/builds/cifuzz-example_libfuzzer_ubsan/custom/do_stuff_fuzzer -rss_limit_mb=2560 -timeout=60 -runs=100 /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/8c61f7cd6cd23254f6aa1ef786a0bbf95e6b4b0d3255bfef95601890afd80709
+Time ran: 0.009686946868896484
+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 286946349
+INFO: Loaded 1 modules   (72 inline 8-bit counters): 72 [0x52b2f0, 0x52b338),
+INFO: Loaded 1 PC tables (72 PCs): 72 [0x4f2320,0x4f27a0),
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/cifuzz-example_libfuzzer_ubsan/custom/do_stuff_fuzzer: Running 1 inputs 100 time(s) each.
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/8c61f7cd6cd23254f6aa1ef786a0bbf95e6b4b0d3255bfef95601890afd80709
+do_stuff_fuzzer.cpp:10:16: runtime error: execution reached the end of a value-returning function without returning a value
+    #0 0x4b3352 in LLVMFuzzerTestOneInput /src/cifuzz-example/do_stuff_fuzzer.cpp:13:18
+    #1 0x43eec3 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #2 0x42a7d2 in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:324:6
+    #3 0x43029a in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #4 0x4591c2 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #5 0x7f15154070b2 in __libc_start_main
+    #6 0x407a5d in _start
+
+SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior do_stuff_fuzzer.cpp:10:16 in
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/8c61f7cd6cd23254f6aa1ef786a0bbf95e6b4b0d3255bfef95601890afd80709
+do_stuff_fuzzer.cpp:10:16: runtime error: execution reached the end of a value-returning function without returning a value
+    #0 0x4b3352  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cifuzz-example_libfuzzer_ubsan/custom/do_stuff_fuzzer+0x4b3352)
+    #1 0x43eec3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cifuzz-example_libfuzzer_ubsan/custom/do_stuff_fuzzer+0x43eec3)
+    #2 0x42a7d2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cifuzz-example_libfuzzer_ubsan/custom/do_stuff_fuzzer+0x42a7d2)
+    #3 0x43029a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cifuzz-example_libfuzzer_ubsan/custom/do_stuff_fuzzer+0x43029a)
+    #4 0x4591c2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cifuzz-example_libfuzzer_ubsan/custom/do_stuff_fuzzer+0x4591c2)
+    #5 0x7f15154070b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #6 0x407a5d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/cifuzz-example_libfuzzer_ubsan/custom/do_stuff_fuzzer+0x407a5d)

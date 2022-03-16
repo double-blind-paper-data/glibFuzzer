@@ -1,0 +1,60 @@
+Testcase id: 25567
+Job: exiv2_libfuzzer_msan
+Crash Type: Use-of-uninitialized-value
+isSecurity: True
+Crash state: Exiv2::isXmpType
+Exiv2::ImageFactory::open
+Exiv2::ImageFactory::open
+Poc: 25567.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_fuzz-read-print-write
+target: fuzz-read-print-write
+name: libFuzzer
+[Environment] MSAN_OPTIONS=exitcode=77
++----------------------------------------Release Build Stacktrace----------------------------------------+
+Command: /clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write -rss_limit_mb=2560 -timeout=60 -runs=100 /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/c24c78c99ce3f17e3648e138ff523d71f5d4809a766c8474257b1d043a482517
+Time ran: 0.04782724380493164
+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 2533222440
+INFO: Loaded 1 modules   (48948 inline 8-bit counters): 48948 [0x103c0f0, 0x1048024),
+INFO: Loaded 1 PC tables (48948 PCs): 48948 [0x1048028,0x1107368),
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write: Running 1 inputs 100 time(s) each.
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/c24c78c99ce3f17e3648e138ff523d71f5d4809a766c8474257b1d043a482517
+Uninitialized bytes in __interceptor_strncmp at offset 24 inside [0x7ffccf10fb50, 25)
+==1979==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x73051b in Exiv2::isXmpType(Exiv2::BasicIo&amp;, bool) /src/exiv2/src/xmpsidecar.cpp:213:21
+    #1 0x5c2468 in Exiv2::ImageFactory::open(std::__1::unique_ptr&lt;Exiv2::BasicIo, std::__1::default_delete&lt;Exiv2::BasicIo&gt; &gt;) /src/exiv2/src/image.cpp:911:17
+    #2 0x5c2fc8 in Exiv2::ImageFactory::open(unsigned char const*, long) /src/exiv2/src/image.cpp:900:34
+    #3 0x52e85a in LLVMFuzzerTestOneInput /src/exiv2/fuzz/fuzz-read-print-write.cpp:20:7
+    #4 0x45c4e3 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #5 0x447df2 in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:324:6
+    #6 0x44d8ba in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #7 0x4767e2 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #8 0x7f4d0698b0b2 in __libc_start_main
+    #9 0x42507d in _start
+
+  Uninitialized value was created by an allocation of &#x27;buf&#x27; in the stack frame of function &#x27;_ZN5Exiv29isXmpTypeERNS_7BasicIoEb&#x27;
+    #0 0x730300 in Exiv2::isXmpType(Exiv2::BasicIo&amp;, bool) /src/exiv2/src/xmpsidecar.cpp:201
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x73051b)
+Exiting
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+Uninitialized bytes in __interceptor_strncmp at offset 24 inside [0x7ffccf10fb50, 25)
+==1979==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x73051b  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x73051b)
+    #1 0x5c2468  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x5c2468)
+    #2 0x5c2fc8  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x5c2fc8)
+    #3 0x52e85a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x52e85a)
+    #4 0x45c4e3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x45c4e3)
+    #5 0x447df2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x447df2)
+    #6 0x44d8ba  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x44d8ba)
+    #7 0x4767e2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x4767e2)
+    #8 0x7f4d0698b0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #9 0x42507d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x42507d)
+
+  Uninitialized value was created by an allocation of &#x27;buf&#x27; in the stack frame of function &#x27;_ZN5Exiv29isXmpTypeERNS_7BasicIoEb&#x27;
+    #0 0x730300  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/exiv2_libfuzzer_msan/custom/fuzz-read-print-write+0x730300)

@@ -1,0 +1,73 @@
+Testcase id: 424
+Job: lzo_libfuzzer_msan
+Crash Type: Use-of-uninitialized-value
+isSecurity: True
+Crash state: do_compress
+_lzo1c_do_compress
+lzo1c_9_compress
+Poc: 424.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_all_lzo_compress
+target: all_lzo_compress
+name: libFuzzer
+[Environment] MSAN_OPTIONS=exitcode=77
++----------------------------------------Release Build Stacktrace----------------------------------------+
+Command: /clusterfuzz/run_bot/clusterfuzz/bot/builds/lzo_libfuzzer_msan/custom/all_lzo_compress -rss_limit_mb=2560 -timeout=60 -runs=100 /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/b99025d320b3139eca2045c79e5318331bb36a2b45736ce41a52ecf1185df66f
+Time ran: 0.16532087326049805
+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 841977732
+INFO: Loaded 1 modules   (3445 inline 8-bit counters): 3445 [0x6b15c8, 0x6b233d),
+INFO: Loaded 1 PC tables (3445 PCs): 3445 [0x657a78,0x6651c8),
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/lzo_libfuzzer_msan/custom/all_lzo_compress: Running 1 inputs 100 time(s) each.
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/b99025d320b3139eca2045c79e5318331bb36a2b45736ce41a52ecf1185df66f
+==4579==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x5648a2 in do_compress /src/lzo-2.10/src/lzo1b_sm.ch:92:21
+    #1 0x56e269 in _lzo1c_do_compress /src/lzo-2.10/src/lzo1c_cc.c:72:13
+    #2 0x564b68 in lzo1c_9_compress /src/lzo-2.10/src/compr1c.h:64:12
+    #3 0x52a115 in FuzzLzoAlgorithm /src/all_lzo_compress.cc:206:7
+    #4 0x52a115 in LLVMFuzzerTestOneInput /src/all_lzo_compress.cc:253:3
+    #5 0x4571f3 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #6 0x442b02 in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:324:6
+    #7 0x4485ca in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #8 0x4714f2 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #9 0x7f79679310b2 in __libc_start_main
+    #10 0x41fd8d in _start
+
+  Uninitialized value was created by a heap allocation
+    #0 0x5284a9 in operator new[](unsigned long) /src/llvm-project/compiler-rt/lib/msan/msan_new_delete.cpp:47:37
+    #1 0x529e20 in FuzzLzoAlgorithm /src/all_lzo_compress.cc:201:7
+    #2 0x529e20 in LLVMFuzzerTestOneInput /src/all_lzo_compress.cc:253:3
+    #3 0x4571f3 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #4 0x442b02 in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:324:6
+    #5 0x4485ca in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #6 0x4714f2 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #7 0x7f79679310b2 in __libc_start_main
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/lzo_libfuzzer_msan/custom/all_lzo_compress+0x5648a2)
+Exiting
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/b99025d320b3139eca2045c79e5318331bb36a2b45736ce41a52ecf1185df66f
+==4579==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x5648a2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/lzo_libfuzzer_msan/custom/all_lzo_compress+0x5648a2)
+    #1 0x56e269  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/lzo_libfuzzer_msan/custom/all_lzo_compress+0x56e269)
+    #2 0x564b68  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/lzo_libfuzzer_msan/custom/all_lzo_compress+0x564b68)
+    #3 0x52a115  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/lzo_libfuzzer_msan/custom/all_lzo_compress+0x52a115)
+    #4 0x4571f3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/lzo_libfuzzer_msan/custom/all_lzo_compress+0x4571f3)
+    #5 0x442b02  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/lzo_libfuzzer_msan/custom/all_lzo_compress+0x442b02)
+    #6 0x4485ca  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/lzo_libfuzzer_msan/custom/all_lzo_compress+0x4485ca)
+    #7 0x4714f2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/lzo_libfuzzer_msan/custom/all_lzo_compress+0x4714f2)
+    #8 0x7f79679310b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #9 0x41fd8d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/lzo_libfuzzer_msan/custom/all_lzo_compress+0x41fd8d)
+
+  Uninitialized value was created by a heap allocation
+    #0 0x5284a9  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/lzo_libfuzzer_msan/custom/all_lzo_compress+0x5284a9)
+    #1 0x529e20  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/lzo_libfuzzer_msan/custom/all_lzo_compress+0x529e20)
+    #2 0x4571f3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/lzo_libfuzzer_msan/custom/all_lzo_compress+0x4571f3)
+    #3 0x442b02  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/lzo_libfuzzer_msan/custom/all_lzo_compress+0x442b02)
+    #4 0x4485ca  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/lzo_libfuzzer_msan/custom/all_lzo_compress+0x4485ca)
+    #5 0x4714f2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/lzo_libfuzzer_msan/custom/all_lzo_compress+0x4714f2)
+    #6 0x7f79679310b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)

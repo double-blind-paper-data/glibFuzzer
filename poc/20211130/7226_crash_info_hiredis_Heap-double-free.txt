@@ -1,0 +1,49 @@
+Testcase id: 7226
+Job: hiredis_afl_asan
+Crash Type: Heap-double-free
+isSecurity: True
+Crash state: alloc.h
+Poc: 7226.testcase
+engine: afl
+fully_qualified_name: afl_format_command_fuzzer
+target: format_command_fuzzer
+name: afl
+[Environment] ASAN_OPTIONS=abort_on_error=1:alloc_dealloc_mismatch=0:allocator_may_return_null=1:allocator_release_to_os_interval_ms=500:allow_user_segv_handler=0:check_malloc_usable_size=0:detect_leaks=1:detect_odr_violation=0:detect_stack_use_after_return=1:fast_unwind_on_fatal=0:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:max_uar_stack_size_log=16:print_scariness=1:print_summary=1:print_suppressions=0:quarantine_size_mb=64:redzone=512:strict_memcmp=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+=================================================================
+==4930==ERROR: AddressSanitizer: attempting double-free on 0x61500007a000 in thread T0:
+SCARINESS: 42 (double-free)
+    #0 0x49e49f in free /src/llvm-project/compiler-rt/lib/asan/asan_malloc_linux.cpp:111:3
+    #1 0x4d646f in hi_free /src/hiredis/alloc.h:79:5
+    #2 0x4d646f in LLVMFuzzerTestOneInput /src/hiredis/format_command_fuzzer.c:54:9
+    #3 0x4d576f in main /src/aflplusplus/utils/aflpp_driver/aflpp_driver.c:303:7
+    #4 0x7f2bba6620b2 in __libc_start_main
+    #5 0x41d4ad in _start
+
+0x61500007a000 is located 0 bytes inside of 15-byte region [0x61500007a000,0x61500007a00f)
+freed by thread T0 here:
+    #0 0x49e49f in free /src/llvm-project/compiler-rt/lib/asan/asan_malloc_linux.cpp:111:3
+
+previously allocated by thread T0 here:
+    #0 0x49e70a in __interceptor_malloc /src/llvm-project/compiler-rt/lib/asan/asan_malloc_linux.cpp:129:3
+
+SUMMARY: AddressSanitizer: double-free (/clusterfuzz/run_bot/clusterfuzz/bot/builds/hiredis_afl_asan/custom/format_command_fuzzer+0x49e49f)
+==4930==ABORTING
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+==4930==ERROR: AddressSanitizer: attempting double-free on 0x61500007a000 in thread T0:
+SCARINESS: 42 (double-free)
+    #0 0x49e49f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/hiredis_afl_asan/custom/format_command_fuzzer+0x49e49f)
+    #1 0x4d646f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/hiredis_afl_asan/custom/format_command_fuzzer+0x4d646f)
+    #2 0x4d576f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/hiredis_afl_asan/custom/format_command_fuzzer+0x4d576f)
+    #3 0x7f2bba6620b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #4 0x41d4ad  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/hiredis_afl_asan/custom/format_command_fuzzer+0x41d4ad)
+
+0x61500007a000 is located 0 bytes inside of 15-byte region [0x61500007a000,0x61500007a00f)
+freed by thread T0 here:
+    #0 0x49e49f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/hiredis_afl_asan/custom/format_command_fuzzer+0x49e49f)
+
+previously allocated by thread T0 here:
+    #0 0x49e70a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/hiredis_afl_asan/custom/format_command_fuzzer+0x49e70a)

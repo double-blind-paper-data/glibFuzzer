@@ -1,0 +1,47 @@
+Testcase id: 95054
+Job: libgit2_libfuzzer_ubsan
+Crash Type: Undefined-shift
+isSecurity: False
+Crash state: git_midx_parse
+midx_fuzzer.c
+Poc: 95054.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_midx_fuzzer
+target: midx_fuzzer
+name: libFuzzer
+[Environment] UBSAN_OPTIONS=exitcode=77:print_stacktrace=1:silence_unsigned_overflow=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+Command: /clusterfuzz/run_bot/clusterfuzz/bot/builds/libgit2_libfuzzer_ubsan/custom/midx_fuzzer -rss_limit_mb=2560 -timeout=60 -runs=100 /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/20e86040898c5c23ad481137bebf6090ed16847c6930a71c0547a34e52db409e
+Time ran: 0.015306949615478516
+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 1811090039
+INFO: Loaded 1 modules   (98729 inline 8-bit counters): 98729 [0xf39470, 0xf51619),
+INFO: Loaded 1 PC tables (98729 PCs): 98729 [0xb7e818,0xd002a8),
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/libgit2_libfuzzer_ubsan/custom/midx_fuzzer: Running 1 inputs 100 time(s) each.
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/20e86040898c5c23ad481137bebf6090ed16847c6930a71c0547a34e52db409e
+/src/libgit2/src/midx.c:224:67: runtime error: left shift of 3035675703 by 32 places cannot be represented in type &#x27;off64_t&#x27; (aka &#x27;long&#x27;)
+    #0 0x4c0fbe in git_midx_parse /src/libgit2/src/midx.c:224:67
+    #1 0x4b4855 in LLVMFuzzerTestOneInput /src/libgit2/fuzzers/midx_fuzzer.c:69:6
+    #2 0x440283 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #3 0x42bb92 in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:324:6
+    #4 0x43165a in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #5 0x45a582 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #6 0x7f98f25ee0b2 in __libc_start_main
+    #7 0x408e1d in _start
+
+SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior /src/libgit2/src/midx.c:224:67 in
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/20e86040898c5c23ad481137bebf6090ed16847c6930a71c0547a34e52db409e
+/src/libgit2/src/midx.c:224:67: runtime error: left shift of 3035675703 by 32 places cannot be represented in type &#x27;off64_t&#x27; (aka &#x27;long&#x27;)
+    #0 0x4c0fbe  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libgit2_libfuzzer_ubsan/custom/midx_fuzzer+0x4c0fbe)
+    #1 0x4b4855  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libgit2_libfuzzer_ubsan/custom/midx_fuzzer+0x4b4855)
+    #2 0x440283  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libgit2_libfuzzer_ubsan/custom/midx_fuzzer+0x440283)
+    #3 0x42bb92  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libgit2_libfuzzer_ubsan/custom/midx_fuzzer+0x42bb92)
+    #4 0x43165a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libgit2_libfuzzer_ubsan/custom/midx_fuzzer+0x43165a)
+    #5 0x45a582  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libgit2_libfuzzer_ubsan/custom/midx_fuzzer+0x45a582)
+    #6 0x7f98f25ee0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #7 0x408e1d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libgit2_libfuzzer_ubsan/custom/midx_fuzzer+0x408e1d)

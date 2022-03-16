@@ -1,0 +1,55 @@
+Testcase id: 8513
+Job: gopacket_afl_asan
+Crash Type: Index out of range
+isSecurity: False
+Crash state: gopacket.(*lazyPacket).decodeNextLayer
+gopacket.(*lazyPacket).Layers
+Poc: 8513.testcase
+engine: afl
+fully_qualified_name: afl_fuzz_layers
+target: fuzz_layers
+name: afl
+[Environment] ASAN_OPTIONS=abort_on_error=1:alloc_dealloc_mismatch=0:allocator_may_return_null=1:allocator_release_to_os_interval_ms=500:allow_user_segv_handler=0:check_malloc_usable_size=0:detect_leaks=1:detect_odr_violation=0:detect_stack_use_after_return=1:fast_unwind_on_fatal=0:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:max_uar_stack_size_log=16:print_scariness=1:print_summary=1:print_suppressions=0:quarantine_size_mb=64:redzone=32:strict_memcmp=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+panic: runtime error: slice bounds out of range [:6] with capacity 4
+
+goroutine 17 [running, locked to thread]:
+github.com/google/gopacket/layers.(*USBRequestBlockSetup).DecodeFromBytes(0x0, {0x7fc0bf1fc007, 0x10c000210840, 0x4e4c47}, {0x38, 0x6d3840})
+	github.com/google/gopacket/layers/usb.go:222 +0x132
+github.com/google/gopacket/layers.decodingLayerDecoder({0x6e74b8, 0x10c000205440}, {0x7fc0bf1fc007, 0x4, 0x4}, {0x6e7d70, 0x10c000210840})
+	github.com/google/gopacket/layers/base.go:39 +0x88
+github.com/google/gopacket/layers.decodeUSBRequestBlockSetup({0x7fc0bf1fc007, 0x4, 0x4}, {0x6e7d70, 0x10c000210840})
+	github.com/google/gopacket/layers/usb.go:231 +0x70
+github.com/google/gopacket.DecodeFunc.Decode(0x0, {0x7fc0bf1fc007, 0x57ba47, 0x0}, {0x6e7d70, 0x10c000210840})
+	github.com/google/gopacket/decode.go:87 +0x4d
+github.com/google/gopacket.LayerType.Decode(0x6d, {0x7fc0bf1fc007, 0x4, 0x4}, {0x6e7d70, 0x10c000210840})
+	github.com/google/gopacket/layertype.go:95 +0x12d
+github.com/google/gopacket.(*lazyPacket).decodeNextLayer(0x10c000210840)
+	github.com/google/gopacket/packet.go:527 +0x18b
+github.com/google/gopacket.(*lazyPacket).Layers(0x10c000210840)
+	github.com/google/gopacket/packet.go:564 +0x3e
+github.com/google/gopacket/layers.FuzzLayer({0x7fc0bf1fc004, 0x7, 0x7})
+	github.com/google/gopacket/layers/fuzz_layer.go:32 +0x15e
+main.LLVMFuzzerTestOneInput(...)
+	./main.4138260126.go:21
+panic: runtime error: index out of range [1] with length 1
+
+goroutine 17 [running, locked to thread]:
+github.com/google/gopacket/layers.(*GRE).DecodeFromBytes(0x10c0000622a0, {0x7fc0bf1fc007, 0x1, 0x1}, {0x58, 0x6dc6c0})
+	github.com/google/gopacket/layers/gre.go:45 +0x725
+github.com/google/gopacket/layers.decodingLayerDecoder({0x6e6e38, 0x10c0000622a0}, {0x7fc0bf1fc007, 0x1, 0x1}, {0x6e7d70, 0x10c0000e3600})
+	github.com/google/gopacket/layers/base.go:39 +0x88
+github.com/google/gopacket/layers.decodeGRE({0x7fc0bf1fc007, 0x1, 0x1}, {0x6e7d70, 0x10c0000e3600})
+	github.com/google/gopacket/layers/gre.go:199 +0x70
+github.com/google/gopacket.DecodeFunc.Decode(0x0, {0x7fc0bf1fc007, 0x57ba47, 0x0}, {0x6e7d70, 0x10c0000e3600})
+	github.com/google/gopacket/decode.go:87 +0x4d
+github.com/google/gopacket.LayerType.Decode(0x12, {0x7fc0bf1fc007, 0x1, 0x1}, {0x6e7d70, 0x10c0000e3600})
+	github.com/google/gopacket/layertype.go:95 +0x12d
+github.com/google/gopacket.(*lazyPacket).decodeNextLayer(0x10c0000e3600)
+	github.com/google/gopacket/packet.go:527 +0x18b
+github.com/google/gopacket.(*lazyPacket).Layers(0x10c0000e3600)
+	github.com/google/gopacket/packet.go:564 +0x3e
+github.com/google/gopacket/layers.FuzzLayer({0x7fc0bf1fc004, 0x4, 0x4})
+	github.com/google/gopacket/layers/fuzz_layer.go:32 +0x15e
+main.LLVMFuzzerTestOneInput(...)
+	./main.4138260126.go:21

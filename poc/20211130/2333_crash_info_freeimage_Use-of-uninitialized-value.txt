@@ -1,0 +1,60 @@
+Testcase id: 2333
+Job: freeimage_libfuzzer_msan
+Crash Type: Use-of-uninitialized-value
+isSecurity: True
+Crash state: Validate
+FreeImage_ValidateFIF
+FreeImage_GetFileTypeFromMemory
+Poc: 2333.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_load_from_memory_fuzzer
+target: load_from_memory_fuzzer
+name: libFuzzer
+[Environment] MSAN_OPTIONS=exitcode=77
++----------------------------------------Release Build Stacktrace----------------------------------------+
+Command: /clusterfuzz/run_bot/clusterfuzz/bot/builds/freeimage_libfuzzer_msan/custom/load_from_memory_fuzzer -rss_limit_mb=2560 -timeout=60 -runs=100 /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/afce11548f936582c39a36b70893ea945e6b4b0d3255bfef95601890afd80709
+Time ran: 0.06792306900024414
+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 994286456
+INFO: Loaded 1 modules   (102361 inline 8-bit counters): 102361 [0x1b2b1e8, 0x1b441c1),
+INFO: Loaded 1 PC tables (102361 PCs): 102361 [0x1b441c8,0x1cd3f58),
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/freeimage_libfuzzer_msan/custom/load_from_memory_fuzzer: Running 1 inputs 100 time(s) each.
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/afce11548f936582c39a36b70893ea945e6b4b0d3255bfef95601890afd80709
+==3938==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x5bba6a in Validate(FreeImageIO*, void*) /src/freeimage-svn/FreeImage/trunk/Source/FreeImage/PluginICO.cpp:210:40
+    #1 0x569afc in FreeImage_ValidateFIF /src/freeimage-svn/FreeImage/trunk/Source/FreeImage/Plugin.cpp:811:95
+    #2 0x54bffd in FreeImage_GetFileTypeFromHandle /src/freeimage-svn/FreeImage/trunk/Source/FreeImage/GetType.cpp:43:8
+    #3 0x54bffd in FreeImage_GetFileTypeFromMemory /src/freeimage-svn/FreeImage/trunk/Source/FreeImage/GetType.cpp:109:10
+    #4 0x52e004 in LLVMFuzzerTestOneInput /src/load_from_memory_fuzzer.cc:33:27
+    #5 0x45bae3 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #6 0x4473f2 in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:324:6
+    #7 0x44ceba in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #8 0x475de2 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #9 0x7f2b41c280b2 in __libc_start_main
+    #10 0x42467d in _start
+
+  Uninitialized value was created by an allocation of &#x27;icon_header&#x27; in the stack frame of function &#x27;_ZL8ValidateP11FreeImageIOPv&#x27;
+    #0 0x5bb7c0 in Validate(FreeImageIO*, void*) /src/freeimage-svn/FreeImage/trunk/Source/FreeImage/PluginICO.cpp:202
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/freeimage_libfuzzer_msan/custom/load_from_memory_fuzzer+0x5bba6a)
+Exiting
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/afce11548f936582c39a36b70893ea945e6b4b0d3255bfef95601890afd80709
+==3938==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x5bba6a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/freeimage_libfuzzer_msan/custom/load_from_memory_fuzzer+0x5bba6a)
+    #1 0x569afc  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/freeimage_libfuzzer_msan/custom/load_from_memory_fuzzer+0x569afc)
+    #2 0x54bffd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/freeimage_libfuzzer_msan/custom/load_from_memory_fuzzer+0x54bffd)
+    #3 0x52e004  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/freeimage_libfuzzer_msan/custom/load_from_memory_fuzzer+0x52e004)
+    #4 0x45bae3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/freeimage_libfuzzer_msan/custom/load_from_memory_fuzzer+0x45bae3)
+    #5 0x4473f2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/freeimage_libfuzzer_msan/custom/load_from_memory_fuzzer+0x4473f2)
+    #6 0x44ceba  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/freeimage_libfuzzer_msan/custom/load_from_memory_fuzzer+0x44ceba)
+    #7 0x475de2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/freeimage_libfuzzer_msan/custom/load_from_memory_fuzzer+0x475de2)
+    #8 0x7f2b41c280b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #9 0x42467d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/freeimage_libfuzzer_msan/custom/load_from_memory_fuzzer+0x42467d)
+
+  Uninitialized value was created by an allocation of &#x27;icon_header&#x27; in the stack frame of function &#x27;_ZL8ValidateP11FreeImageIOPv&#x27;
+    #0 0x5bb7c0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/freeimage_libfuzzer_msan/custom/load_from_memory_fuzzer+0x5bb7c0)

@@ -1,0 +1,73 @@
+Testcase id: 120965
+Job: libheif_libfuzzer_asan
+Crash Type: Direct-leak
+isSecurity: False
+Crash state: posix_memalign
+x265::x265_malloc
+x265_param_alloc
+Poc: 120965.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_encoder-fuzzer
+target: encoder-fuzzer
+name: libFuzzer
+[Environment] ASAN_OPTIONS=exitcode=77
++----------------------------------------Release Build Stacktrace----------------------------------------+
+Command: /clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_asan/custom/encoder-fuzzer -rss_limit_mb=2560 -timeout=60 -runs=100 /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/9eb3eadafc5d160c9f577dc5f12aa27ce10c8b98b18476cb242e2a581ab48c41
+Time ran: 0.3751819133758545
+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 3279255027
+INFO: Loaded 1 modules   (136041 inline 8-bit counters): 136041 [0x27ef480, 0x28107e9),
+INFO: Loaded 1 PC tables (136041 PCs): 136041 [0x28107f0,0x2a23e80),
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_asan/custom/encoder-fuzzer: Running 1 inputs 100 time(s) each.
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/9eb3eadafc5d160c9f577dc5f12aa27ce10c8b98b18476cb242e2a581ab48c41
+
+=================================================================
+==73104==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 1112 byte(s) in 1 object(s) allocated from:
+<b>    #0 0x527ff7 in posix_memalign /src/llvm-project/compiler-rt/lib/asan/asan_malloc_linux.cpp:210:3</b>
+<b>    #1 0x227277c in x265::x265_malloc(unsigned long) /src/x265/source/common/common.cpp:81:9</b>
+<b>    #2 0x2273229 in x265_param_alloc /src/x265/source/common/param.cpp:96:38</b>
+<b>    #3 0x1ddba8d in x265_encoder_open_192 /src/x265/source/encoder/api.cpp:98:37</b>
+<b>    #4 0x6c3fd1 in x265_encode_image(void*, heif_image const*, heif_image_input_class) /src/libheif/libheif/heif_encoder_x265.cc:895:22</b>
+<b>    #5 0x652a2b in heif::HeifContext::encode_image_as_hevc(std::__1::shared_ptr&lt;heif::HeifPixelImage&gt;, heif_encoder*, heif_encoding_options const*, heif_image_input_class, std::__1::shared_ptr&lt;heif::HeifContext::Image&gt;&amp;) /src/libheif/libheif/heif_context.cc:1962:27</b>
+<b>    #6 0x650f57 in heif::HeifContext::encode_image(std::__1::shared_ptr&lt;heif::HeifPixelImage&gt;, heif_encoder*, heif_encoding_options const*, heif_image_input_class, std::__1::shared_ptr&lt;heif::HeifContext::Image&gt;&amp;) /src/libheif/libheif/heif_context.cc:1888:15</b>
+<b>    #7 0x61c257 in heif_context_encode_image /src/libheif/libheif/heif.cc:2197:25</b>
+<b>    #8 0x6c7281 in LLVMFuzzerTestOneInput /src/libheif/libheif/encoder_fuzzer.cc:185:9</b>
+<b>    #9 0x4583c3 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0</b>
+<b>    #10 0x443cd2 in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:324:6</b>
+<b>    #11 0x44979a in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0</b>
+<b>    #12 0x4726c2 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10</b>
+<b>    #13 0x7f04c9c7b0b2 in __libc_start_main</b>
+
+================================================================================
+The following leaks are not necessarily related to the first leak.
+
+
+SUMMARY: AddressSanitizer: 1112 byte(s) leaked in 1 allocation(s).
+
+INFO: a leak has been found in the initial corpus.
+
+INFO: to ignore leaks on libFuzzer side use -detect_leaks=0.
+
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+
+Direct leak of 1112 byte(s) in 1 object(s) allocated from:
+    #0 0x527ff7  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_asan/custom/encoder-fuzzer+0x527ff7)
+    #1 0x227277c  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_asan/custom/encoder-fuzzer+0x227277c)
+    #2 0x2273229  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_asan/custom/encoder-fuzzer+0x2273229)
+    #3 0x1ddba8d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_asan/custom/encoder-fuzzer+0x1ddba8d)
+    #4 0x6c3fd1  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_asan/custom/encoder-fuzzer+0x6c3fd1)
+    #5 0x652a2b  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_asan/custom/encoder-fuzzer+0x652a2b)
+    #6 0x650f57  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_asan/custom/encoder-fuzzer+0x650f57)
+    #7 0x61c257  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_asan/custom/encoder-fuzzer+0x61c257)
+    #8 0x6c7281  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_asan/custom/encoder-fuzzer+0x6c7281)
+    #9 0x4583c3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_asan/custom/encoder-fuzzer+0x4583c3)
+    #10 0x443cd2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_asan/custom/encoder-fuzzer+0x443cd2)
+    #11 0x44979a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_asan/custom/encoder-fuzzer+0x44979a)
+    #12 0x4726c2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_libfuzzer_asan/custom/encoder-fuzzer+0x4726c2)
+    #13 0x7f04c9c7b0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)

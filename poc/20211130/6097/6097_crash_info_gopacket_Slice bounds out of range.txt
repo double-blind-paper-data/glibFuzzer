@@ -1,0 +1,86 @@
+Testcase id: 6097
+Job: gopacket_libfuzzer_msan
+Crash Type: Slice bounds out of range
+isSecurity: False
+Crash state: NULL
+Poc: 6097.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_fuzz_layers
+target: fuzz_layers
+name: libFuzzer
+[Environment] MSAN_OPTIONS=allocator_release_to_os_interval_ms=500:exitcode=77:halt_on_error=1:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:print_stats=1:print_summary=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 1109676790
+INFO: 9512 Extra Counters
+INFO: -fork=48: fuzzing in separate process(s)
+INFO: -fork=48: 1 seed inputs, starting to fuzz in /clusterfuzz/run_bot/clusterfuzz/bot_tmpdir/libFuzzerTemp.FuzzWithFork33352.dir
+#187: cov: 267 ft: 267 corp: 1 exec/s 0 oom/timeout/crash: 0/0/0 time: 2s job: 6 dft_time: 0
+INFO: log from the inner process:
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 1109936890
+INFO: 9512 Extra Counters
+INFO:        0 files found in /clusterfuzz/run_bot/clusterfuzz/bot_tmpdir/libFuzzerTemp.FuzzWithFork33352.dir/C6
+INFO: -max_len is not provided; libFuzzer will not generate inputs larger than 4096 bytes
+INFO: seed corpus: files: 1 min: 1b max: 1b total: 1b rss: 49Mb
+#2	INITED ft: 5 corp: 1/1b exec/s: 0 rss: 49Mb
+#5	NEW    ft: 6 corp: 2/3b lim: 4 exec/s: 0 rss: 49Mb L: 2/2 MS: 3 ChangeBit-ShuffleBytes-CopyPart-
+#18	NEW    ft: 178 corp: 3/7b lim: 4 exec/s: 0 rss: 49Mb L: 4/4 MS: 3 CrossOver-ShuffleBytes-CopyPart-
+#21	NEW    ft: 237 corp: 4/11b lim: 4 exec/s: 0 rss: 49Mb L: 4/4 MS: 3 ChangeBinInt-CMP-CopyPart- DE: &quot;\000\000&quot;-
+#32	NEW    ft: 247 corp: 5/15b lim: 4 exec/s: 0 rss: 49Mb L: 4/4 MS: 1 ChangeBit-
+#34	NEW    ft: 253 corp: 6/19b lim: 4 exec/s: 0 rss: 49Mb L: 4/4 MS: 2 PersAutoDict-ChangeByte- DE: &quot;\000\000&quot;-
+#46	NEW    ft: 254 corp: 7/23b lim: 4 exec/s: 0 rss: 49Mb L: 4/4 MS: 2 CopyPart-ChangeBinInt-
+#48	NEW    ft: 449 corp: 8/27b lim: 4 exec/s: 0 rss: 49Mb L: 4/4 MS: 2 ShuffleBytes-ChangeByte-
+#49	NEW    ft: 451 corp: 9/31b lim: 4 exec/s: 0 rss: 49Mb L: 4/4 MS: 1 ChangeASCIIInt-
+#50	NEW    ft: 453 corp: 10/34b lim: 4 exec/s: 0 rss: 49Mb L: 3/4 MS: 1 InsertByte-
+#53	NEW    ft: 456 corp: 11/37b lim: 4 exec/s: 0 rss: 49Mb L: 3/4 MS: 3 ChangeByte-CopyPart-CrossOver-
+#59	NEW    ft: 457 corp: 12/41b lim: 4 exec/s: 0 rss: 49Mb L: 4/4 MS: 1 ShuffleBytes-
+#70	REDUCE ft: 457 corp: 12/40b lim: 4 exec/s: 0 rss: 49Mb L: 3/4 MS: 1 EraseBytes-
+#81	REDUCE ft: 460 corp: 13/43b lim: 4 exec/s: 0 rss: 49Mb L: 3/4 MS: 1 ChangeBinInt-
+#100	NEW    ft: 461 corp: 14/47b lim: 4 exec/s: 0 rss: 49Mb L: 4/4 MS: 4 ChangeBit-CopyPart-ChangeByte-ChangeBinInt-
+#101	NEW    ft: 483 corp: 15/51b lim: 4 exec/s: 0 rss: 49Mb L: 4/4 MS: 1 ChangeByte-
+#104	NEW    ft: 498 corp: 16/55b lim: 4 exec/s: 0 rss: 49Mb L: 4/4 MS: 3 CopyPart-ShuffleBytes-ChangeBinInt-
+panic: runtime error: slice bounds out of range [:4] with capacity 0
+
+goroutine 17 [running, locked to thread]:
+github.com/google/gopacket/layers.decodeIPSecESP({0x27f4270, 0x5334ae, 0x46df00}, {0x758ce8, 0xc0000d3760})
+	github.com/google/gopacket/layers/ipsec.go:71 +0x16c
+github.com/google/gopacket.DecodeFunc.Decode(0xc0000d3760, {0x27f4270, 0x10000, 0x0}, {0x758ce8, 0xc0000d3760})
+	github.com/google/gopacket/decode.go:87 +0x4d
+github.com/google/gopacket.LayerType.Decode(0x33, {0x27f4270, 0x0, 0x0}, {0x758ce8, 0xc0000d3760})
+	github.com/google/gopacket/layertype.go:95 +0x12d
+github.com/google/gopacket.(*eagerPacket).initialDecode(0xc0000d3760, {0x754000, 0x8588f8})
+	github.com/google/gopacket/packet.go:453 +0x90
+github.com/google/gopacket.NewPacket({0x7010000001c0, 0x0, 0x0}, {0x754000, 0x8588f8}, {0x0, 0x0, 0x0, 0x0})
+	github.com/google/gopacket/packet.go:682 +0x29f
+github.com/google/gopacket/layers.FuzzLayer({0x7010000001c0, 0x3, 0x3})
+	github.com/google/gopacket/layers/fuzz_layer.go:31 +0x14b
+main.LLVMFuzzerTestOneInput(...)
+	./main.948843791.go:21
+MemorySanitizer:DEADLYSIGNAL
+==33473==ERROR: MemorySanitizer: ABRT on unknown address 0x03e8000082c1 (pc 0x000000587981 bp 0x00c0000b9a80 sp 0x00c0000b9a68 T33473)
+    #0 0x587981 in runtime.raise.abi0 runtime/sys_linux_amd64.s:165
+
+MemorySanitizer can not provide additional info.
+SUMMARY: MemorySanitizer: ABRT (/clusterfuzz/run_bot/clusterfuzz/bot/builds/gopacket_libfuzzer_msan/custom/fuzz_layers+0x587981)
+==33473==ABORTING
+MS: 3 ChangeBit-ChangeASCIIInt-CrossOver-; base unit: 89f0403865a685eab3831c406205bbfe40f946d4
+0x0,0x33,0x24,
+\0003$
+artifact_prefix=&#x27;/clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/&#x27;; Test unit written to /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/crash-9a0cb4f15c19e3c313fd1a0f568b74e57e4b57cf
+Base64: ADMk
+stat::number_of_executed_units: 187
+stat::average_exec_per_sec:     0
+stat::new_units_added:          16
+stat::slowest_unit_time_sec:    0
+stat::peak_rss_mb:              49
+INFO: exiting: 77 time: 3s
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+MemorySanitizer:DEADLYSIGNAL
+==33473==ERROR: MemorySanitizer: ABRT on unknown address 0x03e8000082c1 (pc 0x000000587981 bp 0x00c0000b9a80 sp 0x00c0000b9a68 T33473)
+    #0 0x587981  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/gopacket_libfuzzer_msan/custom/fuzz_layers+0x587981)
+
+MemorySanitizer can not provide additional info.

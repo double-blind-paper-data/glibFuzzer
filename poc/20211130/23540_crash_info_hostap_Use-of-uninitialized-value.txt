@@ -1,0 +1,45 @@
+Testcase id: 23540
+Job: hostap_honggfuzz_msan
+Crash Type: Use-of-uninitialized-value
+isSecurity: True
+Crash state: sae_parse_commit
+sae.c
+sae_parse_commit
+Poc: 23540.testcase
+engine: honggfuzz
+fully_qualified_name: honggfuzz_sae
+target: sae
+name: honggfuzz
+[Environment] MSAN_OPTIONS=allocator_release_to_os_interval_ms=500:halt_on_error=1:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:print_stats=1:print_summary=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+Uninitialized bytes in MemcmpInterceptorCommon at offset 0 inside [0x7fffffffce00, 32)
+==20078==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x455ee7 in __interceptor_memcmp /src/llvm-project/compiler-rt/lib/sanitizer_common/sanitizer_common_interceptors.inc:892:10
+    #1 0x4e1392 in sae_parse_commit_element_ecc /src/hostap/src/common/sae.c:1912:6
+    #2 0x4e1392 in sae_parse_commit_element /src/hostap/src/common/sae.c:1998:9
+    #3 0x4e1392 in sae_parse_commit /src/hostap/src/common/sae.c:2107:8
+    #4 0x4cdd29 in LLVMFuzzerTestOneInput /src/hostap/tests/fuzzing/sae/sae.c:33:8
+    #5 0x4a57fe in main
+    #6 0x7ffff79830b2 in __libc_start_main
+    #7 0x42102d in _start
+
+  Uninitialized value was created by an allocation of &#x27;prime.i6.i&#x27; in the stack frame of function &#x27;sae_parse_commit&#x27;
+    #0 0x4e00e0 in sae_parse_commit /src/hostap/src/common/sae.c:2086
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/hostap_honggfuzz_msan/custom/sae+0x455ee7)
+Exiting
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+Uninitialized bytes in MemcmpInterceptorCommon at offset 0 inside [0x7fffffffce00, 32)
+==20078==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x455ee7  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/hostap_honggfuzz_msan/custom/sae+0x455ee7)
+    #1 0x4e1392  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/hostap_honggfuzz_msan/custom/sae+0x4e1392)
+    #2 0x4cdd29  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/hostap_honggfuzz_msan/custom/sae+0x4cdd29)
+    #3 0x4a57fe  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/hostap_honggfuzz_msan/custom/sae+0x4a57fe)
+    #4 0x7ffff79830b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #5 0x42102d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/hostap_honggfuzz_msan/custom/sae+0x42102d)
+
+  Uninitialized value was created by an allocation of &#x27;prime.i6.i&#x27; in the stack frame of function &#x27;sae_parse_commit&#x27;
+    #0 0x4e00e0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/hostap_honggfuzz_msan/custom/sae+0x4e00e0)

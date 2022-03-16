@@ -1,0 +1,254 @@
+Testcase id: 14637
+Job: haproxy_libfuzzer_asan
+Crash Type: Null-dereference WRITE
+isSecurity: False
+Crash state: make_arg_list
+cfg_parse_cond_term
+cfg_parse_cond_and
+Poc: 14637.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_fuzz_cfg_parser
+target: fuzz_cfg_parser
+name: libFuzzer
+[Environment] ASAN_OPTIONS=alloc_dealloc_mismatch=0:allocator_may_return_null=1:allocator_release_to_os_interval_ms=500:allow_user_segv_handler=0:check_malloc_usable_size=0:detect_leaks=1:detect_odr_violation=0:detect_stack_use_after_return=1:exitcode=77:fast_unwind_on_fatal=0:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:max_uar_stack_size_log=16:print_scariness=1:print_summary=1:print_suppressions=0:quarantine_size_mb=64:redzone=32:strict_memcmp=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 1056058729
+INFO: Loaded 1 modules   (53111 inline 8-bit counters): 53111 [0xc16410, 0xc23387),
+INFO: Loaded 1 PC tables (53111 PCs): 53111 [0xa5a850,0xb29fc0),
+INFO:        0 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases-disk/temp-23/new
+INFO:      858 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/data-bundles/fuzz_cfg_parser
+INFO: -max_len is not provided; libFuzzer will not generate inputs larger than 8192 bytes
+INFO: seed corpus: files: 858 min: 1b max: 8192b total: 1044268b rss: 65Mb
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unknown keyword &#x27;W7mh6&#x27; out of section.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: Missing LF on last line, file might have been truncated at position 17.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unknown keyword &#x27;W7mh6&#x27; out of section.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: Missing LF on last line, file might have been truncated at position 17.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: negation/default currently supported only for options, log, busy-polling, set-dumpable, strict-limits, insecure-fork-wanted and numa-cpu-mapping.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unknown keyword &#x27;lt&#x27; out of section.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: Missing LF on last line, file might have been truncated at position 20.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: negation/default currently supported only for options, log, busy-polling, set-dumpable, strict-limits, insecure-fork-wanted and numa-cpu-mapping.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unknown keyword &#x27;lt&#x27; out of section.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: Missing LF on last line, file might have been truncated at position 17.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unknown keyword &#x27;W7mh-&#x27; out of section.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: Missing LF on last line, file might have been truncated at position 10.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unknown keyword &#x27;W7mh-&#x27; out of section.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: Missing LF on last line, file might have been truncated at position 10.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: negation/default currently supported only for options, log, busy-polling, set-dumpable, strict-limits, insecure-fork-wanted and numa-cpu-mapping.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unknown keyword &#x27;lt&#x27; out of section.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: Missing LF on last line, file might have been truncated at position 28.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: negation/default currently supported only for options, log, busy-polling, set-dumpable, strict-limits, insecure-fork-wanted and numa-cpu-mapping.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unknown keyword &#x27;ooooooooooooooooooooooooooooooooooooooooooo
+tQ&#x27; out of section.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: Missing LF on last line, file might have been truncated at position 59.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unparsable conditional expression &#x27;( &#x27; in &#x27;.if&#x27; at position 1:
+  .if (
+      ^
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: negation/default currently supported only for options, log, busy-polling, set-dumpable, strict-limits, insecure-fork-wanted and numa-cpu-mapping.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unknown keyword &#x27;\aaaaTҟk0p{#ps]J`:H_&#x27; out of section.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unmatched quote at position 63:
+  ??aaaaaaaaaaaa?????_?????????&amp;3????V/?:A+d???J?R?\???3???????&quot;*
+                                                               ^
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: Missing LF on last line, file might have been truncated at position 65.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unknown keyword &#x27;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&#x27; out of section.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: Missing LF on last line, file might have been truncated at position 65.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unexpected character &#x27;&#x27; at the end of conditional expression &#x27;0-[aP834316762925993457.S&#x27; in &#x27;.if&#x27; at position 2:
+  .if 0????-?[aP834316762925993457?.??S
+       ^
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unknown keyword &#x27;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&#x27; out of section.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: Missing LF on last line, file might have been truncated at position 65.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unexpected character &#x27;$&#x27; at the end of conditional expression &#x27;!   457$$$$$$$$$$$$$$$$$$$$&#x27; in &#x27;.if&#x27; at position 8:
+  .if !   457$$$$$$$$$$$$$$$$$$$$
+             ^
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unparsable conditional expression &#x27;\a&#x27; in &#x27;.if&#x27; at position 1:
+  .if ?\a
+      ^
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: negation/default currently supported only for options, log, busy-polling, set-dumpable, strict-limits, insecure-fork-wanted and numa-cpu-mapping.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unknown keyword &#x27;\aaaaTҟk0p{\{.n3玥
+n&#x27; out of section.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: Missing LF on last line, file might have been truncated at position 65.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unknown keyword &#x27;option&#x27; out of section.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: Missing LF on last line, file might have been truncated at position 65.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: truncated or invalid hexadecimal sequence at position 9:
+  ?\\\\\\\x?\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+         ^
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: Missing LF on last line, file might have been truncated at position 65.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: negation/default currently supported only for options, log, busy-polling, set-dumpable, strict-limits, insecure-fork-wanted and numa-cpu-mapping.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unknown keyword &#x27;nt&#x27; out of section.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: Missing LF on last line, file might have been truncated at position 28.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unparsable conditional expression &#x27;aaaaaaaaa鈜
+9
+^Tҟk0=Z}-6724wqKOZ}-6724ƊΡJ[*&#x27; in &#x27;.if&#x27; at position 1:
+  .if aaaaaaaaa????9?^T??k???0=?Z?}-6724?wq???KOZ?}-6724?????J??[*
+      ^
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: negation/default currently supported only for options, log, busy-polling, set-dumpable, strict-limits, insecure-fork-wanted and numa-cpu-mapping.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unknown keyword &#x27;nult&#x27; out of section.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: Missing LF on last line, file might have been truncated at position 51.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unknown keyword &#x27;\aaaaTҟk0p{#ps]J`:H_&#x27; out of section.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unknown keyword &#x27;Ch+
+6/Żhqa&lt;@e\ìoewPUx9:
+&#x27; out of section.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:2]: unknown keyword &#x27;
+x9&#x27; out of section.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:2]: Missing LF on last line, file might have been truncated at position 6.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unmatched quote at position 30:
+  ???aaaa???????Po??Wb&lt;b??d?r?}&quot;*p3??wq???KOZ?}-67249 ???v??p????^
+                               ^
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: Missing LF on last line, file might have been truncated at position 65.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unparsable conditional expression &#x27;\aaa鈜
+9
+^Tҟk0=Z}-6724wqKOZ}-6724ƊΡJ[*&#x27; in &#x27;.if&#x27; at position 1:
+  .if ?\aaa????????9?^T??k???0=?Z?}-6724?wq???KOZ?}-6724?????J??[*
+      ^
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: negation/default currently supported only for options, log, busy-polling, set-dumpable, strict-limits, insecure-fork-wanted and numa-cpu-mapping.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unknown keyword &#x27;lt&#x27; out of section.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: Missing LF on last line, file might have been truncated at position 65.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unknown directive &#x27;.war&#x27;.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: Missing LF on last line, file might have been truncated at position 65.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unexpected character &#x27;!&#x27; at the end of conditional expression &#x27;  457 !.S7 &#x27; in &#x27;.if&#x27; at position 7:
+  .if   457 !?.??S7
+            ^
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unknown keyword &#x27;\aaaa鈜
+9
+^Tҟk0=P&#x27; out of section.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:2]: unknown keyword &#x27;&#x27; out of section.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:2]: Missing LF on last line, file might have been truncated at position 2.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unknown keyword &#x27;aaaaaaaaaaaaaaaaaaaYA
+_(pYs۸+o}&#x27; out of section.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: Missing LF on last line, file might have been truncated at position 65.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unknown keyword &#x27;\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\&#x27; out of section.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: Missing LF on last line, file might have been truncated at position 65.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unknown keyword &#x27;aakajqaaaaakajqFau))&amp;TU$&#x27; out of section.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: Missing LF on last line, file might have been truncated at position 52.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unexpected character &#x27;$&#x27; at the end of conditional expression &#x27;  457$$$$$$$$$$$$$$$$$$$$&#x27; in &#x27;.if&#x27; at position 6:
+  .if   457$$$$$$$$$$$$$$$$$$$$
+           ^
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unmatched quote at position 24:
+  ?-566434aaaaaaaa6???Y?&#x27;H o?;??????-???}???=?
+                        ^
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:2]: unknown keyword &#x27;jG
+8?)|h&#x27; out of section.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:2]: Missing LF on last line, file might have been truncated at position 19.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unknown keyword &#x27;Ch+
+6/Żhqa&lt;@e\\\ìoewPUx9:
+x&#x27; out of section.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: Missing LF on last line, file might have been truncated at position 65.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unknown keyword &#x27;\aaa`鈜
+9
+^Tҟk0=&#x27; out of section.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unparsable conditional expression &#x27;! IQ^;.
+9&#x27; in &#x27;.if&#x27; at position 1:
+  .if ! IQ???^;.?9??
+      ^
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unknown keyword &#x27;Ch+
+6/Żhqa&lt;@e\\\ìoewPUx9:
+&#x27; out of section.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unknown keyword &#x27;\aaaa鈜
+9
+^Tҟk0=&#x27; out of section.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unknown keyword &#x27;551610g`Iu,h7ӓmM&#x27; out of section.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: Missing LF on last line, file might have been truncated at position 65.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: truncated or invalid hexadecimal sequence at position 32:
+  ??aaaaaaaaaaaaaaaaaaaa??&amp;??2??\x
+                                ^
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: Missing LF on last line, file might have been truncated at position 34.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: negation/default currently supported only for options, log, busy-polling, set-dumpable, strict-limits, insecure-fork-wanted and numa-cpu-mapping.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unknown keyword &#x27;lt&#x27; out of section.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: Missing LF on last line, file might have been truncated at position 42.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: negation/default currently supported only for options, log, busy-polling, set-dumpable, strict-limits, insecure-fork-wanted and numa-cpu-mapping.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unknown keyword &#x27;W7default&#x27; out of section.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: Missing LF on last line, file might have been truncated at position 30.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: Unexpected argument &#x27;䠞lO160.&#x27; for &#x27;.endif&#x27;.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: Missing LF on last line, file might have been truncated at position 65.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unexpected character &#x27;!&#x27; at the end of conditional expression &#x27;! 457 !.S7 &#x27; in &#x27;.if&#x27; at position 7:
+  .if ! 457 !?.??S7
+            ^
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unknown keyword &#x27;UW7mh,&#x27; out of section.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: Missing LF on last line, file might have been truncated at position 12.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1] : character &#x27;&#x27; is not permitted in a scope name.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unexpected character &#x27;!&#x27; at the end of conditional expression &#x27;457 !.S7 &#x27; in &#x27;.if&#x27; at position 5:
+  .if 457 !?.??S7
+          ^
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unparsable conditional expression &#x27;\aaaa&#x27; in &#x27;.if&#x27; at position 1:
+  .if ?\aaaa?
+      ^
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: Missing LF on last line, file might have been truncated at position 1.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unknown keyword &#x27;\aaaa鈜
+9
+^Tҟk0=&#x27; out of section.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unknown keyword &#x27;\aaaa4097111ުg۰;|N^UeWU8ត4/];e,ikO&#x27; out of section.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: Missing LF on last line, file might have been truncated at position 65.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: negation/default currently supported only for options, log, busy-polling, set-dumpable, strict-limits, insecure-fork-wanted and numa-cpu-mapping.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unknown keyword &#x27;a8888888888888888888888e..&#x27; out of section.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: Missing LF on last line, file might have been truncated at position 65.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unknown keyword &#x27;$$61976175948F˟By!WV9$$$$$$$$$$$$$$$$$$$$$$$$$$$$&#x27; out of section.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: Missing LF on last line, file might have been truncated at position 65.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unknown keyword &#x27;ۤHD.)j fw&lt;P&#x27; out of section.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: Missing LF on last line, file might have been truncated at position 65.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unparsable conditional expression &#x27;\aaaa鈜
+9
+^Tҟk0=Z}-6724wqS*RQ]znj&#x27; in &#x27;.if&#x27; at position 1:
+  .if ?\aaaa???????9?^T??k???0=?Z?}-6724?wq?S?*R??????Q?]??z??n?j?
+      ^
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unknown keyword &#x27;$$6&#x27; out of section.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:14]: unknown keyword &#x27;-9042&#x27; out of section.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:16]: unknown keyword &#x27;B_&#x27; out of section.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:50]: non-terminated &#x27;.if&#x27; block.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: unknown keyword &#x27;aa[gaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&#x27; out of section.
+[ALERT]    (40688) : parsing [/tmp/libfuzzer.40688:1]: Missing LF on last line, file might have been truncated at position 65.
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==40688==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000000 (pc 0x00000086c1f3 bp 0x7ffee4e57aa0 sp 0x7ffee4e57940 T0)
+==40688==The signal is caused by a WRITE memory access.
+==40688==Hint: address points to the zero page.
+SCARINESS: 10 (null-deref)
+    #0 0x86c1f3 in make_arg_list /src/haproxy/src/arg.c:225:26
+    #1 0x89d95a in cfg_parse_cond_term /src/haproxy/src/cfgcond.c:153:12
+    #2 0x89f39b in cfg_parse_cond_and /src/haproxy/src/cfgcond.c:336:8
+    #3 0x89df3e in cfg_parse_cond_expr /src/haproxy/src/cfgcond.c:409:8
+    #4 0x89fb61 in cfg_eval_condition /src/haproxy/src/cfgcond.c:494:8
+    #5 0x568ad5 in readcfgfile /src/haproxy/src/cfgparse.c:1916:12
+    #6 0x55f28e in LLVMFuzzerTestOneInput /src/haproxy/fuzz_cfg_parser.c:38:2
+    #7 0x456cb3 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #8 0x45649a in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*, bool, bool*) cxa_noexception.cpp:0
+    #9 0x4582f4 in fuzzer::Fuzzer::ReadAndExecuteSeedCorpora(std::__Fuzzer::vector&lt;fuzzer::SizedFile, std::__Fuzzer::allocator&lt;fuzzer::SizedFile&gt; &gt;&amp;) cxa_noexception.cpp:0
+    #10 0x458529 in fuzzer::Fuzzer::Loop(std::__Fuzzer::vector&lt;fuzzer::SizedFile, std::__Fuzzer::allocator&lt;fuzzer::SizedFile&gt; &gt;&amp;) cxa_noexception.cpp:0
+    #11 0x447f6d in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #12 0x470fb2 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #13 0x7fc0558480b2 in __libc_start_main
+    #14 0x41f84d in _start
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV (/clusterfuzz/run_bot/clusterfuzz/bot/builds/haproxy_libfuzzer_asan/custom/fuzz_cfg_parser+0x86c1f3)
+==40688==ABORTING
+MS: 0 ; base unit: 0000000000000000000000000000000000000000
+0x2e,0x69,0x66,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x64,0x65,0x66,0x69,0x6e,0x65,0x64,0x20,0x20,0x20,0x20,0x20,0x21,0xca,0x2e,0xaa,0xda,0x53,0x37,0x20,0x20,0x20,0x20,0x20,0x20,0x20,
+.if                                   defined     !\312.\252\332S7
+artifact_prefix=&#x27;/clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/&#x27;; Test unit written to /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/crash-09fd9e461cc2e15dc99402ff928c091bd59dc658
+Base64: LmlmICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBkZWZpbmVkICAgICAhyi6q2lM3ICAgICAgIA==
+stat::number_of_executed_units: 90
+stat::average_exec_per_sec:     0
+stat::new_units_added:          0
+stat::slowest_unit_time_sec:    0
+stat::peak_rss_mb:              65
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+==40688==Hint: address points to the zero page.
+SCARINESS: 10 (null-deref)
+    #0 0x86c1f3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/haproxy_libfuzzer_asan/custom/fuzz_cfg_parser+0x86c1f3)
+    #1 0x89d95a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/haproxy_libfuzzer_asan/custom/fuzz_cfg_parser+0x89d95a)
+    #2 0x89f39b  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/haproxy_libfuzzer_asan/custom/fuzz_cfg_parser+0x89f39b)
+    #3 0x89df3e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/haproxy_libfuzzer_asan/custom/fuzz_cfg_parser+0x89df3e)
+    #4 0x89fb61  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/haproxy_libfuzzer_asan/custom/fuzz_cfg_parser+0x89fb61)
+    #5 0x568ad5  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/haproxy_libfuzzer_asan/custom/fuzz_cfg_parser+0x568ad5)
+    #6 0x55f28e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/haproxy_libfuzzer_asan/custom/fuzz_cfg_parser+0x55f28e)
+    #7 0x456cb3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/haproxy_libfuzzer_asan/custom/fuzz_cfg_parser+0x456cb3)
+    #8 0x45649a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/haproxy_libfuzzer_asan/custom/fuzz_cfg_parser+0x45649a)
+    #9 0x4582f4  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/haproxy_libfuzzer_asan/custom/fuzz_cfg_parser+0x4582f4)
+    #10 0x458529  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/haproxy_libfuzzer_asan/custom/fuzz_cfg_parser+0x458529)
+    #11 0x447f6d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/haproxy_libfuzzer_asan/custom/fuzz_cfg_parser+0x447f6d)
+    #12 0x470fb2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/haproxy_libfuzzer_asan/custom/fuzz_cfg_parser+0x470fb2)
+    #13 0x7fc0558480b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #14 0x41f84d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/haproxy_libfuzzer_asan/custom/fuzz_cfg_parser+0x41f84d)

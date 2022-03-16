@@ -1,0 +1,61 @@
+Testcase id: 85643
+Job: libpng-proto_libfuzzer_msan
+Crash Type: Use-of-uninitialized-value
+isSecurity: True
+Crash state: std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<ch
+std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<ch
+google::protobuf::internal::InlineGreedyStringParser
+Poc: 85643.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_png_proto_fuzzer_example
+target: png_proto_fuzzer_example
+name: libFuzzer
++----------------------------------------Release Build Stacktrace----------------------------------------+
+Command: /clusterfuzz/run_bot/clusterfuzz/bot/builds/libpng-proto_libfuzzer_msan/custom/png_proto_fuzzer_example -rss_limit_mb=2560 -timeout=60 -runs=100 /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/tmpefnd_dub
+Time ran: 0.006306648254394531
+
+==61206==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x713039 in std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;::__assign_external(char const*, unsigned long) /work/msan/include/c++/v1/string:2351:7
+    #1 0x712c97 in std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;::assign(char const*, unsigned long) /work/msan/include/c++/v1/string:2371:18
+    #2 0x582d45 in ReadString /src/LPM/external.protobuf/src/external.protobuf/src/google/protobuf/parse_context.h:156:10
+    #3 0x582d45 in google::protobuf::internal::InlineGreedyStringParser(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;*, char const*, google::protobuf::internal::ParseContext*) /src/LPM/external.protobuf/src/external.protobuf/src/google/protobuf/parse_context.cc:403:15
+    #4 0x5dabbe in google::protobuf::FileDescriptorProto::_InternalParse(char const*, google::protobuf::internal::ParseContext*) /src/LPM/external.protobuf/src/external.protobuf/src/google/protobuf/descriptor.pb.cc:1597:17
+    #5 0x580834 in MergeFromImpl&lt;false&gt; /src/LPM/external.protobuf/src/external.protobuf/src/google/protobuf/message_lite.cc:144:14
+    #6 0x580834 in ParseFrom&lt;google::protobuf::MessageLite::kParse, google::protobuf::stringpiece_internal::StringPiece&gt; /src/LPM/external.protobuf/src/external.protobuf/src/google/protobuf/message_lite.h:598:10
+    #7 0x580834 in google::protobuf::MessageLite::ParseFromArray(void const*, int) /src/LPM/external.protobuf/src/external.protobuf/src/google/protobuf/message_lite.cc:325:10
+    #8 0x5f787b in google::protobuf::EncodedDescriptorDatabase::Add(void const*, int) /src/LPM/external.protobuf/src/external.protobuf/src/google/protobuf/descriptor_database.cc:556:12
+    #9 0x5a300e in google::protobuf::DescriptorPool::InternalAddGeneratedFile(void const*, int) /src/LPM/external.protobuf/src/external.protobuf/src/google/protobuf/descriptor.cc:1357:3
+    #10 0x6107d7 in AddDescriptorsImpl /src/LPM/external.protobuf/src/external.protobuf/src/google/protobuf/generated_message_reflection.cc:2767:3
+    #11 0x6107d7 in google::protobuf::(anonymous namespace)::AddDescriptors(google::protobuf::internal::DescriptorTable const*) /src/LPM/external.protobuf/src/external.protobuf/src/google/protobuf/generated_message_reflection.cc:2778:3
+    #12 0x41fea8 in __cxx_global_var_init /src/genfiles/png_fuzz_proto.pb.cc:224:97
+    #13 0x41fea8 in _GLOBAL__I_000102 /src/genfiles/png_fuzz_proto.pb.cc:0
+    #14 0x88967c in __libc_csu_init
+    #15 0x7f04217ae03f in __libc_start_main
+    #16 0x42205d in _start
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpng-proto_libfuzzer_msan/custom/png_proto_fuzzer_example+0x713039)
+  ORIGIN: invalid (0). Might be a bug in MemorySanitizer origin tracking.
+    This could still be a bug in your code, too!
+Unique heap origins: 9
+Stack depot allocated bytes: 1900544
+Unique origin histories: 1
+History depot allocated bytes: 196608
+Exiting
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+
+==61206==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x713039  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpng-proto_libfuzzer_msan/custom/png_proto_fuzzer_example+0x713039)
+    #1 0x712c97  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpng-proto_libfuzzer_msan/custom/png_proto_fuzzer_example+0x712c97)
+    #2 0x582d45  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpng-proto_libfuzzer_msan/custom/png_proto_fuzzer_example+0x582d45)
+    #3 0x5dabbe  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpng-proto_libfuzzer_msan/custom/png_proto_fuzzer_example+0x5dabbe)
+    #4 0x580834  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpng-proto_libfuzzer_msan/custom/png_proto_fuzzer_example+0x580834)
+    #5 0x5f787b  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpng-proto_libfuzzer_msan/custom/png_proto_fuzzer_example+0x5f787b)
+    #6 0x5a300e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpng-proto_libfuzzer_msan/custom/png_proto_fuzzer_example+0x5a300e)
+    #7 0x6107d7  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpng-proto_libfuzzer_msan/custom/png_proto_fuzzer_example+0x6107d7)
+    #8 0x41fea8  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpng-proto_libfuzzer_msan/custom/png_proto_fuzzer_example+0x41fea8)
+    #9 0x88967c  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpng-proto_libfuzzer_msan/custom/png_proto_fuzzer_example+0x88967c)
+    #10 0x7f04217ae03f  (/lib/x86_64-linux-gnu/libc.so.6+0x2703f)
+    #11 0x42205d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpng-proto_libfuzzer_msan/custom/png_proto_fuzzer_example+0x42205d)

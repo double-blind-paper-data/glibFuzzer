@@ -1,0 +1,50 @@
+Testcase id: 25571
+Job: libarchive_honggfuzz_msan
+Crash Type: Null-dereference READ
+isSecurity: False
+Crash state: __archive_create_child
+__archive_read_program
+zstd_bidder_init
+Poc: 25571.testcase
+engine: honggfuzz
+fully_qualified_name: honggfuzz_libarchive_fuzzer
+target: libarchive_fuzzer
+name: honggfuzz
+[Environment] MSAN_OPTIONS=allocator_release_to_os_interval_ms=500:halt_on_error=1:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:print_stats=1:print_summary=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+==2353==ERROR: MemorySanitizer: SEGV on unknown address 0x000000000000 (pc 0x00000045e87c bp 0x7fffffffcb10 sp 0x7fffffffcab0 T2353)
+==2353==The signal is caused by a READ memory access.
+==2353==Hint: address points to the zero page.
+    #0 0x45e87c in int PosixSpawnImpl&lt;int (int*, char const*, void const*, void const*, char* const*, char* const*)&gt;(void*, int (*)(int*, char const*, void const*, void const*, char* const*, char* const*), int*, char const*, void const*, void const*, char* const*, char* const*) /src/llvm-project/compiler-rt/lib/sanitizer_common/sanitizer_common_interceptors.inc:2439:10
+    #1 0x45ed32 in posix_spawnp /src/llvm-project/compiler-rt/lib/sanitizer_common/sanitizer_common_interceptors.inc:2463:10
+    #2 0x659ea6 in __archive_create_child /src/libarchive/libarchive/filter_fork_posix.c:141:6
+    #3 0x4d16f9 in __archive_read_program /src/libarchive/libarchive/archive_read_support_filter_program.c:429:8
+    #4 0x4e3657 in zstd_bidder_init /src/libarchive/libarchive/archive_read_support_filter_zstd.c:152:6
+    #5 0x4b0e35 in choose_filters /src/libarchive/libarchive/archive_read.c:603:7
+    #6 0x4b0e35 in archive_read_open1 /src/libarchive/libarchive/archive_read.c:514:7
+    #7 0x4af619 in archive_read_open /src/libarchive/libarchive/archive_read.c:150:9
+    #8 0x4a3dc7 in LLVMFuzzerTestOneInput /src/libarchive_fuzzer.cc:45:3
+    #9 0x4a4eae in main
+    #10 0x7ffff78ff0b2 in __libc_start_main
+    #11 0x41f9ad in _start
+
+MemorySanitizer can not provide additional info.
+SUMMARY: MemorySanitizer: SEGV (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_honggfuzz_msan/custom/libarchive_fuzzer+0x45e87c)
+==2353==ABORTING
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+==2353==The signal is caused by a READ memory access.
+==2353==Hint: address points to the zero page.
+    #0 0x45e87c  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_honggfuzz_msan/custom/libarchive_fuzzer+0x45e87c)
+    #1 0x45ed32  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_honggfuzz_msan/custom/libarchive_fuzzer+0x45ed32)
+    #2 0x659ea6  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_honggfuzz_msan/custom/libarchive_fuzzer+0x659ea6)
+    #3 0x4d16f9  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_honggfuzz_msan/custom/libarchive_fuzzer+0x4d16f9)
+    #4 0x4e3657  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_honggfuzz_msan/custom/libarchive_fuzzer+0x4e3657)
+    #5 0x4b0e35  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_honggfuzz_msan/custom/libarchive_fuzzer+0x4b0e35)
+    #6 0x4af619  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_honggfuzz_msan/custom/libarchive_fuzzer+0x4af619)
+    #7 0x4a3dc7  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_honggfuzz_msan/custom/libarchive_fuzzer+0x4a3dc7)
+    #8 0x4a4eae  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_honggfuzz_msan/custom/libarchive_fuzzer+0x4a4eae)
+    #9 0x7ffff78ff0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #10 0x41f9ad  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libarchive_honggfuzz_msan/custom/libarchive_fuzzer+0x41f9ad)

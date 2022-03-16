@@ -1,0 +1,78 @@
+Testcase id: 61170
+Job: libraw_libfuzzer_asan
+Crash Type: Out-of-memory
+isSecurity: False
+Crash state: libraw_nef_fuzzer
+Poc: 61170.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_libraw_nef_fuzzer
+target: libraw_nef_fuzzer
+name: libFuzzer
+[Environment] ASAN_OPTIONS=exitcode=77
++----------------------------------------Release Build Stacktrace----------------------------------------+
+Command: /clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_libfuzzer_asan/custom/libraw_nef_fuzzer -rss_limit_mb=2560 -timeout=60 -runs=100 /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/fe783faae604946f8c68f3ce5e99e193696f1a5f0f10d6be45fbeffd45554de5
+Time ran: 15.331650257110596
+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 2824193060
+INFO: Loaded 1 modules   (20568 inline 8-bit counters): 20568 [0x900b60, 0x905bb8),
+INFO: Loaded 1 PC tables (20568 PCs): 20568 [0x7e6068,0x8365e8),
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_libfuzzer_asan/custom/libraw_nef_fuzzer: Running 1 inputs 100 time(s) each.
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/fe783faae604946f8c68f3ce5e99e193696f1a5f0f10d6be45fbeffd45554de5
+==74842== ERROR: libFuzzer: out-of-memory (used: 2578Mb; limit: 2560Mb)
+   To change the out-of-memory limit use -rss_limit_mb=&lt;N&gt;
+
+Live Heap Allocations: 2927074245 bytes in 31 chunks; quarantined: 9764 bytes in 10 chunks; 7364 other chunks; total chunks: 7405; showing top 95% (at most 8 unique contexts)
+2321965984 byte(s) (79%) in 1 allocation(s)
+    #0 0x525fb2 in __interceptor_calloc /src/llvm-project/compiler-rt/lib/asan/asan_malloc_linux.cpp:138:3
+    #1 0x59264f in calloc /src/libraw/libraw/libraw_alloc.h:56:17
+    #2 0x59264f in LibRaw::calloc(unsigned long, unsigned long) /src/libraw/src/utils/utils_libraw.cpp:266:20
+    #3 0x576deb in LibRaw::raw2image_ex(int) /src/libraw/src/preprocessing/raw2image.cpp:403:37
+    #4 0x561df8 in LibRaw::dcraw_process() /src/libraw/src/postprocessing/dcraw_process.cpp:43:5
+    #5 0x55f26b in LLVMFuzzerTestOneInput /src/libraw_fuzzer.cc:57:22
+<b>    #6 0x456c53 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0</b>
+<b>    #7 0x442562 in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:324:6</b>
+<b>    #8 0x44802a in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0</b>
+<b>    #9 0x470f52 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10</b>
+<b>    #10 0x7f5837f860b2 in __libc_start_main</b>
+
+580697784 byte(s) (19%) in 1 allocation(s)
+    #0 0x525e1d in __interceptor_malloc /src/llvm-project/compiler-rt/lib/asan/asan_malloc_linux.cpp:129:3
+    #1 0x59158e in malloc /src/libraw/libraw/libraw_alloc.h:49:17
+    #2 0x59158e in LibRaw::malloc(unsigned long) /src/libraw/src/utils/utils_libraw.cpp:251:20
+    #3 0x5600c6 in LibRaw::unpack() /src/libraw/src/decoders/unpack.cpp:241:37
+    #4 0x55f1f6 in LLVMFuzzerTestOneInput /src/libraw_fuzzer.cc:47:20
+<b>    #5 0x456c53 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0</b>
+<b>    #6 0x442562 in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:324:6</b>
+<b>    #7 0x44802a in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0</b>
+<b>    #8 0x470f52 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10</b>
+<b>    #9 0x7f5837f860b2 in __libc_start_main</b>
+
+SUMMARY: libFuzzer: out-of-memory
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+Live Heap Allocations: 2927074245 bytes in 31 chunks; quarantined: 9764 bytes in 10 chunks; 7364 other chunks; total chunks: 7405; showing top 95% (at most 8 unique contexts)
+2321965984 byte(s) (79%) in 1 allocation(s)
+    #0 0x525fb2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_libfuzzer_asan/custom/libraw_nef_fuzzer+0x525fb2)
+    #1 0x59264f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_libfuzzer_asan/custom/libraw_nef_fuzzer+0x59264f)
+    #2 0x576deb  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_libfuzzer_asan/custom/libraw_nef_fuzzer+0x576deb)
+    #3 0x561df8  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_libfuzzer_asan/custom/libraw_nef_fuzzer+0x561df8)
+    #4 0x55f26b  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_libfuzzer_asan/custom/libraw_nef_fuzzer+0x55f26b)
+    #5 0x456c53  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_libfuzzer_asan/custom/libraw_nef_fuzzer+0x456c53)
+    #6 0x442562  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_libfuzzer_asan/custom/libraw_nef_fuzzer+0x442562)
+    #7 0x44802a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_libfuzzer_asan/custom/libraw_nef_fuzzer+0x44802a)
+    #8 0x470f52  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_libfuzzer_asan/custom/libraw_nef_fuzzer+0x470f52)
+    #9 0x7f5837f860b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+580697784 byte(s) (19%) in 1 allocation(s)
+    #0 0x525e1d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_libfuzzer_asan/custom/libraw_nef_fuzzer+0x525e1d)
+    #1 0x59158e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_libfuzzer_asan/custom/libraw_nef_fuzzer+0x59158e)
+    #2 0x5600c6  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_libfuzzer_asan/custom/libraw_nef_fuzzer+0x5600c6)
+    #3 0x55f1f6  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_libfuzzer_asan/custom/libraw_nef_fuzzer+0x55f1f6)
+    #4 0x456c53  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_libfuzzer_asan/custom/libraw_nef_fuzzer+0x456c53)
+    #5 0x442562  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_libfuzzer_asan/custom/libraw_nef_fuzzer+0x442562)
+    #6 0x44802a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_libfuzzer_asan/custom/libraw_nef_fuzzer+0x44802a)
+    #7 0x470f52  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_libfuzzer_asan/custom/libraw_nef_fuzzer+0x470f52)
+    #8 0x7f5837f860b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)

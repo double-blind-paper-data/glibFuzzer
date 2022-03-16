@@ -1,0 +1,64 @@
+Testcase id: 67372
+Job: libtheora_honggfuzz_msan
+Crash Type: Use-of-uninitialized-value
+isSecurity: True
+Crash state: TheoraDecoder::writeImage
+TheoraDecoder::decodePacket
+TheoraDecoder::Run
+Poc: 67372.testcase
+engine: honggfuzz
+fully_qualified_name: honggfuzz_fuzzer-decoder
+target: fuzzer-decoder
+name: honggfuzz
+[Environment] MSAN_OPTIONS=allocator_release_to_os_interval_ms=500:halt_on_error=1:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:print_stats=1:print_summary=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+Uninitialized bytes in __msan_check_mem_is_initialized at offset 240 inside [0x7fffe48a2030, 464)
+==25427==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x4a7ec9 in memory_test_msan /usr/include/fuzzing/memory.hpp:37:5
+    #1 0x4a7ec9 in memory_test /usr/include/fuzzing/memory.hpp:44:5
+    #2 0x4a7ec9 in TheoraDecoder::writeImage(th_img_plane const (&amp;) [3]) const /src/oss-fuzz-fuzzers/libtheora/fuzzer.cpp:173:13
+    #3 0x4a75d7 in TheoraDecoder::decodePacket() /src/oss-fuzz-fuzzers/libtheora/fuzzer.cpp:138:21
+    #4 0x4a84ae in TheoraDecoder::Run() /src/oss-fuzz-fuzzers/libtheora/fuzzer.cpp:191:18
+    #5 0x4a87c2 in LLVMFuzzerTestOneInput /src/oss-fuzz-fuzzers/libtheora/fuzzer.cpp:206:13
+    #6 0x4ef1fe in main
+    #7 0x7ffff7c5b0b2 in __libc_start_main
+    #8 0x41e4cd in _start
+
+  Uninitialized value was created by a heap allocation
+    #0 0x44f2ad in __interceptor_malloc /src/llvm-project/compiler-rt/lib/msan/msan_interceptors.cpp:912:3
+    #1 0x4d3004 in oc_aligned_malloc /src/libtheora/lib/internal.c:103:22
+    #2 0x4dcd82 in oc_state_ref_bufs_init /src/libtheora/lib/state.c:591:18
+    #3 0x4d7492 in oc_state_init /src/libtheora/lib/state.c:736:17
+    #4 0x4aeb20 in oc_dec_init /src/libtheora/lib/decode.c:374:7
+    #5 0x4aeb20 in th_decode_alloc /src/libtheora/lib/decode.c:1965:17
+    #6 0x4a69a1 in TheoraDecoder::initialize() /src/oss-fuzz-fuzzers/libtheora/fuzzer.cpp:82:11
+    #7 0x4a8236 in TheoraDecoder::Run() /src/oss-fuzz-fuzzers/libtheora/fuzzer.cpp:184:10
+    #8 0x4a87c2 in LLVMFuzzerTestOneInput /src/oss-fuzz-fuzzers/libtheora/fuzzer.cpp:206:13
+    #9 0x4ef1fe in main
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libtheora_honggfuzz_msan/custom/fuzzer-decoder+0x4a7ec9)
+Exiting
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+Uninitialized bytes in __msan_check_mem_is_initialized at offset 240 inside [0x7fffe48a2030, 464)
+==25427==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x4a7ec9  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libtheora_honggfuzz_msan/custom/fuzzer-decoder+0x4a7ec9)
+    #1 0x4a75d7  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libtheora_honggfuzz_msan/custom/fuzzer-decoder+0x4a75d7)
+    #2 0x4a84ae  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libtheora_honggfuzz_msan/custom/fuzzer-decoder+0x4a84ae)
+    #3 0x4a87c2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libtheora_honggfuzz_msan/custom/fuzzer-decoder+0x4a87c2)
+    #4 0x4ef1fe  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libtheora_honggfuzz_msan/custom/fuzzer-decoder+0x4ef1fe)
+    #5 0x7ffff7c5b0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #6 0x41e4cd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libtheora_honggfuzz_msan/custom/fuzzer-decoder+0x41e4cd)
+
+  Uninitialized value was created by a heap allocation
+    #0 0x44f2ad  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libtheora_honggfuzz_msan/custom/fuzzer-decoder+0x44f2ad)
+    #1 0x4d3004  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libtheora_honggfuzz_msan/custom/fuzzer-decoder+0x4d3004)
+    #2 0x4dcd82  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libtheora_honggfuzz_msan/custom/fuzzer-decoder+0x4dcd82)
+    #3 0x4d7492  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libtheora_honggfuzz_msan/custom/fuzzer-decoder+0x4d7492)
+    #4 0x4aeb20  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libtheora_honggfuzz_msan/custom/fuzzer-decoder+0x4aeb20)
+    #5 0x4a69a1  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libtheora_honggfuzz_msan/custom/fuzzer-decoder+0x4a69a1)
+    #6 0x4a8236  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libtheora_honggfuzz_msan/custom/fuzzer-decoder+0x4a8236)
+    #7 0x4a87c2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libtheora_honggfuzz_msan/custom/fuzzer-decoder+0x4a87c2)
+    #8 0x4ef1fe  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libtheora_honggfuzz_msan/custom/fuzzer-decoder+0x4ef1fe)

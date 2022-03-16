@@ -1,0 +1,43 @@
+Testcase id: 35315
+Job: hiredis_honggfuzz_msan
+Crash Type: Null-dereference READ
+isSecurity: False
+Crash state: redisvFormatCommand
+redisFormatCommand
+format_command_fuzzer.c
+Poc: 35315.testcase
+engine: honggfuzz
+fully_qualified_name: honggfuzz_format_command_fuzzer
+target: format_command_fuzzer
+name: honggfuzz
+[Environment] MSAN_OPTIONS=allocator_release_to_os_interval_ms=500:halt_on_error=1:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:print_stats=1:print_summary=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+==7898==ERROR: MemorySanitizer: SEGV on unknown address 0x000000000000 (pc 0x7ffff7dbf675 bp 0x7fffffffcb80 sp 0x7fffffffcb48 T7898)
+==7898==The signal is caused by a READ memory access.
+==7898==Hint: address points to the zero page.
+    #0 0x7ffff7dbf675 in libc.so.6
+    #1 0x44f24b in strlen /src/llvm-project/compiler-rt/lib/sanitizer_common/sanitizer_common_interceptors.inc:387:19
+    #2 0x4ab366 in redisvFormatCommand /src/hiredis/hiredis.c:364:24
+    #3 0x4aea1f in redisFormatCommand /src/hiredis/hiredis.c:558:11
+    #4 0x4a995d in LLVMFuzzerTestOneInput /src/hiredis/format_command_fuzzer.c:51:5
+    #5 0x49fb5e in main
+    #6 0x7ffff7c5b0b2 in __libc_start_main
+    #7 0x41d49d in _start
+
+MemorySanitizer can not provide additional info.
+SUMMARY: MemorySanitizer: SEGV (/lib/x86_64-linux-gnu/libc.so.6+0x18b675)
+==7898==ABORTING
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+==7898==The signal is caused by a READ memory access.
+==7898==Hint: address points to the zero page.
+    #0 0x7ffff7dbf675  (/lib/x86_64-linux-gnu/libc.so.6+0x18b675)
+    #1 0x44f24b  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/hiredis_honggfuzz_msan/custom/format_command_fuzzer+0x44f24b)
+    #2 0x4ab366  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/hiredis_honggfuzz_msan/custom/format_command_fuzzer+0x4ab366)
+    #3 0x4aea1f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/hiredis_honggfuzz_msan/custom/format_command_fuzzer+0x4aea1f)
+    #4 0x4a995d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/hiredis_honggfuzz_msan/custom/format_command_fuzzer+0x4a995d)
+    #5 0x49fb5e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/hiredis_honggfuzz_msan/custom/format_command_fuzzer+0x49fb5e)
+    #6 0x7ffff7c5b0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #7 0x41d49d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/hiredis_honggfuzz_msan/custom/format_command_fuzzer+0x41d49d)

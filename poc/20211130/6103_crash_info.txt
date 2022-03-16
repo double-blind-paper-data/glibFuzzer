@@ -1,0 +1,66 @@
+Testcase id: 6103
+Job: libcoap_libfuzzer_msan
+Crash Type: Use-of-uninitialized-value
+isSecurity: True
+Crash state: coap_split_uri_sub
+coap_split_uri
+Poc: 6103.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_split_uri_fuzzer
+target: split_uri_fuzzer
+name: libFuzzer
+[Environment] MSAN_OPTIONS=exitcode=77
++----------------------------------------Release Build Stacktrace----------------------------------------+
+Command: /clusterfuzz/run_bot/clusterfuzz/bot/builds/libcoap_libfuzzer_msan/custom/split_uri_fuzzer -rss_limit_mb=2560 -timeout=60 -runs=100 /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/adeb392d774bb40c6ad6b2172adfec2f5e6b4b0d3255bfef95601890afd80709
+Time ran: 0.058319091796875
+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 1417315311
+INFO: Loaded 1 modules   (5266 inline 8-bit counters): 5266 [0x6457c8, 0x646c5a),
+INFO: Loaded 1 PC tables (5266 PCs): 5266 [0x646c60,0x65b580),
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/libcoap_libfuzzer_msan/custom/split_uri_fuzzer: Running 1 inputs 100 time(s) each.
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/adeb392d774bb40c6ad6b2172adfec2f5e6b4b0d3255bfef95601890afd80709
+==24074==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x4a5c34 in coap_split_uri_sub /src/libcoap/src/uri.c:72:7
+    #1 0x4a3752 in coap_split_uri /src/libcoap/src/uri.c:242:10
+    #2 0x4a36c0 in LLVMFuzzerTestOneInput
+    #3 0x58c633 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #4 0x577f42 in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:324:6
+    #5 0x57da0a in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #6 0x5a6932 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #7 0x7f02f2ec60b2 in __libc_start_main
+    #8 0x41f52d in _start
+
+  Uninitialized value was created by a heap allocation
+    #0 0x45030d in __interceptor_malloc /src/llvm-project/compiler-rt/lib/msan/msan_interceptors.cpp:912:3
+    #1 0x56df77 in operator new(unsigned long) cxa_noexception.cpp:0
+    #2 0x577f42 in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:324:6
+    #3 0x57da0a in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #4 0x5a6932 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #5 0x7f02f2ec60b2 in __libc_start_main
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libcoap_libfuzzer_msan/custom/split_uri_fuzzer+0x4a5c34)
+Exiting
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/adeb392d774bb40c6ad6b2172adfec2f5e6b4b0d3255bfef95601890afd80709
+==24074==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x4a5c34  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libcoap_libfuzzer_msan/custom/split_uri_fuzzer+0x4a5c34)
+    #1 0x4a3752  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libcoap_libfuzzer_msan/custom/split_uri_fuzzer+0x4a3752)
+    #2 0x4a36c0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libcoap_libfuzzer_msan/custom/split_uri_fuzzer+0x4a36c0)
+    #3 0x58c633  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libcoap_libfuzzer_msan/custom/split_uri_fuzzer+0x58c633)
+    #4 0x577f42  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libcoap_libfuzzer_msan/custom/split_uri_fuzzer+0x577f42)
+    #5 0x57da0a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libcoap_libfuzzer_msan/custom/split_uri_fuzzer+0x57da0a)
+    #6 0x5a6932  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libcoap_libfuzzer_msan/custom/split_uri_fuzzer+0x5a6932)
+    #7 0x7f02f2ec60b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #8 0x41f52d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libcoap_libfuzzer_msan/custom/split_uri_fuzzer+0x41f52d)
+
+  Uninitialized value was created by a heap allocation
+    #0 0x45030d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libcoap_libfuzzer_msan/custom/split_uri_fuzzer+0x45030d)
+    #1 0x56df77  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libcoap_libfuzzer_msan/custom/split_uri_fuzzer+0x56df77)
+    #2 0x577f42  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libcoap_libfuzzer_msan/custom/split_uri_fuzzer+0x577f42)
+    #3 0x57da0a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libcoap_libfuzzer_msan/custom/split_uri_fuzzer+0x57da0a)
+    #4 0x5a6932  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libcoap_libfuzzer_msan/custom/split_uri_fuzzer+0x5a6932)
+    #5 0x7f02f2ec60b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)

@@ -1,0 +1,95 @@
+Testcase id: 6131
+Job: draco_libfuzzer_asan
+Crash Type: Out-of-memory
+isSecurity: False
+Crash state: draco_mesh_decoder_fuzzer
+Poc: 6131.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_draco_mesh_decoder_fuzzer
+target: draco_mesh_decoder_fuzzer
+name: libFuzzer
+[Environment] ASAN_OPTIONS=alloc_dealloc_mismatch=0:allocator_may_return_null=1:allocator_release_to_os_interval_ms=500:allow_user_segv_handler=0:check_malloc_usable_size=0:detect_leaks=1:detect_odr_violation=0:detect_stack_use_after_return=1:exitcode=77:fast_unwind_on_fatal=0:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:max_uar_stack_size_log=16:print_scariness=1:print_summary=1:print_suppressions=0:quarantine_size_mb=64:redzone=32:strict_memcmp=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 1174804020
+INFO: Loaded 1 modules   (19696 inline 8-bit counters): 19696 [0x8b1f60, 0x8b6c50),
+INFO: Loaded 1 PC tables (19696 PCs): 19696 [0x7e8de0,0x835ce0),
+INFO:        0 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases-disk/temp-23/new
+INFO:        0 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases-disk/temp-23/mutations
+INFO:      100 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases-disk/temp-23/subset
+INFO: -max_len is not provided; libFuzzer will not generate inputs larger than 7156 bytes
+INFO: seed corpus: files: 100 min: 4b max: 7156b total: 26582b rss: 60Mb
+==4683== ERROR: libFuzzer: out-of-memory (malloc(3704677604))
+   To change the out-of-memory limit use -rss_limit_mb=&lt;N&gt;
+
+    #0 0x530a61 in __sanitizer_print_stack_trace /src/llvm-project/compiler-rt/lib/asan/asan_stack.cpp:87:3
+    #1 0x471498 in fuzzer::PrintStackTrace() cxa_noexception.cpp:0
+    #2 0x455715 in fuzzer::Fuzzer::HandleMalloc(unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerLoop.cpp:131:3
+    #3 0x45562a in fuzzer::MallocHook(void const volatile*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerLoop.cpp:100:6
+    #4 0x538037 in __sanitizer::RunMallocHooks(void const*, unsigned long) /src/llvm-project/compiler-rt/lib/sanitizer_common/sanitizer_common.cpp:308:5
+    #5 0x4a7053 in __asan::Allocator::Allocate(unsigned long, unsigned long, __sanitizer::BufferedStackTrace*, __asan::AllocType, bool) /src/llvm-project/compiler-rt/lib/asan/asan_allocator.cpp:611:5
+    #6 0x4a7679 in __asan::asan_memalign(unsigned long, unsigned long, __sanitizer::BufferedStackTrace*, __asan::AllocType) /src/llvm-project/compiler-rt/lib/asan/asan_allocator.cpp:1025:16
+    #7 0x55d822 in operator new(unsigned long) /src/llvm-project/compiler-rt/lib/asan/asan_new_delete.cpp:95:3
+    #8 0x56f6a2 in __libcpp_operator_new&lt;unsigned long&gt; /usr/local/include/c++/v1/new:245:10
+    #9 0x56f6a2 in __libcpp_allocate /usr/local/include/c++/v1/new:271:10
+    #10 0x56f6a2 in allocate /usr/local/include/c++/v1/__memory/allocator.h:105:38
+    #11 0x56f6a2 in allocate /usr/local/include/c++/v1/__memory/allocator_traits.h:262:20
+    #12 0x56f6a2 in __split_buffer /usr/local/include/c++/v1/__split_buffer:306:29
+    #13 0x56f6a2 in std::__1::vector&lt;int, std::__1::allocator&lt;int&gt; &gt;::reserve(unsigned long) /usr/local/include/c++/v1/vector:1596:53
+    #14 0x5819af in draco::MeshEdgebreakerDecoderImpl&lt;draco::MeshEdgebreakerTraversalPredictiveDecoder&gt;::DecodeConnectivity() /src/draco/src/draco/compression/mesh/mesh_edgebreaker_decoder_impl.cc:363:25
+    #15 0x567b72 in draco::MeshDecoder::DecodeGeometryData() /src/draco/src/draco/compression/mesh/mesh_decoder.cc:31:8
+    #16 0x5cf67b in draco::PointCloudDecoder::Decode(draco::DracoOptions&lt;draco::GeometryAttribute::Type&gt; const&amp;, draco::DecoderBuffer*, draco::PointCloud*) /src/draco/src/draco/compression/point_cloud/point_cloud_decoder.cc:119:8
+    #17 0x567af0 in draco::MeshDecoder::Decode(draco::DracoOptions&lt;draco::GeometryAttribute::Type&gt; const&amp;, draco::DecoderBuffer*, draco::Mesh*) /src/draco/src/draco/compression/mesh/mesh_decoder.cc:24:29
+    #18 0x5639f7 in draco::Decoder::DecodeBufferToGeometry(draco::DecoderBuffer*, draco::Mesh*) /src/draco/src/draco/compression/decode.cc:124:3
+    #19 0x564080 in draco::Decoder::DecodeMeshFromBuffer(draco::DecoderBuffer*) /src/draco/src/draco/compression/decode.cc:89:3
+    #20 0x55ff45 in LLVMFuzzerTestOneInput /src/draco/src/draco/tools/fuzz/draco_mesh_decoder_fuzzer.cc:26:11
+    #21 0x457953 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #22 0x45713a in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*, bool, bool*) cxa_noexception.cpp:0
+    #23 0x458f94 in fuzzer::Fuzzer::ReadAndExecuteSeedCorpora(std::__Fuzzer::vector&lt;fuzzer::SizedFile, std::__Fuzzer::allocator&lt;fuzzer::SizedFile&gt; &gt;&amp;) cxa_noexception.cpp:0
+    #24 0x4591c9 in fuzzer::Fuzzer::Loop(std::__Fuzzer::vector&lt;fuzzer::SizedFile, std::__Fuzzer::allocator&lt;fuzzer::SizedFile&gt; &gt;&amp;) cxa_noexception.cpp:0
+    #25 0x448c0d in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #26 0x471c52 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #27 0x7f7dd1f000b2 in __libc_start_main
+    #28 0x4204ed in _start
+
+MS: 0 ; base unit: 0000000000000000000000000000000000000000
+0x44,0x52,0x41,0x43,0x4f,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x3a,0xf,0x89,0xc0,0x36,0x39,0x39,0x34,0x37,0x39,0x35,0x38,0x34,0x35,0x35,0x54,0xaf,0x2d,0x4f,0x1,0x1,0x1,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0x7e,0x1,0x8d,0x6f,0x1,0x34,0x32,0x36,0xb,0x8a,0xf1,0x5b,0x1,0x1,0x1,0x1,0x1,0x0,0xff,0x0,
+DRACO\001\001\001\001\001\001\001\001\001\001:\017\211\30069947958455T\257-O\001\001\001\377\377\377\377\377\377\377~\001\215o\001426\013\212\361[\001\001\001\001\001\000\377\000
+artifact_prefix=&#x27;/clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/&#x27;; Test unit written to /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/oom-09b1887dc94a29212746bddfff01574e8d92e382
+Base64: RFJBQ08BAQEBAQEBAQEBOg+JwDY5OTQ3OTU4NDU1VK8tTwEBAf////////9+AY1vATQyNguK8VsBAQEBAQD/AA==
+SUMMARY: libFuzzer: out-of-memory
+stat::number_of_executed_units: 65
+stat::average_exec_per_sec:     65
+stat::new_units_added:          0
+stat::slowest_unit_time_sec:    0
+stat::peak_rss_mb:              472
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+   To change the out-of-memory limit use -rss_limit_mb=&lt;N&gt;
+
+    #0 0x530a61  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/draco_libfuzzer_asan/custom/draco_mesh_decoder_fuzzer+0x530a61)
+    #1 0x471498  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/draco_libfuzzer_asan/custom/draco_mesh_decoder_fuzzer+0x471498)
+    #2 0x455715  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/draco_libfuzzer_asan/custom/draco_mesh_decoder_fuzzer+0x455715)
+    #3 0x45562a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/draco_libfuzzer_asan/custom/draco_mesh_decoder_fuzzer+0x45562a)
+    #4 0x538037  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/draco_libfuzzer_asan/custom/draco_mesh_decoder_fuzzer+0x538037)
+    #5 0x4a7053  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/draco_libfuzzer_asan/custom/draco_mesh_decoder_fuzzer+0x4a7053)
+    #6 0x4a7679  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/draco_libfuzzer_asan/custom/draco_mesh_decoder_fuzzer+0x4a7679)
+    #7 0x55d822  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/draco_libfuzzer_asan/custom/draco_mesh_decoder_fuzzer+0x55d822)
+    #8 0x56f6a2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/draco_libfuzzer_asan/custom/draco_mesh_decoder_fuzzer+0x56f6a2)
+    #9 0x5819af  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/draco_libfuzzer_asan/custom/draco_mesh_decoder_fuzzer+0x5819af)
+    #10 0x567b72  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/draco_libfuzzer_asan/custom/draco_mesh_decoder_fuzzer+0x567b72)
+    #11 0x5cf67b  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/draco_libfuzzer_asan/custom/draco_mesh_decoder_fuzzer+0x5cf67b)
+    #12 0x567af0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/draco_libfuzzer_asan/custom/draco_mesh_decoder_fuzzer+0x567af0)
+    #13 0x5639f7  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/draco_libfuzzer_asan/custom/draco_mesh_decoder_fuzzer+0x5639f7)
+    #14 0x564080  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/draco_libfuzzer_asan/custom/draco_mesh_decoder_fuzzer+0x564080)
+    #15 0x55ff45  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/draco_libfuzzer_asan/custom/draco_mesh_decoder_fuzzer+0x55ff45)
+    #16 0x457953  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/draco_libfuzzer_asan/custom/draco_mesh_decoder_fuzzer+0x457953)
+    #17 0x45713a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/draco_libfuzzer_asan/custom/draco_mesh_decoder_fuzzer+0x45713a)
+    #18 0x458f94  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/draco_libfuzzer_asan/custom/draco_mesh_decoder_fuzzer+0x458f94)
+    #19 0x4591c9  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/draco_libfuzzer_asan/custom/draco_mesh_decoder_fuzzer+0x4591c9)
+    #20 0x448c0d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/draco_libfuzzer_asan/custom/draco_mesh_decoder_fuzzer+0x448c0d)
+    #21 0x471c52  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/draco_libfuzzer_asan/custom/draco_mesh_decoder_fuzzer+0x471c52)
+    #22 0x7f7dd1f000b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #23 0x4204ed  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/draco_libfuzzer_asan/custom/draco_mesh_decoder_fuzzer+0x4204ed)

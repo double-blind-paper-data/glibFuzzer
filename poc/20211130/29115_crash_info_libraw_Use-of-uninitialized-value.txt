@@ -1,0 +1,51 @@
+Testcase id: 29115
+Job: libraw_honggfuzz_msan
+Crash Type: Use-of-uninitialized-value
+isSecurity: True
+Crash state: LibRaw::parse_tiff_ifd
+LibRaw::parse_tiff
+LibRaw::identify
+Poc: 29115.testcase
+engine: honggfuzz
+fully_qualified_name: honggfuzz_libraw_raf_fuzzer
+target: libraw_raf_fuzzer
+name: honggfuzz
+[Environment] MSAN_OPTIONS=allocator_release_to_os_interval_ms=500:halt_on_error=1:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:print_stats=1:print_summary=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+==1791==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x71a2fb in LibRaw::parse_tiff_ifd(int) /src/libraw/src/metadata/tiff.cpp:943:34
+    #1 0x71b7e6 in LibRaw::parse_tiff(int) /src/libraw/src/metadata/tiff.cpp:1546:9
+    #2 0x681e2f in LibRaw::identify() /src/libraw/src/metadata/identify.cpp:510:14
+    #3 0x4df4a4 in LibRaw::open_datastream(LibRaw_abstract_datastream*) /src/libraw/src/utils/open.cpp:480:4
+    #4 0x4dd825 in LibRaw::open_buffer(void const*, unsigned long) /src/libraw/src/utils/open.cpp:240:13
+    #5 0x4a28dd in LLVMFuzzerTestOneInput /src/libraw_fuzzer.cc:41:24
+    #6 0x4a32ae in main
+    #7 0x7ffff7c5b0b2 in __libc_start_main
+    #8 0x41e60d in _start
+
+  Uninitialized value was created by an allocation of &#x27;cfa_pat&#x27; in the stack frame of function &#x27;_ZN6LibRaw14parse_tiff_ifdEi&#x27;
+    #0 0x6fbe60 in LibRaw::parse_tiff_ifd(int) /src/libraw/src/metadata/tiff.cpp:23
+
+SUMMARY: MemorySanitizer: use-of-uninitialized-value (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_honggfuzz_msan/custom/libraw_raf_fuzzer+0x71a2fb)
+Unique heap origins: 42
+Stack depot allocated bytes: 1900544
+Unique origin histories: 12
+History depot allocated bytes: 196608
+Exiting
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+==1791==WARNING: MemorySanitizer: use-of-uninitialized-value
+    #0 0x71a2fb  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_honggfuzz_msan/custom/libraw_raf_fuzzer+0x71a2fb)
+    #1 0x71b7e6  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_honggfuzz_msan/custom/libraw_raf_fuzzer+0x71b7e6)
+    #2 0x681e2f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_honggfuzz_msan/custom/libraw_raf_fuzzer+0x681e2f)
+    #3 0x4df4a4  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_honggfuzz_msan/custom/libraw_raf_fuzzer+0x4df4a4)
+    #4 0x4dd825  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_honggfuzz_msan/custom/libraw_raf_fuzzer+0x4dd825)
+    #5 0x4a28dd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_honggfuzz_msan/custom/libraw_raf_fuzzer+0x4a28dd)
+    #6 0x4a32ae  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_honggfuzz_msan/custom/libraw_raf_fuzzer+0x4a32ae)
+    #7 0x7ffff7c5b0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #8 0x41e60d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_honggfuzz_msan/custom/libraw_raf_fuzzer+0x41e60d)
+
+  Uninitialized value was created by an allocation of &#x27;cfa_pat&#x27; in the stack frame of function &#x27;_ZN6LibRaw14parse_tiff_ifdEi&#x27;
+    #0 0x6fbe60  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libraw_honggfuzz_msan/custom/libraw_raf_fuzzer+0x6fbe60)

@@ -1,0 +1,84 @@
+Testcase id: 125842
+Job: icu_libfuzzer_asan
+Crash Type: Timeout
+isSecurity: False
+Crash state: number_format_fuzzer
+Poc: 125842.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_number_format_fuzzer
+target: number_format_fuzzer
+name: libFuzzer
+[Environment] ASAN_OPTIONS=alloc_dealloc_mismatch=0:allocator_may_return_null=1:allocator_release_to_os_interval_ms=500:allow_user_segv_handler=0:check_malloc_usable_size=0:detect_leaks=1:detect_odr_violation=0:detect_stack_use_after_return=1:exitcode=77:fast_unwind_on_fatal=0:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:max_uar_stack_size_log=16:print_scariness=1:print_summary=1:print_suppressions=0:quarantine_size_mb=64:redzone=16:strict_memcmp=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 3075673404
+INFO: Loaded 1 modules   (74106 inline 8-bit counters): 74106 [0x2a43a98, 0x2a55c12),
+INFO: Loaded 1 PC tables (74106 PCs): 74106 [0x280c868,0x292e008),
+INFO:        0 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases-disk/temp-20/new
+INFO:     1982 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases-disk/temp-20/mutations
+INFO:      125 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases-disk/temp-20/subset
+INFO: -max_len is not provided; libFuzzer will not generate inputs larger than 930834 bytes
+INFO: seed corpus: files: 2107 min: 1b max: 930834b total: 4656915b rss: 65Mb
+ALARM: working on the last Unit for 36 seconds
+       and the timeout value is 25 (use -timeout=N to change)
+MS: 0 ; base unit: 0000000000000000000000000000000000000000
+artifact_prefix=&#x27;/clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/&#x27;; Test unit written to /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/timeout-43943aff3377781989b1f98848535068900d17c9
+==131769== ERROR: libFuzzer: timeout after 36 seconds
+    #0 0x52ffb1 in __sanitizer_print_stack_trace /src/llvm-project/compiler-rt/lib/asan/asan_stack.cpp:87:3
+    #1 0x4709e8 in fuzzer::PrintStackTrace() cxa_noexception.cpp:0
+    #2 0x455879 in fuzzer::Fuzzer::AlarmCallback() cxa_noexception.cpp:0
+    #3 0x7fd03ea1f3bf in libpthread.so.0
+    #4 0x53c838 in __sanitizer::internal_memmove(void*, void const*, unsigned long) /src/llvm-project/compiler-rt/lib/sanitizer_common/sanitizer_libc.cpp:68:14
+    #5 0x525965 in __asan_memmove /src/llvm-project/compiler-rt/lib/asan/asan_interceptors_memintrinsics.cpp:30:3
+    #6 0x578bbe in icu_70::number::impl::DecimalQuantity::shiftLeft(int) /src/icu/icu4c/source/i18n/number_decimalquantity.cpp:1030:9
+    #7 0x5784a4 in icu_70::number::impl::DecimalQuantity::appendDigit(signed char, int, bool) /src/icu/icu4c/source/i18n/number_decimalquantity.cpp:908:5
+    #8 0x82ca6f in icu_70::numparse::impl::DecimalMatcher::match(icu_70::StringSegment&amp;, icu_70::numparse::impl::ParsedNumber&amp;, signed char, UErrorCode&amp;) const /src/icu/icu4c/source/i18n/numparse_decimal.cpp:186:28
+    #9 0x82c1f2 in icu_70::numparse::impl::DecimalMatcher::match(icu_70::StringSegment&amp;, icu_70::numparse::impl::ParsedNumber&amp;, UErrorCode&amp;) const /src/icu/icu4c/source/i18n/numparse_decimal.cpp:96:12
+    #10 0x790f96 in parseGreedy /src/icu/icu4c/source/i18n/numparse_impl.cpp:275:18
+    #11 0x790f96 in icu_70::numparse::impl::NumberParserImpl::parse(icu_70::UnicodeString const&amp;, int, bool, icu_70::numparse::impl::ParsedNumber&amp;, UErrorCode&amp;) const /src/icu/icu4c/source/i18n/numparse_impl.cpp:246:9
+    #12 0x6b04a8 in icu_70::DecimalFormat::parse(icu_70::UnicodeString const&amp;, icu_70::Formattable&amp;, icu_70::ParsePosition&amp;) const /src/icu/icu4c/source/i18n/decimfmt.cpp:742:13
+    #13 0x582d60 in icu_70::NumberFormat::parse(icu_70::UnicodeString const&amp;, icu_70::Formattable&amp;, UErrorCode&amp;) const /src/icu/icu4c/source/i18n/numfmt.cpp:723:5
+    #14 0x55f7d1 in LLVMFuzzerTestOneInput /src/icu/icu4c/source/test/fuzzer/number_format_fuzzer.cpp:42:8
+    #15 0x456ea3 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #16 0x45668a in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*, bool, bool*) cxa_noexception.cpp:0
+    #17 0x4584e4 in fuzzer::Fuzzer::ReadAndExecuteSeedCorpora(std::__Fuzzer::vector&lt;fuzzer::SizedFile, std::__Fuzzer::allocator&lt;fuzzer::SizedFile&gt; &gt;&amp;) cxa_noexception.cpp:0
+    #18 0x458719 in fuzzer::Fuzzer::Loop(std::__Fuzzer::vector&lt;fuzzer::SizedFile, std::__Fuzzer::allocator&lt;fuzzer::SizedFile&gt; &gt;&amp;) cxa_noexception.cpp:0
+    #19 0x44815d in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #20 0x4711a2 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #21 0x7fd03e8130b2 in __libc_start_main
+    #22 0x41fa3d in _start
+
+SUMMARY: libFuzzer: timeout
+stat::number_of_executed_units: 2510
+stat::average_exec_per_sec:     64
+stat::new_units_added:          0
+stat::slowest_unit_time_sec:    0
+stat::peak_rss_mb:              142
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+artifact_prefix=&#x27;/clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/&#x27;; Test unit written to /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/timeout-43943aff3377781989b1f98848535068900d17c9
+==131769== ERROR: libFuzzer: timeout after 36 seconds
+    #0 0x52ffb1  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/icu_libfuzzer_asan/custom/number_format_fuzzer+0x52ffb1)
+    #1 0x4709e8  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/icu_libfuzzer_asan/custom/number_format_fuzzer+0x4709e8)
+    #2 0x455879  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/icu_libfuzzer_asan/custom/number_format_fuzzer+0x455879)
+    #3 0x7fd03ea1f3bf  (/lib/x86_64-linux-gnu/libpthread.so.0+0x153bf)
+    #4 0x53c838  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/icu_libfuzzer_asan/custom/number_format_fuzzer+0x53c838)
+    #5 0x525965  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/icu_libfuzzer_asan/custom/number_format_fuzzer+0x525965)
+    #6 0x578bbe  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/icu_libfuzzer_asan/custom/number_format_fuzzer+0x578bbe)
+    #7 0x5784a4  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/icu_libfuzzer_asan/custom/number_format_fuzzer+0x5784a4)
+    #8 0x82ca6f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/icu_libfuzzer_asan/custom/number_format_fuzzer+0x82ca6f)
+    #9 0x82c1f2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/icu_libfuzzer_asan/custom/number_format_fuzzer+0x82c1f2)
+    #10 0x790f96  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/icu_libfuzzer_asan/custom/number_format_fuzzer+0x790f96)
+    #11 0x6b04a8  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/icu_libfuzzer_asan/custom/number_format_fuzzer+0x6b04a8)
+    #12 0x582d60  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/icu_libfuzzer_asan/custom/number_format_fuzzer+0x582d60)
+    #13 0x55f7d1  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/icu_libfuzzer_asan/custom/number_format_fuzzer+0x55f7d1)
+    #14 0x456ea3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/icu_libfuzzer_asan/custom/number_format_fuzzer+0x456ea3)
+    #15 0x45668a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/icu_libfuzzer_asan/custom/number_format_fuzzer+0x45668a)
+    #16 0x4584e4  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/icu_libfuzzer_asan/custom/number_format_fuzzer+0x4584e4)
+    #17 0x458719  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/icu_libfuzzer_asan/custom/number_format_fuzzer+0x458719)
+    #18 0x44815d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/icu_libfuzzer_asan/custom/number_format_fuzzer+0x44815d)
+    #19 0x4711a2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/icu_libfuzzer_asan/custom/number_format_fuzzer+0x4711a2)
+    #20 0x7fd03e8130b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #21 0x41fa3d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/icu_libfuzzer_asan/custom/number_format_fuzzer+0x41fa3d)

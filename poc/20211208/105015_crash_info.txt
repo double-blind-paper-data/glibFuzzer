@@ -1,0 +1,69 @@
+Testcase id: 105015
+Job: gpac_libfuzzer_ubsan
+Crash Type: Undefined-shift
+isSecurity: False
+Crash state: av1_parse_tile_group
+av1_parse_frame
+gf_av1_parse_obu
+Poc: 105015.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_fuzz_parse
+target: fuzz_parse
+name: libFuzzer
+[Environment] UBSAN_OPTIONS=dedup_token_length=3:exitcode=77:print_stacktrace=1:silence_unsigned_overflow=1:symbolize=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+Command: /clusterfuzz/run_bot/clusterfuzz/bot/builds/gpac_libfuzzer_ubsan/custom/fuzz_parse -rss_limit_mb=2560 -timeout=60 -runs=100 /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/69e07b21f0ff5e68547561254c5e704daa7a2efcd023d2bfac5259fd967a7a3f
+Time ran: 0.019666671752929688
+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 3156539231
+INFO: Loaded 1 modules   (289120 inline 8-bit counters): 289120 [0x135b3f8, 0x13a1d58),
+INFO: Loaded 1 PC tables (289120 PCs): 289120 [0x13a1d58,0x180b358),
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/gpac_libfuzzer_ubsan/custom/fuzz_parse: Running 1 inputs 100 time(s) each.
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/69e07b21f0ff5e68547561254c5e704daa7a2efcd023d2bfac5259fd967a7a3f
+media_tools/av_parsers.c:2810:14: runtime error: left shift of 255 by 24 places cannot be represented in type &#x27;int&#x27;
+    #0 0x57981d in aom_av1_le /src/gpac/src/media_tools/av_parsers.c:2810:14
+    #1 0x57981d in av1_parse_tile_group /src/gpac/src/media_tools/av_parsers.c:4069:28
+    #2 0x579132 in av1_parse_frame /src/gpac/src/media_tools/av_parsers.c:4120:9
+    #3 0x575497 in gf_av1_parse_obu /src/gpac/src/media_tools/av_parsers.c:4215:7
+    #4 0x55efe1 in gf_odf_av1_cfg_read_bs_size /src/gpac/src/odf/descriptors.c:1586:7
+    #5 0x648e86 in av1c_box_read /src/gpac/src/isomedia/avc_ext.c:3184:16
+    #6 0x6a4fc1 in gf_isom_box_read /src/gpac/src/isomedia/box_funcs.c:1817:9
+    #7 0x6a3a32 in gf_isom_box_parse_ex /src/gpac/src/isomedia/box_funcs.c:263:14
+    #8 0x6a2c36 in gf_isom_parse_root_box /src/gpac/src/isomedia/box_funcs.c:38:8
+    #9 0x4b5b8f in gf_isom_parse_movie_boxes_internal /src/gpac/src/isomedia/isom_intern.c:320:7
+    #10 0x4b5943 in gf_isom_parse_movie_boxes /src/gpac/src/isomedia/isom_intern.c:783:6
+    #11 0x4b8a50 in gf_isom_open_file /src/gpac/src/isomedia/isom_intern.c:903:19
+    #12 0x4b49da in LLVMFuzzerTestOneInput /src/gpac/fuzz_parse.c:19:13
+    #13 0x4417a3 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #14 0x42d0b2 in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:324:6
+    #15 0x432b7a in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #16 0x45baa2 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #17 0x7fef8ac6e0b2 in __libc_start_main
+    #18 0x40a33d in _start
+
+SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior media_tools/av_parsers.c:2810:14 in
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/69e07b21f0ff5e68547561254c5e704daa7a2efcd023d2bfac5259fd967a7a3f
+media_tools/av_parsers.c:2810:14: runtime error: left shift of 255 by 24 places cannot be represented in type &#x27;int&#x27;
+    #0 0x57981d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/gpac_libfuzzer_ubsan/custom/fuzz_parse+0x57981d)
+    #1 0x579132  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/gpac_libfuzzer_ubsan/custom/fuzz_parse+0x579132)
+    #2 0x575497  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/gpac_libfuzzer_ubsan/custom/fuzz_parse+0x575497)
+    #3 0x55efe1  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/gpac_libfuzzer_ubsan/custom/fuzz_parse+0x55efe1)
+    #4 0x648e86  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/gpac_libfuzzer_ubsan/custom/fuzz_parse+0x648e86)
+    #5 0x6a4fc1  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/gpac_libfuzzer_ubsan/custom/fuzz_parse+0x6a4fc1)
+    #6 0x6a3a32  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/gpac_libfuzzer_ubsan/custom/fuzz_parse+0x6a3a32)
+    #7 0x6a2c36  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/gpac_libfuzzer_ubsan/custom/fuzz_parse+0x6a2c36)
+    #8 0x4b5b8f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/gpac_libfuzzer_ubsan/custom/fuzz_parse+0x4b5b8f)
+    #9 0x4b5943  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/gpac_libfuzzer_ubsan/custom/fuzz_parse+0x4b5943)
+    #10 0x4b8a50  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/gpac_libfuzzer_ubsan/custom/fuzz_parse+0x4b8a50)
+    #11 0x4b49da  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/gpac_libfuzzer_ubsan/custom/fuzz_parse+0x4b49da)
+    #12 0x4417a3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/gpac_libfuzzer_ubsan/custom/fuzz_parse+0x4417a3)
+    #13 0x42d0b2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/gpac_libfuzzer_ubsan/custom/fuzz_parse+0x42d0b2)
+    #14 0x432b7a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/gpac_libfuzzer_ubsan/custom/fuzz_parse+0x432b7a)
+    #15 0x45baa2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/gpac_libfuzzer_ubsan/custom/fuzz_parse+0x45baa2)
+    #16 0x7fef8ac6e0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #17 0x40a33d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/gpac_libfuzzer_ubsan/custom/fuzz_parse+0x40a33d)

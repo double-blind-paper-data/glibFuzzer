@@ -1,0 +1,297 @@
+Testcase id: 114428
+Job: c-blosc2_libfuzzer_ubsan
+Crash Type: Abrt
+isSecurity: False
+Crash state: ZSTD_freeDDict
+blosc2_free_ctx
+blosc2_schunk_free
+Poc: 114428.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_decompress_frame_fuzzer
+target: decompress_frame_fuzzer
+name: libFuzzer
+[Environment] UBSAN_OPTIONS=allocator_release_to_os_interval_ms=500:exitcode=77:halt_on_error=1:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:print_stacktrace=1:print_summary=1:print_suppressions=0:silence_unsigned_overflow=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 1410174981
+INFO: Loaded 1 modules   (73010 inline 8-bit counters): 73010 [0x96bda8, 0x97dada),
+INFO: Loaded 1 PC tables (73010 PCs): 73010 [0x7d4f98,0x8f22b8),
+INFO:        0 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases-disk/temp-20/new
+INFO:     1749 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/data-bundles/decompress_frame_fuzzer
+INFO: -max_len is not provided; libFuzzer will not generate inputs larger than 141061 bytes
+INFO: seed corpus: files: 1749 min: 1b max: 141061b total: 12949210b rss: 64Mb
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -5
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -6
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -6
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -6
+Decompression error.  Error code: -3
+Decompression error.  Error code: -6
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -12
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -12
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -5
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -9
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -11
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -11
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -18
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -10
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -9
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -5
+Decompression error.  Error code: -5
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -10
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -18
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decompression error.  Error code: -3
+Decomprfree(): invalid pointer
+UndefinedBehaviorSanitizer:DEADLYSIGNAL
+==4531==ERROR: UndefinedBehaviorSanitizer: ABRT on unknown address 0x03e8000011b3 (pc 0x7f799a98118b bp 0x7ffc16bcac80 sp 0x7ffc16bca930 T4531)
+    #0 0x7f799a98118b in raise
+    #1 0x7f799a960858 in abort
+    #2 0x7f799a9cb3ed in libc.so.6
+    #3 0x7f799a9d347b in libc.so.6
+    #4 0x7f799a9d4cab in libc.so.6
+    #5 0x6fadb4 in ZSTD_freeDDict /src/c-blosc2/internal-complibs/zstd-1.5.0/decompress/zstd_ddict.c:216:9
+    #6 0x4b9b1b in blosc2_free_ctx /src/c-blosc2/blosc/blosc2.c:3567:5
+    #7 0x4c99b9 in blosc2_schunk_free /src/c-blosc2/blosc/schunk.c:418:5
+    #8 0x4b3564 in LLVMFuzzerTestOneInput /src/c-blosc2/tests/fuzz/fuzz_decompress_frame.c:0
+    #9 0x43f023 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #10 0x43e80a in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*, bool, bool*) cxa_noexception.cpp:0
+    #11 0x440664 in fuzzer::Fuzzer::ReadAndExecuteSeedCorpora(std::__Fuzzer::vector&lt;fuzzer::SizedFile, std::__Fuzzer::allocator&lt;fuzzer::SizedFile&gt; &gt;&amp;) cxa_noexception.cpp:0
+    #12 0x440899 in fuzzer::Fuzzer::Loop(std::__Fuzzer::vector&lt;fuzzer::SizedFile, std::__Fuzzer::allocator&lt;fuzzer::SizedFile&gt; &gt;&amp;) cxa_noexception.cpp:0
+    #13 0x4302dd in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #14 0x459322 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #15 0x7f799a9620b2 in __libc_start_main
+    #16 0x407bbd in _start
+
+UndefinedBehaviorSanitizer can not provide additional info.
+SUMMARY: UndefinedBehaviorSanitizer: ABRT (/lib/x86_64-linux-gnu/libc.so.6+0x4618b)
+==4531==ABORTING
+MS: 0 ; base unit: 0000000000000000000000000000000000000000
+artifact_prefix=&#x27;/clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/&#x27;; Test unit written to /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/crash-0d54f0b996b0213cee4b94bda2154707659fec7e
+stat::number_of_executed_units: 1416
+stat::average_exec_per_sec:     0
+stat::new_units_added:          0
+stat::slowest_unit_time_sec:    0
+stat::peak_rss_mb:              68
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+UndefinedBehaviorSanitizer:DEADLYSIGNAL
+==4531==ERROR: UndefinedBehaviorSanitizer: ABRT on unknown address 0x03e8000011b3 (pc 0x7f799a98118b bp 0x7ffc16bcac80 sp 0x7ffc16bca930 T4531)
+    #0 0x7f799a98118b  (/lib/x86_64-linux-gnu/libc.so.6+0x4618b)
+    #1 0x7f799a960858  (/lib/x86_64-linux-gnu/libc.so.6+0x25858)
+    #2 0x7f799a9cb3ed  (/lib/x86_64-linux-gnu/libc.so.6+0x903ed)
+    #3 0x7f799a9d347b  (/lib/x86_64-linux-gnu/libc.so.6+0x9847b)
+    #4 0x7f799a9d4cab  (/lib/x86_64-linux-gnu/libc.so.6+0x99cab)
+    #5 0x6fadb4  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/c-blosc2_libfuzzer_ubsan/custom/decompress_frame_fuzzer+0x6fadb4)
+    #6 0x4b9b1b  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/c-blosc2_libfuzzer_ubsan/custom/decompress_frame_fuzzer+0x4b9b1b)
+    #7 0x4c99b9  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/c-blosc2_libfuzzer_ubsan/custom/decompress_frame_fuzzer+0x4c99b9)
+    #8 0x4b3564  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/c-blosc2_libfuzzer_ubsan/custom/decompress_frame_fuzzer+0x4b3564)
+    #9 0x43f023  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/c-blosc2_libfuzzer_ubsan/custom/decompress_frame_fuzzer+0x43f023)
+    #10 0x43e80a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/c-blosc2_libfuzzer_ubsan/custom/decompress_frame_fuzzer+0x43e80a)
+    #11 0x440664  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/c-blosc2_libfuzzer_ubsan/custom/decompress_frame_fuzzer+0x440664)
+    #12 0x440899  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/c-blosc2_libfuzzer_ubsan/custom/decompress_frame_fuzzer+0x440899)
+    #13 0x4302dd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/c-blosc2_libfuzzer_ubsan/custom/decompress_frame_fuzzer+0x4302dd)
+    #14 0x459322  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/c-blosc2_libfuzzer_ubsan/custom/decompress_frame_fuzzer+0x459322)
+    #15 0x7f799a9620b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #16 0x407bbd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/c-blosc2_libfuzzer_ubsan/custom/decompress_frame_fuzzer+0x407bbd)

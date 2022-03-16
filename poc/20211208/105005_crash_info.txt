@@ -1,0 +1,73 @@
+Testcase id: 105005
+Job: vlc_libfuzzer_asan
+Crash Type: Direct-leak
+isSecurity: False
+Crash state: Open
+demux_Probe
+vlc_module_load
+Poc: 105005.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_vlc-demux-dec-libfuzzer
+target: vlc-demux-dec-libfuzzer
+name: libFuzzer
+[Environment] ASAN_OPTIONS=exitcode=77
++----------------------------------------Release Build Stacktrace----------------------------------------+
+Command: /clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_libfuzzer_asan/custom/vlc-demux-dec-libfuzzer -rss_limit_mb=2560 -timeout=60 -runs=100 /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/6ac6bd179f3349577b096a7a683db78d9ec17c40d39d45aa9ade765892aea1cf
+Time ran: 0.03685259819030762
+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 2272185646
+INFO: Loaded 1 modules   (62642 inline 8-bit counters): 62642 [0xdecff0, 0xdfc4a2),
+INFO: Loaded 1 PC tables (62642 PCs): 62642 [0xbe6140,0xcdac60),
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_libfuzzer_asan/custom/vlc-demux-dec-libfuzzer: Running 1 inputs 100 time(s) each.
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/6ac6bd179f3349577b096a7a683db78d9ec17c40d39d45aa9ade765892aea1cf
+
+=================================================================
+==22565==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 61288 byte(s) in 1 object(s) allocated from:
+<b>    #0 0x5272dd in malloc /src/llvm-project/compiler-rt/lib/asan/asan_malloc_linux.cpp:129:3</b>
+<b>    #1 0x6d2334 in Open /src/vlc/modules/demux/ty.c:323:13</b>
+<b>    #2 0x955178 in demux_Probe /src/vlc/src/input/demux.c:111:15</b>
+<b>    #3 0x915f6c in vlc_module_load /src/vlc/src/modules/modules.c:243:19</b>
+<b>    #4 0x954bd2 in demux_NewAdvanced /src/vlc/src/input/demux.c:192:20</b>
+<b>    #5 0x953f45 in demux_New /src/vlc/src/input/demux.c:76:12</b>
+<b>    #6 0x55e2b3 in demux_process_stream /src/vlc/test/src/input/demux-run.c:297:22</b>
+<b>    #7 0x55ee81 in libvlc_demux_process_memory /src/vlc/test/src/input/demux-run.c:379:12</b>
+<b>    #8 0x55df72 in LLVMFuzzerTestOneInput /src/vlc/test/vlc-demux-libfuzzer.c:54:5</b>
+<b>    #9 0x458113 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0</b>
+<b>    #10 0x443a22 in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:324:6</b>
+<b>    #11 0x4494ea in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0</b>
+<b>    #12 0x472412 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10</b>
+<b>    #13 0x7fa8bf3020b2 in __libc_start_main</b>
+
+================================================================================
+The following leaks are not necessarily related to the first leak.
+
+
+SUMMARY: AddressSanitizer: 61288 byte(s) leaked in 1 allocation(s).
+
+INFO: a leak has been found in the initial corpus.
+
+INFO: to ignore leaks on libFuzzer side use -detect_leaks=0.
+
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+
+Direct leak of 61288 byte(s) in 1 object(s) allocated from:
+    #0 0x5272dd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_libfuzzer_asan/custom/vlc-demux-dec-libfuzzer+0x5272dd)
+    #1 0x6d2334  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_libfuzzer_asan/custom/vlc-demux-dec-libfuzzer+0x6d2334)
+    #2 0x955178  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_libfuzzer_asan/custom/vlc-demux-dec-libfuzzer+0x955178)
+    #3 0x915f6c  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_libfuzzer_asan/custom/vlc-demux-dec-libfuzzer+0x915f6c)
+    #4 0x954bd2  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_libfuzzer_asan/custom/vlc-demux-dec-libfuzzer+0x954bd2)
+    #5 0x953f45  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_libfuzzer_asan/custom/vlc-demux-dec-libfuzzer+0x953f45)
+    #6 0x55e2b3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_libfuzzer_asan/custom/vlc-demux-dec-libfuzzer+0x55e2b3)
+    #7 0x55ee81  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_libfuzzer_asan/custom/vlc-demux-dec-libfuzzer+0x55ee81)
+    #8 0x55df72  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_libfuzzer_asan/custom/vlc-demux-dec-libfuzzer+0x55df72)
+    #9 0x458113  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_libfuzzer_asan/custom/vlc-demux-dec-libfuzzer+0x458113)
+    #10 0x443a22  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_libfuzzer_asan/custom/vlc-demux-dec-libfuzzer+0x443a22)
+    #11 0x4494ea  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_libfuzzer_asan/custom/vlc-demux-dec-libfuzzer+0x4494ea)
+    #12 0x472412  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/vlc_libfuzzer_asan/custom/vlc-demux-dec-libfuzzer+0x472412)
+    #13 0x7fa8bf3020b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)

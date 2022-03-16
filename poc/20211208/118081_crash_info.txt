@@ -1,0 +1,150 @@
+Testcase id: 118081
+Job: libpg_query_libfuzzer_asan
+Crash Type: Timeout
+isSecurity: False
+Crash state: fuzz_parser
+Poc: 118081.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_fuzz_parser
+target: fuzz_parser
+name: libFuzzer
+[Environment] ASAN_OPTIONS=alloc_dealloc_mismatch=0:allocator_may_return_null=1:allocator_release_to_os_interval_ms=500:allow_user_segv_handler=0:check_malloc_usable_size=0:detect_leaks=1:detect_odr_violation=0:detect_stack_use_after_return=1:exitcode=77:fast_unwind_on_fatal=0:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:max_uar_stack_size_log=16:print_scariness=1:print_summary=1:print_suppressions=0:quarantine_size_mb=64:redzone=16:strict_memcmp=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 3167368920
+INFO: Loaded 1 modules   (21368 inline 8-bit counters): 21368 [0x993c80, 0x998ff8),
+INFO: Loaded 1 PC tables (21368 PCs): 21368 [0x998ff8,0x9ec778),
+INFO:        0 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases-disk/temp-20/new
+INFO:     1974 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases-disk/temp-20/mutations
+INFO:    15073 files found in /clusterfuzz/run_bot/clusterfuzz/bot/inputs/data-bundles/fuzz_parser
+INFO: -max_len is not provided; libFuzzer will not generate inputs larger than 535945 bytes
+INFO: seed corpus: files: 17047 min: 1b max: 535945b total: 48239780b rss: 64Mb
+#16384	pulse  cov: 1269 ft: 7803 corp: 2575/1030Kb exec/s: 1489 rss: 159Mb
+Slowest unit: 11 s:
+artifact_prefix=&#x27;/clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/&#x27;; Test unit written to /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/slow-unit-cb5ee35bf5d816ba629425e46cf28b6374863446
+Slowest unit: 16 s:
+artifact_prefix=&#x27;/clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/&#x27;; Test unit written to /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/slow-unit-baee540b2b783b2d4bf260934a895ae7c2c2f033
+#17048	INITED cov: 1271 ft: 7896 corp: 2637/3014Kb exec/s: 143 rss: 207Mb
+#18829	REDUCE cov: 1271 ft: 7896 corp: 2637/3014Kb lim: 299052 exec/s: 153 rss: 207Mb L: 5/299034 MS: 1 EraseBytes-
+#19182	REDUCE cov: 1271 ft: 7896 corp: 2637/3014Kb lim: 299052 exec/s: 155 rss: 207Mb L: 68/299034 MS: 3 ChangeBinInt-ChangeASCIIInt-EraseBytes-
+#19573	REDUCE cov: 1271 ft: 7896 corp: 2637/3014Kb lim: 299052 exec/s: 159 rss: 207Mb L: 121/299034 MS: 1 EraseBytes-
+#19634	REDUCE cov: 1271 ft: 7896 corp: 2637/3014Kb lim: 299052 exec/s: 159 rss: 207Mb L: 11825/299034 MS: 1 EraseBytes-
+#20660	REDUCE cov: 1271 ft: 7896 corp: 2637/3014Kb lim: 299052 exec/s: 161 rss: 207Mb L: 2418/299034 MS: 1 EraseBytes-
+#20967	REDUCE cov: 1271 ft: 7896 corp: 2637/3014Kb lim: 299052 exec/s: 162 rss: 207Mb L: 47/299034 MS: 2 ShuffleBytes-EraseBytes-
+#21263	REDUCE cov: 1271 ft: 7896 corp: 2637/3014Kb lim: 299052 exec/s: 164 rss: 207Mb L: 2464/299034 MS: 1 EraseBytes-
+#21584	REDUCE cov: 1271 ft: 7896 corp: 2637/3003Kb lim: 299052 exec/s: 167 rss: 207Mb L: 22080/299034 MS: 1 EraseBytes-
+#21586	REDUCE cov: 1271 ft: 7896 corp: 2637/3003Kb lim: 299052 exec/s: 167 rss: 207Mb L: 204/299034 MS: 2 EraseBytes-ChangeBinInt-
+#21784	NEW    cov: 1271 ft: 7897 corp: 2638/3008Kb lim: 299052 exec/s: 168 rss: 207Mb L: 4416/299034 MS: 3 ChangeBinInt-ShuffleBytes-CopyPart-
+#22655	REDUCE cov: 1271 ft: 7897 corp: 2638/3008Kb lim: 299052 exec/s: 175 rss: 207Mb L: 174/299034 MS: 1 EraseBytes-
+#24131	REDUCE cov: 1271 ft: 7897 corp: 2638/3008Kb lim: 299052 exec/s: 182 rss: 207Mb L: 47/299034 MS: 1 EraseBytes-
+#26259	REDUCE cov: 1271 ft: 7897 corp: 2638/3006Kb lim: 299070 exec/s: 195 rss: 207Mb L: 10085/299034 MS: 3 ChangeBit-CMP-EraseBytes- DE: &quot;\000\000\003\377&quot;-
+#28281	REDUCE cov: 1271 ft: 7897 corp: 2638/3006Kb lim: 299088 exec/s: 204 rss: 207Mb L: 6/299034 MS: 2 InsertByte-EraseBytes-
+#28714	REDUCE cov: 1271 ft: 7897 corp: 2638/3006Kb lim: 299088 exec/s: 208 rss: 207Mb L: 129/299034 MS: 3 ChangeBit-EraseBytes-CopyPart-
+#29590	REDUCE cov: 1271 ft: 7897 corp: 2638/2953Kb lim: 299088 exec/s: 214 rss: 207Mb L: 124872/299034 MS: 1 EraseBytes-
+#30240	NEW    cov: 1271 ft: 7898 corp: 2639/3044Kb lim: 299088 exec/s: 153 rss: 207Mb L: 92269/299034 MS: 5 CMP-InsertByte-InsertByte-ChangeBinInt-CopyPart- DE: &quot;?||&quot;-
+#30802	REDUCE cov: 1271 ft: 7898 corp: 2639/3043Kb lim: 299088 exec/s: 156 rss: 207Mb L: 32718/299034 MS: 2 InsertByte-EraseBytes-
+#31283	REDUCE cov: 1271 ft: 7898 corp: 2639/3041Kb lim: 299088 exec/s: 158 rss: 207Mb L: 11669/299034 MS: 1 EraseBytes-
+#31309	REDUCE cov: 1271 ft: 7898 corp: 2639/3041Kb lim: 299088 exec/s: 158 rss: 207Mb L: 11767/299034 MS: 1 EraseBytes-
+#32768	pulse  cov: 1271 ft: 7898 corp: 2639/3041Kb lim: 299088 exec/s: 162 rss: 207Mb
+#32829	REDUCE cov: 1271 ft: 7898 corp: 2639/3041Kb lim: 299088 exec/s: 162 rss: 207Mb L: 11367/299034 MS: 5 CrossOver-EraseBytes-InsertByte-ChangeASCIIInt-CopyPart-
+#33584	REDUCE cov: 1271 ft: 7898 corp: 2639/3036Kb lim: 299088 exec/s: 141 rss: 207Mb L: 23330/299034 MS: 5 ChangeBit-ChangeBinInt-CrossOver-CrossOver-EraseBytes-
+#33699	REDUCE cov: 1271 ft: 7898 corp: 2639/3035Kb lim: 299088 exec/s: 141 rss: 207Mb L: 2601/299034 MS: 5 ChangeByte-PersAutoDict-ShuffleBytes-InsertByte-EraseBytes- DE: &quot;?||&quot;-
+#36025	REDUCE cov: 1271 ft: 7898 corp: 2639/3033Kb lim: 299106 exec/s: 149 rss: 207Mb L: 24672/299034 MS: 1 EraseBytes-
+#37388	REDUCE cov: 1271 ft: 7898 corp: 2639/3028Kb lim: 299106 exec/s: 154 rss: 207Mb L: 17392/299034 MS: 3 CrossOver-ChangeASCIIInt-EraseBytes-
+#37676	REDUCE cov: 1271 ft: 7898 corp: 2639/3028Kb lim: 299106 exec/s: 155 rss: 207Mb L: 159/299034 MS: 3 CMP-ShuffleBytes-EraseBytes- DE: &quot;@?&quot;-
+#38767	REDUCE cov: 1271 ft: 7898 corp: 2639/3028Kb lim: 299106 exec/s: 159 rss: 207Mb L: 435/299034 MS: 1 EraseBytes-
+#40221	REDUCE cov: 1271 ft: 7898 corp: 2639/3028Kb lim: 299106 exec/s: 165 rss: 207Mb L: 18091/299034 MS: 4 CrossOver-ChangeASCIIInt-PersAutoDict-EraseBytes- DE: &quot;?||&quot;-
+#41757	NEW    cov: 1271 ft: 7899 corp: 2640/3071Kb lim: 299106 exec/s: 169 rss: 207Mb L: 44654/299034 MS: 1 CopyPart-
+#42939	REDUCE cov: 1271 ft: 7899 corp: 2640/3071Kb lim: 299106 exec/s: 169 rss: 207Mb L: 12542/299034 MS: 2 ChangeByte-EraseBytes-
+#44100	REDUCE cov: 1271 ft: 7899 corp: 2640/3070Kb lim: 299106 exec/s: 172 rss: 207Mb L: 9729/299034 MS: 1 EraseBytes-
+#44401	REDUCE cov: 1271 ft: 7899 corp: 2640/3070Kb lim: 299106 exec/s: 174 rss: 207Mb L: 25/299034 MS: 1 EraseBytes-
+#45492	REDUCE cov: 1271 ft: 7899 corp: 2640/3070Kb lim: 299106 exec/s: 176 rss: 207Mb L: 80/299034 MS: 1 EraseBytes-
+#46188	REDUCE cov: 1271 ft: 7899 corp: 2640/3069Kb lim: 299106 exec/s: 178 rss: 207Mb L: 10482/299034 MS: 1 EraseBytes-
+#48399	REDUCE cov: 1271 ft: 7899 corp: 2640/3069Kb lim: 299124 exec/s: 185 rss: 207Mb L: 10868/299034 MS: 1 EraseBytes-
+#48532	NEW    cov: 1271 ft: 7900 corp: 2641/3309Kb lim: 299124 exec/s: 162 rss: 207Mb L: 246654/299034 MS: 3 ChangeASCIIInt-ShuffleBytes-CopyPart-
+#51388	REDUCE cov: 1271 ft: 7900 corp: 2641/3309Kb lim: 299142 exec/s: 169 rss: 207Mb L: 99/299034 MS: 1 EraseBytes-
+#53694	REDUCE cov: 1271 ft: 7900 corp: 2641/3309Kb lim: 299160 exec/s: 174 rss: 207Mb L: 1008/299034 MS: 1 EraseBytes-
+#55285	NEW    cov: 1271 ft: 7901 corp: 2642/3314Kb lim: 299160 exec/s: 179 rss: 207Mb L: 4945/299034 MS: 1 CopyPart-
+#56256	REDUCE cov: 1271 ft: 7901 corp: 2642/3303Kb lim: 299160 exec/s: 182 rss: 207Mb L: 70224/299034 MS: 1 EraseBytes-
+Slowest unit: 26 s:
+artifact_prefix=&#x27;/clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/&#x27;; Test unit written to /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/slow-unit-6dcfb689120adf037186f2601978a137e4fa6e5e
+#57978	NEW    cov: 1271 ft: 7902 corp: 2643/3544Kb lim: 299160 exec/s: 162 rss: 207Mb L: 246654/299034 MS: 2 CMP-CopyPart- DE: &quot;\001\000\000\020&quot;-
+#59759	REDUCE cov: 1271 ft: 7902 corp: 2643/3536Kb lim: 299160 exec/s: 146 rss: 207Mb L: 84719/299034 MS: 1 EraseBytes-
+#59866	REDUCE cov: 1271 ft: 7902 corp: 2643/3536Kb lim: 299160 exec/s: 146 rss: 207Mb L: 31/299034 MS: 2 ShuffleBytes-EraseBytes-
+#60427	REDUCE cov: 1271 ft: 7902 corp: 2643/3536Kb lim: 299160 exec/s: 147 rss: 207Mb L: 3/299034 MS: 1 EraseBytes-
+#60473	REDUCE cov: 1271 ft: 7902 corp: 2643/3536Kb lim: 299160 exec/s: 147 rss: 207Mb L: 45/299034 MS: 1 EraseBytes-
+#60922	NEW    cov: 1271 ft: 7903 corp: 2644/3544Kb lim: 299160 exec/s: 148 rss: 207Mb L: 7684/299034 MS: 4 CrossOver-InsertByte-CMP-CopyPart- DE: &quot;\000\000\000\000&quot;-
+#61559	REDUCE cov: 1271 ft: 7903 corp: 2644/3544Kb lim: 299160 exec/s: 149 rss: 207Mb L: 97/299034 MS: 2 CopyPart-EraseBytes-
+#61816	REDUCE cov: 1271 ft: 7903 corp: 2644/3525Kb lim: 299160 exec/s: 140 rss: 207Mb L: 227455/299034 MS: 2 ChangeBinInt-EraseBytes-
+#63037	REDUCE cov: 1271 ft: 7903 corp: 2644/3525Kb lim: 299160 exec/s: 143 rss: 207Mb L: 2/299034 MS: 1 EraseBytes-
+#64501	REDUCE cov: 1271 ft: 7903 corp: 2644/3513Kb lim: 299160 exec/s: 145 rss: 207Mb L: 72230/299034 MS: 4 PersAutoDict-ChangeBinInt-InsertByte-EraseBytes- DE: &quot;\000\000\000\000&quot;-
+#65536	pulse  cov: 1271 ft: 7903 corp: 2644/3513Kb lim: 299160 exec/s: 146 rss: 207Mb
+#66514	REDUCE cov: 1271 ft: 7903 corp: 2644/3509Kb lim: 299178 exec/s: 148 rss: 207Mb L: 23779/299034 MS: 3 ShuffleBytes-ShuffleBytes-EraseBytes-
+#69265	REDUCE cov: 1271 ft: 7903 corp: 2644/3509Kb lim: 299196 exec/s: 144 rss: 207Mb L: 345/299034 MS: 1 EraseBytes-
+#72690	REDUCE cov: 1271 ft: 7903 corp: 2644/3508Kb lim: 299214 exec/s: 150 rss: 207Mb L: 10290/299034 MS: 5 EraseBytes-CMP-CopyPart-ShuffleBytes-CopyPart- DE: &quot;\001\000&quot;-
+#72917	REDUCE cov: 1271 ft: 7903 corp: 2644/3508Kb lim: 299214 exec/s: 151 rss: 207Mb L: 64/299034 MS: 2 CopyPart-EraseBytes-
+#73069	REDUCE cov: 1271 ft: 7903 corp: 2644/3508Kb lim: 299214 exec/s: 151 rss: 207Mb L: 118/299034 MS: 2 CMP-EraseBytes- DE: &quot;+?&quot;-
+#73592	REDUCE cov: 1271 ft: 7903 corp: 2644/3508Kb lim: 299214 exec/s: 152 rss: 207Mb L: 1689/299034 MS: 3 ShuffleBytes-ChangeASCIIInt-EraseBytes-
+#73753	NEW    cov: 1271 ft: 7904 corp: 2645/3749Kb lim: 299214 exec/s: 144 rss: 207Mb L: 246657/299034 MS: 1 PersAutoDict- DE: &quot;?||&quot;-
+#74375	REDUCE cov: 1271 ft: 7904 corp: 2645/3748Kb lim: 299214 exec/s: 145 rss: 207Mb L: 17541/299034 MS: 2 ChangeASCIIInt-EraseBytes-
+#75431	REDUCE cov: 1271 ft: 7904 corp: 2645/3737Kb lim: 299214 exec/s: 140 rss: 207Mb L: 235738/299034 MS: 1 EraseBytes-
+#78347	REDUCE cov: 1271 ft: 7904 corp: 2645/3737Kb lim: 299232 exec/s: 145 rss: 207Mb L: 9834/299034 MS: 1 EraseBytes-
+#78808	REDUCE cov: 1271 ft: 7904 corp: 2645/3737Kb lim: 299232 exec/s: 145 rss: 207Mb L: 1166/299034 MS: 1 EraseBytes-
+#79044	NEW    cov: 1271 ft: 7905 corp: 2646/3770Kb lim: 299232 exec/s: 146 rss: 207Mb L: 34015/299034 MS: 1 CopyPart-
+#79692	REDUCE cov: 1271 ft: 7905 corp: 2646/3769Kb lim: 299232 exec/s: 147 rss: 207Mb L: 18470/299034 MS: 3 ChangeBit-ChangeBinInt-EraseBytes-
+ALARM: working on the last Unit for 25 seconds
+       and the timeout value is 25 (use -timeout=N to change)
+MS: 1 InsertByte-; base unit: 6dcfb689120adf037186f2601978a137e4fa6e5e
+artifact_prefix=&#x27;/clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/&#x27;; Test unit written to /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/timeout-8571fdfe566ed1f411219d27ba32950ff3af88d5
+==18011== ERROR: libFuzzer: timeout after 25 seconds
+    #0 0x52fc51 in __sanitizer_print_stack_trace /src/llvm-project/compiler-rt/lib/asan/asan_stack.cpp:87:3
+    #1 0x470688 in fuzzer::PrintStackTrace() cxa_noexception.cpp:0
+    #2 0x455519 in fuzzer::Fuzzer::AlarmCallback() cxa_noexception.cpp:0
+    #3 0x7f26d05203bf in libpthread.so.0
+    #4 0x5cdb89 in core_yylex /src/libpg_query/scan.c:4843:3
+    #5 0x55df76 in base_yylex /src/libpg_query/src/postgres/src_backend_parser_parser.c:123:15
+    #6 0x560660 in base_yyparse /src/libpg_query/gram.c:27896:16
+    #7 0x55dc97 in raw_parser /src/libpg_query/src/postgres/src_backend_parser_parser.c:71:13
+    #8 0x55d111 in pg_query_raw_parse /src/libpg_query/src/pg_query_parse.c:45:17
+    #9 0x55d3ba in pg_query_parse /src/libpg_query/src/pg_query_parse.c:95:24
+    #10 0x55ca44 in LLVMFuzzerTestOneInput /src/libpg_query/test/fuzz/fuzz_parser.c:16:30
+    #11 0x456b43 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #12 0x45632a in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*, bool, bool*) cxa_noexception.cpp:0
+    #13 0x457bcb in fuzzer::Fuzzer::MutateAndTestOne() cxa_noexception.cpp:0
+    #14 0x4586b5 in fuzzer::Fuzzer::Loop(std::__Fuzzer::vector&lt;fuzzer::SizedFile, std::__Fuzzer::allocator&lt;fuzzer::SizedFile&gt; &gt;&amp;) cxa_noexception.cpp:0
+    #15 0x447dfd in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #16 0x470e42 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #17 0x7f26d01c30b2 in __libc_start_main
+    #18 0x41f6dd in _start
+
+SUMMARY: libFuzzer: timeout
+stat::number_of_executed_units: 81063
+stat::average_exec_per_sec:     141
+stat::new_units_added:          63
+stat::slowest_unit_time_sec:    26
+stat::peak_rss_mb:              207
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+artifact_prefix=&#x27;/clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/&#x27;; Test unit written to /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/timeout-8571fdfe566ed1f411219d27ba32950ff3af88d5
+==18011== ERROR: libFuzzer: timeout after 25 seconds
+    #0 0x52fc51  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x52fc51)
+    #1 0x470688  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x470688)
+    #2 0x455519  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x455519)
+    #3 0x7f26d05203bf  (/lib/x86_64-linux-gnu/libpthread.so.0+0x153bf)
+    #4 0x5cdb89  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x5cdb89)
+    #5 0x55df76  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x55df76)
+    #6 0x560660  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x560660)
+    #7 0x55dc97  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x55dc97)
+    #8 0x55d111  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x55d111)
+    #9 0x55d3ba  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x55d3ba)
+    #10 0x55ca44  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x55ca44)
+    #11 0x456b43  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x456b43)
+    #12 0x45632a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x45632a)
+    #13 0x457bcb  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x457bcb)
+    #14 0x4586b5  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x4586b5)
+    #15 0x447dfd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x447dfd)
+    #16 0x470e42  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x470e42)
+    #17 0x7f26d01c30b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #18 0x41f6dd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libpg_query_libfuzzer_asan/custom/fuzz_parser+0x41f6dd)

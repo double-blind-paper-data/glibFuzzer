@@ -1,0 +1,43 @@
+Testcase id: 67373
+Job: dnsmasq_honggfuzz_asan
+Crash Type: Floating-point-exception
+isSecurity: False
+Crash state: address_allocate
+dhcp_reply
+dhcp_packet
+Poc: 67373.testcase
+engine: honggfuzz
+fully_qualified_name: honggfuzz_fuzz_dhcp
+target: fuzz_dhcp
+name: honggfuzz
+[Environment] ASAN_OPTIONS=alloc_dealloc_mismatch=0:allocator_may_return_null=1:allocator_release_to_os_interval_ms=500:allow_user_segv_handler=0:check_malloc_usable_size=0:detect_leaks=1:detect_odr_violation=0:detect_stack_use_after_return=1:fast_unwind_on_fatal=0:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:max_uar_stack_size_log=16:print_scariness=1:print_summary=1:print_suppressions=0:quarantine_size_mb=64:redzone=16:strict_memcmp=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+=================================================================
+==207085==ERROR: AddressSanitizer: FPE on unknown address 0x0000004fb938 (pc 0x0000004fb938 bp 0x7fffffffca20 sp 0x7fffffffc9a0 T0)
+SCARINESS: 10 (signal)
+    #0 0x4fb938 in address_allocate /src/dnsmasq/src/dhcp.c:808:21
+    #1 0x58bc7f in dhcp_reply /src/dnsmasq/src/rfc2131.c:626:11
+    #2 0x4f775f in dhcp_packet /src/dnsmasq/src/dhcp.c:354:21
+    #3 0x4e45b3 in FuzzDhcp /src/fuzz_dhcp.c:41:3
+    #4 0x4e4812 in LLVMFuzzerTestOneInput /src/fuzz_dhcp.c:78:3
+    #5 0x4d5c9e in main
+    #6 0x7ffff7c5b0b2 in __libc_start_main
+    #7 0x41d79d in _start
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: FPE (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_honggfuzz_asan/custom/fuzz_dhcp+0x4fb938)
+==207085==ABORTING
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+==207085==ERROR: AddressSanitizer: FPE on unknown address 0x0000004fb938 (pc 0x0000004fb938 bp 0x7fffffffca20 sp 0x7fffffffc9a0 T0)
+SCARINESS: 10 (signal)
+    #0 0x4fb938  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_honggfuzz_asan/custom/fuzz_dhcp+0x4fb938)
+    #1 0x58bc7f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_honggfuzz_asan/custom/fuzz_dhcp+0x58bc7f)
+    #2 0x4f775f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_honggfuzz_asan/custom/fuzz_dhcp+0x4f775f)
+    #3 0x4e45b3  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_honggfuzz_asan/custom/fuzz_dhcp+0x4e45b3)
+    #4 0x4e4812  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_honggfuzz_asan/custom/fuzz_dhcp+0x4e4812)
+    #5 0x4d5c9e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_honggfuzz_asan/custom/fuzz_dhcp+0x4d5c9e)
+    #6 0x7ffff7c5b0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #7 0x41d79d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/dnsmasq_honggfuzz_asan/custom/fuzz_dhcp+0x41d79d)

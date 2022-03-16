@@ -1,0 +1,82 @@
+Testcase id: 64716
+Job: libheif_afl_asan
+Crash Type: Heap-buffer-overflow READ {*}
+isSecurity: True
+Crash state: Op_YCbCr_to_RGB<unsigned char>::convert_colorspace
+heif::ColorConversionPipeline::convert_image
+heif::convert_colorspace
+Poc: 64716.testcase
+engine: afl
+fully_qualified_name: afl_color-conversion-fuzzer
+target: color-conversion-fuzzer
+name: afl
+[Environment] ASAN_OPTIONS=abort_on_error=1:alloc_dealloc_mismatch=0:allocator_may_return_null=1:allocator_release_to_os_interval_ms=500:allow_user_segv_handler=0:check_malloc_usable_size=0:detect_leaks=1:detect_odr_violation=0:detect_stack_use_after_return=1:fast_unwind_on_fatal=0:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:max_uar_stack_size_log=16:print_scariness=1:print_summary=1:print_suppressions=0:quarantine_size_mb=64:redzone=16:strict_memcmp=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+=================================================================
+==70266==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x622000755d0f at pc 0x0000004a1f57 bp 0x7ffd19a47930 sp 0x7ffd19a470f8
+READ of size 132 at 0x622000755d0f thread T0
+SCARINESS: 26 (multi-byte-read-heap-buffer-overflow)
+    #0 0x4a1f56 in __asan_memcpy /src/llvm-project/compiler-rt/lib/asan/asan_interceptors_memintrinsics.cpp:22:3
+    #1 0x65a890 in Op_YCbCr_to_RGB&lt;unsigned char&gt;::convert_colorspace(std::__1::shared_ptr&lt;heif::HeifPixelImage const&gt; const&amp;, heif::ColorState, heif::ColorConversionOptions) /src/libheif/libheif/heif_colorconversion.cc:529:7
+    #2 0x64bf8b in heif::ColorConversionPipeline::convert_image(std::__1::shared_ptr&lt;heif::HeifPixelImage&gt; const&amp;) /src/libheif/libheif/heif_colorconversion.cc:3208:19
+    #3 0x64cd4f in heif::convert_colorspace(std::__1::shared_ptr&lt;heif::HeifPixelImage&gt; const&amp;, heif_colorspace, heif_chroma, std::__1::shared_ptr&lt;heif::color_profile_nclx const&gt;, int) /src/libheif/libheif/heif_colorconversion.cc:3315:19
+    #4 0x68a304 in LLVMFuzzerTestOneInput /src/libheif/libheif/color_conversion_fuzzer.cc:243:20
+    #5 0x68bf1f in main /src/aflplusplus/utils/aflpp_driver/aflpp_driver.c:303:7
+    #6 0x7f1b484420b2 in __libc_start_main
+    #7 0x42191d in _start
+
+0x622000755d0f is located 0 bytes to the right of 5135-byte region [0x622000754900,0x622000755d0f)
+allocated by thread T0 here:
+    #0 0x4d992a in operator new[](unsigned long) /src/llvm-project/compiler-rt/lib/asan/asan_new_delete.cpp:98:3
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_afl_asan/custom/color-conversion-fuzzer+0x4a1f56)
+Shadow bytes around the buggy address:
+  0x0c44800e2b50: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c44800e2b60: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c44800e2b70: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c44800e2b80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c44800e2b90: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=&gt;0x0c44800e2ba0: 00[07]fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c44800e2bb0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c44800e2bc0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c44800e2bd0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c44800e2be0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c44800e2bf0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==70266==ABORTING
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+READ of size 132 at 0x622000755d0f thread T0
+SCARINESS: 26 (multi-byte-read-heap-buffer-overflow)
+    #0 0x4a1f56  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_afl_asan/custom/color-conversion-fuzzer+0x4a1f56)
+    #1 0x65a890  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_afl_asan/custom/color-conversion-fuzzer+0x65a890)
+    #2 0x64bf8b  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_afl_asan/custom/color-conversion-fuzzer+0x64bf8b)
+    #3 0x64cd4f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_afl_asan/custom/color-conversion-fuzzer+0x64cd4f)
+    #4 0x68a304  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_afl_asan/custom/color-conversion-fuzzer+0x68a304)
+    #5 0x68bf1f  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_afl_asan/custom/color-conversion-fuzzer+0x68bf1f)
+    #6 0x7f1b484420b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #7 0x42191d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_afl_asan/custom/color-conversion-fuzzer+0x42191d)
+
+0x622000755d0f is located 0 bytes to the right of 5135-byte region [0x622000754900,0x622000755d0f)
+allocated by thread T0 here:
+    #0 0x4d992a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libheif_afl_asan/custom/color-conversion-fuzzer+0x4d992a)

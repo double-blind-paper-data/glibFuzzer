@@ -1,0 +1,597 @@
+Testcase id: 113843
+Job: xpdf_libfuzzer_asan
+Crash Type: Direct-leak
+isSecurity: False
+Crash state: PDFDoc::PDFDoc
+fuzz_pdfload.cc
+Poc: 113843.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_fuzz_pdfload
+target: fuzz_pdfload
+name: libFuzzer
+[Environment] ASAN_OPTIONS=alloc_dealloc_mismatch=0:allocator_may_return_null=1:allocator_release_to_os_interval_ms=500:allow_user_segv_handler=0:check_malloc_usable_size=0:detect_leaks=1:detect_odr_violation=0:detect_stack_use_after_return=1:exitcode=77:fast_unwind_on_fatal=0:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:max_uar_stack_size_log=16:print_scariness=1:print_summary=1:print_suppressions=0:quarantine_size_mb=64:redzone=16:strict_memcmp=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 3724967658
+INFO: Loaded 1 modules   (26081 inline 8-bit counters): 26081 [0xa5f960, 0xa65f41),
+INFO: Loaded 1 PC tables (26081 PCs): 26081 [0x8d2058,0x937e68),
+INFO: -fork=64: fuzzing in separate process(s)
+INFO: -fork=64: 50 seed inputs, starting to fuzz in /clusterfuzz/run_bot/clusterfuzz/bot_tmpdir/libFuzzerTemp.FuzzWithFork1899.dir
+#31: cov: 6286 ft: 6286 corp: 50 exec/s 15 oom/timeout/crash: 0/0/0 time: 4s job: 1 dft_time: 0
+  NEW_FUNC: 0x565210  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x565210)
+  NEW_FUNC: 0x56f810  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x56f810)
+  NEW_FUNC: 0x571aa0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x571aa0)
+  NEW_FUNC: 0x576850  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x576850)
+  NEW_FUNC: 0x578da0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x578da0)
+  NEW_FUNC: 0x578e60  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x578e60)
+  NEW_FUNC: 0x578fe0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x578fe0)
+  NEW_FUNC: 0x579190  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x579190)
+  NEW_FUNC: 0x579e40  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x579e40)
+  NEW_FUNC: 0x579ea0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x579ea0)
+  NEW_FUNC: 0x57a2c0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x57a2c0)
+  NEW_FUNC: 0x57b4d0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x57b4d0)
+  NEW_FUNC: 0x57b760  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x57b760)
+  NEW_FUNC: 0x57be70  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x57be70)
+  NEW_FUNC: 0x57c2a0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x57c2a0)
+  NEW_FUNC: 0x5827e0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x5827e0)
+  NEW_FUNC: 0x588840  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x588840)
+  NEW_FUNC: 0x588e10  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x588e10)
+  NEW_FUNC: 0x588f60  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x588f60)
+  NEW_FUNC: 0x589330  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x589330)
+  NEW_FUNC: 0x589580  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x589580)
+  NEW_FUNC: 0x589620  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x589620)
+  NEW_FUNC: 0x589800  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x589800)
+  NEW_FUNC: 0x589b10  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x589b10)
+  NEW_FUNC: 0x5c0700  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x5c0700)
+  NEW_FUNC: 0x5c0800  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x5c0800)
+  NEW_FUNC: 0x5c08f0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x5c08f0)
+  NEW_FUNC: 0x5c0950  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x5c0950)
+  NEW_FUNC: 0x5c3310  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x5c3310)
+  NEW_FUNC: 0x5c34e0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x5c34e0)
+  NEW_FUNC: 0x5c3680  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x5c3680)
+  NEW_FUNC: 0x5c4020  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x5c4020)
+  NEW_FUNC: 0x5c4040  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x5c4040)
+  NEW_FUNC: 0x5c4460  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x5c4460)
+  NEW_FUNC: 0x5c44d0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x5c44d0)
+  NEW_FUNC: 0x5c6ee0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x5c6ee0)
+  NEW_FUNC: 0x5c9bd0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x5c9bd0)
+  NEW_FUNC: 0x5ca930  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x5ca930)
+  NEW_FUNC: 0x5cbc70  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x5cbc70)
+  NEW_FUNC: 0x5cc220  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x5cc220)
+  NEW_FUNC: 0x5ccef0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x5ccef0)
+  NEW_FUNC: 0x5d0460  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x5d0460)
+  NEW_FUNC: 0x5d0a20  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x5d0a20)
+  NEW_FUNC: 0x5d41b0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x5d41b0)
+  NEW_FUNC: 0x5d4220  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x5d4220)
+  NEW_FUNC: 0x5d4390  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x5d4390)
+  NEW_FUNC: 0x5d47b0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x5d47b0)
+  NEW_FUNC: 0x5d4ab0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x5d4ab0)
+  NEW_FUNC: 0x5e6930  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x5e6930)
+  NEW_FUNC: 0x5e6a70  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x5e6a70)
+  NEW_FUNC: 0x5eac90  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x5eac90)
+  NEW_FUNC: 0x5eacb0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x5eacb0)
+  NEW_FUNC: 0x5fc020  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x5fc020)
+  NEW_FUNC: 0x6599f0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x6599f0)
+  NEW_FUNC: 0x65a180  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x65a180)
+  NEW_FUNC: 0x65a730  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x65a730)
+  NEW_FUNC: 0x676b10  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x676b10)
+  NEW_FUNC: 0x676c80  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x676c80)
+  NEW_FUNC: 0x676d20  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x676d20)
+  NEW_FUNC: 0x6ad550  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x6ad550)
+  NEW_FUNC: 0x6ad960  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x6ad960)
+  NEW_FUNC: 0x7dc560  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x7dc560)
+  NEW_FUNC: 0x7dc720  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x7dc720)
+  NEW_FUNC: 0x7dca10  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x7dca10)
+  NEW_FUNC: 0x7de6f0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x7de6f0)
+  NEW_FUNC: 0x7dfc30  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x7dfc30)
+  NEW_FUNC: 0x7dfcd0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x7dfcd0)
+  NEW_FUNC: 0x7e05d0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x7e05d0)
+  NEW_FUNC: 0x7e07b0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x7e07b0)
+  NEW_FUNC: 0x7e0a50  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x7e0a50)
+  NEW_FUNC: 0x7e1a90  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x7e1a90)
+  NEW_FUNC: 0x7e1f60  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x7e1f60)
+  NEW_FUNC: 0x7e2030  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x7e2030)
+  NEW_FUNC: 0x7e2270  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x7e2270)
+  NEW_FUNC: 0x7e9cc0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x7e9cc0)
+  NEW_FUNC: 0x7e9dc0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x7e9dc0)
+  NEW_FUNC: 0x7ea0d0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x7ea0d0)
+  NEW_FUNC: 0x7ec4d0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x7ec4d0)
+  NEW_FUNC: 0x7ec810  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x7ec810)
+  NEW_FUNC: 0x7ed870  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x7ed870)
+  NEW_FUNC: 0x7ed8a0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x7ed8a0)
+  NEW_FUNC: 0x7ed9f0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x7ed9f0)
+  NEW_FUNC: 0x7edac0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x7edac0)
+  NEW_FUNC: 0x7edd40  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x7edd40)
+  NEW_FUNC: 0x7ede30  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x7ede30)
+  NEW_FUNC: 0x7ede80  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x7ede80)
+#66: cov: 6710 ft: 6314 corp: 60 exec/s 11 oom/timeout/crash: 0/0/0 time: 6s job: 2 dft_time: 0
+  NEW_FUNC: 0x5cd3f0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x5cd3f0)
+  NEW_FUNC: 0x65a320  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x65a320)
+#102: cov: 6780 ft: 6348 corp: 69 exec/s 9 oom/timeout/crash: 0/0/0 time: 7s job: 3 dft_time: 0
+  NEW_FUNC: 0x579c40  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x579c40)
+  NEW_FUNC: 0x589c90  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x589c90)
+#162: cov: 6820 ft: 6385 corp: 74 exec/s 12 oom/timeout/crash: 0/0/0 time: 8s job: 4 dft_time: 0
+  NEW_FUNC: 0x55f670  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x55f670)
+  NEW_FUNC: 0x55f820  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x55f820)
+  NEW_FUNC: 0x55fa20  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x55fa20)
+  NEW_FUNC: 0x560820  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x560820)
+  NEW_FUNC: 0x579d00  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x579d00)
+  NEW_FUNC: 0x7ea220  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x7ea220)
+#213: cov: 6942 ft: 6536 corp: 97 exec/s 8 oom/timeout/crash: 0/0/0 time: 11s job: 5 dft_time: 0
+  NEW_FUNC: 0x5c8850  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x5c8850)
+#247: cov: 7010 ft: 6584 corp: 116 exec/s 4 oom/timeout/crash: 0/0/0 time: 14s job: 6 dft_time: 0
+#301: cov: 7015 ft: 6621 corp: 127 exec/s 6 oom/timeout/crash: 0/0/0 time: 17s job: 8 dft_time: 0
+#438: cov: 7022 ft: 6659 corp: 135 exec/s 13 oom/timeout/crash: 0/0/0 time: 19s job: 9 dft_time: 0
+#602: cov: 7027 ft: 6696 corp: 158 exec/s 14 oom/timeout/crash: 0/0/0 time: 21s job: 10 dft_time: 0
+#780: cov: 7038 ft: 6784 corp: 190 exec/s 14 oom/timeout/crash: 0/0/0 time: 24s job: 11 dft_time: 0
+#923: cov: 7040 ft: 6859 corp: 218 exec/s 11 oom/timeout/crash: 0/0/0 time: 27s job: 12 dft_time: 0
+#1049: cov: 7049 ft: 6945 corp: 240 exec/s 9 oom/timeout/crash: 0/0/0 time: 30s job: 13 dft_time: 0
+#1057: cov: 7053 ft: 7028 corp: 270 exec/s 0 oom/timeout/crash: 0/0/0 time: 34s job: 7 dft_time: 0
+#1144: cov: 7053 ft: 7028 corp: 270 exec/s 5 oom/timeout/crash: 0/0/0 time: 34s job: 14 dft_time: 0
+  NEW_FUNC: 0x560590  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x560590)
+  NEW_FUNC: 0x582f00  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x582f00)
+  NEW_FUNC: 0x5c0420  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x5c0420)
+  NEW_FUNC: 0x5d3f70  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x5d3f70)
+  NEW_FUNC: 0x660350  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x660350)
+  NEW_FUNC: 0x679d90  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x679d90)
+#1377: cov: 7104 ft: 7133 corp: 288 exec/s 12 oom/timeout/crash: 0/0/0 time: 37s job: 17 dft_time: 0
+#1625: cov: 7106 ft: 7167 corp: 301 exec/s 13 oom/timeout/crash: 0/0/0 time: 39s job: 18 dft_time: 0
+#1634: cov: 7109 ft: 7218 corp: 329 exec/s 0 oom/timeout/crash: 0/0/0 time: 41s job: 15 dft_time: 0
+  NEW_FUNC: 0x55fed0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x55fed0)
+#1866: cov: 7123 ft: 7219 corp: 330 exec/s 11 oom/timeout/crash: 0/0/0 time: 45s job: 19 dft_time: 0
+#2073: cov: 7125 ft: 7269 corp: 355 exec/s 9 oom/timeout/crash: 0/0/0 time: 47s job: 20 dft_time: 0
+#2082: cov: 7126 ft: 7343 corp: 385 exec/s 0 oom/timeout/crash: 0/0/0 time: 49s job: 16 dft_time: 0
+  NEW_FUNC: 0x57a190  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x57a190)
+  NEW_FUNC: 0x5837e0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x5837e0)
+  NEW_FUNC: 0x5baca0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x5baca0)
+#2297: cov: 7161 ft: 7375 corp: 367 exec/s 9 oom/timeout/crash: 0/0/0 time: 76s job: 21 dft_time: 0
+#2419: cov: 7161 ft: 7443 corp: 396 exec/s 5 oom/timeout/crash: 0/0/0 time: 77s job: 22 dft_time: 0
+#2761: cov: 7162 ft: 7551 corp: 421 exec/s 13 oom/timeout/crash: 0/0/0 time: 79s job: 25 dft_time: 0
+#3134: cov: 7162 ft: 7563 corp: 432 exec/s 13 oom/timeout/crash: 0/0/0 time: 79s job: 26 dft_time: 0
+#3153: cov: 7163 ft: 7597 corp: 454 exec/s 0 oom/timeout/crash: 0/0/0 time: 80s job: 23 dft_time: 0
+#3519: cov: 7171 ft: 7624 corp: 458 exec/s 13 oom/timeout/crash: 0/0/0 time: 83s job: 27 dft_time: 0
+#3834: cov: 7171 ft: 7646 corp: 474 exec/s 10 oom/timeout/crash: 0/0/0 time: 84s job: 28 dft_time: 0
+#3855: cov: 7175 ft: 7708 corp: 495 exec/s 0 oom/timeout/crash: 0/0/0 time: 85s job: 24 dft_time: 0
+#4184: cov: 7175 ft: 7726 corp: 500 exec/s 10 oom/timeout/crash: 0/0/0 time: 88s job: 29 dft_time: 0
+#4361: cov: 7175 ft: 7760 corp: 517 exec/s 5 oom/timeout/crash: 0/0/0 time: 89s job: 30 dft_time: 0
+#4404: cov: 7175 ft: 7834 corp: 543 exec/s 1 oom/timeout/crash: 0/0/0 time: 90s job: 31 dft_time: 0
+#4937: cov: 7177 ft: 7874 corp: 553 exec/s 15 oom/timeout/crash: 0/0/0 time: 95s job: 33 dft_time: 0
+#5473: cov: 7177 ft: 7904 corp: 576 exec/s 15 oom/timeout/crash: 0/0/0 time: 96s job: 34 dft_time: 0
+#6024: cov: 7177 ft: 7915 corp: 584 exec/s 15 oom/timeout/crash: 0/0/0 time: 97s job: 35 dft_time: 0
+#6496: cov: 7178 ft: 7929 corp: 593 exec/s 12 oom/timeout/crash: 0/0/0 time: 97s job: 36 dft_time: 0
+#6973: cov: 7180 ft: 7969 corp: 609 exec/s 12 oom/timeout/crash: 0/0/0 time: 98s job: 37 dft_time: 0
+#7256: cov: 7181 ft: 8002 corp: 628 exec/s 7 oom/timeout/crash: 0/0/0 time: 99s job: 38 dft_time: 0
+#7310: cov: 7181 ft: 8045 corp: 648 exec/s 1 oom/timeout/crash: 0/0/0 time: 100s job: 39 dft_time: 0
+#7325: cov: 7182 ft: 8086 corp: 658 exec/s 0 oom/timeout/crash: 0/0/0 time: 104s job: 32 dft_time: 0
+#7962: cov: 7182 ft: 8115 corp: 660 exec/s 15 oom/timeout/crash: 0/0/0 time: 108s job: 41 dft_time: 0
+#8573: cov: 7185 ft: 8152 corp: 684 exec/s 14 oom/timeout/crash: 0/0/0 time: 109s job: 42 dft_time: 0
+  NEW_FUNC: 0x7ede70  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x7ede70)
+INFO: log from the inner process:
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 3727287323
+INFO: Loaded 1 modules   (26081 inline 8-bit counters): 26081 [0xa5f960, 0xa65f41),
+INFO: Loaded 1 PC tables (26081 PCs): 26081 [0x8d2058,0x937e68),
+INFO:        0 files found in /clusterfuzz/run_bot/clusterfuzz/bot_tmpdir/libFuzzerTemp.FuzzWithFork1899.dir/C42
+INFO: -max_len is not provided; libFuzzer will not generate inputs larger than 4096 bytes
+INFO: seed corpus: files: 7 min: 61b max: 89b total: 523b rss: 32Mb
+#8	INITED cov: 469 ft: 1634 corp: 6/434b exec/s: 0 rss: 45Mb
+#12	NEW    cov: 469 ft: 1644 corp: 7/518b lim: 89 exec/s: 0 rss: 50Mb L: 84/89 MS: 4 ChangeBit-CMP-ChangeBit-InsertRepeatedBytes- DE: &quot;\001\000&quot;-
+#13	NEW    cov: 469 ft: 1648 corp: 8/565b lim: 89 exec/s: 13 rss: 51Mb L: 47/89 MS: 1 EraseBytes-
+#14	NEW    cov: 469 ft: 1649 corp: 9/646b lim: 89 exec/s: 14 rss: 52Mb L: 81/89 MS: 1 ShuffleBytes-
+#15	NEW    cov: 470 ft: 1664 corp: 10/709b lim: 89 exec/s: 15 rss: 53Mb L: 63/89 MS: 1 CrossOver-
+#17	NEW    cov: 470 ft: 1665 corp: 11/770b lim: 89 exec/s: 17 rss: 55Mb L: 61/89 MS: 2 ChangeASCIIInt-ChangeBinInt-
+#19	NEW    cov: 470 ft: 1681 corp: 12/818b lim: 89 exec/s: 19 rss: 57Mb L: 48/89 MS: 2 ShuffleBytes-InsertByte-
+#20	NEW    cov: 470 ft: 1688 corp: 13/904b lim: 89 exec/s: 20 rss: 58Mb L: 86/89 MS: 1 CrossOver-
+#21	NEW    cov: 470 ft: 1699 corp: 14/980b lim: 89 exec/s: 21 rss: 59Mb L: 76/89 MS: 1 PersAutoDict- DE: &quot;\001\000&quot;-
+#23	NEW    cov: 471 ft: 1720 corp: 15/1030b lim: 89 exec/s: 11 rss: 64Mb L: 50/89 MS: 2 CopyPart-EraseBytes-
+#24	NEW    cov: 471 ft: 1721 corp: 16/1093b lim: 89 exec/s: 12 rss: 65Mb L: 63/89 MS: 1 ShuffleBytes-
+#26	NEW    cov: 471 ft: 1723 corp: 17/1171b lim: 89 exec/s: 13 rss: 67Mb L: 78/89 MS: 2 InsertRepeatedBytes-CopyPart-
+#28	NEW    cov: 473 ft: 1738 corp: 18/1255b lim: 89 exec/s: 14 rss: 69Mb L: 84/89 MS: 2 ShuffleBytes-CopyPart-
+#31	NEW    cov: 473 ft: 1739 corp: 19/1343b lim: 89 exec/s: 15 rss: 72Mb L: 88/89 MS: 3 ShuffleBytes-ShuffleBytes-CrossOver-
+#32	pulse  cov: 473 ft: 1742 corp: 19/1343b lim: 89 exec/s: 16 rss: 73Mb
+#32	NEW    cov: 473 ft: 1742 corp: 20/1406b lim: 89 exec/s: 16 rss: 73Mb L: 63/89 MS: 1 CopyPart-
+#33	NEW    cov: 473 ft: 1743 corp: 21/1456b lim: 89 exec/s: 16 rss: 74Mb L: 50/89 MS: 1 ChangeByte-
+#34	NEW    cov: 473 ft: 1748 corp: 22/1506b lim: 89 exec/s: 17 rss: 75Mb L: 50/89 MS: 1 CopyPart-
+#39	NEW    cov: 473 ft: 1749 corp: 23/1577b lim: 89 exec/s: 13 rss: 80Mb L: 71/89 MS: 5 ChangeByte-ChangeByte-CrossOver-ChangeByte-ShuffleBytes-
+#40	NEW    cov: 474 ft: 1789 corp: 24/1664b lim: 89 exec/s: 13 rss: 81Mb L: 87/89 MS: 1 CopyPart-
+#42	NEW    cov: 474 ft: 1791 corp: 25/1729b lim: 89 exec/s: 14 rss: 83Mb L: 65/89 MS: 2 ShuffleBytes-CopyPart-
+#43	NEW    cov: 474 ft: 1795 corp: 26/1746b lim: 89 exec/s: 14 rss: 84Mb L: 17/89 MS: 1 CrossOver-
+#44	NEW    cov: 474 ft: 1811 corp: 27/1832b lim: 89 exec/s: 14 rss: 85Mb L: 86/89 MS: 1 PersAutoDict- DE: &quot;\001\000&quot;-
+#48	NEW    cov: 474 ft: 1812 corp: 28/1894b lim: 89 exec/s: 12 rss: 89Mb L: 62/89 MS: 4 InsertRepeatedBytes-ChangeBit-ShuffleBytes-ShuffleBytes-
+#49	NEW    cov: 474 ft: 1813 corp: 29/1981b lim: 89 exec/s: 12 rss: 90Mb L: 87/89 MS: 1 CopyPart-
+#50	NEW    cov: 474 ft: 1814 corp: 30/2070b lim: 89 exec/s: 12 rss: 91Mb L: 89/89 MS: 1 CrossOver-
+#52	NEW    cov: 474 ft: 1815 corp: 31/2140b lim: 89 exec/s: 13 rss: 93Mb L: 70/89 MS: 2 CMP-CrossOver- DE: &quot;\004\000&quot;-
+#54	NEW    cov: 475 ft: 1820 corp: 32/2216b lim: 89 exec/s: 13 rss: 95Mb L: 76/89 MS: 2 CrossOver-InsertByte-
+#57	NEW    cov: 475 ft: 1821 corp: 33/2300b lim: 89 exec/s: 14 rss: 99Mb L: 84/89 MS: 3 ChangeBit-ChangeBit-ChangeByte-
+#58	NEW    cov: 475 ft: 1826 corp: 34/2350b lim: 89 exec/s: 14 rss: 100Mb L: 50/89 MS: 1 CopyPart-
+#59	NEW    cov: 475 ft: 1828 corp: 35/2423b lim: 89 exec/s: 14 rss: 101Mb L: 73/89 MS: 1 CrossOver-
+#60	REDUCE cov: 475 ft: 1828 corp: 35/2421b lim: 89 exec/s: 15 rss: 102Mb L: 48/89 MS: 1 EraseBytes-
+#61	NEW    cov: 475 ft: 1829 corp: 36/2509b lim: 89 exec/s: 15 rss: 103Mb L: 88/89 MS: 1 CopyPart-
+#62	NEW    cov: 475 ft: 1831 corp: 37/2570b lim: 89 exec/s: 15 rss: 104Mb L: 61/89 MS: 1 ChangeByte-
+#63	NEW    cov: 478 ft: 1861 corp: 38/2620b lim: 89 exec/s: 12 rss: 105Mb L: 50/89 MS: 1 CrossOver-
+#64	pulse  cov: 478 ft: 1861 corp: 38/2620b lim: 89 exec/s: 12 rss: 108Mb
+#67	NEW    cov: 479 ft: 1870 corp: 39/2706b lim: 89 exec/s: 13 rss: 116Mb L: 86/89 MS: 4 ChangeBinInt-EraseBytes-PersAutoDict-CrossOver- DE: &quot;\004\000&quot;-
+#68	NEW    cov: 479 ft: 1871 corp: 40/2757b lim: 89 exec/s: 13 rss: 116Mb L: 51/89 MS: 1 InsertByte-
+#80	NEW    cov: 479 ft: 1872 corp: 41/2812b lim: 89 exec/s: 13 rss: 122Mb L: 55/89 MS: 2 InsertByte-CrossOver-
+#86	NEW    cov: 480 ft: 1875 corp: 42/2862b lim: 89 exec/s: 14 rss: 123Mb L: 50/89 MS: 1 ChangeBit-
+#88	NEW    cov: 481 ft: 1876 corp: 43/2940b lim: 89 exec/s: 14 rss: 123Mb L: 78/89 MS: 2 ChangeBinInt-ChangeASCIIInt-
+#90	NEW    cov: 481 ft: 1877 corp: 44/3029b lim: 89 exec/s: 15 rss: 124Mb L: 89/89 MS: 2 ChangeBit-ChangeBinInt-
+#100	REDUCE cov: 481 ft: 1877 corp: 44/3026b lim: 89 exec/s: 14 rss: 124Mb L: 81/89 MS: 5 ChangeBinInt-PersAutoDict-PersAutoDict-CopyPart-EraseBytes- DE: &quot;\004\000&quot;-&quot;\004\000&quot;-
+#104	NEW    cov: 481 ft: 1878 corp: 45/3108b lim: 89 exec/s: 14 rss: 124Mb L: 82/89 MS: 4 CrossOver-ChangeBit-CopyPart-CrossOver-
+#105	NEW    cov: 481 ft: 1879 corp: 46/3194b lim: 89 exec/s: 15 rss: 124Mb L: 86/89 MS: 1 CopyPart-
+#110	NEW    cov: 481 ft: 1880 corp: 47/3249b lim: 89 exec/s: 13 rss: 124Mb L: 55/89 MS: 5 ChangeBinInt-InsertByte-InsertByte-InsertByte-PersAutoDict- DE: &quot;\001\000&quot;-
+#111	NEW    cov: 481 ft: 1881 corp: 48/3280b lim: 89 exec/s: 13 rss: 124Mb L: 31/89 MS: 1 EraseBytes-
+#112	NEW    cov: 481 ft: 1882 corp: 49/3362b lim: 89 exec/s: 14 rss: 124Mb L: 82/89 MS: 1 CopyPart-
+#113	NEW    cov: 481 ft: 1886 corp: 50/3427b lim: 89 exec/s: 14 rss: 124Mb L: 65/89 MS: 1 CopyPart-
+#114	NEW    cov: 481 ft: 1887 corp: 51/3508b lim: 89 exec/s: 14 rss: 124Mb L: 81/89 MS: 1 CrossOver-
+#115	NEW    cov: 488 ft: 1919 corp: 52/3589b lim: 89 exec/s: 14 rss: 124Mb L: 81/89 MS: 1 EraseBytes-
+#116	NEW    cov: 488 ft: 1924 corp: 53/3670b lim: 89 exec/s: 14 rss: 124Mb L: 81/89 MS: 1 PersAutoDict- DE: &quot;\001\000&quot;-
+#118	REDUCE cov: 495 ft: 1960 corp: 54/3735b lim: 89 exec/s: 13 rss: 124Mb L: 65/89 MS: 2 ShuffleBytes-CrossOver-
+#120	NEW    cov: 495 ft: 1961 corp: 55/3796b lim: 89 exec/s: 13 rss: 124Mb L: 61/89 MS: 2 ChangeByte-CrossOver-
+#123	NEW    cov: 496 ft: 1967 corp: 56/3882b lim: 89 exec/s: 13 rss: 124Mb L: 86/89 MS: 3 ShuffleBytes-ChangeByte-PersAutoDict- DE: &quot;\004\000&quot;-
+#124	NEW    cov: 496 ft: 1969 corp: 57/3945b lim: 89 exec/s: 13 rss: 124Mb L: 63/89 MS: 1 ShuffleBytes-
+#125	NEW    cov: 496 ft: 1973 corp: 58/4032b lim: 89 exec/s: 13 rss: 124Mb L: 87/89 MS: 1 InsertRepeatedBytes-
+#126	NEW    cov: 496 ft: 1974 corp: 59/4121b lim: 89 exec/s: 14 rss: 124Mb L: 89/89 MS: 1 ChangeASCIIInt-
+#128	pulse  cov: 496 ft: 1976 corp: 59/4121b lim: 89 exec/s: 14 rss: 124Mb
+#128	NEW    cov: 496 ft: 1976 corp: 60/4207b lim: 89 exec/s: 14 rss: 124Mb L: 86/89 MS: 2 CopyPart-CrossOver-
+#130	NEW    cov: 496 ft: 1977 corp: 61/4275b lim: 89 exec/s: 14 rss: 124Mb L: 68/89 MS: 2 ChangeBinInt-CMP- DE: &quot;start&quot;-
+#131	NEW    cov: 498 ft: 1993 corp: 62/4342b lim: 89 exec/s: 13 rss: 124Mb L: 67/89 MS: 1 EraseBytes-
+#133	NEW    cov: 498 ft: 1996 corp: 63/4400b lim: 89 exec/s: 13 rss: 124Mb L: 58/89 MS: 2 EraseBytes-InsertRepeatedBytes-
+#134	NEW    cov: 498 ft: 2004 corp: 64/4443b lim: 89 exec/s: 13 rss: 124Mb L: 43/89 MS: 1 CrossOver-
+#135	NEW    cov: 498 ft: 2008 corp: 65/4531b lim: 89 exec/s: 13 rss: 124Mb L: 88/89 MS: 1 InsertRepeatedBytes-
+#136	NEW    cov: 498 ft: 2009 corp: 66/4560b lim: 89 exec/s: 12 rss: 124Mb L: 29/89 MS: 1 EraseBytes-
+#137	NEW    cov: 498 ft: 2012 corp: 67/4611b lim: 89 exec/s: 12 rss: 124Mb L: 51/89 MS: 1 InsertByte-
+#140	NEW    cov: 498 ft: 2014 corp: 68/4680b lim: 89 exec/s: 12 rss: 124Mb L: 69/89 MS: 3 CMP-PersAutoDict-CMP- DE: &quot;utildebelow&quot;-&quot;\001\000&quot;-&quot;\013\000\000\000&quot;-
+#141	NEW    cov: 498 ft: 2015 corp: 69/4761b lim: 89 exec/s: 12 rss: 124Mb L: 81/89 MS: 1 ChangeBit-
+#144	REDUCE cov: 498 ft: 2015 corp: 69/4746b lim: 89 exec/s: 12 rss: 124Mb L: 47/89 MS: 3 ChangeASCIIInt-InsertByte-EraseBytes-
+#145	NEW    cov: 498 ft: 2016 corp: 70/4824b lim: 89 exec/s: 12 rss: 124Mb L: 78/89 MS: 1 ChangeByte-
+#148	NEW    cov: 498 ft: 2018 corp: 71/4912b lim: 89 exec/s: 12 rss: 126Mb L: 88/89 MS: 3 ChangeBinInt-CrossOver-CopyPart-
+#151	NEW    cov: 498 ft: 2019 corp: 72/4977b lim: 89 exec/s: 12 rss: 126Mb L: 65/89 MS: 3 CopyPart-InsertRepeatedBytes-InsertByte-
+#157	NEW    cov: 499 ft: 2022 corp: 73/5065b lim: 89 exec/s: 12 rss: 126Mb L: 88/89 MS: 1 ChangeByte-
+#159	NEW    cov: 499 ft: 2026 corp: 74/5149b lim: 89 exec/s: 12 rss: 126Mb L: 84/89 MS: 2 CrossOver-CMP- DE: &quot;\377\377\377\377\377\377\377\000&quot;-
+#160	NEW    cov: 504 ft: 2068 corp: 75/5199b lim: 89 exec/s: 12 rss: 126Mb L: 50/89 MS: 1 ChangeASCIIInt-
+#162	NEW    cov: 504 ft: 2069 corp: 76/5260b lim: 89 exec/s: 12 rss: 126Mb L: 61/89 MS: 2 ChangeBinInt-CMP- DE: &quot;\032\000\000\000\000\000\000\000&quot;-
+#164	REDUCE cov: 504 ft: 2069 corp: 76/5246b lim: 89 exec/s: 12 rss: 126Mb L: 51/89 MS: 2 ShuffleBytes-EraseBytes-
+#165	NEW    cov: 504 ft: 2070 corp: 77/5314b lim: 89 exec/s: 12 rss: 126Mb L: 68/89 MS: 1 CrossOver-
+#166	NEW    cov: 504 ft: 2071 corp: 78/5401b lim: 89 exec/s: 12 rss: 126Mb L: 87/89 MS: 1 CMP- DE: &quot;startx&quot;-
+#168	NEW    cov: 504 ft: 2072 corp: 79/5448b lim: 89 exec/s: 12 rss: 126Mb L: 47/89 MS: 2 CopyPart-ChangeBinInt-
+#171	REDUCE cov: 504 ft: 2080 corp: 80/5496b lim: 89 exec/s: 12 rss: 126Mb L: 48/89 MS: 3 ChangeBinInt-ShuffleBytes-EraseBytes-
+#172	NEW    cov: 504 ft: 2083 corp: 81/5547b lim: 89 exec/s: 12 rss: 126Mb L: 51/89 MS: 1 InsertByte-
+#173	NEW    cov: 504 ft: 2085 corp: 82/5635b lim: 89 exec/s: 12 rss: 126Mb L: 88/89 MS: 1 CopyPart-
+#177	NEW    cov: 504 ft: 2086 corp: 83/5703b lim: 89 exec/s: 12 rss: 126Mb L: 68/89 MS: 4 ShuffleBytes-InsertRepeatedBytes-CrossOver-PersAutoDict- DE: &quot;startx&quot;-
+#183	NEW    cov: 504 ft: 2087 corp: 84/5753b lim: 89 exec/s: 13 rss: 126Mb L: 50/89 MS: 1 ChangeBinInt-
+#187	NEW    cov: 504 ft: 2088 corp: 85/5841b lim: 89 exec/s: 12 rss: 126Mb L: 88/89 MS: 4 InsertByte-CMP-InsertRepeatedBytes-ChangeBinInt- DE: &quot;\377\377\377\017&quot;-
+#188	NEW    cov: 504 ft: 2089 corp: 86/5881b lim: 89 exec/s: 12 rss: 126Mb L: 40/89 MS: 1 EraseBytes-
+#189	REDUCE cov: 504 ft: 2089 corp: 86/5874b lim: 89 exec/s: 12 rss: 126Mb L: 44/89 MS: 1 EraseBytes-
+#190	NEW    cov: 504 ft: 2090 corp: 87/5947b lim: 89 exec/s: 12 rss: 126Mb L: 73/89 MS: 1 ChangeByte-
+#191	NEW    cov: 504 ft: 2094 corp: 88/6033b lim: 89 exec/s: 12 rss: 126Mb L: 86/89 MS: 1 CMP- DE: &quot;\026\000\000\000\000\000\000\000&quot;-
+#193	NEW    cov: 505 ft: 2100 corp: 89/6115b lim: 89 exec/s: 12 rss: 126Mb L: 82/89 MS: 2 EraseBytes-PersAutoDict- DE: &quot;start&quot;-
+#210	NEW    cov: 505 ft: 2101 corp: 90/6155b lim: 89 exec/s: 13 rss: 130Mb L: 40/89 MS: 2 ShuffleBytes-EraseBytes-
+#211	NEW    cov: 505 ft: 2106 corp: 91/6225b lim: 89 exec/s: 13 rss: 130Mb L: 70/89 MS: 1 CMP- DE: &quot;\377\377\377\377\377\377\377\020&quot;-
+#214	NEW    cov: 505 ft: 2107 corp: 92/6314b lim: 89 exec/s: 13 rss: 130Mb L: 89/89 MS: 3 InsertRepeatedBytes-CrossOver-PersAutoDict- DE: &quot;start&quot;-
+#218	REDUCE cov: 505 ft: 2107 corp: 92/6292b lim: 89 exec/s: 12 rss: 130Mb L: 67/89 MS: 4 ShuffleBytes-ChangeByte-CopyPart-EraseBytes-
+#219	NEW    cov: 505 ft: 2108 corp: 93/6363b lim: 89 exec/s: 12 rss: 130Mb L: 71/89 MS: 1 ChangeBinInt-
+#228	NEW    cov: 505 ft: 2110 corp: 94/6420b lim: 89 exec/s: 12 rss: 130Mb L: 57/89 MS: 4 CrossOver-ChangeBinInt-CrossOver-EraseBytes-
+#229	NEW    cov: 506 ft: 2130 corp: 95/6497b lim: 89 exec/s: 12 rss: 130Mb L: 77/89 MS: 1 CrossOver-
+#244	NEW    cov: 506 ft: 2131 corp: 96/6586b lim: 89 exec/s: 12 rss: 130Mb L: 89/89 MS: 5 CrossOver-ChangeASCIIInt-ChangeASCIIInt-CMP-PersAutoDict- DE: &quot;\000\000\000\000\000\000\001\000&quot;-&quot;\377\377\377\017&quot;-
+#245	NEW    cov: 506 ft: 2132 corp: 97/6673b lim: 89 exec/s: 12 rss: 130Mb L: 87/89 MS: 1 PersAutoDict- DE: &quot;\032\000\000\000\000\000\000\000&quot;-
+#247	NEW    cov: 507 ft: 2151 corp: 98/6762b lim: 89 exec/s: 12 rss: 130Mb L: 89/89 MS: 2 CopyPart-CopyPart-
+#254	NEW    cov: 512 ft: 2172 corp: 99/6825b lim: 89 exec/s: 12 rss: 130Mb L: 63/89 MS: 2 ShuffleBytes-EraseBytes-
+#256	pulse  cov: 512 ft: 2173 corp: 99/6825b lim: 89 exec/s: 12 rss: 130Mb
+#256	NEW    cov: 512 ft: 2173 corp: 100/6914b lim: 89 exec/s: 12 rss: 130Mb L: 89/89 MS: 2 InsertByte-CMP- DE: &quot;\005\000\000\000&quot;-
+#257	NEW    cov: 512 ft: 2174 corp: 101/6943b lim: 89 exec/s: 12 rss: 130Mb L: 29/89 MS: 1 ChangeBit-
+#260	REDUCE cov: 512 ft: 2174 corp: 101/6939b lim: 89 exec/s: 12 rss: 130Mb L: 83/89 MS: 3 ShuffleBytes-CopyPart-EraseBytes-
+#263	NEW    cov: 512 ft: 2175 corp: 102/7028b lim: 89 exec/s: 12 rss: 130Mb L: 89/89 MS: 3 CMP-InsertRepeatedBytes-ChangeBinInt- DE: &quot;ydota&quot;-
+#264	REDUCE cov: 512 ft: 2175 corp: 102/7018b lim: 89 exec/s: 12 rss: 130Mb L: 78/89 MS: 1 EraseBytes-
+#270	REDUCE cov: 512 ft: 2175 corp: 102/7003b lim: 89 exec/s: 12 rss: 130Mb L: 66/89 MS: 1 EraseBytes-
+#274	REDUCE cov: 512 ft: 2176 corp: 103/7092b lim: 89 exec/s: 12 rss: 130Mb L: 89/89 MS: 4 InsertRepeatedBytes-InsertRepeatedBytes-ChangeByte-CopyPart-
+#277	NEW    cov: 512 ft: 2177 corp: 104/7181b lim: 89 exec/s: 12 rss: 130Mb L: 89/89 MS: 3 ChangeBit-ChangeASCIIInt-ChangeBinInt-
+#281	NEW    cov: 512 ft: 2179 corp: 105/7269b lim: 89 exec/s: 12 rss: 130Mb L: 88/89 MS: 4 CMP-CMP-ChangeByte-InsertRepeatedBytes- DE: &quot;\00400000&quot;-&quot;\001\001\000\000\000\000\000\000&quot;-
+#283	NEW    cov: 512 ft: 2182 corp: 106/7355b lim: 89 exec/s: 12 rss: 130Mb L: 86/89 MS: 2 PersAutoDict-PersAutoDict- DE: &quot;\005\000\000\000&quot;-&quot;\00400000&quot;-
+#285	NEW    cov: 512 ft: 2186 corp: 107/7442b lim: 89 exec/s: 12 rss: 130Mb L: 87/89 MS: 2 ChangeBinInt-CrossOver-
+#287	NEW    cov: 512 ft: 2187 corp: 108/7528b lim: 89 exec/s: 12 rss: 130Mb L: 86/89 MS: 2 ChangeBit-CrossOver-
+#289	NEW    cov: 520 ft: 2221 corp: 109/7593b lim: 89 exec/s: 12 rss: 130Mb L: 65/89 MS: 2 ChangeASCIIInt-ChangeASCIIInt-
+#294	NEW    cov: 520 ft: 2222 corp: 110/7664b lim: 89 exec/s: 12 rss: 130Mb L: 71/89 MS: 5 CopyPart-ChangeBit-EraseBytes-InsertRepeatedBytes-ChangeBit-
+#296	NEW    cov: 521 ft: 2227 corp: 111/7752b lim: 89 exec/s: 12 rss: 130Mb L: 88/89 MS: 2 InsertByte-InsertByte-
+#304	NEW    cov: 521 ft: 2231 corp: 112/7820b lim: 89 exec/s: 12 rss: 130Mb L: 68/89 MS: 3 ChangeASCIIInt-ShuffleBytes-InsertByte-
+#305	NEW    cov: 521 ft: 2232 corp: 113/7868b lim: 89 exec/s: 12 rss: 130Mb L: 48/89 MS: 1 ChangeBinInt-
+#309	NEW    cov: 521 ft: 2233 corp: 114/7926b lim: 89 exec/s: 12 rss: 130Mb L: 58/89 MS: 4 PersAutoDict-PersAutoDict-ChangeBit-ChangeByte- DE: &quot;start&quot;-&quot;\000\000\000\000\000\000\001\000&quot;-
+#310	REDUCE cov: 521 ft: 2234 corp: 115/8009b lim: 89 exec/s: 12 rss: 130Mb L: 83/89 MS: 1 PersAutoDict- DE: &quot;\001\001\000\000\000\000\000\000&quot;-
+#317	NEW    cov: 521 ft: 2238 corp: 116/8086b lim: 89 exec/s: 12 rss: 130Mb L: 77/89 MS: 2 ChangeASCIIInt-CrossOver-
+#332	REDUCE cov: 521 ft: 2238 corp: 116/8080b lim: 89 exec/s: 12 rss: 130Mb L: 83/89 MS: 5 ChangeBit-ChangeASCIIInt-ChangeBit-ChangeASCIIInt-EraseBytes-
+#333	NEW    cov: 521 ft: 2239 corp: 117/8169b lim: 89 exec/s: 12 rss: 130Mb L: 89/89 MS: 1 ChangeByte-
+#335	NEW    cov: 522 ft: 2256 corp: 118/8256b lim: 89 exec/s: 12 rss: 130Mb L: 87/89 MS: 2 EraseBytes-CrossOver-
+#337	NEW    cov: 522 ft: 2257 corp: 119/8282b lim: 89 exec/s: 12 rss: 130Mb L: 26/89 MS: 2 EraseBytes-ChangeBit-
+#340	NEW    cov: 522 ft: 2259 corp: 120/8356b lim: 89 exec/s: 13 rss: 130Mb L: 74/89 MS: 3 ChangeByte-ShuffleBytes-InsertRepeatedBytes-
+#341	NEW    cov: 522 ft: 2260 corp: 121/8442b lim: 89 exec/s: 13 rss: 130Mb L: 86/89 MS: 1 InsertRepeatedBytes-
+#342	REDUCE cov: 522 ft: 2260 corp: 121/8433b lim: 89 exec/s: 13 rss: 130Mb L: 80/89 MS: 1 EraseBytes-
+#345	NEW    cov: 522 ft: 2261 corp: 122/8488b lim: 89 exec/s: 13 rss: 130Mb L: 55/89 MS: 3 ChangeByte-ChangeByte-ShuffleBytes-
+#351	NEW    cov: 522 ft: 2264 corp: 123/8503b lim: 89 exec/s: 13 rss: 130Mb L: 15/89 MS: 1 CrossOver-
+#353	NEW    cov: 522 ft: 2266 corp: 124/8521b lim: 89 exec/s: 13 rss: 130Mb L: 18/89 MS: 2 ChangeBit-CrossOver-
+#354	REDUCE cov: 522 ft: 2267 corp: 125/8599b lim: 89 exec/s: 13 rss: 130Mb L: 78/89 MS: 1 CrossOver-
+#356	NEW    cov: 522 ft: 2268 corp: 126/8688b lim: 89 exec/s: 13 rss: 130Mb L: 89/89 MS: 2 ShuffleBytes-ChangeBinInt-
+#369	NEW    cov: 522 ft: 2269 corp: 127/8777b lim: 89 exec/s: 13 rss: 130Mb L: 89/89 MS: 3 PersAutoDict-CMP-ChangeByte- DE: &quot;\001\000&quot;-&quot;dblarchinverted&quot;-
+#371	REDUCE cov: 522 ft: 2269 corp: 127/8772b lim: 89 exec/s: 13 rss: 130Mb L: 81/89 MS: 2 PersAutoDict-EraseBytes- DE: &quot;startx&quot;-
+#372	REDUCE cov: 522 ft: 2271 corp: 128/8839b lim: 89 exec/s: 13 rss: 130Mb L: 67/89 MS: 1 InsertByte-
+#373	NEW    cov: 540 ft: 2382 corp: 129/8928b lim: 89 exec/s: 13 rss: 130Mb L: 89/89 MS: 1 InsertRepeatedBytes-
+#380	NEW    cov: 543 ft: 2396 corp: 130/8989b lim: 89 exec/s: 13 rss: 130Mb L: 61/89 MS: 2 ChangeBit-CrossOver-
+#383	NEW    cov: 544 ft: 2402 corp: 131/9062b lim: 89 exec/s: 13 rss: 130Mb L: 73/89 MS: 3 InsertByte-CopyPart-ChangeASCIIInt-
+#385	NEW    cov: 544 ft: 2403 corp: 132/9150b lim: 89 exec/s: 13 rss: 130Mb L: 88/89 MS: 2 CrossOver-PersAutoDict- DE: &quot;startx&quot;-
+#386	REDUCE cov: 544 ft: 2403 corp: 132/9148b lim: 89 exec/s: 13 rss: 130Mb L: 48/89 MS: 1 EraseBytes-
+#387	REDUCE cov: 544 ft: 2403 corp: 132/9145b lim: 89 exec/s: 13 rss: 130Mb L: 85/89 MS: 1 EraseBytes-
+#389	NEW    cov: 544 ft: 2404 corp: 133/9174b lim: 89 exec/s: 12 rss: 130Mb L: 29/89 MS: 2 ChangeByte-ShuffleBytes-
+#393	NEW    cov: 545 ft: 2405 corp: 134/9256b lim: 89 exec/s: 13 rss: 130Mb L: 82/89 MS: 4 CopyPart-ShuffleBytes-ChangeBinInt-ChangeASCIIInt-
+#398	NEW    cov: 545 ft: 2406 corp: 135/9295b lim: 89 exec/s: 13 rss: 130Mb L: 39/89 MS: 5 EraseBytes-ChangeASCIIInt-InsertByte-ChangeByte-ChangeBinInt-
+#400	REDUCE cov: 545 ft: 2406 corp: 135/9294b lim: 89 exec/s: 13 rss: 130Mb L: 14/89 MS: 2 ChangeByte-EraseBytes-
+#402	NEW    cov: 545 ft: 2408 corp: 136/9383b lim: 89 exec/s: 13 rss: 130Mb L: 89/89 MS: 2 CopyPart-ChangeBit-
+#404	NEW    cov: 545 ft: 2415 corp: 137/9472b lim: 89 exec/s: 13 rss: 130Mb L: 89/89 MS: 2 ChangeASCIIInt-CopyPart-
+#408	NEW    cov: 545 ft: 2416 corp: 138/9551b lim: 89 exec/s: 13 rss: 130Mb L: 79/89 MS: 4 ChangeASCIIInt-ShuffleBytes-CopyPart-InsertByte-
+#418	REDUCE cov: 545 ft: 2417 corp: 139/9599b lim: 89 exec/s: 13 rss: 130Mb L: 48/89 MS: 5 CrossOver-ChangeBinInt-EraseBytes-ChangeBinInt-ChangeBit-
+#423	NEW    cov: 545 ft: 2419 corp: 140/9688b lim: 89 exec/s: 13 rss: 130Mb L: 89/89 MS: 5 PersAutoDict-CopyPart-ChangeASCIIInt-ChangeBit-CMP- DE: &quot;\013\000\000\000&quot;-&quot;st&quot;-
+#437	NEW    cov: 545 ft: 2420 corp: 141/9744b lim: 89 exec/s: 13 rss: 130Mb L: 56/89 MS: 4 ChangeByte-ChangeBinInt-CMP-EraseBytes- DE: &quot;\021\000\000\000\000\000\000\000&quot;-
+#440	NEW    cov: 545 ft: 2425 corp: 142/9816b lim: 89 exec/s: 13 rss: 130Mb L: 72/89 MS: 3 CMP-ChangeBinInt-CrossOver- DE: &quot;start&quot;-
+#441	NEW    cov: 545 ft: 2426 corp: 143/9893b lim: 89 exec/s: 13 rss: 130Mb L: 77/89 MS: 1 ShuffleBytes-
+#447	NEW    cov: 545 ft: 2427 corp: 144/9963b lim: 89 exec/s: 13 rss: 130Mb L: 70/89 MS: 1 ChangeBinInt-
+#453	NEW    cov: 545 ft: 2428 corp: 145/10050b lim: 89 exec/s: 13 rss: 130Mb L: 87/89 MS: 1 PersAutoDict- DE: &quot;startx&quot;-
+#454	NEW    cov: 546 ft: 2435 corp: 146/10129b lim: 89 exec/s: 13 rss: 130Mb L: 79/89 MS: 1 InsertRepeatedBytes-
+#457	REDUCE cov: 546 ft: 2435 corp: 146/10115b lim: 89 exec/s: 13 rss: 130Mb L: 67/89 MS: 3 ChangeBit-CopyPart-EraseBytes-
+#459	NEW    cov: 546 ft: 2436 corp: 147/10165b lim: 89 exec/s: 13 rss: 130Mb L: 50/89 MS: 2 ChangeByte-EraseBytes-
+#466	NEW    cov: 546 ft: 2437 corp: 148/10226b lim: 89 exec/s: 13 rss: 130Mb L: 61/89 MS: 2 ShuffleBytes-ShuffleBytes-
+#469	REDUCE cov: 546 ft: 2439 corp: 149/10311b lim: 89 exec/s: 13 rss: 130Mb L: 85/89 MS: 3 PersAutoDict-CrossOver-ChangeByte- DE: &quot;\001\001\000\000\000\000\000\000&quot;-
+#473	REDUCE cov: 546 ft: 2441 corp: 150/10391b lim: 89 exec/s: 13 rss: 130Mb L: 80/89 MS: 4 InsertRepeatedBytes-PersAutoDict-CMP-CopyPart- DE: &quot;\026\000\000\000\000\000\000\000&quot;-&quot;\001\005&quot;-
+#475	NEW    cov: 546 ft: 2442 corp: 151/10480b lim: 89 exec/s: 13 rss: 130Mb L: 89/89 MS: 2 CopyPart-ChangeBinInt-
+#477	NEW    cov: 546 ft: 2447 corp: 152/10556b lim: 89 exec/s: 13 rss: 130Mb L: 76/89 MS: 2 PersAutoDict-CrossOver- DE: &quot;dblarchinverted&quot;-
+#480	NEW    cov: 547 ft: 2457 corp: 153/10561b lim: 89 exec/s: 13 rss: 130Mb L: 5/89 MS: 3 ShuffleBytes-InsertByte-CrossOver-
+#486	REDUCE cov: 547 ft: 2457 corp: 153/10534b lim: 89 exec/s: 13 rss: 130Mb L: 41/89 MS: 1 EraseBytes-
+#492	NEW    cov: 549 ft: 2474 corp: 154/10622b lim: 89 exec/s: 13 rss: 130Mb L: 88/89 MS: 1 CMP- DE: &quot;\000\000\000%&quot;-
+#494	NEW    cov: 549 ft: 2480 corp: 155/10667b lim: 89 exec/s: 13 rss: 130Mb L: 45/89 MS: 2 ChangeByte-EraseBytes-
+#496	NEW    cov: 549 ft: 2481 corp: 156/10754b lim: 89 exec/s: 13 rss: 130Mb L: 87/89 MS: 2 ChangeByte-ChangeByte-
+#497	NEW    cov: 549 ft: 2484 corp: 157/10843b lim: 89 exec/s: 13 rss: 130Mb L: 89/89 MS: 1 ChangeByte-
+#499	NEW    cov: 549 ft: 2485 corp: 158/10932b lim: 89 exec/s: 13 rss: 130Mb L: 89/89 MS: 2 InsertByte-InsertByte-
+#501	NEW    cov: 549 ft: 2486 corp: 159/11014b lim: 89 exec/s: 13 rss: 130Mb L: 82/89 MS: 2 InsertRepeatedBytes-InsertRepeatedBytes-
+#506	NEW    cov: 549 ft: 2487 corp: 160/11090b lim: 89 exec/s: 13 rss: 130Mb L: 76/89 MS: 5 ShuffleBytes-ShuffleBytes-CopyPart-CopyPart-ShuffleBytes-
+#512	pulse  cov: 549 ft: 2488 corp: 160/11090b lim: 89 exec/s: 13 rss: 130Mb
+#512	NEW    cov: 549 ft: 2488 corp: 161/11179b lim: 89 exec/s: 13 rss: 130Mb L: 89/89 MS: 1 ShuffleBytes-
+#514	NEW    cov: 549 ft: 2489 corp: 162/11229b lim: 89 exec/s: 13 rss: 130Mb L: 50/89 MS: 2 ShuffleBytes-InsertRepeatedBytes-
+#516	NEW    cov: 549 ft: 2490 corp: 163/11318b lim: 89 exec/s: 13 rss: 130Mb L: 89/89 MS: 2 ChangeBinInt-PersAutoDict- DE: &quot;\000\000\000%&quot;-
+#517	NEW    cov: 549 ft: 2491 corp: 164/11404b lim: 89 exec/s: 13 rss: 130Mb L: 86/89 MS: 1 PersAutoDict- DE: &quot;\001\000&quot;-
+#518	REDUCE cov: 549 ft: 2491 corp: 164/11399b lim: 89 exec/s: 14 rss: 130Mb L: 80/89 MS: 1 EraseBytes-
+#525	NEW    cov: 549 ft: 2492 corp: 165/11487b lim: 89 exec/s: 13 rss: 130Mb L: 88/89 MS: 2 EraseBytes-InsertRepeatedBytes-
+#526	NEW    cov: 549 ft: 2494 corp: 166/11574b lim: 89 exec/s: 13 rss: 130Mb L: 87/89 MS: 1 InsertRepeatedBytes-
+#527	NEW    cov: 550 ft: 2501 corp: 167/11624b lim: 89 exec/s: 13 rss: 130Mb L: 50/89 MS: 1 ChangeBinInt-
+#539	REDUCE cov: 550 ft: 2501 corp: 167/11604b lim: 89 exec/s: 13 rss: 130Mb L: 47/89 MS: 2 ShuffleBytes-CrossOver-
+#543	NEW    cov: 550 ft: 2502 corp: 168/11693b lim: 89 exec/s: 13 rss: 130Mb L: 89/89 MS: 4 ShuffleBytes-CopyPart-CopyPart-CopyPart-
+#550	REDUCE cov: 550 ft: 2502 corp: 168/11680b lim: 89 exec/s: 14 rss: 130Mb L: 76/89 MS: 2 ChangeBit-EraseBytes-
+#551	NEW    cov: 550 ft: 2503 corp: 169/11759b lim: 89 exec/s: 14 rss: 130Mb L: 79/89 MS: 1 InsertRepeatedBytes-
+#553	NEW    cov: 550 ft: 2504 corp: 170/11815b lim: 89 exec/s: 14 rss: 130Mb L: 56/89 MS: 2 InsertByte-ChangeByte-
+#555	NEW    cov: 550 ft: 2506 corp: 171/11903b lim: 89 exec/s: 13 rss: 130Mb L: 88/89 MS: 2 PersAutoDict-ChangeBinInt- DE: &quot;st&quot;-
+#565	NEW    cov: 550 ft: 2507 corp: 172/11985b lim: 89 exec/s: 14 rss: 130Mb L: 82/89 MS: 5 CopyPart-ChangeBit-ShuffleBytes-CopyPart-ChangeBinInt-
+#572	REDUCE cov: 550 ft: 2507 corp: 172/11976b lim: 89 exec/s: 14 rss: 130Mb L: 80/89 MS: 2 CopyPart-EraseBytes-
+#582	NEW    cov: 550 ft: 2508 corp: 173/11988b lim: 89 exec/s: 14 rss: 130Mb L: 12/89 MS: 5 InsertByte-EraseBytes-ShuffleBytes-PersAutoDict-CrossOver- DE: &quot;\021\000\000\000\000\000\000\000&quot;-
+#583	NEW    cov: 550 ft: 2509 corp: 174/12038b lim: 89 exec/s: 14 rss: 130Mb L: 50/89 MS: 1 ChangeByte-
+#584	NEW    cov: 550 ft: 2510 corp: 175/12109b lim: 89 exec/s: 14 rss: 130Mb L: 71/89 MS: 1 ShuffleBytes-
+#586	REDUCE cov: 550 ft: 2510 corp: 175/12093b lim: 89 exec/s: 14 rss: 130Mb L: 66/89 MS: 2 InsertByte-CrossOver-
+#595	REDUCE cov: 550 ft: 2511 corp: 176/12182b lim: 89 exec/s: 14 rss: 130Mb L: 89/89 MS: 4 CrossOver-ShuffleBytes-CopyPart-ChangeByte-
+#603	NEW    cov: 550 ft: 2512 corp: 177/12235b lim: 89 exec/s: 14 rss: 130Mb L: 53/89 MS: 3 CrossOver-PersAutoDict-InsertByte- DE: &quot;\001\000&quot;-
+#604	NEW    cov: 550 ft: 2514 corp: 178/12308b lim: 89 exec/s: 14 rss: 130Mb L: 73/89 MS: 1 CrossOver-
+#611	NEW    cov: 550 ft: 2515 corp: 179/12338b lim: 89 exec/s: 14 rss: 130Mb L: 30/89 MS: 2 CopyPart-InsertByte-
+#611	DONE   cov: 550 ft: 2515 corp: 179/12338b lim: 89 exec/s: 14 rss: 130Mb
+###### Recommended dictionary. ######
+&quot;\001\000&quot; # Uses: 9
+&quot;\004\000&quot; # Uses: 6
+&quot;start&quot; # Uses: 4
+&quot;utildebelow&quot; # Uses: 3
+&quot;\013\000\000\000&quot; # Uses: 2
+&quot;\377\377\377\377\377\377\377\000&quot; # Uses: 2
+&quot;\032\000\000\000\000\000\000\000&quot; # Uses: 1
+&quot;startx&quot; # Uses: 4
+&quot;\377\377\377\017&quot; # Uses: 1
+&quot;\026\000\000\000\000\000\000\000&quot; # Uses: 1
+&quot;\377\377\377\377\377\377\377\020&quot; # Uses: 1
+&quot;\000\000\000\000\000\000\001\000&quot; # Uses: 3
+&quot;\005\000\000\000&quot; # Uses: 1
+&quot;ydota&quot; # Uses: 1
+&quot;\00400000&quot; # Uses: 4
+&quot;\001\001\000\000\000\000\000\000&quot; # Uses: 3
+&quot;dblarchinverted&quot; # Uses: 1
+&quot;st&quot; # Uses: 1
+&quot;\021\000\000\000\000\000\000\000&quot; # Uses: 1
+&quot;\001\005&quot; # Uses: 0
+&quot;\000\000\000%&quot; # Uses: 1
+###### End of recommended dictionary. ######
+Done 611 runs in 43 second(s)
+stat::number_of_executed_units: 611
+stat::average_exec_per_sec:     14
+stat::new_units_added:          195
+stat::slowest_unit_time_sec:    0
+stat::peak_rss_mb:              130
+
+=================================================================
+==2068==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 336 byte(s) in 1 object(s) allocated from:
+<b>    #0 0x55caed in operator new(unsigned long) /src/llvm-project/compiler-rt/lib/asan/asan_new_delete.cpp:95:3</b>
+<b>    #1 0x57b98c in PDFDoc::PDFDoc(char*, GString*, GString*, PDFCore*) /src/xpdf-4.03/xpdf/PDFDoc.cc:216:9</b>
+<b>    #2 0x55f2dd in LLVMFuzzerTestOneInput /src/xpdf-4.03/build/fuzz_pdfload.cc:42:19</b>
+<b>    #3 0x456c83 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0</b>
+<b>    #4 0x45646a in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*, bool, bool*) cxa_noexception.cpp:0</b>
+<b>    #5 0x457d0b in fuzzer::Fuzzer::MutateAndTestOne() cxa_noexception.cpp:0</b>
+<b>    #6 0x4587f5 in fuzzer::Fuzzer::Loop(std::__Fuzzer::vector&lt;fuzzer::SizedFile, std::__Fuzzer::allocator&lt;fuzzer::SizedFile&gt; &gt;&amp;) cxa_noexception.cpp:0</b>
+<b>    #7 0x447f3d in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0</b>
+<b>    #8 0x470f82 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10</b>
+<b>    #9 0x7f3a9d4420b2 in __libc_start_main</b>
+
+================================================================================
+The following leaks are not necessarily related to the first leak.
+
+
+Direct leak of 16 byte(s) in 1 object(s) allocated from:
+    #0 0x55caed in operator new(unsigned long) /src/llvm-project/compiler-rt/lib/asan/asan_new_delete.cpp:95:3
+    #1 0x5ca0b6 in XRef::XRef(BaseStream*, int) /src/xpdf-4.03/xpdf/XRef.cc:352:14
+    #2 0x57c304 in PDFDoc::setup2(GString*, GString*, int) /src/xpdf-4.03/xpdf/PDFDoc.cc:300:14
+    #3 0x57b571 in PDFDoc::setup(GString*, GString*) /src/xpdf-4.03/xpdf/PDFDoc.cc:271:16
+    #4 0x57b9e9 in PDFDoc::PDFDoc(char*, GString*, GString*, PDFCore*) /src/xpdf-4.03/xpdf/PDFDoc.cc:218:8
+    #5 0x55f2dd in LLVMFuzzerTestOneInput /src/xpdf-4.03/build/fuzz_pdfload.cc:42:19
+    #6 0x456c83 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #7 0x45646a in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*, bool, bool*) cxa_noexception.cpp:0
+    #8 0x457d0b in fuzzer::Fuzzer::MutateAndTestOne() cxa_noexception.cpp:0
+    #9 0x4587f5 in fuzzer::Fuzzer::Loop(std::__Fuzzer::vector&lt;fuzzer::SizedFile, std::__Fuzzer::allocator&lt;fuzzer::SizedFile&gt; &gt;&amp;) cxa_noexception.cpp:0
+    #10 0x447f3d in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #11 0x470f82 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #12 0x7f3a9d4420b2 in __libc_start_main
+
+Direct leak of 16 byte(s) in 1 object(s) allocated from:
+    #0 0x55caed in operator new(unsigned long) /src/llvm-project/compiler-rt/lib/asan/asan_new_delete.cpp:95:3
+    #1 0x57b8f0 in PDFDoc::PDFDoc(char*, GString*, GString*, PDFCore*) /src/xpdf-4.03/xpdf/PDFDoc.cc:178:14
+    #2 0x55f2dd in LLVMFuzzerTestOneInput /src/xpdf-4.03/build/fuzz_pdfload.cc:42:19
+    #3 0x456c83 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #4 0x45646a in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*, bool, bool*) cxa_noexception.cpp:0
+    #5 0x457d0b in fuzzer::Fuzzer::MutateAndTestOne() cxa_noexception.cpp:0
+    #6 0x4587f5 in fuzzer::Fuzzer::Loop(std::__Fuzzer::vector&lt;fuzzer::SizedFile, std::__Fuzzer::allocator&lt;fuzzer::SizedFile&gt; &gt;&amp;) cxa_noexception.cpp:0
+    #7 0x447f3d in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #8 0x470f82 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #9 0x7f3a9d4420b2 in __libc_start_main
+
+Indirect leak of 128 byte(s) in 1 object(s) allocated from:
+    #0 0x525e4d in __interceptor_malloc /src/llvm-project/compiler-rt/lib/asan/asan_malloc_linux.cpp:129:3
+    #1 0x7edb48 in gmalloc /src/xpdf-4.03/goo/gmem.cc:148:13
+    #2 0x7edb48 in gmallocn(int, int) /src/xpdf-4.03/goo/gmem.cc:214:10
+    #3 0x5ca10e in XRefPosSet /src/xpdf-4.03/xpdf/XRef.cc:73:24
+    #4 0x5ca10e in XRef::XRef(BaseStream*, int) /src/xpdf-4.03/xpdf/XRef.cc:352:18
+    #5 0x57c304 in PDFDoc::setup2(GString*, GString*, int) /src/xpdf-4.03/xpdf/PDFDoc.cc:300:14
+    #6 0x57b571 in PDFDoc::setup(GString*, GString*) /src/xpdf-4.03/xpdf/PDFDoc.cc:271:16
+    #7 0x57b9e9 in PDFDoc::PDFDoc(char*, GString*, GString*, PDFCore*) /src/xpdf-4.03/xpdf/PDFDoc.cc:218:8
+    #8 0x55f2dd in LLVMFuzzerTestOneInput /src/xpdf-4.03/build/fuzz_pdfload.cc:42:19
+    #9 0x456c83 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #10 0x45646a in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*, bool, bool*) cxa_noexception.cpp:0
+    #11 0x457d0b in fuzzer::Fuzzer::MutateAndTestOne() cxa_noexception.cpp:0
+    #12 0x4587f5 in fuzzer::Fuzzer::Loop(std::__Fuzzer::vector&lt;fuzzer::SizedFile, std::__Fuzzer::allocator&lt;fuzzer::SizedFile&gt; &gt;&amp;) cxa_noexception.cpp:0
+    #13 0x447f3d in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #14 0x470f82 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #15 0x7f3a9d4420b2 in __libc_start_main
+
+Indirect leak of 56 byte(s) in 1 object(s) allocated from:
+    #0 0x55caed in operator new(unsigned long) /src/llvm-project/compiler-rt/lib/asan/asan_new_delete.cpp:95:3
+    #1 0x5888dd in FileStream::FileStream(_IO_FILE*, long, int, long, Object*) /src/xpdf-4.03/xpdf/Stream.cc:757:7
+    #2 0x57b9b6 in PDFDoc::PDFDoc(char*, GString*, GString*, PDFCore*) /src/xpdf-4.03/xpdf/PDFDoc.cc:216:13
+    #3 0x55f2dd in LLVMFuzzerTestOneInput /src/xpdf-4.03/build/fuzz_pdfload.cc:42:19
+    #4 0x456c83 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #5 0x45646a in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*, bool, bool*) cxa_noexception.cpp:0
+    #6 0x457d0b in fuzzer::Fuzzer::MutateAndTestOne() cxa_noexception.cpp:0
+    #7 0x4587f5 in fuzzer::Fuzzer::Loop(std::__Fuzzer::vector&lt;fuzzer::SizedFile, std::__Fuzzer::allocator&lt;fuzzer::SizedFile&gt; &gt;&amp;) cxa_noexception.cpp:0
+    #8 0x447f3d in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #9 0x470f82 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #10 0x7f3a9d4420b2 in __libc_start_main
+
+Indirect leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x55cbfd in operator new[](unsigned long) /src/llvm-project/compiler-rt/lib/asan/asan_new_delete.cpp:98:3
+    #1 0x7e1dda in GString::resize(int) /src/xpdf-4.03/goo/GString.cc:119:9
+    #2 0x7e1fd1 in GString::GString(char const*) /src/xpdf-4.03/goo/GString.cc:143:3
+    #3 0x57b8ff in PDFDoc::PDFDoc(char*, GString*, GString*, PDFCore*) /src/xpdf-4.03/xpdf/PDFDoc.cc:178:18
+    #4 0x55f2dd in LLVMFuzzerTestOneInput /src/xpdf-4.03/build/fuzz_pdfload.cc:42:19
+    #5 0x456c83 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) cxa_noexception.cpp:0
+    #6 0x45646a in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*, bool, bool*) cxa_noexception.cpp:0
+    #7 0x457d0b in fuzzer::Fuzzer::MutateAndTestOne() cxa_noexception.cpp:0
+    #8 0x4587f5 in fuzzer::Fuzzer::Loop(std::__Fuzzer::vector&lt;fuzzer::SizedFile, std::__Fuzzer::allocator&lt;fuzzer::SizedFile&gt; &gt;&amp;) cxa_noexception.cpp:0
+    #9 0x447f3d in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) cxa_noexception.cpp:0
+    #10 0x470f82 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10
+    #11 0x7f3a9d4420b2 in __libc_start_main
+
+SUMMARY: AddressSanitizer: 584 byte(s) leaked in 6 allocation(s).
+MS: 2 CopyPart-InsertByte-; base unit: b07b6ed72102abc82bb424b8416c0998ad76508c
+
+
+artifact_prefix=&#x27;/clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/&#x27;; Test unit written to /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/crash-da39a3ee5e6b4b0d3255bfef95601890afd80709
+Base64:
+stat::number_of_executed_units: 611
+stat::average_exec_per_sec:     14
+stat::new_units_added:          195
+stat::slowest_unit_time_sec:    0
+stat::peak_rss_mb:              130
+INFO: exiting: 77 time: 112s
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+
+Direct leak of 336 byte(s) in 1 object(s) allocated from:
+    #0 0x55caed  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x55caed)
+    #1 0x57b98c  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x57b98c)
+    #2 0x55f2dd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x55f2dd)
+    #3 0x456c83  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x456c83)
+    #4 0x45646a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x45646a)
+    #5 0x457d0b  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x457d0b)
+    #6 0x4587f5  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x4587f5)
+    #7 0x447f3d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x447f3d)
+    #8 0x470f82  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x470f82)
+    #9 0x7f3a9d4420b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Direct leak of 16 byte(s) in 1 object(s) allocated from:
+    #0 0x55caed  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x55caed)
+    #1 0x5ca0b6  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x5ca0b6)
+    #2 0x57c304  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x57c304)
+    #3 0x57b571  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x57b571)
+    #4 0x57b9e9  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x57b9e9)
+    #5 0x55f2dd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x55f2dd)
+    #6 0x456c83  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x456c83)
+    #7 0x45646a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x45646a)
+    #8 0x457d0b  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x457d0b)
+    #9 0x4587f5  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x4587f5)
+    #10 0x447f3d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x447f3d)
+    #11 0x470f82  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x470f82)
+    #12 0x7f3a9d4420b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Direct leak of 16 byte(s) in 1 object(s) allocated from:
+    #0 0x55caed  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x55caed)
+    #1 0x57b8f0  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x57b8f0)
+    #2 0x55f2dd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x55f2dd)
+    #3 0x456c83  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x456c83)
+    #4 0x45646a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x45646a)
+    #5 0x457d0b  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x457d0b)
+    #6 0x4587f5  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x4587f5)
+    #7 0x447f3d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x447f3d)
+    #8 0x470f82  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x470f82)
+    #9 0x7f3a9d4420b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 128 byte(s) in 1 object(s) allocated from:
+    #0 0x525e4d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x525e4d)
+    #1 0x7edb48  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x7edb48)
+    #2 0x5ca10e  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x5ca10e)
+    #3 0x57c304  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x57c304)
+    #4 0x57b571  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x57b571)
+    #5 0x57b9e9  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x57b9e9)
+    #6 0x55f2dd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x55f2dd)
+    #7 0x456c83  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x456c83)
+    #8 0x45646a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x45646a)
+    #9 0x457d0b  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x457d0b)
+    #10 0x4587f5  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x4587f5)
+    #11 0x447f3d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x447f3d)
+    #12 0x470f82  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x470f82)
+    #13 0x7f3a9d4420b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 56 byte(s) in 1 object(s) allocated from:
+    #0 0x55caed  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x55caed)
+    #1 0x5888dd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x5888dd)
+    #2 0x57b9b6  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x57b9b6)
+    #3 0x55f2dd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x55f2dd)
+    #4 0x456c83  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x456c83)
+    #5 0x45646a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x45646a)
+    #6 0x457d0b  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x457d0b)
+    #7 0x4587f5  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x4587f5)
+    #8 0x447f3d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x447f3d)
+    #9 0x470f82  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x470f82)
+    #10 0x7f3a9d4420b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+Indirect leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x55cbfd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x55cbfd)
+    #1 0x7e1dda  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x7e1dda)
+    #2 0x7e1fd1  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x7e1fd1)
+    #3 0x57b8ff  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x57b8ff)
+    #4 0x55f2dd  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x55f2dd)
+    #5 0x456c83  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x456c83)
+    #6 0x45646a  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x45646a)
+    #7 0x457d0b  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x457d0b)
+    #8 0x4587f5  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x4587f5)
+    #9 0x447f3d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x447f3d)
+    #10 0x470f82  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/xpdf_libfuzzer_asan/custom/fuzz_pdfload+0x470f82)
+    #11 0x7f3a9d4420b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)

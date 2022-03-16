@@ -1,0 +1,25 @@
+Testcase id: 143976
+Job: draco_libfuzzer_ubsan
+Crash Type: Out-of-memory
+isSecurity: False
+Crash state: draco_mesh_decoder_without_dequantization_fuzzer
+Poc: 143976.testcase
+engine: libFuzzer
+fully_qualified_name: libFuzzer_draco_mesh_decoder_without_dequantization_fuzzer
+target: draco_mesh_decoder_without_dequantization_fuzzer
+name: libFuzzer
+[Environment] UBSAN_OPTIONS=exitcode=77
++----------------------------------------Release Build Stacktrace----------------------------------------+
+Command: /clusterfuzz/run_bot/clusterfuzz/bot/builds/draco_libfuzzer_ubsan/custom/draco_mesh_decoder_without_dequantization_fuzzer -rss_limit_mb=2560 -timeout=60 -runs=100 /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/3f7a415ec9abd52cd734096acc6ad203af54ecf5486deb30b4ab552ed8a57925
+Time ran: 5.974721193313599
+
+INFO: Running with entropic power schedule (0xFF, 100).
+INFO: Seed: 566134232
+INFO: Loaded 1 modules   (28169 inline 8-bit counters): 28169 [0x7a7650, 0x7ae459),
+INFO: Loaded 1 PC tables (28169 PCs): 28169 [0x688ac0,0x6f6b50),
+/clusterfuzz/run_bot/clusterfuzz/bot/builds/draco_libfuzzer_ubsan/custom/draco_mesh_decoder_without_dequantization_fuzzer: Running 1 inputs 100 time(s) each.
+Running: /clusterfuzz/run_bot/clusterfuzz/bot/inputs/fuzzer-testcases/3f7a415ec9abd52cd734096acc6ad203af54ecf5486deb30b4ab552ed8a57925
+==78702== ERROR: libFuzzer: out-of-memory (used: 2607Mb; limit: 2560Mb)
+   To change the out-of-memory limit use -rss_limit_mb=&lt;N&gt;
+
+SUMMARY: libFuzzer: out-of-memory

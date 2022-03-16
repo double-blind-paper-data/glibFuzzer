@@ -1,0 +1,81 @@
+Testcase id: 36201
+Job: libtsm_honggfuzz_asan
+Crash Type: Global-buffer-overflow READ 1
+isSecurity: True
+Crash state: vte_write_debug
+do_action
+parse_data
+Poc: 36201.testcase
+engine: honggfuzz
+fully_qualified_name: honggfuzz_libtsm_fuzzer
+target: libtsm_fuzzer
+name: honggfuzz
+[Environment] ASAN_OPTIONS=alloc_dealloc_mismatch=0:allocator_may_return_null=1:allocator_release_to_os_interval_ms=500:allow_user_segv_handler=0:check_malloc_usable_size=0:detect_leaks=1:detect_odr_violation=0:detect_stack_use_after_return=1:fast_unwind_on_fatal=0:handle_abort=2:handle_segv=2:handle_sigbus=2:handle_sigfpe=2:handle_sigill=2:max_uar_stack_size_log=16:print_scariness=1:print_summary=1:print_suppressions=0:quarantine_size_mb=64:redzone=256:strict_memcmp=1:symbolize=0:use_sigaltstack=1
++----------------------------------------Release Build Stacktrace----------------------------------------+
+=================================================================
+==22177==ERROR: AddressSanitizer: global-buffer-overflow on address 0x000000529010 at pc 0x0000004f83b6 bp 0x7fffffffcce0 sp 0x7fffffffccd8
+READ of size 1 at 0x000000529010 thread T0
+SCARINESS: 12 (1-byte-read-global-buffer-overflow)
+    #0 0x4f83b5 in vte_write_debug /src/libtsm/src/tsm/tsm-vte.c:514:8
+    #1 0x4f9e45 in do_action /src/libtsm/src/tsm/tsm-vte.c:0
+    #2 0x4f170d in do_trans /src/libtsm/src/tsm/tsm-vte.c:1858:3
+    #3 0x4f170d in parse_data /src/libtsm/src/tsm/tsm-vte.c:1882:4
+    #4 0x4f10d6 in tsm_vte_input /src/libtsm/src/tsm/tsm-vte.c:0
+    #5 0x4d86d9 in LLVMFuzzerTestOneInput /src/libtsm_fuzzer.c:44:3
+    #6 0x503dbe in main
+    #7 0x7ffff7c5b0b2 in __libc_start_main
+    #8 0x41e06d in _start
+
+0x000000529010 is located 48 bytes to the left of global variable &#x27;&lt;string literal&gt;&#x27; defined in &#x27;src/tsm/tsm-vte.c:950:3&#x27; (0x529040) of size 24
+  &#x27;&lt;string literal&gt;&#x27; is ascii string &#x27;unhandled escape seq %u&#x27;
+0x000000529010 is located 16 bytes to the left of global variable &#x27;&lt;string literal&gt;&#x27; defined in &#x27;src/tsm/tsm-vte.c:950:3&#x27; (0x529020) of size 7
+  &#x27;&lt;string literal&gt;&#x27; is ascii string &#x27;do_esc&#x27;
+0x000000529010 is located 0 bytes to the right of global variable &#x27;&lt;string literal&gt;&#x27; defined in &#x27;src/tsm/tsm-vte.c:654:2&#x27; (0x529000) of size 16
+  &#x27;&lt;string literal&gt;&#x27; is ascii string &#x27;[?60;1;6;9;15c&#x27;
+SUMMARY: AddressSanitizer: global-buffer-overflow (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libtsm_honggfuzz_asan/custom/libtsm_fuzzer+0x4f83b5)
+Shadow bytes around the buggy address:
+  0x00008009d1b0: 00 00 00 01 f9 f9 f9 f9 00 02 f9 f9 00 00 f9 f9
+  0x00008009d1c0: 00 00 f9 f9 00 03 f9 f9 00 00 00 07 f9 f9 f9 f9
+  0x00008009d1d0: 00 00 00 00 00 00 00 00 f9 f9 f9 f9 00 00 00 00
+  0x00008009d1e0: 00 00 00 00 f9 f9 f9 f9 00 02 f9 f9 00 00 02 f9
+  0x00008009d1f0: f9 f9 f9 f9 00 03 f9 f9 00 00 00 02 f9 f9 f9 f9
+=&gt;0x00008009d200: 00 00[f9]f9 07 f9 f9 f9 00 00 00 f9 f9 f9 f9 f9
+  0x00008009d210: 07 f9 f9 f9 00 00 00 07 f9 f9 f9 f9 00 00 00 07
+  0x00008009d220: f9 f9 f9 f9 00 00 00 00 f9 f9 f9 f9 00 00 00 02
+  0x00008009d230: f9 f9 f9 f9 06 f9 f9 f9 00 06 f9 f9 00 00 05 f9
+  0x00008009d240: f9 f9 f9 f9 00 00 06 f9 f9 f9 f9 f9 00 00 f9 f9
+  0x00008009d250: 00 00 00 00 00 00 00 03 f9 f9 f9 f9 00 01 f9 f9
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==22177==ABORTING
+
+
++----------------------------------------Release Build Unsymbolized Stacktrace (diff)----------------------------------------+
+
+READ of size 1 at 0x000000529010 thread T0
+SCARINESS: 12 (1-byte-read-global-buffer-overflow)
+    #0 0x4f83b5  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libtsm_honggfuzz_asan/custom/libtsm_fuzzer+0x4f83b5)
+    #1 0x4f9e45  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libtsm_honggfuzz_asan/custom/libtsm_fuzzer+0x4f9e45)
+    #2 0x4f170d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libtsm_honggfuzz_asan/custom/libtsm_fuzzer+0x4f170d)
+    #3 0x4f10d6  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libtsm_honggfuzz_asan/custom/libtsm_fuzzer+0x4f10d6)
+    #4 0x4d86d9  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libtsm_honggfuzz_asan/custom/libtsm_fuzzer+0x4d86d9)
+    #5 0x503dbe  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libtsm_honggfuzz_asan/custom/libtsm_fuzzer+0x503dbe)
+    #6 0x7ffff7c5b0b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #7 0x41e06d  (/clusterfuzz/run_bot/clusterfuzz/bot/builds/libtsm_honggfuzz_asan/custom/libtsm_fuzzer+0x41e06d)
